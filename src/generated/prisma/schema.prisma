@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id        String    @id @default(uuid())
+  name      String
+  legalName String
+  taxId     String
+  address   String
+  city      String
+  latitude  Float
+  longitude Float
+  notes     String?   @db.MediumText
+  licenses  License[]
+  devices   Device[]
+  createdAt DateTime  @default(now())
+
+  @@map("client")
+}
+
+model License {
+  id          String      @id
+  clientId    String
+  typeKey     String
+  parentId    String?
+  client      Client      @relation(fields: [clientId], references: [id])
+  type        LicenseType @relation(fields: [typeKey], references: [key])
+  parent      License?    @relation("SubLicenses", fields: [parentId], references: [id])
+  subLicenses License[]   @relation("SubLicenses")
+
+  @@map("license")
+}
+
+model LicenseType {
+  key      String    @unique
+  name     String
+  licenses License[]
+
+  @@map("license_type")
+}
+
+model DeviceType {
+  key     String   @id
+  name    String
+  icon    String
+  devices Device[]
+
+  @@map("device_type")
+}
+
+model Device {
+  id           String     @id @default(cuid()) // ID autogenerado
+  name         String
+  serialNumber String?
+  ip           String?
+  anyDesk      String?
+  typeKey      String
+  type         DeviceType @relation(fields: [typeKey], references: [key])
+  clientId     String
+  client       Client     @relation(fields: [clientId], references: [id])
+}
