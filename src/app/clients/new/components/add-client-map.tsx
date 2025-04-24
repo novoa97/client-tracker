@@ -36,7 +36,7 @@ export const AddClientMap = ({ coordinates }: Props) => {
   };
 
   return (
-    <Card className="w-1/2 h-full p-0">
+    <Card className="hidden md:block w-1/2 h-full p-0">
       <div className="h-full w-full rounded-lg overflow-hidden">
         <MapContainer
           center={position}

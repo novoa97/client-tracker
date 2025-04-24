@@ -123,7 +123,12 @@ export function LicenseForm({
                   disabled={types.length === 0}
                 >
                   <FormControl>
-                    <SelectTrigger className="w-full">
+                    <SelectTrigger
+                      id="type"
+                      name="type"
+                      className="w-full"
+                      tabIndex={0}
+                    >
                       <SelectValue
                         placeholder={
                           types.length === 0
@@ -204,7 +209,12 @@ export function LicenseForm({
                               disabled={types.length === 0}
                             >
                               <FormControl>
-                                <SelectTrigger className="w-full">
+                                <SelectTrigger
+                                  id="type"
+                                  name="type"
+                                  className="w-full"
+                                  tabIndex={0}
+                                >
                                   <SelectValue placeholder={t("Select type")} />
                                 </SelectTrigger>
                               </FormControl>
@@ -237,7 +247,7 @@ export function LicenseForm({
             {isSubmitting
               ? mode === "create"
                 ? t("Creating")
-                : t("Updating")
+                : "Updating..."
               : buttonText}
           </Button>
         </div>

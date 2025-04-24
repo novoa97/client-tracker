@@ -7,6 +7,7 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
+import { useTranslations } from "next-intl";
 
 type Props = {
   value: string;
@@ -19,6 +20,7 @@ export default function AddressAutocomplete({
   onChange,
   onSelect,
 }: Props) {
+  const t = useTranslations();
   const [hasEdited, setHasEdited] = useState(false);
 
   const {
@@ -73,7 +75,7 @@ export default function AddressAutocomplete({
 
   return (
     <div className="relative">
-      <Label className="mb-2">Dirección</Label>
+      <Label className="mb-2">{t("Address")}</Label>
       <Input
         value={inputValue}
         onChange={handleInput}

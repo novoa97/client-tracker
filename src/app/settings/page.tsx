@@ -50,17 +50,7 @@ export default async function SettingsPage() {
           </TabsList>
           {/* General Tab */}
           <TabsContent value="general">
-            <Card>
-              <CardHeader>
-                <CardTitle>General Settings</CardTitle>
-                <CardDescription>
-                  Configure general application settings.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <GeneralSettings />
-              </CardContent>
-            </Card>
+            <GeneralSettings />
           </TabsContent>
           {/* Licenses Tab */}
           <TabsContent

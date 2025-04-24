@@ -22,7 +22,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Device, DeviceType } from "@/generated/prisma";
 import DynamicIcon from "@/components/icon";
-
+import { useTranslations } from "next-intl";
 // valid IP regex
 const ipRegex =
   /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/;
@@ -57,28 +57,34 @@ export function DeviceForm({
   onCancel,
   isLoading,
 }: DeviceFormProps) {
+  const t = useTranslations();
   const form = useForm<DeviceFormValues>({
     resolver: zodResolver(deviceSchema),
     defaultValues: {
-      name: defaultValues?.name,
-      type: defaultValues?.typeKey,
+      name: defaultValues?.name || "",
+      type: defaultValues?.typeKey || "",
       serialNumber: defaultValues?.serialNumber || "",
       anyDesk: defaultValues?.anyDesk || "",
       ip: defaultValues?.ip || "",
     },
   });
 
+  const handleSubmit = async (data: DeviceFormValues) => {
+    await onSubmit(data);
+    form.reset();
+  };
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>{t("Name")}</FormLabel>
               <FormControl>
-                <Input placeholder="Device name" {...field} />
+                <Input placeholder={t("Device name")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -90,11 +96,20 @@ export function DeviceForm({
           name="type"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Type</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <FormLabel>{t("Type")}</FormLabel>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                disabled={types.length === 0}
+              >
                 <FormControl>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select device type" />
+                  <SelectTrigger
+                    id="type"
+                    name="type"
+                    className="w-full"
+                    tabIndex={0}
+                  >
+                    <SelectValue placeholder={t("Select device type")} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -118,7 +133,9 @@ export function DeviceForm({
           name="serialNumber"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Serial Number (optional)</FormLabel>
+              <FormLabel>
+                {t("Serial Number")} ({t("Optional")})
+              </FormLabel>
               <FormControl>
                 <Input placeholder="e.g. SMPH00123" {...field} />
               </FormControl>
@@ -132,7 +149,7 @@ export function DeviceForm({
           name="anyDesk"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Anydesk (optional)</FormLabel>
+              <FormLabel>Anydesk ({t("Optional")})</FormLabel>
               <FormControl>
                 <Input placeholder="e.g. 123 456 789" {...field} />
               </FormControl>
@@ -146,7 +163,9 @@ export function DeviceForm({
           name="ip"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>IP Address (optional)</FormLabel>
+              <FormLabel>
+                {t("IP Address")} ({t("Optional")})
+              </FormLabel>
               <FormControl>
                 <Input placeholder="e.g. 192.168.1.10" {...field} />
               </FormControl>
@@ -162,7 +181,7 @@ export function DeviceForm({
             </Button>
           )}
           <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Saving..." : "Save"}
+            {isLoading ? t("Saving") : t("Save")}
           </Button>
         </div>
       </form>

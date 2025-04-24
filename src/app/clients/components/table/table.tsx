@@ -15,6 +15,7 @@ import { Client } from "@/generated/prisma";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
+import dayjs from "dayjs";
 type Props = {
   clients: Client[];
   onDelete: (id: string) => Promise<void>;
@@ -43,16 +44,19 @@ export function ClientTable({ clients, onDelete }: Props) {
         {clients.map((client) => (
           <TableRow
             key={client.id}
-            onClick={() => handleRowClick(client.id)}
             className="cursor-pointer hover:bg-muted"
+            onClick={() => handleRowClick(client.id)}
           >
             <TableCell>{client.name}</TableCell>
             <TableCell>{client.taxId}</TableCell>
             <TableCell>{client.city}</TableCell>
             <TableCell>
-              {new Date(client.createdAt).toLocaleDateString()}
+              {dayjs(client.createdAt).format("DD/MM/YYYY")}
             </TableCell>
-            <TableCell className="text-right">
+            <TableCell
+              className="text-right"
+              onClick={(e) => e.stopPropagation()}
+            >
               <TableActions client={client} onDelete={onDelete} />
             </TableCell>
           </TableRow>

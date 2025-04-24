@@ -16,7 +16,7 @@ export function Sidebar() {
 
   return (
     <aside className="w-64 bg-white border-r p-4 space-y-4 min-h-screen">
-      <h1 className="text-lg font-bold mb-6">My App</h1>
+      <h1 className="text-lg font-bold mb-6">ClientTracker</h1>
       <nav className="flex flex-col gap-2">
         {links.map(({ href, label, icon: Icon }) => (
           <Link

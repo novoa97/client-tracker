@@ -13,10 +13,18 @@ import { Pagination } from "./components/pagination";
 import { Header } from "@/components/header";
 import { Users } from "lucide-react";
 
-export default async function ClientsPage({ searchParams }: any) {
-  const page = Number(searchParams?.page ?? "1");
+type Props = {
+  searchParams: {
+    page?: string;
+    search?: string;
+  };
+};
+
+export default async function ClientsPage({ searchParams }: Props) {
+  const { page, search } = await searchParams;
+  const pageNumber = Number(page ?? "1");
   const pageSize = 15;
-  const search = searchParams?.search || "";
+  const searchText = search || "";
 
   const totalClients = await prisma.client.count({
     where: {
@@ -28,17 +36,20 @@ export default async function ClientsPage({ searchParams }: any) {
     where: {
       OR: [
         {
-          name: { contains: search },
+          name: { contains: searchText },
         },
         {
-          address: { contains: search },
+          address: { contains: searchText },
         },
         {
-          city: { contains: search },
+          city: { contains: searchText },
+        },
+        {
+          taxId: { contains: searchText },
         },
       ],
     },
-    skip: (page - 1) * pageSize,
+    skip: (pageNumber - 1) * pageSize,
     take: pageSize,
     orderBy: { createdAt: "desc" },
   });
@@ -58,7 +69,7 @@ export default async function ClientsPage({ searchParams }: any) {
         <CardFooter>
           <Pagination
             total={totalClients}
-            page={page}
+            page={pageNumber}
             pageSize={pageSize}
           ></Pagination>
         </CardFooter>

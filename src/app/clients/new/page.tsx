@@ -22,7 +22,7 @@ export default function NewClientPage() {
   };
 
   return (
-    <div className="p-8 h-screen flex flex-col">
+    <div className="p-8 h-full flex flex-col">
       <Header icon={UserPlus} title={t("Add Client")}></Header>
       <div className="flex flex-1 gap-2">
         <AddClientForm onSubmit={addClient} onChange={handleFormChange} />

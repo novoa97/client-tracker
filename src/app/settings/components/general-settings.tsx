@@ -1,19 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import {
   Select,
   SelectContent,
@@ -21,69 +7,57 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import { useChangeLocale } from "@/hooks/useChangeLocale";
-import { useLocale } from "next-intl";
-// import { toast } from "@/hooks/use-toast";
-
-const formSchema = z.object({
-  language: z.string({
-    required_error: "Please select a language.",
-  }),
-});
-
-type FormValues = z.infer<typeof formSchema>;
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export function GeneralSettings() {
+  const t = useTranslations();
   const locale = useLocale();
   const { setLocale } = useChangeLocale();
-  const [isLoading, setIsLoading] = useState(false);
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      language: locale,
-    },
-  });
-
-  function onSubmit(data: FormValues) {
-    setIsLoading(true);
-    setIsLoading(false);
-    setLocale(data.language);
+  function handleChange(language: string) {
+    setLocale(language);
   }
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="language"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Language</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a language" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="en">English</SelectItem>
-                  <SelectItem value="es">Spanish</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormDescription>
-                This is the language that will be used throughout the
-                application.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Saving..." : "Save changes"}
-        </Button>
-      </form>
-    </Form>
+    <Card>
+      <CardHeader>
+        <CardTitle>{t("General Settings")}</CardTitle>
+        <CardDescription>
+          {t("Configure general application settings")}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-4">
+          <label className="text-sm font-medium">{t("Language")}</label>
+          <Select onValueChange={handleChange} defaultValue={locale}>
+            <SelectTrigger>
+              <SelectValue placeholder={t("Select a language")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="en">English</SelectItem>
+              <SelectItem value="es">Spanish</SelectItem>
+            </SelectContent>
+          </Select>
+          <p className="text-muted-foreground text-sm">
+            {t(
+              "This is the language that will be used throughout the application"
+            )}
+          </p>
+        </div>
+        <div className="text-center pt-4">
+          <p className="text-xs text-muted-foreground">
+            v{process.env.NEXT_PUBLIC_APP_VERSION}
+          </p>
+        </div>
+      </CardContent>
+    </Card>
   );
 }

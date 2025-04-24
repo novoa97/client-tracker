@@ -42,7 +42,7 @@ interface Props {
 export function DevicesList({ client, devices, types }: Props) {
   const t = useTranslations();
   const router = useRouter();
-  const [editingDevice, setEditingLicense] = useState<Device | null>(null);
+  const [editingDevice, setEditingDevice] = useState<Device | null>(null);
   const [copiedValues, setCopiedValues] = useState<Record<string, boolean>>({});
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -51,8 +51,8 @@ export function DevicesList({ client, devices, types }: Props) {
     console.log(data);
     await addDevice(client.id, data);
     setIsDialogOpen(false);
-    toast("Copied to clipboard", {
-      description: `zdxcsadmnas`,
+    toast(t("Device added successfully"), {
+      description: t("Device added successfully description"),
       duration: 2000,
       icon: <Plus className="w-5 h-5 text-green-500" />,
     });
@@ -63,7 +63,7 @@ export function DevicesList({ client, devices, types }: Props) {
     console.log(data);
     if (!editingDevice) return;
     await editDevice(editingDevice.id, data);
-    setEditingLicense(null);
+    setEditingDevice(null);
     setIsDialogOpen(false);
     router.refresh();
   };
@@ -124,7 +124,7 @@ export function DevicesList({ client, devices, types }: Props) {
             isCopied={isCopied}
             handleDelete={handleDelete}
             onEdit={(device) => {
-              setEditingLicense(device);
+              setEditingDevice(device);
               setIsDialogOpen(true);
             }}
           />
@@ -132,11 +132,17 @@ export function DevicesList({ client, devices, types }: Props) {
       </CardList>
       <DialogContainer
         open={isDialogOpen}
-        onOpenChange={setIsDialogOpen}
-        title={"Add device"}
-        description={"Edit device"}
+        onOpenChange={(open) => {
+          setIsDialogOpen(open);
+          if (!open) {
+            setEditingDevice(null);
+          }
+        }}
+        title={editingDevice ? t("Edit device") : t("Add device")}
+        description={
+          editingDevice ? t("Edit the device details") : t("Add a new device")
+        }
       >
-        {" "}
         {editingDevice ? (
           <DeviceForm
             types={types}
