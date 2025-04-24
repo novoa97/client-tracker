@@ -225,16 +225,17 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": "DATABASE_URL",
-        "value": "mysql://root:root@localhost:3307/client-track"
+        "fromEnvVar": "MYSQL_DATABASE_URL",
+        "value": null
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Client {\n  id        String    @id @default(uuid())\n  name      String\n  legalName String\n  taxId     String\n  address   String\n  city      String\n  latitude  Float\n  longitude Float\n  notes     String?   @db.MediumText\n  licenses  License[]\n  devices   Device[]\n  createdAt DateTime  @default(now())\n\n  @@map(\"client\")\n}\n\nmodel License {\n  id          String      @id\n  clientId    String\n  typeKey     String\n  parentId    String?\n  client      Client      @relation(fields: [clientId], references: [id])\n  type        LicenseType @relation(fields: [typeKey], references: [key])\n  parent      License?    @relation(\"SubLicenses\", fields: [parentId], references: [id])\n  subLicenses License[]   @relation(\"SubLicenses\")\n\n  @@map(\"license\")\n}\n\nmodel LicenseType {\n  key      String    @unique\n  name     String\n  licenses License[]\n\n  @@map(\"license_type\")\n}\n\nmodel DeviceType {\n  key     String   @id\n  name    String\n  icon    String\n  devices Device[]\n\n  @@map(\"device_type\")\n}\n\nmodel Device {\n  id           String     @id @default(cuid()) // ID autogenerado\n  name         String\n  serialNumber String?\n  ip           String?\n  anyDesk      String?\n  typeKey      String\n  type         DeviceType @relation(fields: [typeKey], references: [key])\n  clientId     String\n  client       Client     @relation(fields: [clientId], references: [id])\n\n  @@map(\"device\")\n}\n",
-  "inlineSchemaHash": "2581b046b79ebffcaef6a0065c35d56e53744246d306a0e5e4a4d7f42bfa4082",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"MYSQL_DATABASE_URL\")\n}\n\nmodel Client {\n  id        String    @id @default(uuid())\n  name      String\n  legalName String\n  taxId     String\n  address   String\n  city      String\n  latitude  Float\n  longitude Float\n  notes     String?   @db.MediumText\n  licenses  License[]\n  devices   Device[]\n  createdAt DateTime  @default(now())\n\n  @@map(\"client\")\n}\n\nmodel License {\n  id          String      @id\n  clientId    String\n  typeKey     String\n  parentId    String?\n  client      Client      @relation(fields: [clientId], references: [id])\n  type        LicenseType @relation(fields: [typeKey], references: [key])\n  parent      License?    @relation(\"SubLicenses\", fields: [parentId], references: [id])\n  subLicenses License[]   @relation(\"SubLicenses\")\n\n  @@map(\"license\")\n}\n\nmodel LicenseType {\n  key      String    @unique\n  name     String\n  licenses License[]\n\n  @@map(\"license_type\")\n}\n\nmodel DeviceType {\n  key     String   @id\n  name    String\n  icon    String\n  devices Device[]\n\n  @@map(\"device_type\")\n}\n\nmodel Device {\n  id           String     @id @default(cuid()) // ID autogenerado\n  name         String\n  serialNumber String?\n  ip           String?\n  anyDesk      String?\n  typeKey      String\n  type         DeviceType @relation(fields: [typeKey], references: [key])\n  clientId     String\n  client       Client     @relation(fields: [clientId], references: [id])\n\n  @@map(\"device\")\n}\n",
+  "inlineSchemaHash": "541c6b600509c99fd43ce127089430e967ae6f900e56777cf1d3c91057e0740e",
   "copyEngine": true
 }
 config.dirname = '/'
@@ -246,7 +247,7 @@ config.compilerWasm = undefined
 
 config.injectableEdgeEnv = () => ({
   parsed: {
-    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
+    MYSQL_DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['MYSQL_DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.MYSQL_DATABASE_URL || undefined
   }
 })
 

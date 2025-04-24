@@ -1,6 +1,6 @@
 "use server";
 import { ActionError } from "@/errors/actions";
-import { prisma } from "@/lib/prisma"; // donde tengas Prisma configurado
+import { prisma } from "@/lib/prisma";
 import { ActionResponse } from "@/types/action-response";
 
 type AddLicenseInput = {

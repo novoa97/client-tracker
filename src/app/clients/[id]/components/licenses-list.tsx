@@ -1,8 +1,6 @@
 "use client";
-
-import { MoreVertical, Pencil, Plus, Trash, Trash2 } from "lucide-react";
 import { CardList } from "@/components/card-list";
-import { use, useState } from "react";
+import { useState } from "react";
 import { DialogContainer } from "@/components/dialog-container";
 import { LicenseForm, LicenseFormValues } from "./license-form";
 import { Client, License, LicenseType } from "@/generated/prisma";
@@ -10,14 +8,6 @@ import { LicenseWithRelations } from "@/app/types";
 import { addLicense } from "../actions/add-license";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { TableActions } from "../../components/table/table-actions";
 import { LicenseActions } from "./license-actions";
 import { deleteLicense } from "../actions/delete-license";
 import { toast } from "sonner";
