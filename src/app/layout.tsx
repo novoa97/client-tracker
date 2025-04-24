@@ -35,7 +35,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <Script
         defer
-        src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyB-AXLL_gGcVybSe8GfBBG3oOuWVgHosjc&libraries=places`}
+        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`}
       />
       <NextIntlClientProvider>
         <body className="flex flex-row text-gray-900">
