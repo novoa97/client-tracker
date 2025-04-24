@@ -5,7 +5,7 @@ import AddClientForm from "@/app/clients/new/components/add-client-form";
 import { addClient } from "../actions/add-client";
 import { useState } from "react";
 import { AddClientMap } from "./components/add-client-map";
-import { Header } from "@/components/Header";
+import { Header } from "@/components/header";
 import { UserPlus } from "lucide-react";
 import { useTranslations } from "next-intl";
 

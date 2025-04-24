@@ -120,3 +120,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.leaflet-pane {
+  z-index: 0 !important;
+}

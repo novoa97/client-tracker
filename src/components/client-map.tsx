@@ -44,7 +44,7 @@ export const ClientMap = ({ coordinates }: Props) => {
           center={position}
           zoom={8.4}
           scrollWheelZoom={true}
-          className="w-full h-full leaflet-rounded"
+          className="w-full h-full leaflet-rounded z-0"
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {coordinates ? (

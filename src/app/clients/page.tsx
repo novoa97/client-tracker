@@ -10,7 +10,7 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { Pagination } from "./components/pagination";
-import { Header } from "@/components/Header";
+import { Header } from "@/components/header";
 import { Users } from "lucide-react";
 
 export default async function ClientsPage({ searchParams }: any) {

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { ClientInfo } from "./components/client-info";
-import { Header } from "@/components/Header";
+import { Header } from "@/components/header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Computer, Key, Map, Edit, User, InfoIcon } from "lucide-react";
 import { LicensesList } from "./components/licenses-list";
@@ -10,7 +10,9 @@ import { DevicesList } from "./components/devices-list";
 import { getTranslations } from "next-intl/server";
 import { ClientMap } from "@/components/client-map";
 import { ClientNotes } from "./components/client-notes";
-import MapWrapper from "@/components/MapWrapper";
+import MapWrapper from "@/components/map-wrapper";
+import { DialogContainer } from "@/components/dialog-container";
+import { EditClientForm } from "./components/edit-client-form";
 
 type Props = {
   params: {
@@ -23,24 +25,34 @@ export default async function ClientPage({ params }: Props) {
   const { id } = await params;
   const client = await prisma.client.findUnique({
     where: { id: id },
-    include: {
-      licenses: {
-        include: {
-          type: true,
-          subLicenses: {
-            include: {
-              type: true, // si quieres también el tipo de cada sublicencia
-            },
+  });
+
+  if (!client) return notFound();
+
+  const [licenses, devices] = await Promise.all([
+    prisma.license.findMany({
+      where: {
+        clientId: client.id,
+        parentId: null,
+      },
+      include: {
+        type: true,
+        subLicenses: {
+          include: {
+            type: true,
           },
         },
       },
-      devices: {
-        include: {
-          type: true,
-        },
+    }),
+    prisma.device.findMany({
+      where: {
+        clientId: client.id,
       },
-    },
-  });
+      include: {
+        type: true,
+      },
+    }),
+  ]);
 
   const [licenseTypes, deviceTypes] = await Promise.all([
     prisma.licenseType.findMany(),
@@ -51,16 +63,9 @@ export default async function ClientPage({ params }: Props) {
     console.log(notes);
   };
 
-  if (!client) return notFound();
-
   return (
     <div className="p-8 space-y-4 flex flex-col h-full">
-      <Header icon={User} title={client.name}>
-        <Button variant="outline" size="sm" className="flex items-center gap-1">
-          <Edit className="h-4 w-4" />
-          <span className="hidden sm:inline">Edit Info</span>
-        </Button>
-      </Header>
+      <Header icon={User} title={client.name}></Header>
       <Tabs
         defaultValue="general"
         className="flex w-full h-full flex-1 flex-1 min-h-0"
@@ -107,16 +112,12 @@ export default async function ClientPage({ params }: Props) {
         <TabsContent value="licenses" className="flex-1 flex flex-col min-h-0">
           <LicensesList
             types={licenseTypes}
-            licenses={client.licenses}
+            licenses={licenses}
             client={client}
           />
         </TabsContent>
         <TabsContent value="devices" className="flex-1 flex flex-col min-h-0">
-          <DevicesList
-            client={client}
-            devices={client.devices}
-            types={deviceTypes}
-          />
+          <DevicesList client={client} devices={devices} types={deviceTypes} />
         </TabsContent>
       </Tabs>
     </div>

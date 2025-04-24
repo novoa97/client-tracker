@@ -19,28 +19,22 @@ import {
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { MoreVertical, Trash2 } from "lucide-react";
+import { MoreVertical, Trash2, Edit } from "lucide-react";
 import { startTransition, useState } from "react";
 import { useRouter } from "next/navigation";
 import { License } from "@/generated/prisma";
+import { useTranslations } from "next-intl";
 
 type Props = {
   license: License;
-  onDelete: (id: string) => Promise<void>;
+  onDelete: () => void;
+  onEdit: () => void;
 };
 
-export function LicenseActions({ license, onDelete }: Props) {
+export function LicenseActions({ license, onDelete, onEdit }: Props) {
+  const t = useTranslations();
   const [open, setOpen] = useState(false);
   const router = useRouter();
-
-  const handleDelete = () => {
-    startTransition(() => {
-      onDelete(license.id).then(() => {
-        router.refresh();
-        setOpen(false);
-      });
-    });
-  };
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
@@ -53,6 +47,14 @@ export function LicenseActions({ license, onDelete }: Props) {
         </DropdownMenuTrigger>
 
         <DropdownMenuContent align="end" className="w-36">
+          <DropdownMenuItem
+            onClick={() => {
+              onEdit();
+            }}
+          >
+            <Edit className="mr-2 h-4 w-4" />
+            {t("Edit")}
+          </DropdownMenuItem>
           <AlertDialogTrigger asChild>
             <DropdownMenuItem
               onSelect={(e) => {
@@ -80,7 +82,7 @@ export function LicenseActions({ license, onDelete }: Props) {
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
           <AlertDialogAction
             onClick={() => {
-              handleDelete();
+              onDelete();
               setOpen(false);
             }}
           >

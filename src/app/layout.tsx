@@ -3,7 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Sidebar } from "@/components/Sidebar";
+import { Sidebar } from "@/components/sidebar";
 import Script from "next/script";
 import { Settings, Users, Map } from "lucide-react";
 import BottomNav from "@/components/bottom-nav";

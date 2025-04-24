@@ -16,6 +16,7 @@ import {
   Server,
   Printer,
   Check,
+  CircleX,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -35,13 +36,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
 import { TableRow, TableCell } from "@/components/ui/table";
 import { CardList } from "@/components/card-list";
 import { useTranslations } from "next-intl";
@@ -103,15 +97,29 @@ export function DeviceTypeSettings({ types }: Props) {
   const selectedIcon = editForm.watch("icon");
 
   const handleCreate = async (data: z.infer<typeof deviceSchema>) => {
-    await addDeviceType(data);
-    setIsCreateOpen(false);
-    createForm.reset();
-    router.refresh();
-    toast(t("Device type deleted"), {
-      description: t("The device type has been deleted"),
-      duration: 2000,
-      icon: <Check className="h-4 w-4 text-green-500" />,
-    });
+    try {
+      const response = await addDeviceType(data);
+      if (response.ok) {
+        setIsCreateOpen(false);
+        createForm.reset();
+        router.refresh();
+        toast(t("Device type created"), {
+          description: t("The device type has been created"),
+          duration: 2000,
+          icon: <Check className="h-4 w-4 text-green-500" />,
+        });
+      } else {
+        toast.error(t("Error creating device type"), {
+          description: t(response.message),
+          duration: 3000,
+        });
+      }
+    } catch (error) {
+      toast.error(t("Error creating device type"), {
+        description: t("There was a problem creating the device type"),
+        duration: 3000,
+      });
+    }
   };
 
   const handleEdit = async (data: z.infer<typeof deviceSchema>) => {
@@ -131,13 +139,6 @@ export function DeviceTypeSettings({ types }: Props) {
       duration: 2000,
       icon: <Check className="h-4 w-4 text-green-500" />,
     });
-  };
-
-  const renderIcon = (icon: string) => {
-    const found = availableIcons.find((i) => i.value === icon);
-    if (!found) return null;
-    const Icon = found.icon;
-    return <Icon className="h-5 w-5" />;
   };
 
   if (!items) {

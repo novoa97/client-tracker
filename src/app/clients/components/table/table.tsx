@@ -33,7 +33,7 @@ export function ClientTable({ clients, onDelete }: Props) {
       <TableHeader>
         <TableRow>
           <TableHead>{t("Name")}</TableHead>
-          <TableHead>{t("Tax ID")}</TableHead>
+          <TableHead>{t("VAT")}</TableHead>
           <TableHead>{t("City")}</TableHead>
           <TableHead>{t("Created At")}</TableHead>
           <TableHead className="text-right">{t("Actions")}</TableHead>

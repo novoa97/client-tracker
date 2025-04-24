@@ -1,4 +1,4 @@
-import { Header } from "@/components/Header";
+import { Header } from "@/components/header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Computer, Key, Settings, Settings2 } from "lucide-react";
 import { GeneralSettings } from "./components/general-settings";

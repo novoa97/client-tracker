@@ -20,6 +20,9 @@ import { Button } from "@/components/ui/button";
 import { TableActions } from "../../components/table/table-actions";
 import { LicenseActions } from "./license-actions";
 import { deleteLicense } from "../actions/delete-license";
+import { toast } from "sonner";
+import { editLicense } from "../actions/edit-license";
+import { Badge } from "@/components/ui/badge";
 
 interface Props {
   client: Client;
@@ -35,24 +38,24 @@ export function LicensesList({ types, licenses, client }: Props) {
   const [editingLicense, setEditingLicense] =
     useState<LicenseWithRelations | null>(null);
 
-  const dialogTitle = "Create New License";
-  const dialogDescription =
-    "Fill in the details to create a new license. Add sublicenses as needed.";
-
   const handleSubmit = async (values: LicenseFormValues) => {
     setIsSubmitting(true);
-
     try {
       // Default behavior if no custom submit handler is provided
       console.log("License created:", values);
-      await addLicense({
+      const response = await addLicense({
         id: values.id,
         type: values.type,
         clientId: client.id,
-        subLicenses: values.sublicenses,
+        subLicenses: values.subLicenses,
       });
-      setIsDialogOpen(false);
-      router.refresh();
+      if (response.ok) {
+        setIsDialogOpen(false);
+        router.refresh();
+        toast.success(t("License created successfully"));
+      } else {
+        toast.error(t(response.message));
+      }
     } catch (error) {
       console.error("Error creating license:", error);
     } finally {
@@ -62,6 +65,15 @@ export function LicensesList({ types, licenses, client }: Props) {
 
   const handleDelete = async (id: string): Promise<void> => {
     await deleteLicense(id);
+    toast.success(t("License deleted successfully"));
+    router.refresh();
+  };
+
+  const handleEdit = async (values: LicenseFormValues): Promise<void> => {
+    await editLicense(values);
+    toast.success(t("License edited successfully"));
+    setIsDialogOpen(false);
+    setEditingLicense(null);
     router.refresh();
   };
 
@@ -84,24 +96,43 @@ export function LicensesList({ types, licenses, client }: Props) {
             className="flex items-center justify-between border-b pb-3 last:border-0 last:pb-0"
           >
             <div>
-              <h3 className="font-medium">{license.type.name}</h3>
+              <div className="flex items-center gap-2">
+                <h3 className="font-medium">{license.type.name}</h3>
+                {license.subLicenses && license.subLicenses.length > 0 && (
+                  <Badge variant="outline" className="text-xs">
+                    {license.subLicenses.length} sublicense
+                    {license.subLicenses.length !== 1 ? "s" : ""}
+                  </Badge>
+                )}
+              </div>
               <p className="text-sm text-muted-foreground">ID: {license.id}</p>
             </div>
-            <LicenseActions license={license} onDelete={handleDelete} />
+            <LicenseActions
+              license={license}
+              onDelete={() => handleDelete(license.id)}
+              onEdit={() => {
+                setEditingLicense(license);
+                setIsDialogOpen(true);
+              }}
+            />
           </div>
         ))}
       </CardList>
       <DialogContainer
         open={isDialogOpen}
         onOpenChange={setIsDialogOpen}
-        title={dialogTitle}
-        description={dialogDescription}
+        title={editingLicense ? t("Edit License") : t("Create New License")}
+        description={
+          editingLicense
+            ? t("Edit the license details")
+            : t("Fill in the details to create a new license")
+        }
       >
         {" "}
         {editingLicense ? (
           <LicenseForm
             types={types}
-            onSubmit={handleSubmit}
+            onSubmit={handleEdit}
             isSubmitting={isSubmitting}
             defaultValues={editingLicense}
             mode="edit"

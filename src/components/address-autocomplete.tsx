@@ -1,4 +1,3 @@
-// src/components/AddressAutocomplete.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -20,6 +19,8 @@ export default function AddressAutocomplete({
   onChange,
   onSelect,
 }: Props) {
+  const [hasEdited, setHasEdited] = useState(false);
+
   const {
     ready,
     value: inputValue,
@@ -36,13 +37,17 @@ export default function AddressAutocomplete({
   const [lastSelected, setLastSelected] = useState<string | null>(null);
 
   useEffect(() => {
-    if (value === lastSelected) return;
-    setValue(value);
-  }, [value, setValue, lastSelected]);
+    // Solo sincroniza el valor inicial, sin buscar
+    if (!hasEdited && value !== lastSelected) {
+      setValue(value, false); // `shouldFetchData = false`
+    }
+  }, [value, setValue, lastSelected, hasEdited]);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-    onChange(e.target.value);
+    setHasEdited(true);
+    const newValue = e.target.value;
+    setValue(newValue);
+    onChange(newValue);
   };
 
   const handleSelect = async (description: string) => {
@@ -56,16 +61,11 @@ export default function AddressAutocomplete({
       onChange(formatted);
       clearSuggestions();
 
-      // Extraer ciudad
       const city = results[0].address_components.find((c: any) =>
         c.types.includes("locality")
       )?.long_name;
 
-      // Puedes usar el nuevo parámetro 'city' aquí
-      console.log("Ciudad:", city);
-
-      // Modifica tu función onSelect si quieres enviar también la ciudad
-      onSelect(formatted, lat, lng, city); // o: onSelect(description, lat, lng, city);
+      onSelect(formatted, lat, lng, city);
     } catch (error) {
       console.error("Error al obtener coordenadas:", error);
     }

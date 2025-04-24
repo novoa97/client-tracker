@@ -26,5 +26,4 @@ export async function addClient(input: AddClientInput) {
         },
     });
 
-    redirect("/clients");
 }

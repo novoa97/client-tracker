@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import AddressAutocomplete from "@/components/AddressAutocomplete"; // asumo que esto ya lo tenés
-
+import AddressAutocomplete from "@/components/address-autocomplete"; // asumo que esto ya lo tenés
+import { toast } from "sonner";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 type Props = {
   onSubmit: (data: {
     name: string;
@@ -21,6 +23,8 @@ type Props = {
 };
 
 export default function AddClientForm({ onSubmit, onChange }: Props) {
+  const t = useTranslations();
+  const router = useRouter();
   const [name, setName] = useState("");
   const [legalName, setLegalName] = useState("");
   const [taxId, setTaxId] = useState("");
@@ -51,8 +55,12 @@ export default function AddClientForm({ onSubmit, onChange }: Props) {
       legalName: legalName,
     });
 
-    // Redirigir (opcional)
-    window.location.href = "/clients";
+    toast.success(t("Client created successfully"), {
+      description: t("Client created successfully description"),
+      duration: 3000,
+    });
+
+    router.push("/clients");
   };
 
   const handleOnChange = (latitude: number, longitude: number) => {

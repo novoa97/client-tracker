@@ -68,4 +68,5 @@ model Device {
   type          DeviceType  @relation(fields: [typeKey], references: [key])
   clientId      String
   client        Client      @relation(fields: [clientId], references: [id])
+  @@map("device")
 }

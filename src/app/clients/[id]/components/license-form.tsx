@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/select";
 import { License, LicenseType } from "@/generated/prisma";
 import { LicenseWithRelations } from "@/app/types";
+import { useTranslations } from "next-intl";
 
 // Define the schema for sublicense
 const sublicenseSchema = z.object({
@@ -34,7 +35,7 @@ const sublicenseSchema = z.object({
 const formSchema = z.object({
   id: z.string().min(1, "ID is required"),
   type: z.string().min(1, "Type is required"),
-  sublicenses: z.array(sublicenseSchema),
+  subLicenses: z.array(sublicenseSchema),
 });
 
 export type LicenseFormValues = z.infer<typeof formSchema>;
@@ -55,13 +56,14 @@ export function LicenseForm({
   isSubmitting = false,
   mode = "create",
 }: LicenseFormProps) {
+  const t = useTranslations();
   // Initialize the form
   const form = useForm<LicenseFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       id: defaultValues?.id || "",
       type: defaultValues?.typeKey || "",
-      sublicenses:
+      subLicenses:
         defaultValues?.subLicenses.map((l) => {
           return { id: l.id, type: l.typeKey };
         }) || [],
@@ -70,16 +72,16 @@ export function LicenseForm({
 
   // Function to add a new sublicense
   const addSublicense = () => {
-    const currentSublicenses = form.getValues("sublicenses");
-    form.setValue("sublicenses", [...currentSublicenses, { id: "", type: "" }]);
+    const currentSubLicenses = form.getValues("subLicenses");
+    form.setValue("subLicenses", [...currentSubLicenses, { id: "", type: "" }]);
   };
 
   // Function to remove a sublicense
   const removeSublicense = (index: number) => {
-    const currentSublicenses = form.getValues("sublicenses");
+    const currentSubLicenses = form.getValues("subLicenses");
     form.setValue(
-      "sublicenses",
-      currentSublicenses.filter((_, i) => i !== index)
+      "subLicenses",
+      currentSubLicenses.filter((_, i) => i !== index)
     );
   };
 
@@ -88,7 +90,8 @@ export function LicenseForm({
   };
 
   // Determine button text based on mode
-  const buttonText = mode === "create" ? "Create License" : "Update License";
+  const buttonText =
+    mode === "create" ? t("Create License") : t("Update License");
 
   return (
     <Form {...form}>
@@ -99,9 +102,9 @@ export function LicenseForm({
             name="id"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>License ID</FormLabel>
+                <FormLabel>{t("License ID")}</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter license ID" {...field} />
+                  <Input placeholder={t("Enter license ID")} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -113,14 +116,21 @@ export function LicenseForm({
             name="type"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>License Type</FormLabel>
+                <FormLabel>{t("License Type")}</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
+                  disabled={types.length === 0}
                 >
                   <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select license type" />
+                    <SelectTrigger className="w-full">
+                      <SelectValue
+                        placeholder={
+                          types.length === 0
+                            ? t("No license types added yet")
+                            : t("Select license type")
+                        }
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -138,7 +148,7 @@ export function LicenseForm({
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-medium">Sublicenses</h3>
+              <h3 className="text-sm font-medium">{t("Sublicenses")}</h3>
               <Button
                 type="button"
                 variant="outline"
@@ -147,13 +157,13 @@ export function LicenseForm({
                 className="h-8 gap-1"
               >
                 <PlusCircle className="h-4 w-4" />
-                <span>Add Sublicense</span>
+                <span>{t("Add Sublicense")}</span>
               </Button>
             </div>
 
-            {form.watch("sublicenses").length > 0 ? (
+            {form.watch("subLicenses").length > 0 ? (
               <div className="space-y-4">
-                {form.watch("sublicenses").map((_, index) => (
+                {form.watch("subLicenses").map((_, index) => (
                   <div key={index} className="rounded-md border p-4 relative">
                     <Button
                       type="button"
@@ -168,13 +178,13 @@ export function LicenseForm({
                     <div className="grid gap-4 sm:grid-cols-2">
                       <FormField
                         control={form.control}
-                        name={`sublicenses.${index}.id`}
+                        name={`subLicenses.${index}.id`}
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Sublicense ID</FormLabel>
+                            <FormLabel>{t("Sublicense ID")}</FormLabel>
                             <FormControl>
                               <Input
-                                placeholder="Enter sublicense ID"
+                                placeholder={t("Enter sublicense ID")}
                                 {...field}
                               />
                             </FormControl>
@@ -184,17 +194,18 @@ export function LicenseForm({
                       />
                       <FormField
                         control={form.control}
-                        name={`sublicenses.${index}.type`}
+                        name={`subLicenses.${index}.type`}
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Sublicense Type</FormLabel>
+                            <FormLabel>{t("Sublicense Type")}</FormLabel>
                             <Select
                               onValueChange={field.onChange}
                               defaultValue={field.value}
+                              disabled={types.length === 0}
                             >
                               <FormControl>
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Select type" />
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder={t("Select type")} />
                                 </SelectTrigger>
                               </FormControl>
                               <SelectContent>
@@ -215,18 +226,18 @@ export function LicenseForm({
               </div>
             ) : (
               <div className="rounded-md border border-dashed p-6 text-center text-sm text-muted-foreground">
-                No sublicenses added yet. Click the button above to add one.
+                {t("No sublicenses added yet")}
               </div>
             )}
           </div>
         </div>
 
         <div className="flex justify-end gap-2">
-          <Button type="submit" disabled={isSubmitting}>
+          <Button type="submit" disabled={isSubmitting || types.length === 0}>
             {isSubmitting
               ? mode === "create"
-                ? "Creating..."
-                : "Updating..."
+                ? t("Creating")
+                : t("Updating")
               : buttonText}
           </Button>
         </div>
