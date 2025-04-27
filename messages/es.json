@@ -14,6 +14,11 @@
   "Filters": "Filtros",
   "You can browse icon names at": "Puedes buscar nombres de iconos en",
 
+  "Color": "Color",
+  "Icon": "Icono",
+  "Enter an icon name": "Introduce un nombre de icono",
+  "Type name": "Nombre del Tipo",
+
   "Clients": "Clientes",
   "Client": "Cliente",
   "Add Client": "Añadir Cliente",
@@ -36,7 +41,6 @@
   "Add Device": "Añadir Dispositivo",
   "No devices found": "No se encontraron dispositivos.",
   "Settings": "Configuración",
-  "Icon": "Icono",
   "Add Device Type": "Añadir Tipo de Dispositivo",
   "No device types added yet": "Aún no se han añadido tipos de dispositivos.",
   "General": "General",

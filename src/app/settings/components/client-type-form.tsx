@@ -60,9 +60,9 @@ export function ClientTypeForm({
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel>{t("Name")}</FormLabel>
               <FormControl>
-                <Input placeholder="Device name" {...field} />
+                <Input placeholder={t("Type name")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -74,7 +74,7 @@ export function ClientTypeForm({
           name="color"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Color</FormLabel>
+              <FormLabel>{t("Color")}</FormLabel>
               <FormControl>
                 <ColorPicker value={field.value} onChange={field.onChange} />
               </FormControl>
@@ -88,7 +88,7 @@ export function ClientTypeForm({
           name="icon"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Icon</FormLabel>
+              <FormLabel>{t("Icon")}</FormLabel>
               <div className="relative">
                 <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
                   {field.value ? (
@@ -99,7 +99,7 @@ export function ClientTypeForm({
                 </div>
                 <FormControl>
                   <Input
-                    placeholder="Enter an icon name (e.g. monitor)"
+                    placeholder={t("Enter an icon name") + " (e.g. monitor)"}
                     className={"pl-9"}
                     {...field}
                   />

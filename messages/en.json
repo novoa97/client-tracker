@@ -14,6 +14,11 @@
   "Filters": "Filters",
   "You can browse icon names at": "You can browse icon names at",
 
+  "Color": "Color",
+  "Icon": "Icon",
+  "Enter an icon name": "Enter an icon name",
+  "Type name": "Type name",
+
   "Clients": "Clients",
   "Client": "Client",
   "Add Client": "Add Client",
@@ -36,7 +41,6 @@
   "Registered devices for this client": "Registered devices for this client.",
   "No devices found": "No devices found.",
   "Settings": "Settings",
-  "Icon": "Icon",
   "Add Device Type": "Add Device Type",
   "No device types added yet": "No device types added yet.",
   "General": "General",
