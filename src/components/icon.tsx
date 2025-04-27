@@ -10,7 +10,10 @@ type DynamicIconProps = {
 };
 
 const DynamicIcon: FC<DynamicIconProps> = memo(({ name, className }) => {
-  const normalizedName = name.charAt(0).toUpperCase() + name.slice(1);
+  const normalizedName = name
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join("");
 
   const MaybeIcon = Icons[normalizedName as keyof typeof Icons];
 
@@ -19,9 +22,6 @@ const DynamicIcon: FC<DynamicIconProps> = memo(({ name, className }) => {
     MaybeIcon && typeof MaybeIcon === "object" && "$$typeof" in MaybeIcon;
 
   if (!isValidIcon) {
-    console.error(
-      `Icon "${name}" not found or is not a valid icon in lucide-react`
-    );
     return <LoaderIcon className={className} />;
   }
 

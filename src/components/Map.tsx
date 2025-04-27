@@ -14,7 +14,7 @@ import { Client } from "@/generated/prisma";
 import Link from "next/link";
 import { ClientWithType } from "@/app/types";
 import { renderToStaticMarkup } from "react-dom/server";
-import { Building } from "lucide-react";
+import { ArrowRight, Building } from "lucide-react";
 import DynamicIcon from "./icon";
 import { generateMarkerIcon } from "@/lib/marker";
 
@@ -73,7 +73,11 @@ export default function GeneralMap({ clients }: Props) {
                     icon={customIcon}
                   >
                     <Popup>
-                      <Link href={"clients/" + client.id}>{client.name}</Link>
+                      <Link href={"clients/" + client.id}>
+                        <div className="flex flex-row items-center gap-2 text-md font-bold text-black">
+                          {client.name}
+                        </div>
+                      </Link>
                     </Popup>
                   </Marker>
                 );

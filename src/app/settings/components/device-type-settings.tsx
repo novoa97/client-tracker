@@ -248,7 +248,7 @@ export function DeviceTypeSettings({ types }: Props) {
                       </FormControl>
                     </div>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      You can browse icon names at{" "}
+                      {t("You can browse icon names at")}{" "}
                       <a
                         href="https://lucide.dev/icons/"
                         target="_blank"
@@ -331,7 +331,7 @@ export function DeviceTypeSettings({ types }: Props) {
                       </FormControl>
                     </div>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      You can browse icon names at{" "}
+                      {t("You can browse icon names at")}{" "}
                       <a
                         href="https://lucide.dev/icons/"
                         target="_blank"

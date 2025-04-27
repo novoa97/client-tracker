@@ -12,6 +12,7 @@
   "Saved": "Guardado",
   "Optional": "Opcional",
   "Filters": "Filtros",
+  "You can browse icon names at": "Puedes buscar nombres de iconos en",
 
   "Clients": "Clientes",
   "Client": "Cliente",
@@ -117,6 +118,15 @@
   "Edit Client Type": "Editar tipo de cliente",
   "Edit the client type details": "Editar los detalles del tipo de cliente",
   "No client types added yet": "Aún no se han añadido tipos de clientes. Haz clic en el botón superior para añadir uno.",
+  "Client type created": "Tipo de cliente creado correctamente",
+  "Client type created description": "El tipo de cliente se ha creado correctamente",
+  "Client type creation failed": "Error al crear el tipo de cliente",
+  "Client type creation failed description": "El tipo de cliente no se ha creado",
+  "Client type already exists": "El tipo de cliente ya existe",
+  "Client type updated": "Tipo de cliente actualizado correctamente",
+  "Client type updated description": "El tipo de cliente se ha actualizado correctamente",
+  "Client type update failed": "Error al actualizar el tipo de cliente",
+  "Client type update failed description": "El tipo de cliente no se ha actualizado",
   "Client type deleted": "Tipo de cliente eliminado correctamente",
   "Client type deleted description": "El tipo de cliente se ha eliminado correctamente"
 }

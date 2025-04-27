@@ -12,6 +12,7 @@
   "Saved": "Saved",
   "Optional": "Optional",
   "Filters": "Filters",
+  "You can browse icon names at": "You can browse icon names at",
 
   "Clients": "Clients",
   "Client": "Client",
@@ -116,6 +117,15 @@
   "Edit Client Type": "Edit client type",
   "Edit the client type details": "Edit the client type details",
   "No client types added yet": "No client types added yet. Click the button above to add one.",
+  "Client type created": "Client type created",
+  "Client type created description": "The client type has been created successfully",
+  "Client type creation failed": "Client type creation failed",
+  "Client type creation failed description": "The client type has not been created",
+  "Client type already exists": "Client type already exists",
+  "Client type updated": "Client type updated",
+  "Client type updated description": "The client type has been updated successfully",
+  "Client type update failed": "Client type update failed",
+  "Client type update failed description": "The client type has not been updated",
   "Client type deleted": "Client type deleted",
   "Client type deleted description": "The client type has been deleted successfully"
 }

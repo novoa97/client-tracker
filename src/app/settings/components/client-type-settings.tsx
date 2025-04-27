@@ -1,34 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { z } from "zod";
-import {
-  Pencil,
-  Trash,
-  Smartphone,
-  Laptop,
-  ComputerIcon as Desktop,
-  Tablet,
-  Watch,
-  Tv,
-  Server,
-  Printer,
-  Check,
-  CircleX,
-} from "lucide-react";
-
+import { Pencil, Trash, Check, CircleX } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { TableRow, TableCell } from "@/components/ui/table";
 import { CardList } from "@/components/card-list";
 import { useTranslations } from "next-intl";
-import { addDeviceType } from "../actions/add-device-type";
 import { useRouter } from "next/navigation";
-import { ClientType, DeviceType } from "@/generated/prisma";
-import { deleteDeviceType } from "../actions/delete-device-type";
-import { editDeviceType } from "../actions/edit-device-type";
+import { ClientType } from "@/generated/prisma";
 import DynamicIcon from "@/components/icon";
-import { DeviceTypeWithInUse } from "../actions/get-devices-type";
 import {
   Tooltip,
   TooltipContent,
@@ -40,20 +20,21 @@ import { ClientTypeForm, ClientTypeFormValues } from "./client-type-form";
 import { ClientTypeWithInUse } from "../actions/get-client-type";
 import { addClientType } from "../actions/add-client-type";
 import { editClientType } from "../actions/edit-client-type";
+import { deleteClientType } from "../actions/delete-client-type";
 
 interface Props {
   types: ClientTypeWithInUse[];
 }
 
 export function ClientTypeSettings({ types }: Props) {
+  const t = useTranslations();
+  const router = useRouter();
   const [items, setItems] = useState<ClientTypeWithInUse[] | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [editingClientType, setEditingClientType] = useState<ClientType | null>(
     null
   );
-  const t = useTranslations();
-  const router = useRouter();
 
   useEffect(() => {
     setItems(types);
@@ -66,7 +47,17 @@ export function ClientTypeSettings({ types }: Props) {
       if (response.ok) {
         setIsDialogOpen(false);
         router.refresh();
+        toast.success(t("Client type created"), {
+          description: t("Client type created description"),
+          duration: 2000,
+          icon: <Check className="h-4 w-4 text-green-500" />,
+        });
       } else {
+        toast.error(t("Client type creation failed"), {
+          description: t(response.message),
+          duration: 2000,
+          icon: <CircleX className="h-4 w-4 text-red-500" />,
+        });
       }
     } catch (error) {
       console.log(error);
@@ -80,16 +71,25 @@ export function ClientTypeSettings({ types }: Props) {
     setIsDialogOpen(false);
     setEditingClientType(null);
     router.refresh();
-  };
-
-  const handleDelete = async (id: string) => {
-    await deleteDeviceType(id);
-    router.refresh();
-    toast(t("Device type deleted"), {
-      description: t("The device type has been deleted"),
+    toast(t("Client type updated"), {
+      description: t("Client type updated description"),
       duration: 2000,
       icon: <Check className="h-4 w-4 text-green-500" />,
     });
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteClientType(id);
+      router.refresh();
+      toast(t("Client type deleted"), {
+        description: t("Client type deleted description"),
+        duration: 2000,
+        icon: <Check className="h-4 w-4 text-green-500" />,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (!items) {

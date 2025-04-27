@@ -1,5 +1,6 @@
 "use server";
 
+import { ActionError } from "@/errors/actions";
 import { prisma } from "@/lib/prisma";
 import { slugify } from "@/lib/utils";
 import { ActionResponse } from "@/types/action-response";
@@ -14,16 +15,30 @@ export interface CreateClientTypeData {
 
 
 export async function addClientType(data: CreateClientTypeData): Promise<ActionResponse> {
-    const { name, color, icon } = data;
+    try {
+        const key = slugify(data.name);
 
-    const clientType = await prisma.clientType.create({
-        data: {
-            key: slugify(name),
-            name,
-            color,
-            icon,
-        },
-    });
+        const existingClientType = await prisma.clientType.findUnique({
+            where: { key },
+        });
+        if (existingClientType) throw new ActionError("Client type already exists");
 
-    return { ok: true };
+        const { name, color, icon } = data;
+
+        await prisma.clientType.create({
+            data: {
+                key: slugify(name),
+                name,
+                color,
+                icon,
+            },
+        });
+
+        return { ok: true };
+    }
+    catch (error) {
+        if (error instanceof ActionError) return error.toResponse();
+        throw error;
+    }
+
 }   
