@@ -23,3 +23,12 @@ export const DeviceWithRelations = Prisma.validator<Prisma.LicenseDefaultArgs>()
 
 
 export type DeviceWithRelations = Prisma.DeviceGetPayload<typeof DeviceWithRelations>
+
+
+export const ClientWithType = Prisma.validator<Prisma.ClientDefaultArgs>()({
+    include: {
+        type: true,
+    }
+})
+
+export type ClientWithType = Prisma.ClientGetPayload<typeof ClientWithType>

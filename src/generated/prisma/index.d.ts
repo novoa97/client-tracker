@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model ClientType
+ * 
+ */
+export type ClientType = $Result.DefaultSelection<Prisma.$ClientTypePayload>
+/**
  * Model Client
  * 
  */
@@ -46,8 +51,8 @@ export type Device = $Result.DefaultSelection<Prisma.$DevicePayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Clients
- * const clients = await prisma.client.findMany()
+ * // Fetch zero or more ClientTypes
+ * const clientTypes = await prisma.clientType.findMany()
  * ```
  *
  *
@@ -67,8 +72,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Clients
-   * const clients = await prisma.client.findMany()
+   * // Fetch zero or more ClientTypes
+   * const clientTypes = await prisma.clientType.findMany()
    * ```
    *
    *
@@ -165,6 +170,16 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.clientType`: Exposes CRUD operations for the **ClientType** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ClientTypes
+    * const clientTypes = await prisma.clientType.findMany()
+    * ```
+    */
+  get clientType(): Prisma.ClientTypeDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.client`: Exposes CRUD operations for the **Client** model.
     * Example usage:
     * ```ts
@@ -653,6 +668,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    ClientType: 'ClientType',
     Client: 'Client',
     License: 'License',
     LicenseType: 'LicenseType',
@@ -676,10 +692,76 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "client" | "license" | "licenseType" | "deviceType" | "device"
+      modelProps: "clientType" | "client" | "license" | "licenseType" | "deviceType" | "device"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      ClientType: {
+        payload: Prisma.$ClientTypePayload<ExtArgs>
+        fields: Prisma.ClientTypeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ClientTypeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTypePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ClientTypeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTypePayload>
+          }
+          findFirst: {
+            args: Prisma.ClientTypeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTypePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ClientTypeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTypePayload>
+          }
+          findMany: {
+            args: Prisma.ClientTypeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTypePayload>[]
+          }
+          create: {
+            args: Prisma.ClientTypeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTypePayload>
+          }
+          createMany: {
+            args: Prisma.ClientTypeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ClientTypeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTypePayload>
+          }
+          update: {
+            args: Prisma.ClientTypeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTypePayload>
+          }
+          deleteMany: {
+            args: Prisma.ClientTypeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ClientTypeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ClientTypeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClientTypePayload>
+          }
+          aggregate: {
+            args: Prisma.ClientTypeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClientType>
+          }
+          groupBy: {
+            args: Prisma.ClientTypeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClientTypeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ClientTypeCountArgs<ExtArgs>
+            result: $Utils.Optional<ClientTypeCountAggregateOutputType> | number
+          }
+        }
+      }
       Client: {
         payload: Prisma.$ClientPayload<ExtArgs>
         fields: Prisma.ClientFieldRefs
@@ -1094,6 +1176,7 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
+    clientType?: ClientTypeOmit
     client?: ClientOmit
     license?: LicenseOmit
     licenseType?: LicenseTypeOmit
@@ -1186,6 +1269,37 @@ export namespace Prisma {
   /**
    * Count Types
    */
+
+
+  /**
+   * Count Type ClientTypeCountOutputType
+   */
+
+  export type ClientTypeCountOutputType = {
+    clients: number
+  }
+
+  export type ClientTypeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    clients?: boolean | ClientTypeCountOutputTypeCountClientsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ClientTypeCountOutputType without action
+   */
+  export type ClientTypeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientTypeCountOutputType
+     */
+    select?: ClientTypeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ClientTypeCountOutputType without action
+   */
+  export type ClientTypeCountOutputTypeCountClientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientWhereInput
+  }
 
 
   /**
@@ -1326,6 +1440,950 @@ export namespace Prisma {
    */
 
   /**
+   * Model ClientType
+   */
+
+  export type AggregateClientType = {
+    _count: ClientTypeCountAggregateOutputType | null
+    _min: ClientTypeMinAggregateOutputType | null
+    _max: ClientTypeMaxAggregateOutputType | null
+  }
+
+  export type ClientTypeMinAggregateOutputType = {
+    key: string | null
+    name: string | null
+    icon: string | null
+    color: string | null
+  }
+
+  export type ClientTypeMaxAggregateOutputType = {
+    key: string | null
+    name: string | null
+    icon: string | null
+    color: string | null
+  }
+
+  export type ClientTypeCountAggregateOutputType = {
+    key: number
+    name: number
+    icon: number
+    color: number
+    _all: number
+  }
+
+
+  export type ClientTypeMinAggregateInputType = {
+    key?: true
+    name?: true
+    icon?: true
+    color?: true
+  }
+
+  export type ClientTypeMaxAggregateInputType = {
+    key?: true
+    name?: true
+    icon?: true
+    color?: true
+  }
+
+  export type ClientTypeCountAggregateInputType = {
+    key?: true
+    name?: true
+    icon?: true
+    color?: true
+    _all?: true
+  }
+
+  export type ClientTypeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClientType to aggregate.
+     */
+    where?: ClientTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientTypes to fetch.
+     */
+    orderBy?: ClientTypeOrderByWithRelationInput | ClientTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ClientTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ClientTypes
+    **/
+    _count?: true | ClientTypeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ClientTypeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ClientTypeMaxAggregateInputType
+  }
+
+  export type GetClientTypeAggregateType<T extends ClientTypeAggregateArgs> = {
+        [P in keyof T & keyof AggregateClientType]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateClientType[P]>
+      : GetScalarType<T[P], AggregateClientType[P]>
+  }
+
+
+
+
+  export type ClientTypeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientTypeWhereInput
+    orderBy?: ClientTypeOrderByWithAggregationInput | ClientTypeOrderByWithAggregationInput[]
+    by: ClientTypeScalarFieldEnum[] | ClientTypeScalarFieldEnum
+    having?: ClientTypeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ClientTypeCountAggregateInputType | true
+    _min?: ClientTypeMinAggregateInputType
+    _max?: ClientTypeMaxAggregateInputType
+  }
+
+  export type ClientTypeGroupByOutputType = {
+    key: string
+    name: string
+    icon: string
+    color: string
+    _count: ClientTypeCountAggregateOutputType | null
+    _min: ClientTypeMinAggregateOutputType | null
+    _max: ClientTypeMaxAggregateOutputType | null
+  }
+
+  type GetClientTypeGroupByPayload<T extends ClientTypeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ClientTypeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ClientTypeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ClientTypeGroupByOutputType[P]>
+            : GetScalarType<T[P], ClientTypeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ClientTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    key?: boolean
+    name?: boolean
+    icon?: boolean
+    color?: boolean
+    clients?: boolean | ClientType$clientsArgs<ExtArgs>
+    _count?: boolean | ClientTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["clientType"]>
+
+
+
+  export type ClientTypeSelectScalar = {
+    key?: boolean
+    name?: boolean
+    icon?: boolean
+    color?: boolean
+  }
+
+  export type ClientTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"key" | "name" | "icon" | "color", ExtArgs["result"]["clientType"]>
+  export type ClientTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    clients?: boolean | ClientType$clientsArgs<ExtArgs>
+    _count?: boolean | ClientTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $ClientTypePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClientType"
+    objects: {
+      clients: Prisma.$ClientPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      key: string
+      name: string
+      icon: string
+      color: string
+    }, ExtArgs["result"]["clientType"]>
+    composites: {}
+  }
+
+  type ClientTypeGetPayload<S extends boolean | null | undefined | ClientTypeDefaultArgs> = $Result.GetResult<Prisma.$ClientTypePayload, S>
+
+  type ClientTypeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ClientTypeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ClientTypeCountAggregateInputType | true
+    }
+
+  export interface ClientTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClientType'], meta: { name: 'ClientType' } }
+    /**
+     * Find zero or one ClientType that matches the filter.
+     * @param {ClientTypeFindUniqueArgs} args - Arguments to find a ClientType
+     * @example
+     * // Get one ClientType
+     * const clientType = await prisma.clientType.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ClientTypeFindUniqueArgs>(args: SelectSubset<T, ClientTypeFindUniqueArgs<ExtArgs>>): Prisma__ClientTypeClient<$Result.GetResult<Prisma.$ClientTypePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ClientType that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ClientTypeFindUniqueOrThrowArgs} args - Arguments to find a ClientType
+     * @example
+     * // Get one ClientType
+     * const clientType = await prisma.clientType.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ClientTypeFindUniqueOrThrowArgs>(args: SelectSubset<T, ClientTypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClientTypeClient<$Result.GetResult<Prisma.$ClientTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClientType that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientTypeFindFirstArgs} args - Arguments to find a ClientType
+     * @example
+     * // Get one ClientType
+     * const clientType = await prisma.clientType.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ClientTypeFindFirstArgs>(args?: SelectSubset<T, ClientTypeFindFirstArgs<ExtArgs>>): Prisma__ClientTypeClient<$Result.GetResult<Prisma.$ClientTypePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ClientType that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientTypeFindFirstOrThrowArgs} args - Arguments to find a ClientType
+     * @example
+     * // Get one ClientType
+     * const clientType = await prisma.clientType.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ClientTypeFindFirstOrThrowArgs>(args?: SelectSubset<T, ClientTypeFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClientTypeClient<$Result.GetResult<Prisma.$ClientTypePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ClientTypes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientTypeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ClientTypes
+     * const clientTypes = await prisma.clientType.findMany()
+     * 
+     * // Get first 10 ClientTypes
+     * const clientTypes = await prisma.clientType.findMany({ take: 10 })
+     * 
+     * // Only select the `key`
+     * const clientTypeWithKeyOnly = await prisma.clientType.findMany({ select: { key: true } })
+     * 
+     */
+    findMany<T extends ClientTypeFindManyArgs>(args?: SelectSubset<T, ClientTypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ClientType.
+     * @param {ClientTypeCreateArgs} args - Arguments to create a ClientType.
+     * @example
+     * // Create one ClientType
+     * const ClientType = await prisma.clientType.create({
+     *   data: {
+     *     // ... data to create a ClientType
+     *   }
+     * })
+     * 
+     */
+    create<T extends ClientTypeCreateArgs>(args: SelectSubset<T, ClientTypeCreateArgs<ExtArgs>>): Prisma__ClientTypeClient<$Result.GetResult<Prisma.$ClientTypePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ClientTypes.
+     * @param {ClientTypeCreateManyArgs} args - Arguments to create many ClientTypes.
+     * @example
+     * // Create many ClientTypes
+     * const clientType = await prisma.clientType.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ClientTypeCreateManyArgs>(args?: SelectSubset<T, ClientTypeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ClientType.
+     * @param {ClientTypeDeleteArgs} args - Arguments to delete one ClientType.
+     * @example
+     * // Delete one ClientType
+     * const ClientType = await prisma.clientType.delete({
+     *   where: {
+     *     // ... filter to delete one ClientType
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ClientTypeDeleteArgs>(args: SelectSubset<T, ClientTypeDeleteArgs<ExtArgs>>): Prisma__ClientTypeClient<$Result.GetResult<Prisma.$ClientTypePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ClientType.
+     * @param {ClientTypeUpdateArgs} args - Arguments to update one ClientType.
+     * @example
+     * // Update one ClientType
+     * const clientType = await prisma.clientType.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ClientTypeUpdateArgs>(args: SelectSubset<T, ClientTypeUpdateArgs<ExtArgs>>): Prisma__ClientTypeClient<$Result.GetResult<Prisma.$ClientTypePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ClientTypes.
+     * @param {ClientTypeDeleteManyArgs} args - Arguments to filter ClientTypes to delete.
+     * @example
+     * // Delete a few ClientTypes
+     * const { count } = await prisma.clientType.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ClientTypeDeleteManyArgs>(args?: SelectSubset<T, ClientTypeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClientTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientTypeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ClientTypes
+     * const clientType = await prisma.clientType.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ClientTypeUpdateManyArgs>(args: SelectSubset<T, ClientTypeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ClientType.
+     * @param {ClientTypeUpsertArgs} args - Arguments to update or create a ClientType.
+     * @example
+     * // Update or create a ClientType
+     * const clientType = await prisma.clientType.upsert({
+     *   create: {
+     *     // ... data to create a ClientType
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ClientType we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ClientTypeUpsertArgs>(args: SelectSubset<T, ClientTypeUpsertArgs<ExtArgs>>): Prisma__ClientTypeClient<$Result.GetResult<Prisma.$ClientTypePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ClientTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientTypeCountArgs} args - Arguments to filter ClientTypes to count.
+     * @example
+     * // Count the number of ClientTypes
+     * const count = await prisma.clientType.count({
+     *   where: {
+     *     // ... the filter for the ClientTypes we want to count
+     *   }
+     * })
+    **/
+    count<T extends ClientTypeCountArgs>(
+      args?: Subset<T, ClientTypeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ClientTypeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ClientType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientTypeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ClientTypeAggregateArgs>(args: Subset<T, ClientTypeAggregateArgs>): Prisma.PrismaPromise<GetClientTypeAggregateType<T>>
+
+    /**
+     * Group by ClientType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClientTypeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ClientTypeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ClientTypeGroupByArgs['orderBy'] }
+        : { orderBy?: ClientTypeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ClientTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClientTypeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ClientType model
+   */
+  readonly fields: ClientTypeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ClientType.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ClientTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    clients<T extends ClientType$clientsArgs<ExtArgs> = {}>(args?: Subset<T, ClientType$clientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ClientType model
+   */
+  interface ClientTypeFieldRefs {
+    readonly key: FieldRef<"ClientType", 'String'>
+    readonly name: FieldRef<"ClientType", 'String'>
+    readonly icon: FieldRef<"ClientType", 'String'>
+    readonly color: FieldRef<"ClientType", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ClientType findUnique
+   */
+  export type ClientTypeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientType
+     */
+    select?: ClientTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientType
+     */
+    omit?: ClientTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientType to fetch.
+     */
+    where: ClientTypeWhereUniqueInput
+  }
+
+  /**
+   * ClientType findUniqueOrThrow
+   */
+  export type ClientTypeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientType
+     */
+    select?: ClientTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientType
+     */
+    omit?: ClientTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientType to fetch.
+     */
+    where: ClientTypeWhereUniqueInput
+  }
+
+  /**
+   * ClientType findFirst
+   */
+  export type ClientTypeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientType
+     */
+    select?: ClientTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientType
+     */
+    omit?: ClientTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientType to fetch.
+     */
+    where?: ClientTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientTypes to fetch.
+     */
+    orderBy?: ClientTypeOrderByWithRelationInput | ClientTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClientTypes.
+     */
+    cursor?: ClientTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClientTypes.
+     */
+    distinct?: ClientTypeScalarFieldEnum | ClientTypeScalarFieldEnum[]
+  }
+
+  /**
+   * ClientType findFirstOrThrow
+   */
+  export type ClientTypeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientType
+     */
+    select?: ClientTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientType
+     */
+    omit?: ClientTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientType to fetch.
+     */
+    where?: ClientTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientTypes to fetch.
+     */
+    orderBy?: ClientTypeOrderByWithRelationInput | ClientTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClientTypes.
+     */
+    cursor?: ClientTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClientTypes.
+     */
+    distinct?: ClientTypeScalarFieldEnum | ClientTypeScalarFieldEnum[]
+  }
+
+  /**
+   * ClientType findMany
+   */
+  export type ClientTypeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientType
+     */
+    select?: ClientTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientType
+     */
+    omit?: ClientTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which ClientTypes to fetch.
+     */
+    where?: ClientTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClientTypes to fetch.
+     */
+    orderBy?: ClientTypeOrderByWithRelationInput | ClientTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ClientTypes.
+     */
+    cursor?: ClientTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClientTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClientTypes.
+     */
+    skip?: number
+    distinct?: ClientTypeScalarFieldEnum | ClientTypeScalarFieldEnum[]
+  }
+
+  /**
+   * ClientType create
+   */
+  export type ClientTypeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientType
+     */
+    select?: ClientTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientType
+     */
+    omit?: ClientTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ClientType.
+     */
+    data: XOR<ClientTypeCreateInput, ClientTypeUncheckedCreateInput>
+  }
+
+  /**
+   * ClientType createMany
+   */
+  export type ClientTypeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ClientTypes.
+     */
+    data: ClientTypeCreateManyInput | ClientTypeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ClientType update
+   */
+  export type ClientTypeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientType
+     */
+    select?: ClientTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientType
+     */
+    omit?: ClientTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ClientType.
+     */
+    data: XOR<ClientTypeUpdateInput, ClientTypeUncheckedUpdateInput>
+    /**
+     * Choose, which ClientType to update.
+     */
+    where: ClientTypeWhereUniqueInput
+  }
+
+  /**
+   * ClientType updateMany
+   */
+  export type ClientTypeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ClientTypes.
+     */
+    data: XOR<ClientTypeUpdateManyMutationInput, ClientTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which ClientTypes to update
+     */
+    where?: ClientTypeWhereInput
+    /**
+     * Limit how many ClientTypes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClientType upsert
+   */
+  export type ClientTypeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientType
+     */
+    select?: ClientTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientType
+     */
+    omit?: ClientTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTypeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ClientType to update in case it exists.
+     */
+    where: ClientTypeWhereUniqueInput
+    /**
+     * In case the ClientType found by the `where` argument doesn't exist, create a new ClientType with this data.
+     */
+    create: XOR<ClientTypeCreateInput, ClientTypeUncheckedCreateInput>
+    /**
+     * In case the ClientType was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ClientTypeUpdateInput, ClientTypeUncheckedUpdateInput>
+  }
+
+  /**
+   * ClientType delete
+   */
+  export type ClientTypeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientType
+     */
+    select?: ClientTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientType
+     */
+    omit?: ClientTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTypeInclude<ExtArgs> | null
+    /**
+     * Filter which ClientType to delete.
+     */
+    where: ClientTypeWhereUniqueInput
+  }
+
+  /**
+   * ClientType deleteMany
+   */
+  export type ClientTypeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClientTypes to delete
+     */
+    where?: ClientTypeWhereInput
+    /**
+     * Limit how many ClientTypes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ClientType.clients
+   */
+  export type ClientType$clientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    where?: ClientWhereInput
+    orderBy?: ClientOrderByWithRelationInput | ClientOrderByWithRelationInput[]
+    cursor?: ClientWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClientScalarFieldEnum | ClientScalarFieldEnum[]
+  }
+
+  /**
+   * ClientType without action
+   */
+  export type ClientTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClientType
+     */
+    select?: ClientTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ClientType
+     */
+    omit?: ClientTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientTypeInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Client
    */
 
@@ -1357,6 +2415,7 @@ export namespace Prisma {
     latitude: number | null
     longitude: number | null
     notes: string | null
+    typeKey: string | null
     createdAt: Date | null
   }
 
@@ -1370,6 +2429,7 @@ export namespace Prisma {
     latitude: number | null
     longitude: number | null
     notes: string | null
+    typeKey: string | null
     createdAt: Date | null
   }
 
@@ -1383,6 +2443,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes: number
+    typeKey: number
     createdAt: number
     _all: number
   }
@@ -1408,6 +2469,7 @@ export namespace Prisma {
     latitude?: true
     longitude?: true
     notes?: true
+    typeKey?: true
     createdAt?: true
   }
 
@@ -1421,6 +2483,7 @@ export namespace Prisma {
     latitude?: true
     longitude?: true
     notes?: true
+    typeKey?: true
     createdAt?: true
   }
 
@@ -1434,6 +2497,7 @@ export namespace Prisma {
     latitude?: true
     longitude?: true
     notes?: true
+    typeKey?: true
     createdAt?: true
     _all?: true
   }
@@ -1534,6 +2598,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes: string | null
+    typeKey: string
     createdAt: Date
     _count: ClientCountAggregateOutputType | null
     _avg: ClientAvgAggregateOutputType | null
@@ -1566,7 +2631,9 @@ export namespace Prisma {
     latitude?: boolean
     longitude?: boolean
     notes?: boolean
+    typeKey?: boolean
     createdAt?: boolean
+    type?: boolean | ClientTypeDefaultArgs<ExtArgs>
     licenses?: boolean | Client$licensesArgs<ExtArgs>
     devices?: boolean | Client$devicesArgs<ExtArgs>
     _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
@@ -1584,11 +2651,13 @@ export namespace Prisma {
     latitude?: boolean
     longitude?: boolean
     notes?: boolean
+    typeKey?: boolean
     createdAt?: boolean
   }
 
-  export type ClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "legalName" | "taxId" | "address" | "city" | "latitude" | "longitude" | "notes" | "createdAt", ExtArgs["result"]["client"]>
+  export type ClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "legalName" | "taxId" | "address" | "city" | "latitude" | "longitude" | "notes" | "typeKey" | "createdAt", ExtArgs["result"]["client"]>
   export type ClientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    type?: boolean | ClientTypeDefaultArgs<ExtArgs>
     licenses?: boolean | Client$licensesArgs<ExtArgs>
     devices?: boolean | Client$devicesArgs<ExtArgs>
     _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
@@ -1597,6 +2666,7 @@ export namespace Prisma {
   export type $ClientPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Client"
     objects: {
+      type: Prisma.$ClientTypePayload<ExtArgs>
       licenses: Prisma.$LicensePayload<ExtArgs>[]
       devices: Prisma.$DevicePayload<ExtArgs>[]
     }
@@ -1610,6 +2680,7 @@ export namespace Prisma {
       latitude: number
       longitude: number
       notes: string | null
+      typeKey: string
       createdAt: Date
     }, ExtArgs["result"]["client"]>
     composites: {}
@@ -1951,6 +3022,7 @@ export namespace Prisma {
    */
   export interface Prisma__ClientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    type<T extends ClientTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientTypeDefaultArgs<ExtArgs>>): Prisma__ClientTypeClient<$Result.GetResult<Prisma.$ClientTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     licenses<T extends Client$licensesArgs<ExtArgs> = {}>(args?: Subset<T, Client$licensesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LicensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     devices<T extends Client$devicesArgs<ExtArgs> = {}>(args?: Subset<T, Client$devicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DevicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -1991,6 +3063,7 @@ export namespace Prisma {
     readonly latitude: FieldRef<"Client", 'Float'>
     readonly longitude: FieldRef<"Client", 'Float'>
     readonly notes: FieldRef<"Client", 'String'>
+    readonly typeKey: FieldRef<"Client", 'String'>
     readonly createdAt: FieldRef<"Client", 'DateTime'>
   }
     
@@ -6200,6 +7273,16 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const ClientTypeScalarFieldEnum: {
+    key: 'key',
+    name: 'name',
+    icon: 'icon',
+    color: 'color'
+  };
+
+  export type ClientTypeScalarFieldEnum = (typeof ClientTypeScalarFieldEnum)[keyof typeof ClientTypeScalarFieldEnum]
+
+
   export const ClientScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -6210,6 +7293,7 @@ export namespace Prisma {
     latitude: 'latitude',
     longitude: 'longitude',
     notes: 'notes',
+    typeKey: 'typeKey',
     createdAt: 'createdAt'
   };
 
@@ -6264,6 +7348,16 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const ClientTypeOrderByRelevanceFieldEnum: {
+    key: 'key',
+    name: 'name',
+    icon: 'icon',
+    color: 'color'
+  };
+
+  export type ClientTypeOrderByRelevanceFieldEnum = (typeof ClientTypeOrderByRelevanceFieldEnum)[keyof typeof ClientTypeOrderByRelevanceFieldEnum]
+
+
   export const NullsOrder: {
     first: 'first',
     last: 'last'
@@ -6279,7 +7373,8 @@ export namespace Prisma {
     taxId: 'taxId',
     address: 'address',
     city: 'city',
-    notes: 'notes'
+    notes: 'notes',
+    typeKey: 'typeKey'
   };
 
   export type ClientOrderByRelevanceFieldEnum = (typeof ClientOrderByRelevanceFieldEnum)[keyof typeof ClientOrderByRelevanceFieldEnum]
@@ -6361,6 +7456,57 @@ export namespace Prisma {
    */
 
 
+  export type ClientTypeWhereInput = {
+    AND?: ClientTypeWhereInput | ClientTypeWhereInput[]
+    OR?: ClientTypeWhereInput[]
+    NOT?: ClientTypeWhereInput | ClientTypeWhereInput[]
+    key?: StringFilter<"ClientType"> | string
+    name?: StringFilter<"ClientType"> | string
+    icon?: StringFilter<"ClientType"> | string
+    color?: StringFilter<"ClientType"> | string
+    clients?: ClientListRelationFilter
+  }
+
+  export type ClientTypeOrderByWithRelationInput = {
+    key?: SortOrder
+    name?: SortOrder
+    icon?: SortOrder
+    color?: SortOrder
+    clients?: ClientOrderByRelationAggregateInput
+    _relevance?: ClientTypeOrderByRelevanceInput
+  }
+
+  export type ClientTypeWhereUniqueInput = Prisma.AtLeast<{
+    key?: string
+    AND?: ClientTypeWhereInput | ClientTypeWhereInput[]
+    OR?: ClientTypeWhereInput[]
+    NOT?: ClientTypeWhereInput | ClientTypeWhereInput[]
+    name?: StringFilter<"ClientType"> | string
+    icon?: StringFilter<"ClientType"> | string
+    color?: StringFilter<"ClientType"> | string
+    clients?: ClientListRelationFilter
+  }, "key">
+
+  export type ClientTypeOrderByWithAggregationInput = {
+    key?: SortOrder
+    name?: SortOrder
+    icon?: SortOrder
+    color?: SortOrder
+    _count?: ClientTypeCountOrderByAggregateInput
+    _max?: ClientTypeMaxOrderByAggregateInput
+    _min?: ClientTypeMinOrderByAggregateInput
+  }
+
+  export type ClientTypeScalarWhereWithAggregatesInput = {
+    AND?: ClientTypeScalarWhereWithAggregatesInput | ClientTypeScalarWhereWithAggregatesInput[]
+    OR?: ClientTypeScalarWhereWithAggregatesInput[]
+    NOT?: ClientTypeScalarWhereWithAggregatesInput | ClientTypeScalarWhereWithAggregatesInput[]
+    key?: StringWithAggregatesFilter<"ClientType"> | string
+    name?: StringWithAggregatesFilter<"ClientType"> | string
+    icon?: StringWithAggregatesFilter<"ClientType"> | string
+    color?: StringWithAggregatesFilter<"ClientType"> | string
+  }
+
   export type ClientWhereInput = {
     AND?: ClientWhereInput | ClientWhereInput[]
     OR?: ClientWhereInput[]
@@ -6374,7 +7520,9 @@ export namespace Prisma {
     latitude?: FloatFilter<"Client"> | number
     longitude?: FloatFilter<"Client"> | number
     notes?: StringNullableFilter<"Client"> | string | null
+    typeKey?: StringFilter<"Client"> | string
     createdAt?: DateTimeFilter<"Client"> | Date | string
+    type?: XOR<ClientTypeScalarRelationFilter, ClientTypeWhereInput>
     licenses?: LicenseListRelationFilter
     devices?: DeviceListRelationFilter
   }
@@ -6389,7 +7537,9 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     notes?: SortOrderInput | SortOrder
+    typeKey?: SortOrder
     createdAt?: SortOrder
+    type?: ClientTypeOrderByWithRelationInput
     licenses?: LicenseOrderByRelationAggregateInput
     devices?: DeviceOrderByRelationAggregateInput
     _relevance?: ClientOrderByRelevanceInput
@@ -6408,7 +7558,9 @@ export namespace Prisma {
     latitude?: FloatFilter<"Client"> | number
     longitude?: FloatFilter<"Client"> | number
     notes?: StringNullableFilter<"Client"> | string | null
+    typeKey?: StringFilter<"Client"> | string
     createdAt?: DateTimeFilter<"Client"> | Date | string
+    type?: XOR<ClientTypeScalarRelationFilter, ClientTypeWhereInput>
     licenses?: LicenseListRelationFilter
     devices?: DeviceListRelationFilter
   }, "id">
@@ -6423,6 +7575,7 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     notes?: SortOrderInput | SortOrder
+    typeKey?: SortOrder
     createdAt?: SortOrder
     _count?: ClientCountOrderByAggregateInput
     _avg?: ClientAvgOrderByAggregateInput
@@ -6444,6 +7597,7 @@ export namespace Prisma {
     latitude?: FloatWithAggregatesFilter<"Client"> | number
     longitude?: FloatWithAggregatesFilter<"Client"> | number
     notes?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    typeKey?: StringWithAggregatesFilter<"Client"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Client"> | Date | string
   }
 
@@ -6663,6 +7817,59 @@ export namespace Prisma {
     clientId?: StringWithAggregatesFilter<"Device"> | string
   }
 
+  export type ClientTypeCreateInput = {
+    key: string
+    name: string
+    icon: string
+    color: string
+    clients?: ClientCreateNestedManyWithoutTypeInput
+  }
+
+  export type ClientTypeUncheckedCreateInput = {
+    key: string
+    name: string
+    icon: string
+    color: string
+    clients?: ClientUncheckedCreateNestedManyWithoutTypeInput
+  }
+
+  export type ClientTypeUpdateInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    clients?: ClientUpdateManyWithoutTypeNestedInput
+  }
+
+  export type ClientTypeUncheckedUpdateInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    clients?: ClientUncheckedUpdateManyWithoutTypeNestedInput
+  }
+
+  export type ClientTypeCreateManyInput = {
+    key: string
+    name: string
+    icon: string
+    color: string
+  }
+
+  export type ClientTypeUpdateManyMutationInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ClientTypeUncheckedUpdateManyInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+  }
+
   export type ClientCreateInput = {
     id?: string
     name: string
@@ -6674,6 +7881,7 @@ export namespace Prisma {
     longitude: number
     notes?: string | null
     createdAt?: Date | string
+    type: ClientTypeCreateNestedOneWithoutClientsInput
     licenses?: LicenseCreateNestedManyWithoutClientInput
     devices?: DeviceCreateNestedManyWithoutClientInput
   }
@@ -6688,6 +7896,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes?: string | null
+    typeKey: string
     createdAt?: Date | string
     licenses?: LicenseUncheckedCreateNestedManyWithoutClientInput
     devices?: DeviceUncheckedCreateNestedManyWithoutClientInput
@@ -6704,6 +7913,7 @@ export namespace Prisma {
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: ClientTypeUpdateOneRequiredWithoutClientsNestedInput
     licenses?: LicenseUpdateManyWithoutClientNestedInput
     devices?: DeviceUpdateManyWithoutClientNestedInput
   }
@@ -6718,6 +7928,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    typeKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licenses?: LicenseUncheckedUpdateManyWithoutClientNestedInput
     devices?: DeviceUncheckedUpdateManyWithoutClientNestedInput
@@ -6733,6 +7944,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes?: string | null
+    typeKey: string
     createdAt?: Date | string
   }
 
@@ -6759,6 +7971,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    typeKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6980,6 +8193,61 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type ClientListRelationFilter = {
+    every?: ClientWhereInput
+    some?: ClientWhereInput
+    none?: ClientWhereInput
+  }
+
+  export type ClientOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ClientTypeOrderByRelevanceInput = {
+    fields: ClientTypeOrderByRelevanceFieldEnum | ClientTypeOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ClientTypeCountOrderByAggregateInput = {
+    key?: SortOrder
+    name?: SortOrder
+    icon?: SortOrder
+    color?: SortOrder
+  }
+
+  export type ClientTypeMaxOrderByAggregateInput = {
+    key?: SortOrder
+    name?: SortOrder
+    icon?: SortOrder
+    color?: SortOrder
+  }
+
+  export type ClientTypeMinOrderByAggregateInput = {
+    key?: SortOrder
+    name?: SortOrder
+    icon?: SortOrder
+    color?: SortOrder
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
   export type FloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[]
@@ -7015,6 +8283,11 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type ClientTypeScalarRelationFilter = {
+    is?: ClientTypeWhereInput
+    isNot?: ClientTypeWhereInput
   }
 
   export type LicenseListRelationFilter = {
@@ -7058,6 +8331,7 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     notes?: SortOrder
+    typeKey?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -7076,6 +8350,7 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     notes?: SortOrder
+    typeKey?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -7089,30 +8364,13 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     notes?: SortOrder
+    typeKey?: SortOrder
     createdAt?: SortOrder
   }
 
   export type ClientSumOrderByAggregateInput = {
     latitude?: SortOrder
     longitude?: SortOrder
-  }
-
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -7291,6 +8549,58 @@ export namespace Prisma {
     clientId?: SortOrder
   }
 
+  export type ClientCreateNestedManyWithoutTypeInput = {
+    create?: XOR<ClientCreateWithoutTypeInput, ClientUncheckedCreateWithoutTypeInput> | ClientCreateWithoutTypeInput[] | ClientUncheckedCreateWithoutTypeInput[]
+    connectOrCreate?: ClientCreateOrConnectWithoutTypeInput | ClientCreateOrConnectWithoutTypeInput[]
+    createMany?: ClientCreateManyTypeInputEnvelope
+    connect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+  }
+
+  export type ClientUncheckedCreateNestedManyWithoutTypeInput = {
+    create?: XOR<ClientCreateWithoutTypeInput, ClientUncheckedCreateWithoutTypeInput> | ClientCreateWithoutTypeInput[] | ClientUncheckedCreateWithoutTypeInput[]
+    connectOrCreate?: ClientCreateOrConnectWithoutTypeInput | ClientCreateOrConnectWithoutTypeInput[]
+    createMany?: ClientCreateManyTypeInputEnvelope
+    connect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type ClientUpdateManyWithoutTypeNestedInput = {
+    create?: XOR<ClientCreateWithoutTypeInput, ClientUncheckedCreateWithoutTypeInput> | ClientCreateWithoutTypeInput[] | ClientUncheckedCreateWithoutTypeInput[]
+    connectOrCreate?: ClientCreateOrConnectWithoutTypeInput | ClientCreateOrConnectWithoutTypeInput[]
+    upsert?: ClientUpsertWithWhereUniqueWithoutTypeInput | ClientUpsertWithWhereUniqueWithoutTypeInput[]
+    createMany?: ClientCreateManyTypeInputEnvelope
+    set?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    disconnect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    delete?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    connect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    update?: ClientUpdateWithWhereUniqueWithoutTypeInput | ClientUpdateWithWhereUniqueWithoutTypeInput[]
+    updateMany?: ClientUpdateManyWithWhereWithoutTypeInput | ClientUpdateManyWithWhereWithoutTypeInput[]
+    deleteMany?: ClientScalarWhereInput | ClientScalarWhereInput[]
+  }
+
+  export type ClientUncheckedUpdateManyWithoutTypeNestedInput = {
+    create?: XOR<ClientCreateWithoutTypeInput, ClientUncheckedCreateWithoutTypeInput> | ClientCreateWithoutTypeInput[] | ClientUncheckedCreateWithoutTypeInput[]
+    connectOrCreate?: ClientCreateOrConnectWithoutTypeInput | ClientCreateOrConnectWithoutTypeInput[]
+    upsert?: ClientUpsertWithWhereUniqueWithoutTypeInput | ClientUpsertWithWhereUniqueWithoutTypeInput[]
+    createMany?: ClientCreateManyTypeInputEnvelope
+    set?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    disconnect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    delete?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    connect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    update?: ClientUpdateWithWhereUniqueWithoutTypeInput | ClientUpdateWithWhereUniqueWithoutTypeInput[]
+    updateMany?: ClientUpdateManyWithWhereWithoutTypeInput | ClientUpdateManyWithWhereWithoutTypeInput[]
+    deleteMany?: ClientScalarWhereInput | ClientScalarWhereInput[]
+  }
+
+  export type ClientTypeCreateNestedOneWithoutClientsInput = {
+    create?: XOR<ClientTypeCreateWithoutClientsInput, ClientTypeUncheckedCreateWithoutClientsInput>
+    connectOrCreate?: ClientTypeCreateOrConnectWithoutClientsInput
+    connect?: ClientTypeWhereUniqueInput
+  }
+
   export type LicenseCreateNestedManyWithoutClientInput = {
     create?: XOR<LicenseCreateWithoutClientInput, LicenseUncheckedCreateWithoutClientInput> | LicenseCreateWithoutClientInput[] | LicenseUncheckedCreateWithoutClientInput[]
     connectOrCreate?: LicenseCreateOrConnectWithoutClientInput | LicenseCreateOrConnectWithoutClientInput[]
@@ -7319,10 +8629,6 @@ export namespace Prisma {
     connect?: DeviceWhereUniqueInput | DeviceWhereUniqueInput[]
   }
 
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
-  }
-
   export type FloatFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -7337,6 +8643,14 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type ClientTypeUpdateOneRequiredWithoutClientsNestedInput = {
+    create?: XOR<ClientTypeCreateWithoutClientsInput, ClientTypeUncheckedCreateWithoutClientsInput>
+    connectOrCreate?: ClientTypeCreateOrConnectWithoutClientsInput
+    upsert?: ClientTypeUpsertWithoutClientsInput
+    connect?: ClientTypeWhereUniqueInput
+    update?: XOR<XOR<ClientTypeUpdateToOneWithWhereWithoutClientsInput, ClientTypeUpdateWithoutClientsInput>, ClientTypeUncheckedUpdateWithoutClientsInput>
   }
 
   export type LicenseUpdateManyWithoutClientNestedInput = {
@@ -7608,6 +8922,35 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type NestedFloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[]
@@ -7643,35 +8986,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -7733,6 +9047,98 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type ClientCreateWithoutTypeInput = {
+    id?: string
+    name: string
+    legalName: string
+    taxId: string
+    address: string
+    city: string
+    latitude: number
+    longitude: number
+    notes?: string | null
+    createdAt?: Date | string
+    licenses?: LicenseCreateNestedManyWithoutClientInput
+    devices?: DeviceCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutTypeInput = {
+    id?: string
+    name: string
+    legalName: string
+    taxId: string
+    address: string
+    city: string
+    latitude: number
+    longitude: number
+    notes?: string | null
+    createdAt?: Date | string
+    licenses?: LicenseUncheckedCreateNestedManyWithoutClientInput
+    devices?: DeviceUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutTypeInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutTypeInput, ClientUncheckedCreateWithoutTypeInput>
+  }
+
+  export type ClientCreateManyTypeInputEnvelope = {
+    data: ClientCreateManyTypeInput | ClientCreateManyTypeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ClientUpsertWithWhereUniqueWithoutTypeInput = {
+    where: ClientWhereUniqueInput
+    update: XOR<ClientUpdateWithoutTypeInput, ClientUncheckedUpdateWithoutTypeInput>
+    create: XOR<ClientCreateWithoutTypeInput, ClientUncheckedCreateWithoutTypeInput>
+  }
+
+  export type ClientUpdateWithWhereUniqueWithoutTypeInput = {
+    where: ClientWhereUniqueInput
+    data: XOR<ClientUpdateWithoutTypeInput, ClientUncheckedUpdateWithoutTypeInput>
+  }
+
+  export type ClientUpdateManyWithWhereWithoutTypeInput = {
+    where: ClientScalarWhereInput
+    data: XOR<ClientUpdateManyMutationInput, ClientUncheckedUpdateManyWithoutTypeInput>
+  }
+
+  export type ClientScalarWhereInput = {
+    AND?: ClientScalarWhereInput | ClientScalarWhereInput[]
+    OR?: ClientScalarWhereInput[]
+    NOT?: ClientScalarWhereInput | ClientScalarWhereInput[]
+    id?: StringFilter<"Client"> | string
+    name?: StringFilter<"Client"> | string
+    legalName?: StringFilter<"Client"> | string
+    taxId?: StringFilter<"Client"> | string
+    address?: StringFilter<"Client"> | string
+    city?: StringFilter<"Client"> | string
+    latitude?: FloatFilter<"Client"> | number
+    longitude?: FloatFilter<"Client"> | number
+    notes?: StringNullableFilter<"Client"> | string | null
+    typeKey?: StringFilter<"Client"> | string
+    createdAt?: DateTimeFilter<"Client"> | Date | string
+  }
+
+  export type ClientTypeCreateWithoutClientsInput = {
+    key: string
+    name: string
+    icon: string
+    color: string
+  }
+
+  export type ClientTypeUncheckedCreateWithoutClientsInput = {
+    key: string
+    name: string
+    icon: string
+    color: string
+  }
+
+  export type ClientTypeCreateOrConnectWithoutClientsInput = {
+    where: ClientTypeWhereUniqueInput
+    create: XOR<ClientTypeCreateWithoutClientsInput, ClientTypeUncheckedCreateWithoutClientsInput>
+  }
+
   export type LicenseCreateWithoutClientInput = {
     id: string
     type: LicenseTypeCreateNestedOneWithoutLicensesInput
@@ -7783,6 +9189,31 @@ export namespace Prisma {
   export type DeviceCreateManyClientInputEnvelope = {
     data: DeviceCreateManyClientInput | DeviceCreateManyClientInput[]
     skipDuplicates?: boolean
+  }
+
+  export type ClientTypeUpsertWithoutClientsInput = {
+    update: XOR<ClientTypeUpdateWithoutClientsInput, ClientTypeUncheckedUpdateWithoutClientsInput>
+    create: XOR<ClientTypeCreateWithoutClientsInput, ClientTypeUncheckedCreateWithoutClientsInput>
+    where?: ClientTypeWhereInput
+  }
+
+  export type ClientTypeUpdateToOneWithWhereWithoutClientsInput = {
+    where?: ClientTypeWhereInput
+    data: XOR<ClientTypeUpdateWithoutClientsInput, ClientTypeUncheckedUpdateWithoutClientsInput>
+  }
+
+  export type ClientTypeUpdateWithoutClientsInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ClientTypeUncheckedUpdateWithoutClientsInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
   }
 
   export type LicenseUpsertWithWhereUniqueWithoutClientInput = {
@@ -7851,6 +9282,7 @@ export namespace Prisma {
     longitude: number
     notes?: string | null
     createdAt?: Date | string
+    type: ClientTypeCreateNestedOneWithoutClientsInput
     devices?: DeviceCreateNestedManyWithoutClientInput
   }
 
@@ -7864,6 +9296,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes?: string | null
+    typeKey: string
     createdAt?: Date | string
     devices?: DeviceUncheckedCreateNestedManyWithoutClientInput
   }
@@ -7953,6 +9386,7 @@ export namespace Prisma {
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: ClientTypeUpdateOneRequiredWithoutClientsNestedInput
     devices?: DeviceUpdateManyWithoutClientNestedInput
   }
 
@@ -7966,6 +9400,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    typeKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devices?: DeviceUncheckedUpdateManyWithoutClientNestedInput
   }
@@ -8144,6 +9579,7 @@ export namespace Prisma {
     longitude: number
     notes?: string | null
     createdAt?: Date | string
+    type: ClientTypeCreateNestedOneWithoutClientsInput
     licenses?: LicenseCreateNestedManyWithoutClientInput
   }
 
@@ -8157,6 +9593,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes?: string | null
+    typeKey: string
     createdAt?: Date | string
     licenses?: LicenseUncheckedCreateNestedManyWithoutClientInput
   }
@@ -8211,6 +9648,7 @@ export namespace Prisma {
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: ClientTypeUpdateOneRequiredWithoutClientsNestedInput
     licenses?: LicenseUpdateManyWithoutClientNestedInput
   }
 
@@ -8224,8 +9662,65 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    typeKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licenses?: LicenseUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientCreateManyTypeInput = {
+    id?: string
+    name: string
+    legalName: string
+    taxId: string
+    address: string
+    city: string
+    latitude: number
+    longitude: number
+    notes?: string | null
+    createdAt?: Date | string
+  }
+
+  export type ClientUpdateWithoutTypeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    legalName?: StringFieldUpdateOperationsInput | string
+    taxId?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    licenses?: LicenseUpdateManyWithoutClientNestedInput
+    devices?: DeviceUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutTypeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    legalName?: StringFieldUpdateOperationsInput | string
+    taxId?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    licenses?: LicenseUncheckedUpdateManyWithoutClientNestedInput
+    devices?: DeviceUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateManyWithoutTypeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    legalName?: StringFieldUpdateOperationsInput | string
+    taxId?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LicenseCreateManyClientInput = {

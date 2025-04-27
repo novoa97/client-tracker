@@ -11,13 +11,14 @@ import {
 } from "@/components/ui/table";
 
 import { TableActions } from "./table-actions";
-import { Client } from "@/generated/prisma";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import dayjs from "dayjs";
+import { ClientWithType } from "@/app/types";
+import { Badge } from "@/components/ui/badge";
 type Props = {
-  clients: Client[];
+  clients: ClientWithType[];
   onDelete: (id: string) => Promise<void>;
 };
 
@@ -34,6 +35,7 @@ export function ClientTable({ clients, onDelete }: Props) {
       <TableHeader>
         <TableRow>
           <TableHead>{t("Name")}</TableHead>
+          <TableHead>{t("Type")}</TableHead>
           <TableHead>{t("VAT")}</TableHead>
           <TableHead>{t("City")}</TableHead>
           <TableHead>{t("Created At")}</TableHead>
@@ -48,6 +50,14 @@ export function ClientTable({ clients, onDelete }: Props) {
             onClick={() => handleRowClick(client.id)}
           >
             <TableCell>{client.name}</TableCell>
+            <TableCell>
+              <Badge
+                variant="outline"
+                style={{ backgroundColor: client.type?.color, color: "white" }}
+              >
+                {client.type?.name}
+              </Badge>
+            </TableCell>
             <TableCell>{client.taxId}</TableCell>
             <TableCell>{client.city}</TableCell>
             <TableCell>

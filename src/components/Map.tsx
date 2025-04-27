@@ -1,28 +1,40 @@
 "use client";
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  LayersControl,
+  LayerGroup,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { Client } from "@/generated/prisma";
 import Link from "next/link";
-
-// Fix para los iconos por defecto de Leaflet en Vite/Next.js
-delete (L.Icon.Default.prototype as any)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: new URL(
-    "leaflet/dist/images/marker-icon-2x.png",
-    import.meta.url
-  ).href,
-  iconUrl: new URL("leaflet/dist/images/marker-icon.png", import.meta.url).href,
-  shadowUrl: new URL("leaflet/dist/images/marker-shadow.png", import.meta.url)
-    .href,
-});
+import { ClientWithType } from "@/app/types";
+import { renderToStaticMarkup } from "react-dom/server";
+import { Building } from "lucide-react";
+import DynamicIcon from "./icon";
+import { generateMarkerIcon } from "@/lib/marker";
 
 interface Props {
-  clients: Client[];
+  clients: ClientWithType[];
 }
 
 export default function GeneralMap({ clients }: Props) {
+  // Agrupar clientes por tipo dinámicamente
+  const clientsByType = clients.reduce<Record<string, ClientWithType[]>>(
+    (acc, client) => {
+      if (!acc[client.type.name]) {
+        acc[client.type.name] = [];
+      }
+      acc[client.type.name].push(client);
+      return acc;
+    },
+    {}
+  );
+
   return (
     <MapContainer
       center={[42.7551, -7.8662]}
@@ -35,13 +47,41 @@ export default function GeneralMap({ clients }: Props) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
 
-      {clients.map((client) => (
-        <Marker key={client.id} position={[client.latitude, client.longitude]}>
-          <Popup>
-            <Link href={"clients/" + client.id}>{client.name}</Link>
-          </Popup>
-        </Marker>
-      ))}
+      <LayersControl position="topright">
+        {Object.entries(clientsByType).map(([typeName, clients]) => (
+          <LayersControl.Overlay
+            key={typeName}
+            name={typeName.charAt(0).toUpperCase() + typeName.slice(1)}
+            checked
+          >
+            <LayerGroup>
+              {clients.map((client) => {
+                const iconHtml = renderToStaticMarkup(
+                  <DynamicIcon
+                    name={client.type.icon}
+                    className="text-white w-4 h-4"
+                  />
+                );
+                const customIcon = generateMarkerIcon(
+                  client.type.color,
+                  iconHtml
+                );
+                return (
+                  <Marker
+                    key={client.id}
+                    position={[client.latitude, client.longitude]}
+                    icon={customIcon}
+                  >
+                    <Popup>
+                      <Link href={"clients/" + client.id}>{client.name}</Link>
+                    </Popup>
+                  </Marker>
+                );
+              })}
+            </LayerGroup>
+          </LayersControl.Overlay>
+        ))}
+      </LayersControl>
     </MapContainer>
   );
 }

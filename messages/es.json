@@ -1,4 +1,7 @@
 {
+  "Map": "Mapa",
+  "View details": "Ver detalles",
+
   "Create": "Crear",
   "Cancel": "Cancelar",
   "Edit": "Editar",
@@ -8,6 +11,7 @@
   "Saving": "Guardando",
   "Saved": "Guardado",
   "Optional": "Opcional",
+  "Filters": "Filtros",
 
   "Clients": "Clientes",
   "Client": "Cliente",
@@ -55,6 +59,10 @@
   "Edit Client Info": "Editar Información del Cliente",
   "Client created successfully description": "El cliente ha sido creado correctamente",
   "Client updated successfully": "Cliente actualizado correctamente",
+  "All Types": "Todos los Tipos",
+  "All Cities": "Todas las Ciudades",
+  "Select a type": "Selecciona un tipo...",
+  "Select a city": "Selecciona una ciudad...",
 
   "Create New License": "Crear Nueva Licencia",
   "Fill in the details to create a new license": "Rellena los detalles para crear una nueva licencia. Añade sublicencias según sea necesario.",
@@ -100,5 +108,15 @@
   "Select a language": "Selecciona un idioma",
   "English": "English",
   "Spanish": "Español",
-  "This is the language that will be used throughout the application": "Este es el idioma que se utilizará en toda la aplicación."
+  "This is the language that will be used throughout the application": "Este es el idioma que se utilizará en toda la aplicación.",
+
+  "Client Types": "Tipos de Clientes",
+  "Manage client types for your application": "Administra los tipos de clientes para tu aplicación.",
+  "Add Client Type": "Añadir Tipo de Cliente",
+  "Add a new client type to your application": "Añade un nuevo tipo de cliente a la aplicación.",
+  "Edit Client Type": "Editar tipo de cliente",
+  "Edit the client type details": "Editar los detalles del tipo de cliente",
+  "No client types added yet": "Aún no se han añadido tipos de clientes. Haz clic en el botón superior para añadir uno.",
+  "Client type deleted": "Tipo de cliente eliminado correctamente",
+  "Client type deleted description": "El tipo de cliente se ha eliminado correctamente"
 }

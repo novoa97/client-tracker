@@ -19,6 +19,14 @@ import AddressAutocomplete from "@/components/address-autocomplete";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { ClientType } from "@/generated/prisma";
+import {
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Select } from "@/components/ui/select";
 
 const schema = z.object({
   name: z.string().min(1, "El nombre es obligatorio"),
@@ -28,16 +36,26 @@ const schema = z.object({
   city: z.string().min(1, "La ciudad es obligatoria"),
   latitude: z.number().min(-90).max(90),
   longitude: z.number().min(-180).max(180),
+  type: z.string().min(1, "El tipo de cliente es obligatorio"),
 });
 
 type FormData = z.infer<typeof schema>;
 
 type Props = {
   onSubmit: (data: FormData) => Promise<void>;
-  onChange?: (data: { latitude: number; longitude: number }) => void;
+  onChange?: (data: {
+    latitude: number;
+    longitude: number;
+    type?: ClientType;
+  }) => void;
+  clientTypes: ClientType[];
 };
 
-export default function AddClientForm({ onSubmit, onChange }: Props) {
+export default function AddClientForm({
+  onSubmit,
+  onChange,
+  clientTypes,
+}: Props) {
   const t = useTranslations();
   const router = useRouter();
 
@@ -51,11 +69,13 @@ export default function AddClientForm({ onSubmit, onChange }: Props) {
       city: "",
       latitude: 0,
       longitude: 0,
+      type: "",
     },
   });
 
   const lat = form.watch("latitude");
   const lng = form.watch("longitude");
+  const typeSelected = form.watch("type");
 
   const handleFormSubmit = async (data: FormData) => {
     await onSubmit(data);
@@ -87,6 +107,45 @@ export default function AddClientForm({ onSubmit, onChange }: Props) {
                       <Input id="name" {...field} />
                     </FormControl>
                     <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="type"
+                render={({ field }) => (
+                  <FormItem>
+                    <Label htmlFor="type">{t("Type")}</Label>
+                    <FormControl>
+                      <Select
+                        onValueChange={(value) => {
+                          form.setValue("type", value);
+                          if (onChange)
+                            onChange({
+                              latitude: lat,
+                              longitude: lng,
+                              type:
+                                clientTypes.find(
+                                  (type) => type.key === value
+                                ) ?? undefined,
+                            });
+                        }}
+                        defaultValue={field.value}
+                        disabled={clientTypes.length === 0}
+                      >
+                        <SelectTrigger className="w-full" tabIndex={0}>
+                          <SelectValue placeholder={t("Select a type")} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {clientTypes.map((type) => (
+                            <SelectItem key={type.key} value={type.key}>
+                              {type.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
                   </FormItem>
                 )}
               />

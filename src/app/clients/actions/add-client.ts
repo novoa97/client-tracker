@@ -10,6 +10,7 @@ type AddClientInput = {
     taxId: string
     legalName: string
     city: string;
+    type: string;
 };
 
 export async function addClient(input: AddClientInput) {
@@ -22,7 +23,8 @@ export async function addClient(input: AddClientInput) {
             longitude: input.longitude,
             taxId: input.taxId,
             legalName: input.legalName,
-            city: input.city
+            city: input.city,
+            typeKey: input.type,
         },
     });
 

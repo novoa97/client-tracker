@@ -14,6 +14,16 @@ datasource db {
   url      = env("MYSQL_DATABASE_URL")
 }
 
+model ClientType {
+  key     String   @id
+  name    String
+  icon    String
+  color   String
+  clients Client[]
+  
+  @@map("client_type")
+}
+
 model Client {
   id         String   @id @default(uuid())
   name       String
@@ -24,6 +34,8 @@ model Client {
   latitude   Float
   longitude  Float
   notes      String? @db.MediumText
+  typeKey String
+  type   ClientType @relation(fields: [typeKey], references: [key])
   licenses License[]
   devices Device[] 
   createdAt  DateTime @default(now())

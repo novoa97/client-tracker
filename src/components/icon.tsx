@@ -1,33 +1,35 @@
 "use client";
+
 import { LoaderIcon } from "lucide-react";
-import dynamicIconImports from "lucide-react/dynamicIconImports";
-import dynamic from "next/dynamic";
+import * as Icons from "lucide-react";
 import { FC, memo } from "react";
-
-type IconName = keyof typeof dynamicIconImports;
-
-const icons = Object.keys(dynamicIconImports) as IconName[];
-
-type ReactComponent = FC<{ className?: string }>;
-const icons_components = {} as Record<IconName, ReactComponent>;
-
-for (const name of icons) {
-  const NewIcon = dynamic(dynamicIconImports[name], {
-    ssr: false,
-  }) as ReactComponent;
-  icons_components[name] = NewIcon;
-}
 
 type DynamicIconProps = {
   name: string;
   className?: string;
 };
 
-const DynamicIcon = memo(({ name, ...props }: DynamicIconProps) => {
-  const Icon = icons_components[name as IconName];
-  if (!Icon) return <LoaderIcon {...props}></LoaderIcon>;
-  return <Icon {...props} />;
+const DynamicIcon: FC<DynamicIconProps> = memo(({ name, className }) => {
+  const normalizedName = name.charAt(0).toUpperCase() + name.slice(1);
+
+  const MaybeIcon = Icons[normalizedName as keyof typeof Icons];
+
+  // Check if it's a React component (forwardRef has $$typeof)
+  const isValidIcon =
+    MaybeIcon && typeof MaybeIcon === "object" && "$$typeof" in MaybeIcon;
+
+  if (!isValidIcon) {
+    console.error(
+      `Icon "${name}" not found or is not a valid icon in lucide-react`
+    );
+    return <LoaderIcon className={className} />;
+  }
+
+  const IconComponent = MaybeIcon as unknown as FC<{ className?: string }>;
+
+  return <IconComponent className={className} />;
 });
+
 DynamicIcon.displayName = "DynamicIcon";
 
 export default DynamicIcon;

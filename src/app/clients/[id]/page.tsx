@@ -25,6 +25,9 @@ export default async function ClientPage({ params }: Props) {
   const { id } = await params;
   const client = await prisma.client.findUnique({
     where: { id: id },
+    include: {
+      type: true,
+    },
   });
 
   if (!client) return notFound();
@@ -92,9 +95,7 @@ export default async function ClientPage({ params }: Props) {
               <ClientNotes client={client} />
             </div>
             <MapWrapper className="w-1/2 h-full">
-              <ClientMap
-                coordinates={[client.latitude, client.longitude]}
-              ></ClientMap>
+              <ClientMap client={client}></ClientMap>
             </MapWrapper>
           </div>
           {/* Mobil */}
@@ -103,9 +104,7 @@ export default async function ClientPage({ params }: Props) {
               <ClientNotes client={client} />
             </div>
             <MapWrapper className="w-full h-full">
-              <ClientMap
-                coordinates={[client.latitude, client.longitude]}
-              ></ClientMap>
+              <ClientMap client={client}></ClientMap>
             </MapWrapper>
           </div>
         </TabsContent>

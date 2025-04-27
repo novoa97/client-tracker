@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
-import { Map, Users, Settings } from "lucide-react";
-
+import { Map, Users, Settings, Building2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 const links = [
   { href: "/", label: "Map", icon: Map },
   { href: "/clients", label: "Clients", icon: Users },
@@ -12,6 +12,7 @@ const links = [
 ];
 
 export function Sidebar() {
+  const t = useTranslations();
   const pathname = usePathname();
 
   return (
@@ -30,7 +31,7 @@ export function Sidebar() {
             )}
           >
             <Icon className="w-4 h-4" />
-            <span>{label}</span>
+            <span>{t(label)}</span>
           </Link>
         ))}
       </nav>

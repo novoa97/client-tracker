@@ -1,10 +1,13 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { Card } from "@/components/ui/card";
+import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { ClientType } from "@/generated/prisma";
+import { generateMarkerIcon } from "@/lib/marker";
+import { renderToStaticMarkup } from "react-dom/server";
+import DynamicIcon from "@/components/icon";
 
-// Fix para los iconos por defecto de Leaflet en Vite/Next.js
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: new URL(
@@ -18,13 +21,32 @@ L.Icon.Default.mergeOptions({
 
 type Props = {
   coordinates: [number, number] | null;
+  type: ClientType | null;
 };
 
-export const AddClientMap = ({ coordinates }: Props) => {
+export const AddClientMap = ({ coordinates, type }: Props) => {
   const fallbackCoords: [number, number] = [42.7551, -7.8662];
   const position = coordinates ?? fallbackCoords;
 
-  // Componente auxiliar interno
+  const markerRef = useRef<L.Marker>(null);
+
+  useEffect(() => {
+    console.log("Type", type);
+    if (markerRef.current && type) {
+      const newIcon = generateMarkerIcon(
+        type?.color ?? "#ababab",
+        renderToStaticMarkup(
+          type?.icon ? (
+            <DynamicIcon name={type.icon} className="text-white w-4 h-4" />
+          ) : (
+            <DynamicIcon name={"user"} className=" w-4 h-4" />
+          )
+        )
+      );
+      markerRef.current.setIcon(newIcon);
+    }
+  }, [type]);
+
   const MapUpdater = ({ center }: { center: [number, number] }) => {
     const map = useMap();
 
@@ -46,9 +68,23 @@ export const AddClientMap = ({ coordinates }: Props) => {
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {coordinates ? (
-            <Marker position={position}>
-              <Popup>Cliente</Popup>
-            </Marker>
+            <Marker
+              ref={markerRef}
+              position={position}
+              icon={generateMarkerIcon(
+                type?.color ?? "#ababab",
+                renderToStaticMarkup(
+                  type?.icon ? (
+                    <DynamicIcon
+                      name={type.icon}
+                      className="text-white w-4 h-4"
+                    />
+                  ) : (
+                    <DynamicIcon name={"user"} className=" w-4 h-4" />
+                  )
+                )
+              )}
+            />
           ) : null}
           <MapUpdater center={position} />
         </MapContainer>

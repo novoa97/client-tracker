@@ -1,6 +1,6 @@
 import { Header } from "@/components/header";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Computer, Key, Settings, Settings2 } from "lucide-react";
+import { Computer, Key, Settings, Settings2, Users } from "lucide-react";
 import { GeneralSettings } from "./components/general-settings";
 import { LicenseTypeSettings } from "./components/license-type-settings";
 import { DeviceTypeSettings } from "./components/device-type-settings";
@@ -16,12 +16,15 @@ import { deleteLicenseType } from "./actions/delete-license-type";
 import { getTranslations } from "next-intl/server";
 import { getLicensesType } from "./actions/get-licenses-type";
 import { getDevicesType } from "./actions/get-devices-type";
+import { ClientTypeSettings } from "./components/client-type-settings";
+import { getClientTypes } from "./actions/get-client-type";
 
 export default async function SettingsPage() {
   const t = await getTranslations();
-  const [licensesTypes, deviceTypes] = await Promise.all([
+  const [licensesTypes, deviceTypes, clientTypes] = await Promise.all([
     getLicensesType(),
     getDevicesType(),
+    getClientTypes(),
   ]);
 
   return (
@@ -39,6 +42,10 @@ export default async function SettingsPage() {
               <Settings2 className="h-4 w-4" />
               {t("General")}
             </TabsTrigger>
+            <TabsTrigger value="clients" className="flex items-center gap-1">
+              <Users className="h-4 w-4" />
+              {t("Clients")}
+            </TabsTrigger>
             <TabsTrigger value="licenses" className="flex items-center gap-1">
               <Key className="h-4 w-4" />
               {t("Licenses")}
@@ -51,6 +58,10 @@ export default async function SettingsPage() {
           {/* General Tab */}
           <TabsContent value="general">
             <GeneralSettings />
+          </TabsContent>
+          {/* Client Types Tab */}
+          <TabsContent value="clients" className="flex-1 flex flex-col min-h-0">
+            <ClientTypeSettings types={clientTypes} />
           </TabsContent>
           {/* Licenses Tab */}
           <TabsContent

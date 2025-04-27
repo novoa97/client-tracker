@@ -5,6 +5,10 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { useEffect } from "react";
+import { ClientWithType } from "@/app/types";
+import { generateMarkerIcon } from "@/lib/marker";
+import { renderToStaticMarkup } from "react-dom/server";
+import DynamicIcon from "./icon";
 
 // Fix para los iconos por defecto de Leaflet en Vite/Next.js
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -19,19 +23,21 @@ L.Icon.Default.mergeOptions({
 });
 
 type Props = {
-  coordinates: [number, number] | null;
+  client: ClientWithType;
 };
 
-export const ClientMap = ({ coordinates }: Props) => {
+export const ClientMap = ({ client }: Props) => {
   const fallbackCoords: [number, number] = [42.7551, -7.8662];
-  const position = coordinates ?? fallbackCoords;
+  const position: [number, number] = client
+    ? [client.latitude, client.longitude]
+    : fallbackCoords;
 
   // Componente auxiliar interno
   const MapUpdater = ({ center }: { center: [number, number] }) => {
     const map = useMap();
 
     useEffect(() => {
-      map.setView(center, coordinates ? 15 : 8);
+      map.setView(center, position ? 15 : 8);
     }, [center, map]);
 
     return null;
@@ -47,10 +53,19 @@ export const ClientMap = ({ coordinates }: Props) => {
           className="w-full h-full leaflet-rounded z-0"
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          {coordinates ? (
-            <Marker position={position}>
-              <Popup>Cliente</Popup>
-            </Marker>
+          {client ? (
+            <Marker
+              position={position}
+              icon={generateMarkerIcon(
+                client.type.color,
+                renderToStaticMarkup(
+                  <DynamicIcon
+                    name={client.type.icon}
+                    className="text-white w-4 h-4"
+                  />
+                )
+              )}
+            ></Marker>
           ) : null}
           <MapUpdater center={position} />
         </MapContainer>

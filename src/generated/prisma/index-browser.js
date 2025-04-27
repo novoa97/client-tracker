@@ -117,6 +117,13 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.ClientTypeScalarFieldEnum = {
+  key: 'key',
+  name: 'name',
+  icon: 'icon',
+  color: 'color'
+};
+
 exports.Prisma.ClientScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -127,6 +134,7 @@ exports.Prisma.ClientScalarFieldEnum = {
   latitude: 'latitude',
   longitude: 'longitude',
   notes: 'notes',
+  typeKey: 'typeKey',
   createdAt: 'createdAt'
 };
 
@@ -163,6 +171,13 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.ClientTypeOrderByRelevanceFieldEnum = {
+  key: 'key',
+  name: 'name',
+  icon: 'icon',
+  color: 'color'
+};
+
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
@@ -175,7 +190,8 @@ exports.Prisma.ClientOrderByRelevanceFieldEnum = {
   taxId: 'taxId',
   address: 'address',
   city: 'city',
-  notes: 'notes'
+  notes: 'notes',
+  typeKey: 'typeKey'
 };
 
 exports.Prisma.LicenseOrderByRelevanceFieldEnum = {
@@ -208,6 +224,7 @@ exports.Prisma.DeviceOrderByRelevanceFieldEnum = {
 
 
 exports.Prisma.ModelName = {
+  ClientType: 'ClientType',
   Client: 'Client',
   License: 'License',
   LicenseType: 'LicenseType',

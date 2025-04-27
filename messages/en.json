@@ -1,4 +1,7 @@
 {
+  "Map": "Map",
+  "View details": "View details",
+
   "Create": "Create",
   "Cancel": "Cancel",
   "Edit": "Edit",
@@ -8,6 +11,7 @@
   "Saving": "Saving",
   "Saved": "Saved",
   "Optional": "Optional",
+  "Filters": "Filters",
 
   "Clients": "Clients",
   "Client": "Client",
@@ -54,6 +58,10 @@
   "Edit Client Info": "Edit Client Info",
   "Client created successfully description": "The client has been created successfully",
   "Client updated successfully": "Client updated successfully",
+  "All Types": "All Types",
+  "All Cities": "All Cities",
+  "Select a type": "Select a type...",
+  "Select a city": "Select a city...",
 
   "Create New License": "Create New License",
   "Fill in the details to create a new license": "Fill in the details to create a new license. Add sublicenses as needed.",
@@ -99,5 +107,15 @@
   "Select a language": "Select a language",
   "English": "English",
   "Spanish": "Español",
-  "This is the language that will be used throughout the application": "This is the language that will be used throughout the application."
+  "This is the language that will be used throughout the application": "This is the language that will be used throughout the application.",
+
+  "Client Types": "Client Types",
+  "Manage client types for your application": "Manage client types for your application.",
+  "Add Client Type": "Add Client Type",
+  "Add a new client type to your application": "Add a new client type to your application.",
+  "Edit Client Type": "Edit client type",
+  "Edit the client type details": "Edit the client type details",
+  "No client types added yet": "No client types added yet. Click the button above to add one.",
+  "Client type deleted": "Client type deleted",
+  "Client type deleted description": "The client type has been deleted successfully"
 }
