@@ -39,7 +39,7 @@ export const AddClientMap = ({ coordinates, type }: Props) => {
           type?.icon ? (
             <DynamicIcon name={type.icon} className="text-white w-4 h-4" />
           ) : (
-            <DynamicIcon name={"user"} className=" w-4 h-4" />
+            <DynamicIcon name={"circle-dashed"} className=" w-4 h-4" />
           )
         )
       );

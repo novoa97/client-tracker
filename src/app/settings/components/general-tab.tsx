@@ -38,12 +38,12 @@ export function GeneralTab() {
         <div className="space-y-4">
           <label className="text-sm font-medium">{t("Language")}</label>
           <Select onValueChange={handleChange} defaultValue={locale}>
-            <SelectTrigger>
+            <SelectTrigger className="mt-1">
               <SelectValue placeholder={t("Select a language")} />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="en">English</SelectItem>
-              <SelectItem value="es">Spanish</SelectItem>
+              <SelectItem value="es">Español</SelectItem>
             </SelectContent>
           </Select>
           <p className="text-muted-foreground text-sm">

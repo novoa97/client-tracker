@@ -48,7 +48,7 @@ model License {
   clientId    String
   typeKey     String
   parentId    String?
-  client      Client      @relation(fields: [clientId], references: [id])
+  client      Client      @relation(fields: [clientId], references: [id], onDelete: Cascade)
   type        LicenseType @relation(fields: [typeKey], references: [key])
   parent      License?    @relation("SubLicenses", fields: [parentId], references: [id])
   subLicenses License[]   @relation("SubLicenses")
@@ -82,7 +82,7 @@ model Device {
   typeKey      String
   type         DeviceType @relation(fields: [typeKey], references: [key])
   clientId     String
-  client       Client     @relation(fields: [clientId], references: [id])
+  client       Client     @relation(fields: [clientId], references: [id], onDelete: Cascade)
 
   @@map("device")
 }

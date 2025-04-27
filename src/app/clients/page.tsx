@@ -63,7 +63,11 @@ export default async function ClientsPage({ searchParams }: Props) {
     },
   });
 
-  const types = await prisma.clientType.findMany();
+  const types = await prisma.clientType.findMany({
+    orderBy: {
+      name: "asc",
+    },
+  });
 
   const cities = await prisma.client.findMany({
     select: {

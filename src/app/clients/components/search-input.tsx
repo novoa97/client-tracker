@@ -25,6 +25,7 @@ import {
 import { useTranslations } from "next-intl";
 import { ClientType } from "@/generated/prisma";
 import { Badge } from "@/components/ui/badge";
+import { darkenColor } from "@/lib/colors";
 
 export function ClientSearchForm({
   types,
@@ -121,6 +122,8 @@ export function ClientSearchForm({
                         style={{
                           backgroundColor: type.color,
                           color: "white",
+                          borderColor: darkenColor(type.color, 30),
+                          borderWidth: 3,
                         }}
                       >
                         {type.name}

@@ -64,11 +64,7 @@ export function SettingsTabs({ tab, clients, licenses, devices }: Props) {
         </TabsContent>
         {/* Licenses Tab */}
         <TabsContent value="licenses" className="flex-1 flex flex-col min-h-0">
-          <LicenseTypesTab
-            types={licenses}
-            createLicense={addLicenseType}
-            deleteLicense={deleteLicenseType}
-          />
+          <LicenseTypesTab types={licenses} />
         </TabsContent>
         {/* Devices Tab */}
         <TabsContent value="devices" className="flex-1 flex flex-col min-h-0">
