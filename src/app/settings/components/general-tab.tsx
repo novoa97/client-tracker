@@ -17,7 +17,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export function GeneralSettings() {
+export function GeneralTab() {
   const t = useTranslations();
   const locale = useLocale();
   const { setLocale } = useChangeLocale();

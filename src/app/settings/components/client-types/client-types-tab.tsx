@@ -17,16 +17,16 @@ import {
 import { toast } from "sonner";
 import { DialogContainer } from "@/components/dialog-container";
 import { ClientTypeForm, ClientTypeFormValues } from "./client-type-form";
-import { ClientTypeWithInUse } from "../actions/get-client-type";
-import { addClientType } from "../actions/add-client-type";
-import { editClientType } from "../actions/edit-client-type";
-import { deleteClientType } from "../actions/delete-client-type";
+import { ClientTypeWithInUse } from "../../actions/get-client-type";
+import { addClientType } from "../../actions/add-client-type";
+import { editClientType } from "../../actions/edit-client-type";
+import { deleteClientType } from "../../actions/delete-client-type";
 
 interface Props {
   types: ClientTypeWithInUse[];
 }
 
-export function ClientTypeSettings({ types }: Props) {
+export function ClientTypesTab({ types }: Props) {
   const t = useTranslations();
   const router = useRouter();
   const [items, setItems] = useState<ClientTypeWithInUse[] | null>(null);
