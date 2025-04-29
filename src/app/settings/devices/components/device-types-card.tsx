@@ -6,13 +6,15 @@ import { Button } from "@/components/ui/button";
 import { TableRow, TableCell } from "@/components/ui/table";
 import { CardList } from "@/components/card-list";
 import { useTranslations } from "next-intl";
-import { addDeviceType } from "../../actions/add-device-type";
+import {
+  DeviceTypeWithInUse,
+  addDeviceType,
+  editDeviceType,
+  deleteDeviceType,
+} from "../actions";
 import { useRouter } from "next/navigation";
 import { DeviceType } from "@/generated/prisma";
-import { deleteDeviceType } from "../../actions/delete-device-type";
-import { editDeviceType } from "../../actions/edit-device-type";
 import DynamicIcon from "@/components/icon";
-import { DeviceTypeWithInUse } from "../../actions/get-devices-type";
 import {
   Tooltip,
   TooltipContent,
@@ -26,7 +28,7 @@ interface Props {
   types: DeviceTypeWithInUse[];
 }
 
-export function DeviceTypesTab({ types }: Props) {
+export function DeviceTypesCard({ types }: Props) {
   const t = useTranslations();
   const router = useRouter();
   const [items, setItems] = useState<DeviceTypeWithInUse[] | null>(null);
@@ -85,7 +87,7 @@ export function DeviceTypesTab({ types }: Props) {
   return (
     <>
       <CardList
-        title={t("Devices Types")}
+        title={t("Device Types")}
         description={t("Manage device types for your application")}
         buttonText={t("Add Device Type")}
         emptyMessage={t("No device types added yet")}

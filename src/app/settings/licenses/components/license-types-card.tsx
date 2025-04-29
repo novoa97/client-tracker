@@ -10,7 +10,6 @@ import { Pencil, Trash } from "lucide-react";
 import { CardList } from "@/components/card-list";
 import { LicenseType } from "@/generated/prisma";
 import { useTranslations } from "next-intl";
-import { LicenseWithInUse } from "../../actions/get-licenses-type";
 import {
   Tooltip,
   TooltipContent,
@@ -18,16 +17,19 @@ import {
 } from "@/components/ui/tooltip";
 import { DialogContainer } from "@/components/dialog-container";
 import { LicenseTypeForm } from "./license-type-form";
-import { editLicenseType } from "../../actions/edit-license-type";
+import {
+  LicenseWithInUse,
+  editLicenseType,
+  addLicenseType,
+  deleteLicenseType,
+} from "../actions";
 import { toast } from "sonner";
-import { addLicenseType } from "../../actions/add-license-type";
-import { deleteLicenseType } from "../../actions/delete-license-type";
 
 interface Props {
   types: LicenseWithInUse[];
 }
 
-export function LicenseTypesTab({ types }: Props) {
+export function LicenseTypesCard({ types }: Props) {
   const t = useTranslations();
   const [licenses, setLicenses] = useState<LicenseWithInUse[] | null>(null);
   const [licenseType, setLicenseType] = useState<LicenseType | null>(null);

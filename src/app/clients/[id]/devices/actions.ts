@@ -22,3 +22,27 @@ export async function addDevice(clientId: string, data: AddDeviceData): Promise<
         },
     });
 }
+
+export async function editDevice(id: string, data: any): Promise<void> {
+    console.log(id, data);
+    await prisma.device.update({
+        where: {
+            id: id,
+        },
+        data: {
+            serialNumber: data.serialNumber,
+            typeKey: data.type,
+            name: data.name,
+            anyDesk: data.anyDesk,
+            ip: data.ip
+        }
+    })
+}
+
+export async function deleteDevice(id: string): Promise<void> {
+    await prisma.device.delete({
+        where: {
+            id: id,
+        },
+    })
+}

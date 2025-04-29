@@ -30,7 +30,6 @@
   "Address": "Dirección",
   "Created At": "Creado",
   "Actions": "Acciones",
-  "Devices Types": "Tipos de Dispositivos",
   "Licenses": "Licencias",
   "All licenses associated with this client": "Todas las licencias asociadas a este cliente.",
   "Add License": "Añadir Licencia",
@@ -60,6 +59,7 @@
   "Select a city": "Selecciona una ciudad...",
 
   "Create New License": "Crear Nueva Licencia",
+  "No types available client types": "No hay tipos de clientes disponibles.",
   "Fill in the details to create a new license": "Rellena los detalles para crear una nueva licencia. Añade sublicencias según sea necesario.",
   "Edit License": "Editar Licencia",
   "Edit the license details": "Editar los detalles de la licencia",

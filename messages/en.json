@@ -32,7 +32,7 @@
   "Actions": "Actions",
   "Licenses": "Licenses",
   "All licenses associated with this client": "All licenses associated with this client.",
-  "Add license": "Add license",
+  "Add License": "Add License",
   "No licenses found": "No licenses found.",
   "Devices": "Devices",
   "Registered devices for this client": "Registered devices for this client.",
@@ -58,6 +58,7 @@
   "Select a city": "Select a city...",
 
   "Create New License": "Create New License",
+  "No types available client types": "No client types available.",
   "Fill in the details to create a new license": "Fill in the details to create a new license. Add sublicenses as needed.",
   "Edit License": "Edit License",
   "Edit the license details": "Edit the license details",

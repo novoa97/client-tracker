@@ -24,30 +24,58 @@ export function Pagination({ page, pageSize, total }: Props) {
   };
 
   return (
-    <div className="flex items-center justify-between border-t py-3 text-sm w-full">
-      <div className="text-muted-foreground">
-        Mostrando {total === 0 ? 0 : `${start}-${end}`} de {total} cliente
-        {total === 1 ? "" : "s"}
-      </div>
+    <>
+      <div className="hidden md:flex items-center justify-between border-t py-3 text-sm w-full">
+        <div className="text-muted-foreground">
+          Mostrando {total === 0 ? 0 : `${start}-${end}`} de {total} cliente
+          {total === 1 ? "" : "s"}
+        </div>
 
-      <div className="space-x-2">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => goToPage(page - 1)}
-          disabled={page <= 1}
-        >
-          ← Anterior
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => goToPage(page + 1)}
-          disabled={page >= totalPages}
-        >
-          Siguiente →
-        </Button>
+        <div className="space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => goToPage(page - 1)}
+            disabled={page <= 1}
+          >
+            ← Anterior
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => goToPage(page + 1)}
+            disabled={page >= totalPages}
+          >
+            Siguiente →
+          </Button>
+        </div>
       </div>
-    </div>
+      <div className="flex md:hidden flex-col items-center justify-between border-t py-3 text-sm w-full">
+        <div className="flex w-full gap-2">
+          <Button
+            variant="outline"
+            className="w-1/2"
+            size="sm"
+            onClick={() => goToPage(page - 1)}
+            disabled={page <= 1}
+          >
+            ← Anterior
+          </Button>
+          <Button
+            variant="outline"
+            className="w-1/2"
+            size="sm"
+            onClick={() => goToPage(page + 1)}
+            disabled={page >= totalPages}
+          >
+            Siguiente →
+          </Button>
+        </div>
+        <div className="text-muted-foreground">
+          Mostrando {total === 0 ? 0 : `${start}-${end}`} de {total} cliente
+          {total === 1 ? "" : "s"}
+        </div>
+      </div>
+    </>
   );
 }

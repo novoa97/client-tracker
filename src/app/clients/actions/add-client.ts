@@ -1,6 +1,5 @@
 "use server";
-import { redirect } from "next/navigation";
-import { prisma } from "@/lib/prisma"; // donde tengas Prisma configurado
+import { prisma } from "@/lib/prisma";
 
 type AddClientInput = {
     name: string;

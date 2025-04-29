@@ -1,29 +1,15 @@
 "use client";
 
-import {
-  Check,
-  ClipboardCheck,
-  Computer,
-  Copy,
-  CopyCheck,
-  Globe,
-  Hash,
-  Plus,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { CopyCheck, Plus } from "lucide-react";
 import { CardList } from "@/components/card-list";
 import { useTranslations } from "next-intl";
 import { DialogContainer } from "@/components/dialog-container";
 import { DeviceForm } from "./device-form";
 import { useState } from "react";
 import { DeviceWithRelations } from "@/app/types";
-import DynamicIcon from "@/components/icon";
 import { useRouter } from "next/navigation";
-import { addDevice } from "../actions/add-device";
-import { Client, Device, DeviceType } from "@/generated/prisma";
-import { DeviceActions } from "./devices-actions";
-import { deleteDevice } from "../actions/delete-device";
-import { editDevice } from "../actions/edit-device";
+import { addDevice, editDevice, deleteDevice } from "../actions";
+import { Device, DeviceType } from "@/generated/prisma";
 import { toast } from "sonner";
 import {
   Tooltip,
@@ -33,13 +19,13 @@ import {
 import { DeviceItem } from "./device-item";
 
 interface Props {
-  client: Client;
+  clientId: string;
   devices: DeviceWithRelations[];
   types: DeviceType[];
   onAddDevice?: () => void;
 }
 
-export function DevicesList({ client, devices, types }: Props) {
+export function DevicesList({ clientId, devices, types }: Props) {
   const t = useTranslations();
   const router = useRouter();
   const [editingDevice, setEditingDevice] = useState<Device | null>(null);
@@ -49,7 +35,7 @@ export function DevicesList({ client, devices, types }: Props) {
 
   const handleSubmit = async (data: any) => {
     console.log(data);
-    await addDevice(client.id, data);
+    await addDevice(clientId, data);
     setIsDialogOpen(false);
     toast(t("Device added successfully"), {
       description: t("Device added successfully description"),

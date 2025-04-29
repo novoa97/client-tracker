@@ -13,7 +13,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { CheckCircle2 } from "lucide-react";
 import { Client } from "@/generated/prisma";
-import { saveNotes } from "../actions/save-notes";
+import { saveNotes } from "../actions";
 import { useTranslations } from "next-intl";
 
 interface NotesCardProps {

@@ -1,38 +1,33 @@
 "use client";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Computer, Key, Settings2, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
-import { GeneralTab } from "./general-tab";
-import { LicenseTypesTab } from "./license-types/license-types-tab";
-import { LicenseWithInUse } from "../actions/get-licenses-type";
-import { DeviceTypeWithInUse } from "../actions/get-devices-type";
-import { ClientTypeWithInUse } from "../actions/get-client-type";
-import { ClientTypesTab } from "./client-types/client-types-tab";
-import { DeviceTypesTab } from "./device-types/device-types-tab";
-import { addLicenseType } from "../actions/add-license-type";
-import { deleteLicenseType } from "../actions/delete-license-type";
+import { usePathname, useRouter } from "next/navigation";
 
-interface Props {
-  tab: string;
-  clients: ClientTypeWithInUse[];
-  licenses: LicenseWithInUse[];
-  devices: DeviceTypeWithInUse[];
-}
-
-export function SettingsTabs({ tab, clients, licenses, devices }: Props) {
+export function SettingsTabs() {
   const t = useTranslations();
   const router = useRouter();
 
   const handleTabChange = (value: string) => {
-    router.push(`/settings?tab=${value}`);
+    if (value === "general") {
+      router.push("/settings");
+    } else {
+      router.push(`/settings/${value}`);
+    }
   };
 
+  // Check path
+  let tab = "general";
+  const pathname = usePathname();
+  if (pathname.includes("licenses")) tab = "licenses";
+  if (pathname.includes("clients")) tab = "clients";
+  if (pathname.includes("devices")) tab = "devices";
+
   return (
-    <div className="flex-1 flex flex-col min-h-0">
+    <div className="flex flex-col min-h-0">
       <Tabs
-        defaultValue={tab || "general"}
+        defaultValue={tab}
         onValueChange={handleTabChange}
         className="flex w-full h-full flex-1 flex-1 min-h-0"
       >
@@ -54,22 +49,6 @@ export function SettingsTabs({ tab, clients, licenses, devices }: Props) {
             {t("Devices")}
           </TabsTrigger>
         </TabsList>
-        {/* General Tab */}
-        <TabsContent value="general">
-          <GeneralTab />
-        </TabsContent>
-        {/* Client Types Tab */}
-        <TabsContent value="clients" className="flex-1 flex flex-col min-h-0">
-          <ClientTypesTab types={clients} />
-        </TabsContent>
-        {/* Licenses Tab */}
-        <TabsContent value="licenses" className="flex-1 flex flex-col min-h-0">
-          <LicenseTypesTab types={licenses} />
-        </TabsContent>
-        {/* Devices Tab */}
-        <TabsContent value="devices" className="flex-1 flex flex-col min-h-0">
-          <DeviceTypesTab types={devices} />
-        </TabsContent>
       </Tabs>
     </div>
   );

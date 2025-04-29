@@ -15,6 +15,8 @@ const DynamicIcon: FC<DynamicIconProps> = memo(({ name, className }) => {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join("");
 
+  if (normalizedName === "Icon") return <LoaderIcon className={className} />;
+
   const MaybeIcon = Icons[normalizedName as keyof typeof Icons];
 
   // Check if it's a React component (forwardRef has $$typeof)

@@ -17,16 +17,19 @@ import {
 import { toast } from "sonner";
 import { DialogContainer } from "@/components/dialog-container";
 import { ClientTypeForm, ClientTypeFormValues } from "./client-type-form";
-import { ClientTypeWithInUse } from "../../actions/get-client-type";
-import { addClientType } from "../../actions/add-client-type";
-import { editClientType } from "../../actions/edit-client-type";
-import { deleteClientType } from "../../actions/delete-client-type";
+import {
+  ClientTypeWithInUse,
+  addClientType,
+  editClientType,
+  deleteClientType,
+} from "../actions";
+import { darkenColor } from "@/lib/colors";
 
 interface Props {
   types: ClientTypeWithInUse[];
 }
 
-export function ClientTypesTab({ types }: Props) {
+export function ClientTypesCard({ types }: Props) {
   const t = useTranslations();
   const router = useRouter();
   const [items, setItems] = useState<ClientTypeWithInUse[] | null>(null);
@@ -112,7 +115,11 @@ export function ClientTypesTab({ types }: Props) {
             <TableCell>
               <div
                 className="flex h-9 w-9 items-center justify-center rounded-full"
-                style={{ backgroundColor: type.color }}
+                style={{
+                  backgroundColor: type.color,
+                  borderWidth: 3,
+                  borderColor: darkenColor(type?.color, 30),
+                }}
               >
                 <DynamicIcon name={type.icon} className="text-white h-5 w-5" />
               </div>

@@ -16,10 +16,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import AddressAutocomplete from "@/components/address-autocomplete";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Client } from "@/generated/prisma";
+import { Client, ClientType } from "@/generated/prisma";
+import {
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Select } from "@/components/ui/select";
 
 const clientSchema = z.object({
   name: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
+  type: z.string().min(1, "El tipo de cliente es obligatorio"),
   legalName: z
     .string()
     .min(2, "La razón social debe tener al menos 2 caracteres"),
@@ -31,6 +39,7 @@ export type EditClientFormValues = z.infer<typeof clientSchema>;
 
 interface EditClientFormProps {
   defaultValues: Client;
+  types: ClientType[];
   onSubmit: (
     values: EditClientFormValues & {
       latitude: number;
@@ -44,6 +53,7 @@ interface EditClientFormProps {
 
 export function EditClientForm({
   defaultValues,
+  types,
   onSubmit,
   onCancel,
   isLoading,
@@ -51,7 +61,13 @@ export function EditClientForm({
   const t = useTranslations();
   const form = useForm<EditClientFormValues>({
     resolver: zodResolver(clientSchema),
-    defaultValues,
+    defaultValues: {
+      type: defaultValues.typeKey,
+      legalName: defaultValues.legalName || "",
+      taxId: defaultValues.taxId || "",
+      name: defaultValues.name,
+      address: defaultValues.address,
+    },
   });
 
   const [coords, setCoords] = useState<{
@@ -80,6 +96,35 @@ export function EditClientForm({
               <FormLabel>{t("Name")}</FormLabel>
               <FormControl>
                 <Input placeholder={t("Name")} {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="type"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("Type")}</FormLabel>
+              <FormControl>
+                <Select
+                  value={field.value}
+                  onValueChange={field.onChange}
+                  disabled={types.length === 0}
+                >
+                  <SelectTrigger className="w-full" tabIndex={0}>
+                    <SelectValue placeholder={t("Select a type")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {types.map((type) => (
+                      <SelectItem key={type.key} value={type.key}>
+                        {type.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </FormControl>
               <FormMessage />
             </FormItem>

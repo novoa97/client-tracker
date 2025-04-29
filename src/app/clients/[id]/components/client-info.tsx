@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Client } from "@/generated/prisma";
+import { Client, ClientType } from "@/generated/prisma";
 import {
   Building,
   FileText,
@@ -21,15 +21,16 @@ import { useTranslations } from "use-intl";
 import { Button } from "@/components/ui/button";
 import { DialogContainer } from "@/components/dialog-container";
 import { EditClientForm } from "./edit-client-form";
-import { editClient, EditClientData } from "../actions/edit-client";
+import { editClient, EditClientData } from "../actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 interface Props {
   client: Client;
+  types: ClientType[];
 }
 
-export function ClientInfo({ client }: Props) {
+export function ClientInfo({ client, types }: Props) {
   const router = useRouter();
   const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
@@ -113,6 +114,7 @@ export function ClientInfo({ client }: Props) {
         title={t("Edit Client Info")}
       >
         <EditClientForm
+          types={types}
           defaultValues={client}
           onSubmit={handleSubmit}
           onCancel={() => setIsEditing(false)}

@@ -3,24 +3,22 @@ import { CardList } from "@/components/card-list";
 import { useState } from "react";
 import { DialogContainer } from "@/components/dialog-container";
 import { LicenseForm, LicenseFormValues } from "./license-form";
-import { Client, License, LicenseType } from "@/generated/prisma";
+import { LicenseType } from "@/generated/prisma";
 import { LicenseWithRelations } from "@/app/types";
-import { addLicense } from "../actions/add-license";
+import { addLicense, editLicense, deleteLicense } from "../actions";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { LicenseActions } from "./license-actions";
-import { deleteLicense } from "../actions/delete-license";
 import { toast } from "sonner";
-import { editLicense } from "../actions/edit-license";
 import { Badge } from "@/components/ui/badge";
 
 interface Props {
-  client: Client;
+  clientId: string;
   types: LicenseType[];
   licenses: LicenseWithRelations[];
 }
 
-export function LicensesList({ types, licenses, client }: Props) {
+export function LicensesList({ types, licenses, clientId }: Props) {
   const t = useTranslations();
   const router = useRouter();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -36,7 +34,7 @@ export function LicensesList({ types, licenses, client }: Props) {
       const response = await addLicense({
         id: values.id,
         type: values.type,
-        clientId: client.id,
+        clientId: clientId,
         subLicenses: values.subLicenses,
       });
       if (response.ok) {
@@ -90,8 +88,7 @@ export function LicensesList({ types, licenses, client }: Props) {
                 <h3 className="font-medium">{license.type.name}</h3>
                 {license.subLicenses && license.subLicenses.length > 0 && (
                   <Badge variant="outline" className="text-xs">
-                    {license.subLicenses.length} sublicense
-                    {license.subLicenses.length !== 1 ? "s" : ""}
+                    {license.subLicenses.length} {t("Sublicenses")}
                   </Badge>
                 )}
               </div>
