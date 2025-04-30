@@ -1,11 +1,10 @@
 import { prisma } from "@/lib/prisma";
-import { notFound } from "next/navigation";
 import { LicensesList } from "./components/licenses-list";
 
 interface Props {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function ClientLicensesPage({ params }: Props) {

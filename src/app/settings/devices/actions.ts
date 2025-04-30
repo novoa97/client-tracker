@@ -1,3 +1,5 @@
+"use server";
+
 import { ActionError } from "@/errors/actions";
 import { DeviceType } from "@/generated/prisma";
 import { prisma } from "@/lib/prisma";

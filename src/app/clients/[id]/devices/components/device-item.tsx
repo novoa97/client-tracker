@@ -8,7 +8,6 @@ import { Device } from "@/generated/prisma";
 import DynamicIcon from "@/components/icon";
 import { DeviceWithRelations } from "@/app/types";
 import { DeviceActions } from "./devices-actions";
-import { Badge } from "@/components/ui/badge";
 
 interface DeviceItemProps {
   device: DeviceWithRelations;

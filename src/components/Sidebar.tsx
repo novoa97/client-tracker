@@ -3,15 +3,18 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
-import { Map, Users, Settings, Building2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-const links = [
-  { href: "/", label: "Map", icon: Map },
-  { href: "/clients", label: "Clients", icon: Users },
-  { href: "/settings", label: "Settings", icon: Settings },
-];
+import DynamicIcon from "./icon";
 
-export function Sidebar() {
+interface Props {
+  section?: {
+    href: string;
+    label: string;
+    icon: string;
+  }[];
+}
+
+export function Sidebar({ section }: Props) {
   const t = useTranslations();
   const pathname = usePathname();
 
@@ -21,7 +24,7 @@ export function Sidebar() {
     <aside className="w-64 bg-white border-r p-4 space-y-4 min-h-screen">
       <h1 className="text-lg font-bold mb-6">ClientTracker</h1>
       <nav className="flex flex-col gap-2">
-        {links.map(({ href, label, icon: Icon }) => {
+        {section?.map(({ href, label, icon }) => {
           return (
             <Link
               key={href}
@@ -33,7 +36,7 @@ export function Sidebar() {
                   : "text-gray-700"
               )}
             >
-              <Icon className="w-4 h-4" />
+              <DynamicIcon name={icon} className="w-4 h-4" />
               <span>{t(label)}</span>
             </Link>
           );

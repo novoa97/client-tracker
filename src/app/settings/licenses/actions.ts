@@ -1,3 +1,5 @@
+"use server";
+
 import { ActionError } from "@/errors/actions";
 import { LicenseType } from "@/generated/prisma";
 import { prisma } from "@/lib/prisma";
@@ -32,7 +34,7 @@ export async function addLicenseType(name: string): Promise<ActionResponse> {
 
         if (existingLicenseType) throw new ActionError("License type already exists");
 
-        const licenseType = await prisma.licenseType.create({
+        await prisma.licenseType.create({
             data: {
                 key,
                 name,
@@ -50,7 +52,7 @@ export async function addLicenseType(name: string): Promise<ActionResponse> {
 }
 
 export async function editLicenseType(key: string, name: string) {
-    const licenseType = await prisma.licenseType.update({
+    await prisma.licenseType.update({
         where: { key },
         data: { name },
     });

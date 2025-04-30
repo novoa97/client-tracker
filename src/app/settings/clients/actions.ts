@@ -1,3 +1,5 @@
+"use server";
+
 import { ActionError } from "@/errors/actions";
 import { ClientType } from "@/generated/prisma";
 import { prisma } from "@/lib/prisma";

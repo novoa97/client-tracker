@@ -75,7 +75,6 @@ export default function AddClientForm({
 
   const lat = form.watch("latitude");
   const lng = form.watch("longitude");
-  const typeSelected = form.watch("type");
 
   const handleFormSubmit = async (data: FormData) => {
     await onSubmit(data);

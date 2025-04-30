@@ -4,12 +4,12 @@
 import AddClientForm from "@/app/clients/new/components/add-client-form";
 import { addClient } from "../actions/add-client";
 import { useState, useEffect } from "react";
-import { AddClientMap } from "./components/add-client-map";
 import { Header } from "@/components/header";
 import { UserPlus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { getClientType } from "../actions/get-client-type";
 import { ClientType } from "@/generated/prisma";
+import AddClientMapWrapper from "./components/add-client-map-wrapper";
 
 export default function NewClientPage() {
   const [coordinates, setCoordinates] = useState<[number, number] | null>(null);
@@ -25,13 +25,14 @@ export default function NewClientPage() {
     fetchClientTypes();
   }, []);
 
-  const handleFormChange = (newData: any) => {
-    console.log("handleFormChange", newData);
+  const handleFormChange = (newData: {
+    latitude: number;
+    longitude: number;
+    type?: ClientType;
+  }) => {
     if (newData.latitude && newData.longitude) {
-      console.log("set coord");
       setCoordinates([newData.latitude, newData.longitude]);
     }
-    console.log(newData.type);
     if (newData.type) {
       setSelectedType(newData.type);
     }
@@ -46,10 +47,11 @@ export default function NewClientPage() {
           onSubmit={addClient}
           onChange={handleFormChange}
         />
-        <AddClientMap
+        <AddClientMapWrapper
+          className="hidden md:block w-1/2 h-full"
           coordinates={coordinates}
           type={selectedType}
-        ></AddClientMap>
+        ></AddClientMapWrapper>
       </div>
     </div>
   );

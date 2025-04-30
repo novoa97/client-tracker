@@ -6,8 +6,6 @@ export default getRequestConfig(async () => {
 
     const locale = cookieStore.get('LOCALE')?.value || 'es'; // 'es' como idioma por defecto
 
-    console.log('Locale:', locale)
-
     return {
         locale,
         messages: (await import(`../../messages/${locale}.json`)).default

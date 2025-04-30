@@ -9,12 +9,9 @@ import {
   LayerGroup,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import { Client } from "@/generated/prisma";
 import Link from "next/link";
 import { ClientWithType } from "@/app/types";
 import { renderToStaticMarkup } from "react-dom/server";
-import { ArrowRight, Building } from "lucide-react";
 import DynamicIcon from "./icon";
 import { generateMarkerIcon } from "@/lib/marker";
 

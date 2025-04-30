@@ -20,8 +20,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { MoreVertical, Trash2, Edit } from "lucide-react";
-import { startTransition, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { License } from "@/generated/prisma";
 import { useTranslations } from "next-intl";
 
@@ -34,7 +33,6 @@ type Props = {
 export function LicenseActions({ license, onDelete, onEdit }: Props) {
   const t = useTranslations();
   const [open, setOpen] = useState(false);
-  const router = useRouter();
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>

@@ -1,9 +1,5 @@
 "use client";
-import {
-  ClientWithType,
-  DeviceWithRelations,
-  LicenseWithRelations,
-} from "@/app/types";
+import { ClientWithType } from "@/app/types";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Computer, InfoIcon, Key } from "lucide-react";
 import { useTranslations } from "next-intl";

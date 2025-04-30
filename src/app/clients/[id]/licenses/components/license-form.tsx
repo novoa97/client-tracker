@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { License, LicenseType } from "@/generated/prisma";
+import { LicenseType } from "@/generated/prisma";
 import { LicenseWithRelations } from "@/app/types";
 import { useTranslations } from "next-intl";
 

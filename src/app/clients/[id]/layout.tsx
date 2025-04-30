@@ -5,12 +5,9 @@ import { notFound } from "next/navigation";
 import { ClientTabs } from "./components/client-tabs";
 
 type Props = {
-  params: {
+  params: Promise<{
     id: string;
-  };
-  searchParams: {
-    tab: string;
-  };
+  }>;
   children: React.ReactNode;
 };
 

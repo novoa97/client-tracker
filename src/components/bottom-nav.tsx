@@ -1,39 +1,35 @@
 "use client";
 
-import { LucideIcon, Map, Users, Settings } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import DynamicIcon from "./icon";
 
 interface Section {
   href: string;
   label: string;
-  icon: LucideIcon;
+  icon: string;
 }
 
 interface Props {
   section?: Section[];
 }
 
-export const navigationLinks = [
-  { href: "/", label: "Map", icon: Map },
-  { href: "/clients", label: "Clients", icon: Users },
-  { href: "/settings", label: "Settings", icon: Settings },
-];
-
 export default function BottomNav({ section }: Props) {
   const pathname = usePathname();
 
+  const path = "/" + pathname.split("/")[1];
+
   return (
     <nav className="bg-white border-t shadow-md flex justify-around items-center h-14">
-      {navigationLinks.map(({ href, label, icon: Icon }) => (
+      {section?.map(({ href, icon }) => (
         <Link
           key={href}
           href={href}
           className={`flex flex-col items-center text-xs ${
-            pathname === href ? "text-black font-semibold" : "text-gray-500"
+            path === href ? "text-blue-600 font-semibold " : "text-gray-500"
           }`}
         >
-          <Icon size={20} />
+          <DynamicIcon name={icon} className="w-6 h-6" />
         </Link>
       ))}
     </nav>

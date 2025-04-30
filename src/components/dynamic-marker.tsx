@@ -14,7 +14,7 @@ export function DynamicMarker({
   color = "#2c3e50",
   iconName,
 }: DynamicMarkerProps) {
-  const IconComponent = LucideIcons[iconName];
+  const IconComponent = LucideIcons[iconName] as React.ElementType;
 
   if (!IconComponent) {
     console.error(`Icon "${iconName}" not found in LucideIcons`);

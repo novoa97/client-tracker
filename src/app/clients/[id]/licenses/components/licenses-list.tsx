@@ -29,8 +29,6 @@ export function LicensesList({ types, licenses, clientId }: Props) {
   const handleSubmit = async (values: LicenseFormValues) => {
     setIsSubmitting(true);
     try {
-      // Default behavior if no custom submit handler is provided
-      console.log("License created:", values);
       const response = await addLicense({
         id: values.id,
         type: values.type,

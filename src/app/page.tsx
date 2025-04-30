@@ -1,6 +1,5 @@
 "use server";
-import GeneralMap from "@/components/map";
-import MapWrapper from "@/components/map-wrapper";
+import GeneralMapWrapper from "@/components/general-map-wrapper";
 import { prisma } from "@/lib/prisma";
 
 export default async function MapPage() {
@@ -12,9 +11,10 @@ export default async function MapPage() {
 
   return (
     <div className="w-full h-[calc(100vh)]">
-      <MapWrapper className="h-full">
-        <GeneralMap clients={clients}></GeneralMap>
-      </MapWrapper>
+      <GeneralMapWrapper
+        clients={clients}
+        className="h-full"
+      ></GeneralMapWrapper>
     </div>
   );
 }

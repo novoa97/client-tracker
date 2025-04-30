@@ -63,8 +63,8 @@ export default function AddressAutocomplete({
       onChange(formatted);
       clearSuggestions();
 
-      const city = results[0].address_components.find((c: any) =>
-        c.types.includes("locality")
+      const city = results[0].address_components.find(
+        (c: { types: string[] }) => c.types.includes("locality")
       )?.long_name;
 
       onSelect(formatted, lat, lng, city);

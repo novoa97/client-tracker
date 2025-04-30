@@ -83,6 +83,7 @@ export function LicenseTypesCard({ types }: Props) {
         duration: 2000,
       });
     } catch (error) {
+      console.error(error);
       toast.error(t("License type update failed"), {
         description: t("License type update failed description"),
         duration: 2000,
@@ -103,6 +104,7 @@ export function LicenseTypesCard({ types }: Props) {
       });
       router.refresh();
     } catch (error) {
+      console.error(error);
       toast.error(t("License type deletion failed"), {
         description: t("License type deletion failed description"),
         duration: 2000,

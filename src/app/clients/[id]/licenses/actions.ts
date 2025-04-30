@@ -69,7 +69,6 @@ type EditLicense = {
 };
 
 export async function editLicense(data: EditLicense): Promise<ActionResponse> {
-  console.log(data);
   try {
     // Check if the license exists
     const license = await prisma.license.findUnique({

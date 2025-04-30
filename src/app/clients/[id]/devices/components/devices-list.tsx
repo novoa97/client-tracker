@@ -8,14 +8,14 @@ import { DeviceForm } from "./device-form";
 import { useState } from "react";
 import { DeviceWithRelations } from "@/app/types";
 import { useRouter } from "next/navigation";
-import { addDevice, editDevice, deleteDevice } from "../actions";
+import {
+  addDevice,
+  editDevice,
+  deleteDevice,
+  DeviceDataAction,
+} from "../actions";
 import { Device, DeviceType } from "@/generated/prisma";
 import { toast } from "sonner";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { DeviceItem } from "./device-item";
 
 interface Props {
@@ -33,8 +33,8 @@ export function DevicesList({ clientId, devices, types }: Props) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (data: any) => {
-    console.log(data);
+  const handleSubmit = async (data: DeviceDataAction) => {
+    setIsLoading(true);
     await addDevice(clientId, data);
     setIsDialogOpen(false);
     toast(t("Device added successfully"), {
@@ -43,10 +43,10 @@ export function DevicesList({ clientId, devices, types }: Props) {
       icon: <Plus className="w-5 h-5 text-green-500" />,
     });
     router.refresh();
+    setIsLoading(false);
   };
 
-  const handleEdit = async (data: any) => {
-    console.log(data);
+  const handleEdit = async (data: DeviceDataAction) => {
     if (!editingDevice) return;
     await editDevice(editingDevice.id, data);
     setEditingDevice(null);

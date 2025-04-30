@@ -15,17 +15,16 @@ import { Users } from "lucide-react";
 import { Prisma } from "@/generated/prisma";
 
 type Props = {
-  searchParams: {
+  searchParams: Promise<{
     page?: string;
     search?: string;
     type?: string;
     city?: string;
-  };
+  }>;
 };
 
 export default async function ClientsPage({ searchParams }: Props) {
   const { page, search, type, city } = await searchParams;
-  console.log(type);
   const pageNumber = Number(page ?? "1");
   const pageSize = 15;
   const searchText = search || "";

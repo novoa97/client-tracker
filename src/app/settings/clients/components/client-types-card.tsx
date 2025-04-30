@@ -45,7 +45,7 @@ export function ClientTypesCard({ types }: Props) {
 
   const handleCreate = async (data: ClientTypeFormValues) => {
     try {
-      console.log(data);
+      setIsLoading(true);
       const response = await addClientType(data);
       if (response.ok) {
         setIsDialogOpen(false);
@@ -62,13 +62,13 @@ export function ClientTypesCard({ types }: Props) {
           icon: <CircleX className="h-4 w-4 text-red-500" />,
         });
       }
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleEdit = async (data: ClientTypeFormValues) => {
-    console.log(data);
     if (!editingClientType) return;
     await editClientType(editingClientType.key, data);
     setIsDialogOpen(false);

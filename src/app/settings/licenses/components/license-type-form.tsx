@@ -40,7 +40,6 @@ export function LicenseTypeForm({
   });
 
   const handleSubmit = (data: LicenseFormValues) => {
-    console.log(data);
     onSubmit(data);
   };
 

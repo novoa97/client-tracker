@@ -1,16 +1,16 @@
 "use server";
 import { prisma } from "@/lib/prisma";
 
-export type AddDeviceData = {
+export type DeviceDataAction = {
     name: string;
-    ip: string;
     type: string;
-    anyDesk: string;
-    serialNumber: string;
+    ip?: string;
+    anyDesk?: string;
+    serialNumber?: string;
 };
 
 
-export async function addDevice(clientId: string, data: AddDeviceData): Promise<void> {
+export async function addDevice(clientId: string, data: DeviceDataAction): Promise<void> {
     await prisma.device.create({
         data: {
             name: data.name,
@@ -23,8 +23,7 @@ export async function addDevice(clientId: string, data: AddDeviceData): Promise<
     });
 }
 
-export async function editDevice(id: string, data: any): Promise<void> {
-    console.log(id, data);
+export async function editDevice(id: string, data: DeviceDataAction): Promise<void> {
     await prisma.device.update({
         where: {
             id: id,

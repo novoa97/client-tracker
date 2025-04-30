@@ -1,3 +1,5 @@
+"use client";
+
 import { Card } from "@/components/ui/card";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -8,30 +10,18 @@ import { generateMarkerIcon } from "@/lib/marker";
 import { renderToStaticMarkup } from "react-dom/server";
 import DynamicIcon from "@/components/icon";
 
-delete (L.Icon.Default.prototype as any)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: new URL(
-    "leaflet/dist/images/marker-icon-2x.png",
-    import.meta.url
-  ).href,
-  iconUrl: new URL("leaflet/dist/images/marker-icon.png", import.meta.url).href,
-  shadowUrl: new URL("leaflet/dist/images/marker-shadow.png", import.meta.url)
-    .href,
-});
-
 type Props = {
   coordinates: [number, number] | null;
   type: ClientType | null;
 };
 
-export const AddClientMap = ({ coordinates, type }: Props) => {
+export default function AddClientMap({ coordinates, type }: Props) {
   const fallbackCoords: [number, number] = [42.7551, -7.8662];
   const position = coordinates ?? fallbackCoords;
 
   const markerRef = useRef<L.Marker>(null);
 
   useEffect(() => {
-    console.log("Type", type);
     if (markerRef.current && type) {
       const newIcon = generateMarkerIcon(
         type?.color ?? "#ababab",
@@ -58,7 +48,7 @@ export const AddClientMap = ({ coordinates, type }: Props) => {
   };
 
   return (
-    <Card className="hidden md:block w-1/2 h-full p-0">
+    <Card className="h-full w-full p-0">
       <div className="h-full w-full rounded-lg overflow-hidden">
         <MapContainer
           center={position}
@@ -91,4 +81,4 @@ export const AddClientMap = ({ coordinates, type }: Props) => {
       </div>
     </Card>
   );
-};
+}

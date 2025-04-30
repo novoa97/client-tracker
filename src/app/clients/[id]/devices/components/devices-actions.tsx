@@ -55,7 +55,7 @@ export function DeviceActions({ device, onEdit, onDelete }: Props) {
 
         <DropdownMenuContent align="end" className="w-36">
           <DropdownMenuItem
-            onSelect={(e) => {
+            onSelect={() => {
               onEdit(device);
             }}
           >

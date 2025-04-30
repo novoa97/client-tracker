@@ -2,9 +2,9 @@ import { prisma } from "@/lib/prisma";
 import { DevicesList } from "./components/devices-list";
 
 interface Props {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function ClientDevicesPage({ params }: Props) {

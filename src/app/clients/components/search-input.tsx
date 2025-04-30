@@ -3,10 +3,9 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { ChevronDown, Search, SlidersHorizontal } from "lucide-react";
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -18,10 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-} from "@/components/ui/dropdown-menu";
+import { DropdownMenuLabel } from "@/components/ui/dropdown-menu";
 import { useTranslations } from "next-intl";
 import { ClientType } from "@/generated/prisma";
 import { Badge } from "@/components/ui/badge";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Pencil, Trash, Check } from "lucide-react";
+import { Pencil, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TableRow, TableCell } from "@/components/ui/table";
 import { CardList } from "@/components/card-list";
@@ -52,6 +52,7 @@ export function DeviceTypesCard({ types }: Props) {
         });
       }
     } catch (error) {
+      console.error(error);
       toast.error(t("Error creating device type"), {
         description: t("There was a problem creating the device type"),
         duration: 3000,

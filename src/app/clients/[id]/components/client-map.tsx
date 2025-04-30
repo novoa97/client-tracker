@@ -7,13 +7,13 @@ import { useEffect } from "react";
 import { ClientWithType } from "@/app/types";
 import { generateMarkerIcon } from "@/lib/marker";
 import { renderToStaticMarkup } from "react-dom/server";
-import DynamicIcon from "./icon";
+import DynamicIcon from "@/components/icon";
 
 type Props = {
   client: ClientWithType;
 };
 
-export const ClientMap = ({ client }: Props) => {
+export default function ClientMap({ client }: Props) {
   const fallbackCoords: [number, number] = [42.7551, -7.8662];
   const position: [number, number] = client
     ? [client.latitude, client.longitude]
@@ -59,4 +59,4 @@ export const ClientMap = ({ client }: Props) => {
       </div>
     </Card>
   );
-};
+}
