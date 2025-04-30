@@ -21,7 +21,7 @@ model ClientType {
   icon    String
   color   String
   clients Client[]
-  
+  createdAt  DateTime @default(now())
   @@map("client_type")
 }
 
@@ -52,6 +52,7 @@ model License {
   type           LicenseType  @relation(fields: [typeKey], references: [key])
   parent         License?     @relation("SubLicenses", fields: [parentId], references: [id])
   subLicenses    License[]    @relation("SubLicenses")
+  createdAt  DateTime @default(now())
   @@map("license")
 }
 
@@ -59,6 +60,7 @@ model LicenseType {
   key      String @unique
   name     String
   licenses License[]
+  createdAt  DateTime @default(now())
   @@map("license_type")
 }
 
@@ -68,6 +70,7 @@ model DeviceType {
   name    String              
   icon    String
   devices Device[]
+  createdAt  DateTime @default(now())
   @@map("device_type")
 }
 
@@ -81,5 +84,6 @@ model Device {
   type          DeviceType  @relation(fields: [typeKey], references: [key])
   clientId      String
   client        Client      @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
   @@map("device")
 }

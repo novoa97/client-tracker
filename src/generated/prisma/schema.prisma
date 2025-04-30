@@ -5,8 +5,9 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  provider      = "prisma-client-js"
+  output        = "../src/generated/prisma"
+  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x", "darwin-arm64"]
 }
 
 datasource db {
@@ -15,11 +16,12 @@ datasource db {
 }
 
 model ClientType {
-  key     String   @id
-  name    String
-  icon    String
-  color   String
-  clients Client[]
+  key       String   @id
+  name      String
+  icon      String
+  color     String
+  clients   Client[]
+  createdAt DateTime @default(now())
 
   @@map("client_type")
 }
@@ -52,23 +54,26 @@ model License {
   type        LicenseType @relation(fields: [typeKey], references: [key])
   parent      License?    @relation("SubLicenses", fields: [parentId], references: [id])
   subLicenses License[]   @relation("SubLicenses")
+  createdAt   DateTime    @default(now())
 
   @@map("license")
 }
 
 model LicenseType {
-  key      String    @unique
-  name     String
-  licenses License[]
+  key       String    @unique
+  name      String
+  licenses  License[]
+  createdAt DateTime  @default(now())
 
   @@map("license_type")
 }
 
 model DeviceType {
-  key     String   @id
-  name    String
-  icon    String
-  devices Device[]
+  key       String   @id
+  name      String
+  icon      String
+  devices   Device[]
+  createdAt DateTime @default(now())
 
   @@map("device_type")
 }
@@ -83,6 +88,7 @@ model Device {
   type         DeviceType @relation(fields: [typeKey], references: [key])
   clientId     String
   client       Client     @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
 
   @@map("device")
 }

@@ -1454,6 +1454,7 @@ export namespace Prisma {
     name: string | null
     icon: string | null
     color: string | null
+    createdAt: Date | null
   }
 
   export type ClientTypeMaxAggregateOutputType = {
@@ -1461,6 +1462,7 @@ export namespace Prisma {
     name: string | null
     icon: string | null
     color: string | null
+    createdAt: Date | null
   }
 
   export type ClientTypeCountAggregateOutputType = {
@@ -1468,6 +1470,7 @@ export namespace Prisma {
     name: number
     icon: number
     color: number
+    createdAt: number
     _all: number
   }
 
@@ -1477,6 +1480,7 @@ export namespace Prisma {
     name?: true
     icon?: true
     color?: true
+    createdAt?: true
   }
 
   export type ClientTypeMaxAggregateInputType = {
@@ -1484,6 +1488,7 @@ export namespace Prisma {
     name?: true
     icon?: true
     color?: true
+    createdAt?: true
   }
 
   export type ClientTypeCountAggregateInputType = {
@@ -1491,6 +1496,7 @@ export namespace Prisma {
     name?: true
     icon?: true
     color?: true
+    createdAt?: true
     _all?: true
   }
 
@@ -1571,6 +1577,7 @@ export namespace Prisma {
     name: string
     icon: string
     color: string
+    createdAt: Date
     _count: ClientTypeCountAggregateOutputType | null
     _min: ClientTypeMinAggregateOutputType | null
     _max: ClientTypeMaxAggregateOutputType | null
@@ -1595,6 +1602,7 @@ export namespace Prisma {
     name?: boolean
     icon?: boolean
     color?: boolean
+    createdAt?: boolean
     clients?: boolean | ClientType$clientsArgs<ExtArgs>
     _count?: boolean | ClientTypeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["clientType"]>
@@ -1606,9 +1614,10 @@ export namespace Prisma {
     name?: boolean
     icon?: boolean
     color?: boolean
+    createdAt?: boolean
   }
 
-  export type ClientTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"key" | "name" | "icon" | "color", ExtArgs["result"]["clientType"]>
+  export type ClientTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"key" | "name" | "icon" | "color" | "createdAt", ExtArgs["result"]["clientType"]>
   export type ClientTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     clients?: boolean | ClientType$clientsArgs<ExtArgs>
     _count?: boolean | ClientTypeCountOutputTypeDefaultArgs<ExtArgs>
@@ -1624,6 +1633,7 @@ export namespace Prisma {
       name: string
       icon: string
       color: string
+      createdAt: Date
     }, ExtArgs["result"]["clientType"]>
     composites: {}
   }
@@ -1998,6 +2008,7 @@ export namespace Prisma {
     readonly name: FieldRef<"ClientType", 'String'>
     readonly icon: FieldRef<"ClientType", 'String'>
     readonly color: FieldRef<"ClientType", 'String'>
+    readonly createdAt: FieldRef<"ClientType", 'DateTime'>
   }
     
 
@@ -3489,6 +3500,7 @@ export namespace Prisma {
     clientId: string | null
     typeKey: string | null
     parentId: string | null
+    createdAt: Date | null
   }
 
   export type LicenseMaxAggregateOutputType = {
@@ -3496,6 +3508,7 @@ export namespace Prisma {
     clientId: string | null
     typeKey: string | null
     parentId: string | null
+    createdAt: Date | null
   }
 
   export type LicenseCountAggregateOutputType = {
@@ -3503,6 +3516,7 @@ export namespace Prisma {
     clientId: number
     typeKey: number
     parentId: number
+    createdAt: number
     _all: number
   }
 
@@ -3512,6 +3526,7 @@ export namespace Prisma {
     clientId?: true
     typeKey?: true
     parentId?: true
+    createdAt?: true
   }
 
   export type LicenseMaxAggregateInputType = {
@@ -3519,6 +3534,7 @@ export namespace Prisma {
     clientId?: true
     typeKey?: true
     parentId?: true
+    createdAt?: true
   }
 
   export type LicenseCountAggregateInputType = {
@@ -3526,6 +3542,7 @@ export namespace Prisma {
     clientId?: true
     typeKey?: true
     parentId?: true
+    createdAt?: true
     _all?: true
   }
 
@@ -3606,6 +3623,7 @@ export namespace Prisma {
     clientId: string
     typeKey: string
     parentId: string | null
+    createdAt: Date
     _count: LicenseCountAggregateOutputType | null
     _min: LicenseMinAggregateOutputType | null
     _max: LicenseMaxAggregateOutputType | null
@@ -3630,6 +3648,7 @@ export namespace Prisma {
     clientId?: boolean
     typeKey?: boolean
     parentId?: boolean
+    createdAt?: boolean
     client?: boolean | ClientDefaultArgs<ExtArgs>
     type?: boolean | LicenseTypeDefaultArgs<ExtArgs>
     parent?: boolean | License$parentArgs<ExtArgs>
@@ -3644,9 +3663,10 @@ export namespace Prisma {
     clientId?: boolean
     typeKey?: boolean
     parentId?: boolean
+    createdAt?: boolean
   }
 
-  export type LicenseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "typeKey" | "parentId", ExtArgs["result"]["license"]>
+  export type LicenseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "typeKey" | "parentId" | "createdAt", ExtArgs["result"]["license"]>
   export type LicenseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | ClientDefaultArgs<ExtArgs>
     type?: boolean | LicenseTypeDefaultArgs<ExtArgs>
@@ -3668,6 +3688,7 @@ export namespace Prisma {
       clientId: string
       typeKey: string
       parentId: string | null
+      createdAt: Date
     }, ExtArgs["result"]["license"]>
     composites: {}
   }
@@ -4045,6 +4066,7 @@ export namespace Prisma {
     readonly clientId: FieldRef<"License", 'String'>
     readonly typeKey: FieldRef<"License", 'String'>
     readonly parentId: FieldRef<"License", 'String'>
+    readonly createdAt: FieldRef<"License", 'DateTime'>
   }
     
 
@@ -4462,16 +4484,19 @@ export namespace Prisma {
   export type LicenseTypeMinAggregateOutputType = {
     key: string | null
     name: string | null
+    createdAt: Date | null
   }
 
   export type LicenseTypeMaxAggregateOutputType = {
     key: string | null
     name: string | null
+    createdAt: Date | null
   }
 
   export type LicenseTypeCountAggregateOutputType = {
     key: number
     name: number
+    createdAt: number
     _all: number
   }
 
@@ -4479,16 +4504,19 @@ export namespace Prisma {
   export type LicenseTypeMinAggregateInputType = {
     key?: true
     name?: true
+    createdAt?: true
   }
 
   export type LicenseTypeMaxAggregateInputType = {
     key?: true
     name?: true
+    createdAt?: true
   }
 
   export type LicenseTypeCountAggregateInputType = {
     key?: true
     name?: true
+    createdAt?: true
     _all?: true
   }
 
@@ -4567,6 +4595,7 @@ export namespace Prisma {
   export type LicenseTypeGroupByOutputType = {
     key: string
     name: string
+    createdAt: Date
     _count: LicenseTypeCountAggregateOutputType | null
     _min: LicenseTypeMinAggregateOutputType | null
     _max: LicenseTypeMaxAggregateOutputType | null
@@ -4589,6 +4618,7 @@ export namespace Prisma {
   export type LicenseTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     key?: boolean
     name?: boolean
+    createdAt?: boolean
     licenses?: boolean | LicenseType$licensesArgs<ExtArgs>
     _count?: boolean | LicenseTypeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["licenseType"]>
@@ -4598,9 +4628,10 @@ export namespace Prisma {
   export type LicenseTypeSelectScalar = {
     key?: boolean
     name?: boolean
+    createdAt?: boolean
   }
 
-  export type LicenseTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"key" | "name", ExtArgs["result"]["licenseType"]>
+  export type LicenseTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"key" | "name" | "createdAt", ExtArgs["result"]["licenseType"]>
   export type LicenseTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     licenses?: boolean | LicenseType$licensesArgs<ExtArgs>
     _count?: boolean | LicenseTypeCountOutputTypeDefaultArgs<ExtArgs>
@@ -4614,6 +4645,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       key: string
       name: string
+      createdAt: Date
     }, ExtArgs["result"]["licenseType"]>
     composites: {}
   }
@@ -4986,6 +5018,7 @@ export namespace Prisma {
   interface LicenseTypeFieldRefs {
     readonly key: FieldRef<"LicenseType", 'String'>
     readonly name: FieldRef<"LicenseType", 'String'>
+    readonly createdAt: FieldRef<"LicenseType", 'DateTime'>
   }
     
 
@@ -5385,18 +5418,21 @@ export namespace Prisma {
     key: string | null
     name: string | null
     icon: string | null
+    createdAt: Date | null
   }
 
   export type DeviceTypeMaxAggregateOutputType = {
     key: string | null
     name: string | null
     icon: string | null
+    createdAt: Date | null
   }
 
   export type DeviceTypeCountAggregateOutputType = {
     key: number
     name: number
     icon: number
+    createdAt: number
     _all: number
   }
 
@@ -5405,18 +5441,21 @@ export namespace Prisma {
     key?: true
     name?: true
     icon?: true
+    createdAt?: true
   }
 
   export type DeviceTypeMaxAggregateInputType = {
     key?: true
     name?: true
     icon?: true
+    createdAt?: true
   }
 
   export type DeviceTypeCountAggregateInputType = {
     key?: true
     name?: true
     icon?: true
+    createdAt?: true
     _all?: true
   }
 
@@ -5496,6 +5535,7 @@ export namespace Prisma {
     key: string
     name: string
     icon: string
+    createdAt: Date
     _count: DeviceTypeCountAggregateOutputType | null
     _min: DeviceTypeMinAggregateOutputType | null
     _max: DeviceTypeMaxAggregateOutputType | null
@@ -5519,6 +5559,7 @@ export namespace Prisma {
     key?: boolean
     name?: boolean
     icon?: boolean
+    createdAt?: boolean
     devices?: boolean | DeviceType$devicesArgs<ExtArgs>
     _count?: boolean | DeviceTypeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["deviceType"]>
@@ -5529,9 +5570,10 @@ export namespace Prisma {
     key?: boolean
     name?: boolean
     icon?: boolean
+    createdAt?: boolean
   }
 
-  export type DeviceTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"key" | "name" | "icon", ExtArgs["result"]["deviceType"]>
+  export type DeviceTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"key" | "name" | "icon" | "createdAt", ExtArgs["result"]["deviceType"]>
   export type DeviceTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     devices?: boolean | DeviceType$devicesArgs<ExtArgs>
     _count?: boolean | DeviceTypeCountOutputTypeDefaultArgs<ExtArgs>
@@ -5546,6 +5588,7 @@ export namespace Prisma {
       key: string
       name: string
       icon: string
+      createdAt: Date
     }, ExtArgs["result"]["deviceType"]>
     composites: {}
   }
@@ -5919,6 +5962,7 @@ export namespace Prisma {
     readonly key: FieldRef<"DeviceType", 'String'>
     readonly name: FieldRef<"DeviceType", 'String'>
     readonly icon: FieldRef<"DeviceType", 'String'>
+    readonly createdAt: FieldRef<"DeviceType", 'DateTime'>
   }
     
 
@@ -6322,6 +6366,7 @@ export namespace Prisma {
     anyDesk: string | null
     typeKey: string | null
     clientId: string | null
+    createdAt: Date | null
   }
 
   export type DeviceMaxAggregateOutputType = {
@@ -6332,6 +6377,7 @@ export namespace Prisma {
     anyDesk: string | null
     typeKey: string | null
     clientId: string | null
+    createdAt: Date | null
   }
 
   export type DeviceCountAggregateOutputType = {
@@ -6342,6 +6388,7 @@ export namespace Prisma {
     anyDesk: number
     typeKey: number
     clientId: number
+    createdAt: number
     _all: number
   }
 
@@ -6354,6 +6401,7 @@ export namespace Prisma {
     anyDesk?: true
     typeKey?: true
     clientId?: true
+    createdAt?: true
   }
 
   export type DeviceMaxAggregateInputType = {
@@ -6364,6 +6412,7 @@ export namespace Prisma {
     anyDesk?: true
     typeKey?: true
     clientId?: true
+    createdAt?: true
   }
 
   export type DeviceCountAggregateInputType = {
@@ -6374,6 +6423,7 @@ export namespace Prisma {
     anyDesk?: true
     typeKey?: true
     clientId?: true
+    createdAt?: true
     _all?: true
   }
 
@@ -6457,6 +6507,7 @@ export namespace Prisma {
     anyDesk: string | null
     typeKey: string
     clientId: string
+    createdAt: Date
     _count: DeviceCountAggregateOutputType | null
     _min: DeviceMinAggregateOutputType | null
     _max: DeviceMaxAggregateOutputType | null
@@ -6484,6 +6535,7 @@ export namespace Prisma {
     anyDesk?: boolean
     typeKey?: boolean
     clientId?: boolean
+    createdAt?: boolean
     type?: boolean | DeviceTypeDefaultArgs<ExtArgs>
     client?: boolean | ClientDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["device"]>
@@ -6498,9 +6550,10 @@ export namespace Prisma {
     anyDesk?: boolean
     typeKey?: boolean
     clientId?: boolean
+    createdAt?: boolean
   }
 
-  export type DeviceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "serialNumber" | "ip" | "anyDesk" | "typeKey" | "clientId", ExtArgs["result"]["device"]>
+  export type DeviceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "serialNumber" | "ip" | "anyDesk" | "typeKey" | "clientId" | "createdAt", ExtArgs["result"]["device"]>
   export type DeviceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     type?: boolean | DeviceTypeDefaultArgs<ExtArgs>
     client?: boolean | ClientDefaultArgs<ExtArgs>
@@ -6520,6 +6573,7 @@ export namespace Prisma {
       anyDesk: string | null
       typeKey: string
       clientId: string
+      createdAt: Date
     }, ExtArgs["result"]["device"]>
     composites: {}
   }
@@ -6898,6 +6952,7 @@ export namespace Prisma {
     readonly anyDesk: FieldRef<"Device", 'String'>
     readonly typeKey: FieldRef<"Device", 'String'>
     readonly clientId: FieldRef<"Device", 'String'>
+    readonly createdAt: FieldRef<"Device", 'DateTime'>
   }
     
 
@@ -7277,7 +7332,8 @@ export namespace Prisma {
     key: 'key',
     name: 'name',
     icon: 'icon',
-    color: 'color'
+    color: 'color',
+    createdAt: 'createdAt'
   };
 
   export type ClientTypeScalarFieldEnum = (typeof ClientTypeScalarFieldEnum)[keyof typeof ClientTypeScalarFieldEnum]
@@ -7304,7 +7360,8 @@ export namespace Prisma {
     id: 'id',
     clientId: 'clientId',
     typeKey: 'typeKey',
-    parentId: 'parentId'
+    parentId: 'parentId',
+    createdAt: 'createdAt'
   };
 
   export type LicenseScalarFieldEnum = (typeof LicenseScalarFieldEnum)[keyof typeof LicenseScalarFieldEnum]
@@ -7312,7 +7369,8 @@ export namespace Prisma {
 
   export const LicenseTypeScalarFieldEnum: {
     key: 'key',
-    name: 'name'
+    name: 'name',
+    createdAt: 'createdAt'
   };
 
   export type LicenseTypeScalarFieldEnum = (typeof LicenseTypeScalarFieldEnum)[keyof typeof LicenseTypeScalarFieldEnum]
@@ -7321,7 +7379,8 @@ export namespace Prisma {
   export const DeviceTypeScalarFieldEnum: {
     key: 'key',
     name: 'name',
-    icon: 'icon'
+    icon: 'icon',
+    createdAt: 'createdAt'
   };
 
   export type DeviceTypeScalarFieldEnum = (typeof DeviceTypeScalarFieldEnum)[keyof typeof DeviceTypeScalarFieldEnum]
@@ -7334,7 +7393,8 @@ export namespace Prisma {
     ip: 'ip',
     anyDesk: 'anyDesk',
     typeKey: 'typeKey',
-    clientId: 'clientId'
+    clientId: 'clientId',
+    createdAt: 'createdAt'
   };
 
   export type DeviceScalarFieldEnum = (typeof DeviceScalarFieldEnum)[keyof typeof DeviceScalarFieldEnum]
@@ -7433,16 +7493,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float'
+   * Reference to a field of type 'DateTime'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
     
 
 
   /**
-   * Reference to a field of type 'DateTime'
+   * Reference to a field of type 'Float'
    */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
@@ -7464,6 +7524,7 @@ export namespace Prisma {
     name?: StringFilter<"ClientType"> | string
     icon?: StringFilter<"ClientType"> | string
     color?: StringFilter<"ClientType"> | string
+    createdAt?: DateTimeFilter<"ClientType"> | Date | string
     clients?: ClientListRelationFilter
   }
 
@@ -7472,6 +7533,7 @@ export namespace Prisma {
     name?: SortOrder
     icon?: SortOrder
     color?: SortOrder
+    createdAt?: SortOrder
     clients?: ClientOrderByRelationAggregateInput
     _relevance?: ClientTypeOrderByRelevanceInput
   }
@@ -7484,6 +7546,7 @@ export namespace Prisma {
     name?: StringFilter<"ClientType"> | string
     icon?: StringFilter<"ClientType"> | string
     color?: StringFilter<"ClientType"> | string
+    createdAt?: DateTimeFilter<"ClientType"> | Date | string
     clients?: ClientListRelationFilter
   }, "key">
 
@@ -7492,6 +7555,7 @@ export namespace Prisma {
     name?: SortOrder
     icon?: SortOrder
     color?: SortOrder
+    createdAt?: SortOrder
     _count?: ClientTypeCountOrderByAggregateInput
     _max?: ClientTypeMaxOrderByAggregateInput
     _min?: ClientTypeMinOrderByAggregateInput
@@ -7505,6 +7569,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"ClientType"> | string
     icon?: StringWithAggregatesFilter<"ClientType"> | string
     color?: StringWithAggregatesFilter<"ClientType"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"ClientType"> | Date | string
   }
 
   export type ClientWhereInput = {
@@ -7609,6 +7674,7 @@ export namespace Prisma {
     clientId?: StringFilter<"License"> | string
     typeKey?: StringFilter<"License"> | string
     parentId?: StringNullableFilter<"License"> | string | null
+    createdAt?: DateTimeFilter<"License"> | Date | string
     client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
     type?: XOR<LicenseTypeScalarRelationFilter, LicenseTypeWhereInput>
     parent?: XOR<LicenseNullableScalarRelationFilter, LicenseWhereInput> | null
@@ -7620,6 +7686,7 @@ export namespace Prisma {
     clientId?: SortOrder
     typeKey?: SortOrder
     parentId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
     client?: ClientOrderByWithRelationInput
     type?: LicenseTypeOrderByWithRelationInput
     parent?: LicenseOrderByWithRelationInput
@@ -7635,6 +7702,7 @@ export namespace Prisma {
     clientId?: StringFilter<"License"> | string
     typeKey?: StringFilter<"License"> | string
     parentId?: StringNullableFilter<"License"> | string | null
+    createdAt?: DateTimeFilter<"License"> | Date | string
     client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
     type?: XOR<LicenseTypeScalarRelationFilter, LicenseTypeWhereInput>
     parent?: XOR<LicenseNullableScalarRelationFilter, LicenseWhereInput> | null
@@ -7646,6 +7714,7 @@ export namespace Prisma {
     clientId?: SortOrder
     typeKey?: SortOrder
     parentId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
     _count?: LicenseCountOrderByAggregateInput
     _max?: LicenseMaxOrderByAggregateInput
     _min?: LicenseMinOrderByAggregateInput
@@ -7659,6 +7728,7 @@ export namespace Prisma {
     clientId?: StringWithAggregatesFilter<"License"> | string
     typeKey?: StringWithAggregatesFilter<"License"> | string
     parentId?: StringNullableWithAggregatesFilter<"License"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"License"> | Date | string
   }
 
   export type LicenseTypeWhereInput = {
@@ -7667,12 +7737,14 @@ export namespace Prisma {
     NOT?: LicenseTypeWhereInput | LicenseTypeWhereInput[]
     key?: StringFilter<"LicenseType"> | string
     name?: StringFilter<"LicenseType"> | string
+    createdAt?: DateTimeFilter<"LicenseType"> | Date | string
     licenses?: LicenseListRelationFilter
   }
 
   export type LicenseTypeOrderByWithRelationInput = {
     key?: SortOrder
     name?: SortOrder
+    createdAt?: SortOrder
     licenses?: LicenseOrderByRelationAggregateInput
     _relevance?: LicenseTypeOrderByRelevanceInput
   }
@@ -7683,12 +7755,14 @@ export namespace Prisma {
     OR?: LicenseTypeWhereInput[]
     NOT?: LicenseTypeWhereInput | LicenseTypeWhereInput[]
     name?: StringFilter<"LicenseType"> | string
+    createdAt?: DateTimeFilter<"LicenseType"> | Date | string
     licenses?: LicenseListRelationFilter
   }, "key">
 
   export type LicenseTypeOrderByWithAggregationInput = {
     key?: SortOrder
     name?: SortOrder
+    createdAt?: SortOrder
     _count?: LicenseTypeCountOrderByAggregateInput
     _max?: LicenseTypeMaxOrderByAggregateInput
     _min?: LicenseTypeMinOrderByAggregateInput
@@ -7700,6 +7774,7 @@ export namespace Prisma {
     NOT?: LicenseTypeScalarWhereWithAggregatesInput | LicenseTypeScalarWhereWithAggregatesInput[]
     key?: StringWithAggregatesFilter<"LicenseType"> | string
     name?: StringWithAggregatesFilter<"LicenseType"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"LicenseType"> | Date | string
   }
 
   export type DeviceTypeWhereInput = {
@@ -7709,6 +7784,7 @@ export namespace Prisma {
     key?: StringFilter<"DeviceType"> | string
     name?: StringFilter<"DeviceType"> | string
     icon?: StringFilter<"DeviceType"> | string
+    createdAt?: DateTimeFilter<"DeviceType"> | Date | string
     devices?: DeviceListRelationFilter
   }
 
@@ -7716,6 +7792,7 @@ export namespace Prisma {
     key?: SortOrder
     name?: SortOrder
     icon?: SortOrder
+    createdAt?: SortOrder
     devices?: DeviceOrderByRelationAggregateInput
     _relevance?: DeviceTypeOrderByRelevanceInput
   }
@@ -7727,6 +7804,7 @@ export namespace Prisma {
     NOT?: DeviceTypeWhereInput | DeviceTypeWhereInput[]
     name?: StringFilter<"DeviceType"> | string
     icon?: StringFilter<"DeviceType"> | string
+    createdAt?: DateTimeFilter<"DeviceType"> | Date | string
     devices?: DeviceListRelationFilter
   }, "key">
 
@@ -7734,6 +7812,7 @@ export namespace Prisma {
     key?: SortOrder
     name?: SortOrder
     icon?: SortOrder
+    createdAt?: SortOrder
     _count?: DeviceTypeCountOrderByAggregateInput
     _max?: DeviceTypeMaxOrderByAggregateInput
     _min?: DeviceTypeMinOrderByAggregateInput
@@ -7746,6 +7825,7 @@ export namespace Prisma {
     key?: StringWithAggregatesFilter<"DeviceType"> | string
     name?: StringWithAggregatesFilter<"DeviceType"> | string
     icon?: StringWithAggregatesFilter<"DeviceType"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"DeviceType"> | Date | string
   }
 
   export type DeviceWhereInput = {
@@ -7759,6 +7839,7 @@ export namespace Prisma {
     anyDesk?: StringNullableFilter<"Device"> | string | null
     typeKey?: StringFilter<"Device"> | string
     clientId?: StringFilter<"Device"> | string
+    createdAt?: DateTimeFilter<"Device"> | Date | string
     type?: XOR<DeviceTypeScalarRelationFilter, DeviceTypeWhereInput>
     client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
   }
@@ -7771,6 +7852,7 @@ export namespace Prisma {
     anyDesk?: SortOrderInput | SortOrder
     typeKey?: SortOrder
     clientId?: SortOrder
+    createdAt?: SortOrder
     type?: DeviceTypeOrderByWithRelationInput
     client?: ClientOrderByWithRelationInput
     _relevance?: DeviceOrderByRelevanceInput
@@ -7787,6 +7869,7 @@ export namespace Prisma {
     anyDesk?: StringNullableFilter<"Device"> | string | null
     typeKey?: StringFilter<"Device"> | string
     clientId?: StringFilter<"Device"> | string
+    createdAt?: DateTimeFilter<"Device"> | Date | string
     type?: XOR<DeviceTypeScalarRelationFilter, DeviceTypeWhereInput>
     client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
   }, "id">
@@ -7799,6 +7882,7 @@ export namespace Prisma {
     anyDesk?: SortOrderInput | SortOrder
     typeKey?: SortOrder
     clientId?: SortOrder
+    createdAt?: SortOrder
     _count?: DeviceCountOrderByAggregateInput
     _max?: DeviceMaxOrderByAggregateInput
     _min?: DeviceMinOrderByAggregateInput
@@ -7815,6 +7899,7 @@ export namespace Prisma {
     anyDesk?: StringNullableWithAggregatesFilter<"Device"> | string | null
     typeKey?: StringWithAggregatesFilter<"Device"> | string
     clientId?: StringWithAggregatesFilter<"Device"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Device"> | Date | string
   }
 
   export type ClientTypeCreateInput = {
@@ -7822,6 +7907,7 @@ export namespace Prisma {
     name: string
     icon: string
     color: string
+    createdAt?: Date | string
     clients?: ClientCreateNestedManyWithoutTypeInput
   }
 
@@ -7830,6 +7916,7 @@ export namespace Prisma {
     name: string
     icon: string
     color: string
+    createdAt?: Date | string
     clients?: ClientUncheckedCreateNestedManyWithoutTypeInput
   }
 
@@ -7838,6 +7925,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     clients?: ClientUpdateManyWithoutTypeNestedInput
   }
 
@@ -7846,6 +7934,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     clients?: ClientUncheckedUpdateManyWithoutTypeNestedInput
   }
 
@@ -7854,6 +7943,7 @@ export namespace Prisma {
     name: string
     icon: string
     color: string
+    createdAt?: Date | string
   }
 
   export type ClientTypeUpdateManyMutationInput = {
@@ -7861,6 +7951,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ClientTypeUncheckedUpdateManyInput = {
@@ -7868,6 +7959,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ClientCreateInput = {
@@ -7977,6 +8069,7 @@ export namespace Prisma {
 
   export type LicenseCreateInput = {
     id: string
+    createdAt?: Date | string
     client: ClientCreateNestedOneWithoutLicensesInput
     type: LicenseTypeCreateNestedOneWithoutLicensesInput
     parent?: LicenseCreateNestedOneWithoutSubLicensesInput
@@ -7988,11 +8081,13 @@ export namespace Prisma {
     clientId: string
     typeKey: string
     parentId?: string | null
+    createdAt?: Date | string
     subLicenses?: LicenseUncheckedCreateNestedManyWithoutParentInput
   }
 
   export type LicenseUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     client?: ClientUpdateOneRequiredWithoutLicensesNestedInput
     type?: LicenseTypeUpdateOneRequiredWithoutLicensesNestedInput
     parent?: LicenseUpdateOneWithoutSubLicensesNestedInput
@@ -8004,6 +8099,7 @@ export namespace Prisma {
     clientId?: StringFieldUpdateOperationsInput | string
     typeKey?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subLicenses?: LicenseUncheckedUpdateManyWithoutParentNestedInput
   }
 
@@ -8012,10 +8108,12 @@ export namespace Prisma {
     clientId: string
     typeKey: string
     parentId?: string | null
+    createdAt?: Date | string
   }
 
   export type LicenseUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LicenseUncheckedUpdateManyInput = {
@@ -8023,51 +8121,60 @@ export namespace Prisma {
     clientId?: StringFieldUpdateOperationsInput | string
     typeKey?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LicenseTypeCreateInput = {
     key: string
     name: string
+    createdAt?: Date | string
     licenses?: LicenseCreateNestedManyWithoutTypeInput
   }
 
   export type LicenseTypeUncheckedCreateInput = {
     key: string
     name: string
+    createdAt?: Date | string
     licenses?: LicenseUncheckedCreateNestedManyWithoutTypeInput
   }
 
   export type LicenseTypeUpdateInput = {
     key?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licenses?: LicenseUpdateManyWithoutTypeNestedInput
   }
 
   export type LicenseTypeUncheckedUpdateInput = {
     key?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licenses?: LicenseUncheckedUpdateManyWithoutTypeNestedInput
   }
 
   export type LicenseTypeCreateManyInput = {
     key: string
     name: string
+    createdAt?: Date | string
   }
 
   export type LicenseTypeUpdateManyMutationInput = {
     key?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LicenseTypeUncheckedUpdateManyInput = {
     key?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DeviceTypeCreateInput = {
     key: string
     name: string
     icon: string
+    createdAt?: Date | string
     devices?: DeviceCreateNestedManyWithoutTypeInput
   }
 
@@ -8075,6 +8182,7 @@ export namespace Prisma {
     key: string
     name: string
     icon: string
+    createdAt?: Date | string
     devices?: DeviceUncheckedCreateNestedManyWithoutTypeInput
   }
 
@@ -8082,6 +8190,7 @@ export namespace Prisma {
     key?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     icon?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devices?: DeviceUpdateManyWithoutTypeNestedInput
   }
 
@@ -8089,6 +8198,7 @@ export namespace Prisma {
     key?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     icon?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devices?: DeviceUncheckedUpdateManyWithoutTypeNestedInput
   }
 
@@ -8096,18 +8206,21 @@ export namespace Prisma {
     key: string
     name: string
     icon: string
+    createdAt?: Date | string
   }
 
   export type DeviceTypeUpdateManyMutationInput = {
     key?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     icon?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DeviceTypeUncheckedUpdateManyInput = {
     key?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     icon?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DeviceCreateInput = {
@@ -8116,6 +8229,7 @@ export namespace Prisma {
     serialNumber?: string | null
     ip?: string | null
     anyDesk?: string | null
+    createdAt?: Date | string
     type: DeviceTypeCreateNestedOneWithoutDevicesInput
     client: ClientCreateNestedOneWithoutDevicesInput
   }
@@ -8128,6 +8242,7 @@ export namespace Prisma {
     anyDesk?: string | null
     typeKey: string
     clientId: string
+    createdAt?: Date | string
   }
 
   export type DeviceUpdateInput = {
@@ -8136,6 +8251,7 @@ export namespace Prisma {
     serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     anyDesk?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: DeviceTypeUpdateOneRequiredWithoutDevicesNestedInput
     client?: ClientUpdateOneRequiredWithoutDevicesNestedInput
   }
@@ -8148,6 +8264,7 @@ export namespace Prisma {
     anyDesk?: NullableStringFieldUpdateOperationsInput | string | null
     typeKey?: StringFieldUpdateOperationsInput | string
     clientId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DeviceCreateManyInput = {
@@ -8158,6 +8275,7 @@ export namespace Prisma {
     anyDesk?: string | null
     typeKey: string
     clientId: string
+    createdAt?: Date | string
   }
 
   export type DeviceUpdateManyMutationInput = {
@@ -8166,6 +8284,7 @@ export namespace Prisma {
     serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     anyDesk?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DeviceUncheckedUpdateManyInput = {
@@ -8176,6 +8295,7 @@ export namespace Prisma {
     anyDesk?: NullableStringFieldUpdateOperationsInput | string | null
     typeKey?: StringFieldUpdateOperationsInput | string
     clientId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -8191,6 +8311,17 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type ClientListRelationFilter = {
@@ -8214,6 +8345,7 @@ export namespace Prisma {
     name?: SortOrder
     icon?: SortOrder
     color?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type ClientTypeMaxOrderByAggregateInput = {
@@ -8221,6 +8353,7 @@ export namespace Prisma {
     name?: SortOrder
     icon?: SortOrder
     color?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type ClientTypeMinOrderByAggregateInput = {
@@ -8228,6 +8361,7 @@ export namespace Prisma {
     name?: SortOrder
     icon?: SortOrder
     color?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -8246,6 +8380,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -8272,17 +8420,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type ClientTypeScalarRelationFilter = {
@@ -8407,20 +8544,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type ClientScalarRelationFilter = {
     is?: ClientWhereInput
     isNot?: ClientWhereInput
@@ -8447,6 +8570,7 @@ export namespace Prisma {
     clientId?: SortOrder
     typeKey?: SortOrder
     parentId?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type LicenseMaxOrderByAggregateInput = {
@@ -8454,6 +8578,7 @@ export namespace Prisma {
     clientId?: SortOrder
     typeKey?: SortOrder
     parentId?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type LicenseMinOrderByAggregateInput = {
@@ -8461,6 +8586,7 @@ export namespace Prisma {
     clientId?: SortOrder
     typeKey?: SortOrder
     parentId?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type LicenseTypeOrderByRelevanceInput = {
@@ -8472,16 +8598,19 @@ export namespace Prisma {
   export type LicenseTypeCountOrderByAggregateInput = {
     key?: SortOrder
     name?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type LicenseTypeMaxOrderByAggregateInput = {
     key?: SortOrder
     name?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type LicenseTypeMinOrderByAggregateInput = {
     key?: SortOrder
     name?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type DeviceTypeOrderByRelevanceInput = {
@@ -8494,18 +8623,21 @@ export namespace Prisma {
     key?: SortOrder
     name?: SortOrder
     icon?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type DeviceTypeMaxOrderByAggregateInput = {
     key?: SortOrder
     name?: SortOrder
     icon?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type DeviceTypeMinOrderByAggregateInput = {
     key?: SortOrder
     name?: SortOrder
     icon?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type DeviceTypeScalarRelationFilter = {
@@ -8527,6 +8659,7 @@ export namespace Prisma {
     anyDesk?: SortOrder
     typeKey?: SortOrder
     clientId?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type DeviceMaxOrderByAggregateInput = {
@@ -8537,6 +8670,7 @@ export namespace Prisma {
     anyDesk?: SortOrder
     typeKey?: SortOrder
     clientId?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type DeviceMinOrderByAggregateInput = {
@@ -8547,6 +8681,7 @@ export namespace Prisma {
     anyDesk?: SortOrder
     typeKey?: SortOrder
     clientId?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type ClientCreateNestedManyWithoutTypeInput = {
@@ -8565,6 +8700,10 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type ClientUpdateManyWithoutTypeNestedInput = {
@@ -8639,10 +8778,6 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type ClientTypeUpdateOneRequiredWithoutClientsNestedInput = {
@@ -8922,6 +9057,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -8951,6 +9097,20 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type NestedFloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[]
@@ -8975,17 +9135,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -9031,20 +9180,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type ClientCreateWithoutTypeInput = {
@@ -9125,6 +9260,7 @@ export namespace Prisma {
     name: string
     icon: string
     color: string
+    createdAt?: Date | string
   }
 
   export type ClientTypeUncheckedCreateWithoutClientsInput = {
@@ -9132,6 +9268,7 @@ export namespace Prisma {
     name: string
     icon: string
     color: string
+    createdAt?: Date | string
   }
 
   export type ClientTypeCreateOrConnectWithoutClientsInput = {
@@ -9141,6 +9278,7 @@ export namespace Prisma {
 
   export type LicenseCreateWithoutClientInput = {
     id: string
+    createdAt?: Date | string
     type: LicenseTypeCreateNestedOneWithoutLicensesInput
     parent?: LicenseCreateNestedOneWithoutSubLicensesInput
     subLicenses?: LicenseCreateNestedManyWithoutParentInput
@@ -9150,6 +9288,7 @@ export namespace Prisma {
     id: string
     typeKey: string
     parentId?: string | null
+    createdAt?: Date | string
     subLicenses?: LicenseUncheckedCreateNestedManyWithoutParentInput
   }
 
@@ -9169,6 +9308,7 @@ export namespace Prisma {
     serialNumber?: string | null
     ip?: string | null
     anyDesk?: string | null
+    createdAt?: Date | string
     type: DeviceTypeCreateNestedOneWithoutDevicesInput
   }
 
@@ -9179,6 +9319,7 @@ export namespace Prisma {
     ip?: string | null
     anyDesk?: string | null
     typeKey: string
+    createdAt?: Date | string
   }
 
   export type DeviceCreateOrConnectWithoutClientInput = {
@@ -9207,6 +9348,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ClientTypeUncheckedUpdateWithoutClientsInput = {
@@ -9214,6 +9356,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LicenseUpsertWithWhereUniqueWithoutClientInput = {
@@ -9240,6 +9383,7 @@ export namespace Prisma {
     clientId?: StringFilter<"License"> | string
     typeKey?: StringFilter<"License"> | string
     parentId?: StringNullableFilter<"License"> | string | null
+    createdAt?: DateTimeFilter<"License"> | Date | string
   }
 
   export type DeviceUpsertWithWhereUniqueWithoutClientInput = {
@@ -9269,6 +9413,7 @@ export namespace Prisma {
     anyDesk?: StringNullableFilter<"Device"> | string | null
     typeKey?: StringFilter<"Device"> | string
     clientId?: StringFilter<"Device"> | string
+    createdAt?: DateTimeFilter<"Device"> | Date | string
   }
 
   export type ClientCreateWithoutLicensesInput = {
@@ -9309,11 +9454,13 @@ export namespace Prisma {
   export type LicenseTypeCreateWithoutLicensesInput = {
     key: string
     name: string
+    createdAt?: Date | string
   }
 
   export type LicenseTypeUncheckedCreateWithoutLicensesInput = {
     key: string
     name: string
+    createdAt?: Date | string
   }
 
   export type LicenseTypeCreateOrConnectWithoutLicensesInput = {
@@ -9323,6 +9470,7 @@ export namespace Prisma {
 
   export type LicenseCreateWithoutSubLicensesInput = {
     id: string
+    createdAt?: Date | string
     client: ClientCreateNestedOneWithoutLicensesInput
     type: LicenseTypeCreateNestedOneWithoutLicensesInput
     parent?: LicenseCreateNestedOneWithoutSubLicensesInput
@@ -9333,6 +9481,7 @@ export namespace Prisma {
     clientId: string
     typeKey: string
     parentId?: string | null
+    createdAt?: Date | string
   }
 
   export type LicenseCreateOrConnectWithoutSubLicensesInput = {
@@ -9342,6 +9491,7 @@ export namespace Prisma {
 
   export type LicenseCreateWithoutParentInput = {
     id: string
+    createdAt?: Date | string
     client: ClientCreateNestedOneWithoutLicensesInput
     type: LicenseTypeCreateNestedOneWithoutLicensesInput
     subLicenses?: LicenseCreateNestedManyWithoutParentInput
@@ -9351,6 +9501,7 @@ export namespace Prisma {
     id: string
     clientId: string
     typeKey: string
+    createdAt?: Date | string
     subLicenses?: LicenseUncheckedCreateNestedManyWithoutParentInput
   }
 
@@ -9419,11 +9570,13 @@ export namespace Prisma {
   export type LicenseTypeUpdateWithoutLicensesInput = {
     key?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LicenseTypeUncheckedUpdateWithoutLicensesInput = {
     key?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LicenseUpsertWithoutSubLicensesInput = {
@@ -9439,6 +9592,7 @@ export namespace Prisma {
 
   export type LicenseUpdateWithoutSubLicensesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     client?: ClientUpdateOneRequiredWithoutLicensesNestedInput
     type?: LicenseTypeUpdateOneRequiredWithoutLicensesNestedInput
     parent?: LicenseUpdateOneWithoutSubLicensesNestedInput
@@ -9449,6 +9603,7 @@ export namespace Prisma {
     clientId?: StringFieldUpdateOperationsInput | string
     typeKey?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LicenseUpsertWithWhereUniqueWithoutParentInput = {
@@ -9469,6 +9624,7 @@ export namespace Prisma {
 
   export type LicenseCreateWithoutTypeInput = {
     id: string
+    createdAt?: Date | string
     client: ClientCreateNestedOneWithoutLicensesInput
     parent?: LicenseCreateNestedOneWithoutSubLicensesInput
     subLicenses?: LicenseCreateNestedManyWithoutParentInput
@@ -9478,6 +9634,7 @@ export namespace Prisma {
     id: string
     clientId: string
     parentId?: string | null
+    createdAt?: Date | string
     subLicenses?: LicenseUncheckedCreateNestedManyWithoutParentInput
   }
 
@@ -9513,6 +9670,7 @@ export namespace Prisma {
     serialNumber?: string | null
     ip?: string | null
     anyDesk?: string | null
+    createdAt?: Date | string
     client: ClientCreateNestedOneWithoutDevicesInput
   }
 
@@ -9523,6 +9681,7 @@ export namespace Prisma {
     ip?: string | null
     anyDesk?: string | null
     clientId: string
+    createdAt?: Date | string
   }
 
   export type DeviceCreateOrConnectWithoutTypeInput = {
@@ -9555,12 +9714,14 @@ export namespace Prisma {
     key: string
     name: string
     icon: string
+    createdAt?: Date | string
   }
 
   export type DeviceTypeUncheckedCreateWithoutDevicesInput = {
     key: string
     name: string
     icon: string
+    createdAt?: Date | string
   }
 
   export type DeviceTypeCreateOrConnectWithoutDevicesInput = {
@@ -9618,12 +9779,14 @@ export namespace Prisma {
     key?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     icon?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DeviceTypeUncheckedUpdateWithoutDevicesInput = {
     key?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     icon?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ClientUpsertWithoutDevicesInput = {
@@ -9727,6 +9890,7 @@ export namespace Prisma {
     id: string
     typeKey: string
     parentId?: string | null
+    createdAt?: Date | string
   }
 
   export type DeviceCreateManyClientInput = {
@@ -9736,10 +9900,12 @@ export namespace Prisma {
     ip?: string | null
     anyDesk?: string | null
     typeKey: string
+    createdAt?: Date | string
   }
 
   export type LicenseUpdateWithoutClientInput = {
     id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: LicenseTypeUpdateOneRequiredWithoutLicensesNestedInput
     parent?: LicenseUpdateOneWithoutSubLicensesNestedInput
     subLicenses?: LicenseUpdateManyWithoutParentNestedInput
@@ -9749,6 +9915,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     typeKey?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subLicenses?: LicenseUncheckedUpdateManyWithoutParentNestedInput
   }
 
@@ -9756,6 +9923,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     typeKey?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DeviceUpdateWithoutClientInput = {
@@ -9764,6 +9932,7 @@ export namespace Prisma {
     serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     anyDesk?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: DeviceTypeUpdateOneRequiredWithoutDevicesNestedInput
   }
 
@@ -9774,6 +9943,7 @@ export namespace Prisma {
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     anyDesk?: NullableStringFieldUpdateOperationsInput | string | null
     typeKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DeviceUncheckedUpdateManyWithoutClientInput = {
@@ -9783,16 +9953,19 @@ export namespace Prisma {
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     anyDesk?: NullableStringFieldUpdateOperationsInput | string | null
     typeKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LicenseCreateManyParentInput = {
     id: string
     clientId: string
     typeKey: string
+    createdAt?: Date | string
   }
 
   export type LicenseUpdateWithoutParentInput = {
     id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     client?: ClientUpdateOneRequiredWithoutLicensesNestedInput
     type?: LicenseTypeUpdateOneRequiredWithoutLicensesNestedInput
     subLicenses?: LicenseUpdateManyWithoutParentNestedInput
@@ -9802,6 +9975,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     clientId?: StringFieldUpdateOperationsInput | string
     typeKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subLicenses?: LicenseUncheckedUpdateManyWithoutParentNestedInput
   }
 
@@ -9809,16 +9983,19 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     clientId?: StringFieldUpdateOperationsInput | string
     typeKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LicenseCreateManyTypeInput = {
     id: string
     clientId: string
     parentId?: string | null
+    createdAt?: Date | string
   }
 
   export type LicenseUpdateWithoutTypeInput = {
     id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     client?: ClientUpdateOneRequiredWithoutLicensesNestedInput
     parent?: LicenseUpdateOneWithoutSubLicensesNestedInput
     subLicenses?: LicenseUpdateManyWithoutParentNestedInput
@@ -9828,6 +10005,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     clientId?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subLicenses?: LicenseUncheckedUpdateManyWithoutParentNestedInput
   }
 
@@ -9835,6 +10013,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     clientId?: StringFieldUpdateOperationsInput | string
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DeviceCreateManyTypeInput = {
@@ -9844,6 +10023,7 @@ export namespace Prisma {
     ip?: string | null
     anyDesk?: string | null
     clientId: string
+    createdAt?: Date | string
   }
 
   export type DeviceUpdateWithoutTypeInput = {
@@ -9852,6 +10032,7 @@ export namespace Prisma {
     serialNumber?: NullableStringFieldUpdateOperationsInput | string | null
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     anyDesk?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     client?: ClientUpdateOneRequiredWithoutDevicesNestedInput
   }
 
@@ -9862,6 +10043,7 @@ export namespace Prisma {
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     anyDesk?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type DeviceUncheckedUpdateManyWithoutTypeInput = {
@@ -9871,6 +10053,7 @@ export namespace Prisma {
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     anyDesk?: NullableStringFieldUpdateOperationsInput | string | null
     clientId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

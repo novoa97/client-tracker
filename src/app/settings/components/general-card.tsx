@@ -44,6 +44,7 @@ export function GeneralCard() {
             <SelectContent>
               <SelectItem value="en">English</SelectItem>
               <SelectItem value="es">Español</SelectItem>
+              <SelectItem value="gl">Galego</SelectItem>
             </SelectContent>
           </Select>
           <p className="text-muted-foreground text-sm">

@@ -25,6 +25,7 @@ type Props = {
 
 export default async function ClientsPage({ searchParams }: Props) {
   const { page, search, type, city } = await searchParams;
+
   const pageNumber = Number(page ?? "1");
   const pageSize = 15;
   const searchText = search || "";
