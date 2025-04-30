@@ -259,7 +259,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "MYSQL_DATABASE_URL",
-        "value": "mysql://root:root@localhost:3307/client-track"
+        "value": "mysql://root:root@localhost:3307/client-tracker"
       }
     }
   },

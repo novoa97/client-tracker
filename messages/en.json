@@ -85,6 +85,7 @@
   "License already exists": "License already exists",
   "One or more sub licenses already exist": "One or more sub licenses already exist",
   "All sublicenses associated with this license": "All sublicenses associated with this license",
+  "Sublicenses already exist": "Some sublicenses to add already exist",
 
   "Device name": "Device name",
   "Select device type": "Select device type...",

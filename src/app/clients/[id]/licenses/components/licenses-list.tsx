@@ -26,12 +26,12 @@ export function LicensesList({ types, licenses, clientId }: Props) {
   const [isSubLicensesDialogOpen, setIsSubLicensesDialogOpen] = useState(false);
   const [selectedLicense, setSelectedLicense] =
     useState<LicenseWithRelations | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [editingLicense, setEditingLicense] =
     useState<LicenseWithRelations | null>(null);
 
   const handleSubmit = async (values: LicenseFormValues) => {
-    setIsSubmitting(true);
+    setIsLoading(true);
     try {
       const response = await addLicense({
         id: values.id,
@@ -49,7 +49,7 @@ export function LicensesList({ types, licenses, clientId }: Props) {
     } catch (error) {
       console.error("Error creating license:", error);
     } finally {
-      setIsSubmitting(false);
+      setIsLoading(false);
     }
   };
 
@@ -60,11 +60,22 @@ export function LicensesList({ types, licenses, clientId }: Props) {
   };
 
   const handleEdit = async (values: LicenseFormValues): Promise<void> => {
-    await editLicense(values);
-    toast.success(t("License edited successfully"));
-    setIsDialogOpen(false);
-    setEditingLicense(null);
-    router.refresh();
+    try {
+      setIsLoading(true);
+      const response = await editLicense(values);
+      if (response.ok) {
+        toast.success(t("License edited successfully"));
+        setIsDialogOpen(false);
+        setEditingLicense(null);
+        router.refresh();
+      } else {
+        toast.error(t(response.message));
+      }
+    } catch (error) {
+      console.error("Error editing license:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -130,7 +141,7 @@ export function LicensesList({ types, licenses, clientId }: Props) {
           <LicenseForm
             types={types}
             onSubmit={handleEdit}
-            isSubmitting={isSubmitting}
+            isSubmitting={isLoading}
             defaultValues={editingLicense}
             mode="edit"
           />
@@ -138,7 +149,7 @@ export function LicensesList({ types, licenses, clientId }: Props) {
           <LicenseForm
             types={types}
             onSubmit={handleSubmit}
-            isSubmitting={isSubmitting}
+            isSubmitting={isLoading}
           />
         )}
       </DialogContainer>
