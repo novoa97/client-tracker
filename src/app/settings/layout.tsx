@@ -1,4 +1,4 @@
-import { Header } from "@/components/header";
+import { Header } from "@/components/header-section";
 import { Settings } from "lucide-react";
 import { SettingsTabs } from "./components/settings-tabs";
 import { getTranslations } from "next-intl/server";
