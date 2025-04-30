@@ -4,7 +4,7 @@
 import AddClientForm from "@/app/clients/new/components/add-client-form";
 import { addClient } from "../actions/add-client";
 import { useState, useEffect } from "react";
-import { Header } from "@/components/header-section";
+import { Header } from "@/components/header";
 import { UserPlus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { getClientType } from "../actions/get-client-type";
