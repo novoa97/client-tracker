@@ -100,9 +100,9 @@ export async function editLicense(data: EditLicense): Promise<ActionResponse> {
       );
       const toDelete = oldSubLicenses.filter((l) => !inputIds.includes(l.id));
 
-      await deleteSubLicenses(toDelete.map((l) => l.id));
-
       await createSubLicenses(data.id, license.client.id, toCreate);
+
+      await deleteSubLicenses(toDelete.map((l) => l.id));
 
       await updateSubLicenses(toUpdate);
     } else {
@@ -135,6 +135,14 @@ async function createSubLicenses(
   clientId: string,
   licenses: { id: string; type: string }[]
 ) {
+  const existingLicenses = await prisma.license.findMany({
+    where: {
+      parentId: parentId,
+    },
+  });
+
+  if (existingLicenses.length > 0) throw new ActionError("Sublicenses already exist");
+
   await prisma.license.createMany({
     data: licenses.map((l) => ({
       id: l.id,
