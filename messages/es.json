@@ -108,7 +108,7 @@
 
   "**CLIENT TYPES**": "CLIENT TYPES",
   "Client Types": "Tipos de Clientes",
-  "Manage client types for your application": "Administra los tipos de clientes para tu aplicación.",
+  "Manage client types for your application": "Administra los tipos de clientes de la aplicación.",
   "Add Client Type": "Añadir Tipo de Cliente",
   "Add a new client type to your application": "Añade un nuevo tipo de cliente a la aplicación.",
   "Edit Client Type": "Editar tipo de cliente",
@@ -128,7 +128,7 @@
 
   "**DEVICE TYPES**": "DEVICE TYPES",
   "Device Types": "Tipos de Dispositivos",
-  "Manage device types for your application": "Administra los tipos de dispositivos para tu aplicación.",
+  "Manage device types for your application": "Administra los tipos de dispositivos de la aplicación.",
   "Add Device Type": "Añadir Tipo de Dispositivo",
   "Add Device Type description": "Añade un nuevo tipo de dispositivo a la aplicación.",
   "Edit Device Type": "Editar tipo de dispositivo",
@@ -147,7 +147,7 @@
 
   "**LICENSE TYPES**": "LICENSE TYPES",
   "License Types": "Tipos de Licencias",
-  "Manage license types for your application": "Administra los tipos de licencias para tu aplicación.",
+  "Manage license types for your application": "Administra los tipos de licencias de la aplicación.",
   "Add License Type": "Añadir Tipo de Licencia",
   "Add License Type description": "Añade un nuevo tipo de licencia a la aplicación.",
   "Edit License Type": "Editar tipo de licencia",
