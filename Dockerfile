@@ -9,6 +9,7 @@ RUN npm ci
 
 # Copy the rest of the application
 COPY . .
+RUN ls -la /app && ls -la /app/src && cat /app/tsconfig.json
 
 RUN npx prisma generate
 
@@ -34,6 +35,7 @@ COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/next.config.ts ./next.config.ts
 COPY --from=builder /app/src/generated/prisma ./src/generated/prisma
+
 # Expose Next.js porte
 EXPOSE 3000
 
