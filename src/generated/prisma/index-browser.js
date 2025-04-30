@@ -121,7 +121,8 @@ exports.Prisma.ClientTypeScalarFieldEnum = {
   key: 'key',
   name: 'name',
   icon: 'icon',
-  color: 'color'
+  color: 'color',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.ClientScalarFieldEnum = {
@@ -142,18 +143,21 @@ exports.Prisma.LicenseScalarFieldEnum = {
   id: 'id',
   clientId: 'clientId',
   typeKey: 'typeKey',
-  parentId: 'parentId'
+  parentId: 'parentId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.LicenseTypeScalarFieldEnum = {
   key: 'key',
-  name: 'name'
+  name: 'name',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.DeviceTypeScalarFieldEnum = {
   key: 'key',
   name: 'name',
-  icon: 'icon'
+  icon: 'icon',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.DeviceScalarFieldEnum = {
@@ -163,7 +167,8 @@ exports.Prisma.DeviceScalarFieldEnum = {
   ip: 'ip',
   anyDesk: 'anyDesk',
   typeKey: 'typeKey',
-  clientId: 'clientId'
+  clientId: 'clientId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {

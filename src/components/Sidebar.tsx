@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
 import { useTranslations } from "next-intl";
 import DynamicIcon from "./icon";
+import Image from "next/image";
 
 interface Props {
   section?: {
@@ -22,7 +23,16 @@ export function Sidebar({ section }: Props) {
 
   return (
     <aside className="w-64 bg-white border-r p-4 space-y-4 min-h-screen">
-      <h1 className="text-lg font-bold mb-6">ClientTracker</h1>
+      <div className="flex flex-row items-center gap-2">
+        <Image
+          src="/logo.png"
+          alt="ClientTracker"
+          width={32}
+          height={32}
+          className="mb-6"
+        />
+        <h1 className="text-lg font-bold mb-6">ClientTracker</h1>
+      </div>
       <nav className="flex flex-col gap-2">
         {section?.map(({ href, label, icon }) => {
           return (

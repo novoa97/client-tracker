@@ -85,6 +85,7 @@
   "License edited successfully": "Licencia editada correctamente",
   "License already exists": "La licencia ya existe",
   "One or more sub licenses already exist": "Una o más sublicencias ya existen",
+  "All sublicenses associated with this license": "Todas las sublicencias asociadas a esta licencia",
 
   "Device name": "Nombre del Dispositivo",
   "Select device type": "Selecciona un tipo de dispositivo...",

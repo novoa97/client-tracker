@@ -11,6 +11,7 @@ import { useTranslations } from "next-intl";
 import { LicenseActions } from "./license-actions";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
+import { SublicensesList } from "./sublicenses-dialog";
 
 interface Props {
   clientId: string;
@@ -22,6 +23,9 @@ export function LicensesList({ types, licenses, clientId }: Props) {
   const t = useTranslations();
   const router = useRouter();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isSubLicensesDialogOpen, setIsSubLicensesDialogOpen] = useState(false);
+  const [selectedLicense, setSelectedLicense] =
+    useState<LicenseWithRelations | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [editingLicense, setEditingLicense] =
     useState<LicenseWithRelations | null>(null);
@@ -85,7 +89,14 @@ export function LicensesList({ types, licenses, clientId }: Props) {
               <div className="flex items-center gap-2">
                 <h3 className="font-medium">{license.type.name}</h3>
                 {license.subLicenses && license.subLicenses.length > 0 && (
-                  <Badge variant="outline" className="text-xs">
+                  <Badge
+                    variant="outline"
+                    className="text-xs cursor-pointer"
+                    onClick={() => {
+                      setSelectedLicense(license);
+                      setIsSubLicensesDialogOpen(true);
+                    }}
+                  >
                     {license.subLicenses.length} {t("Sublicenses")}
                   </Badge>
                 )}
@@ -103,6 +114,7 @@ export function LicensesList({ types, licenses, clientId }: Props) {
           </div>
         ))}
       </CardList>
+      {/* License Dialog */}
       <DialogContainer
         open={isDialogOpen}
         onOpenChange={setIsDialogOpen}
@@ -129,6 +141,15 @@ export function LicensesList({ types, licenses, clientId }: Props) {
             isSubmitting={isSubmitting}
           />
         )}
+      </DialogContainer>
+      {/* Sub Licenses Dialog */}
+      <DialogContainer
+        open={isSubLicensesDialogOpen}
+        onOpenChange={setIsSubLicensesDialogOpen}
+        title={t("Sublicenses")}
+        description={t("All sublicenses associated with this license")}
+      >
+        <SublicensesList license={selectedLicense} />
       </DialogContainer>
     </>
   );
