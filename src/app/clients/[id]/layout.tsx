@@ -1,4 +1,4 @@
-import { Header } from "@/components/header";
+import { Header } from "@/components/header-section";
 import { prisma } from "@/lib/prisma";
 import { User } from "lucide-react";
 import { notFound } from "next/navigation";
