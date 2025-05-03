@@ -34,19 +34,19 @@ export function SettingsTabs() {
         <TabsList className="mb-4 w-full">
           <TabsTrigger value="general" className="flex items-center gap-1">
             <Settings2 className="h-4 w-4" />
-            {t("General")}
+            <span className="hidden md:block">{t("General")}</span>
           </TabsTrigger>
           <TabsTrigger value="clients" className="flex items-center gap-1">
             <Users className="h-4 w-4" />
-            {t("Clients")}
+            <span className="hidden md:block">{t("Clients")}</span>
           </TabsTrigger>
           <TabsTrigger value="licenses" className="flex items-center gap-1">
             <Key className="h-4 w-4" />
-            {t("Licenses")}
+            <span className="hidden md:block">{t("Licenses")}</span>
           </TabsTrigger>
           <TabsTrigger value="devices" className="flex items-center gap-1">
             <Computer className="h-4 w-4" />
-            {t("Devices")}
+            <span className="hidden md:block">{t("Devices")}</span>
           </TabsTrigger>
         </TabsList>
       </Tabs>

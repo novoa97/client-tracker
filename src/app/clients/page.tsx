@@ -77,7 +77,7 @@ export default async function ClientsPage({ searchParams }: Props) {
   });
 
   return (
-    <div className="p-8 space-y-4 flex flex-col h-full">
+    <div className="p-4 md:p-8 space-y-4 flex flex-col h-full">
       <Header icon={Users} title={"Clients"}>
         <AddClientButton types={types}></AddClientButton>
       </Header>

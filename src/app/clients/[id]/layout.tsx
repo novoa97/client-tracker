@@ -23,7 +23,7 @@ export default async function ClientLayout({ params, children }: Props) {
   if (!client) return notFound();
 
   return (
-    <div className="p-8 space-y-4 flex flex-col h-full">
+    <div className="p-4 md:p-8 space-y-4 flex flex-col h-full">
       <Header icon={User} title={client.name}></Header>
       <ClientTabs client={client}></ClientTabs>
       <div className="flex-1 flex flex-col min-h-0">{children}</div>

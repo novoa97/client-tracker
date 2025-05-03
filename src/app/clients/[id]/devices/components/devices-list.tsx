@@ -60,32 +60,38 @@ export function DevicesList({ clientId, devices, types }: Props) {
   };
 
   const copyToClipboard = (text: string, label: string, deviceId: string) => {
-    navigator.clipboard.writeText(text).then(
-      () => {
-        // Show success state
-        const key = `${deviceId}-${label}`;
-        setCopiedValues({ ...copiedValues, [key]: true });
+    if (
+      typeof navigator !== "undefined" &&
+      navigator.clipboard &&
+      window.isSecureContext
+    ) {
+      navigator.clipboard.writeText(text).then(
+        () => {
+          // Show success state
+          const key = `${deviceId}-${label}`;
+          setCopiedValues({ ...copiedValues, [key]: true });
 
-        // Show toast notification
-        toast("Copied to clipboard", {
-          description: `${label}: ${text}`,
-          duration: 2000,
-          icon: <CopyCheck className="w-5 h-5 text-green-500" />,
-        });
+          // Show toast notification
+          toast("Copied to clipboard", {
+            description: `${label}: ${text}`,
+            duration: 2000,
+            icon: <CopyCheck className="w-5 h-5 text-green-500" />,
+          });
 
-        // Reset after 2 seconds
-        setTimeout(() => {
-          setCopiedValues((prev) => ({ ...prev, [key]: false }));
-        }, 2000);
-      },
-      (err) => {
-        console.error("Failed to copy", err);
-        toast("Copied to clipboard", {
-          description: "Could not copy to clipboard",
-          duration: 2000,
-        });
-      }
-    );
+          // Reset after 2 seconds
+          setTimeout(() => {
+            setCopiedValues((prev) => ({ ...prev, [key]: false }));
+          }, 2000);
+        },
+        (err) => {
+          console.error("Failed to copy", err);
+          toast("Copied to clipboard", {
+            description: "Could not copy to clipboard",
+            duration: 2000,
+          });
+        }
+      );
+    }
   };
 
   const isCopied = (deviceId: string, label: string) => {

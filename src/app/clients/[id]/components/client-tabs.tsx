@@ -33,15 +33,15 @@ export function ClientTabs({ client }: Props) {
       <TabsList className="mb-2 w-full">
         <TabsTrigger value="general" className="flex items-center gap-1">
           <InfoIcon className="h-4 w-4" />
-          {t("General")}
+          <span className="hidden md:block">{t("General")}</span>
         </TabsTrigger>
         <TabsTrigger value="licenses" className="flex items-center gap-1">
           <Key className="h-4 w-4" />
-          {t("Licenses")}
+          <span className="hidden md:block">{t("Licenses")}</span>
         </TabsTrigger>
         <TabsTrigger value="devices" className="flex items-center gap-1">
           <Computer className="h-4 w-4" />
-          {t("Devices")}
+          <span className="hidden md:block">{t("Devices")}</span>
         </TabsTrigger>
       </TabsList>
     </Tabs>
