@@ -50,6 +50,9 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <Script
         defer
         src={`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&libraries=places`}
@@ -59,7 +62,7 @@ export default async function RootLayout({
           <div className="hidden md:block">
             <Sidebar section={navigationLinks} />
           </div>
-          <div className="flex flex-col w-full h-screen">
+          <div className="flex flex-col w-full h-[100dvh]">
             <main className="flex-1 min-h-0 overflow-hidden">{children}</main>
             <div className="md:hidden">
               <BottomNav section={navigationLinks} />

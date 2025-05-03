@@ -10,7 +10,7 @@ type Props = {
 export default async function SettingsLayout({ children }: Props) {
   const t = await getTranslations();
   return (
-    <div className="p-8 space-y-4 flex flex-col h-full">
+    <div className="p-4 md:p-8 space-y-4 flex flex-col h-full">
       <Header icon={Settings} title={t("Settings")}></Header>
       <SettingsTabs />
       <div className="flex-1 flex flex-col min-h-0">{children}</div>
