@@ -4,7 +4,7 @@ import { User } from "@/generated/prisma";
 import { createContext, useContext, useState } from "react";
 
 type UserContextType = {
-  /** Active user */
+  /** User of active session */
   user: User;
 };
 
