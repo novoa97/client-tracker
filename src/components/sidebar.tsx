@@ -6,6 +6,7 @@ import { clsx } from "clsx";
 import { useTranslations } from "next-intl";
 import DynamicIcon from "./icon";
 import Image from "next/image";
+import { LogOut } from "lucide-react";
 
 interface Props {
   section?: {

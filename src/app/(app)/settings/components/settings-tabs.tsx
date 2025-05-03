@@ -29,9 +29,9 @@ export function SettingsTabs() {
       <Tabs
         defaultValue={tab}
         onValueChange={handleTabChange}
-        className="flex w-full h-full flex-1 flex-1 min-h-0"
+        className="flex w-full h-full"
       >
-        <TabsList className="mb-4 w-full">
+        <TabsList className="md:mb-2 w-full">
           <TabsTrigger value="general" className="flex items-center gap-1">
             <Settings2 className="h-4 w-4" />
             <span className="hidden md:block">{t("General")}</span>
