@@ -4,9 +4,8 @@ import { User } from "@/generated/prisma";
 import { createContext, useContext, useState } from "react";
 
 type UserContextType = {
-  user: User | null;
-  login: (user: User) => void;
-  logout: () => void;
+  /** Active user */
+  user: User;
 };
 
 export const UserContext = createContext<UserContextType | undefined>(
@@ -17,17 +16,12 @@ export function UserProvider({
   user: initialUser,
   children,
 }: {
-  user: User | null;
+  user: User;
   children: React.ReactNode;
 }) {
-  const [user, setUser] = useState(initialUser);
-
-  const login = (u: User) => setUser(u);
-  const logout = () => setUser(null);
+  const [user] = useState(initialUser);
 
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
   );
 }
