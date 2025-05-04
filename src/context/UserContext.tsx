@@ -3,7 +3,6 @@
 import { User } from "@/generated/prisma";
 import { useChangeLocale } from "@/hooks/useChangeLocale";
 import { changeLanguage as changeLanguageDatabase } from "@/lib/auth";
-import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
 
 type UserContextType = {

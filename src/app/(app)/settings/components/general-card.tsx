@@ -8,7 +8,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useLocale, useTranslations } from "next-intl";
-import { useChangeLocale } from "@/hooks/useChangeLocale";
 import {
   Card,
   CardContent,
