@@ -171,6 +171,16 @@ exports.Prisma.DeviceScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  username: 'username',
+  password: 'password',
+  lang: 'lang',
+  secret: 'secret',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -227,6 +237,14 @@ exports.Prisma.DeviceOrderByRelevanceFieldEnum = {
   clientId: 'clientId'
 };
 
+exports.Prisma.UserOrderByRelevanceFieldEnum = {
+  id: 'id',
+  username: 'username',
+  password: 'password',
+  lang: 'lang',
+  secret: 'secret'
+};
+
 
 exports.Prisma.ModelName = {
   ClientType: 'ClientType',
@@ -234,7 +252,8 @@ exports.Prisma.ModelName = {
   License: 'License',
   LicenseType: 'LicenseType',
   DeviceType: 'DeviceType',
-  Device: 'Device'
+  Device: 'Device',
+  User: 'User'
 };
 
 /**

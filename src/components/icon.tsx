@@ -7,9 +7,10 @@ import { FC, memo } from "react";
 type DynamicIconProps = {
   name: string;
   className?: string;
+  style?: React.CSSProperties;
 };
 
-const DynamicIcon: FC<DynamicIconProps> = memo(({ name, className }) => {
+const DynamicIcon: FC<DynamicIconProps> = memo(({ name, className, style }) => {
   const normalizedName = name
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -24,12 +25,15 @@ const DynamicIcon: FC<DynamicIconProps> = memo(({ name, className }) => {
     MaybeIcon && typeof MaybeIcon === "object" && "$$typeof" in MaybeIcon;
 
   if (!isValidIcon) {
-    return <LoaderIcon className={className} />;
+    return <LoaderIcon className={className} style={style} />;
   }
 
-  const IconComponent = MaybeIcon as unknown as FC<{ className?: string }>;
+  const IconComponent = MaybeIcon as unknown as FC<{
+    className?: string;
+    style?: React.CSSProperties;
+  }>;
 
-  return <IconComponent className={className} />;
+  return <IconComponent className={className} style={style} />;
 });
 
 DynamicIcon.displayName = "DynamicIcon";

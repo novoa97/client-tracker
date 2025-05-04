@@ -1,10 +1,8 @@
+import "./globals.css";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
-import "./globals.css";
-import { Sidebar } from "@/components/sidebar";
 import Script from "next/script";
-import BottomNav from "@/components/bottom-nav";
 import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
@@ -35,12 +33,6 @@ export const metadata: Metadata = {
   },
 };
 
-const navigationLinks = [
-  { href: "/", label: "Map", icon: "map" },
-  { href: "/clients", label: "Clients", icon: "users" },
-  { href: "/settings", label: "Settings", icon: "settings" },
-];
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -58,16 +50,8 @@ export default async function RootLayout({
         src={`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&libraries=places`}
       />
       <NextIntlClientProvider>
-        <body className="flex flex-row text-gray-900">
-          <div className="hidden md:block">
-            <Sidebar section={navigationLinks} />
-          </div>
-          <div className="flex flex-col w-full h-[100dvh]">
-            <main className="flex-1 min-h-0 overflow-hidden">{children}</main>
-            <div className="md:hidden">
-              <BottomNav section={navigationLinks} />
-            </div>
-          </div>
+        <body className="text-gray-900">
+          {children}
           <Toaster />
         </body>
       </NextIntlClientProvider>
