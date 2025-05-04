@@ -60,8 +60,8 @@ export function LicenseTypeForm({
           )}
         />
         <div className="flex justify-end gap-2">
-          <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Creating..." : t("Create")}
+          <Button className="w-full" type="submit" disabled={isLoading}>
+            {isLoading ? t("Saving") : t("Save")}
           </Button>
         </div>
       </form>

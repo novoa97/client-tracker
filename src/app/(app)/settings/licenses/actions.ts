@@ -17,6 +17,9 @@ export async function getLicensesType(): Promise<LicenseWithInUse[]> {
                 },
             },
         },
+        orderBy: {
+            name: "asc",
+        },
     });
     return types.map((type) => ({
         ...type,
@@ -52,10 +55,30 @@ export async function addLicenseType(name: string): Promise<ActionResponse> {
 }
 
 export async function editLicenseType(key: string, name: string) {
-    await prisma.licenseType.update({
-        where: { key },
-        data: { name },
-    });
+    const newKey = slugify(name)
+    if (newKey !== key) {
+        const type = await prisma.licenseType.findFirst({ where: { key: newKey } })
+        if (type) throw new ActionError("License type already exists")
+
+        // Create new type
+        await prisma.licenseType.create({
+            data: {
+                key: newKey,
+                name,
+            },
+        });
+
+        // Update all licenses with the old key to the new key
+        await prisma.license.updateMany({
+            where: { typeKey: key },
+            data: { typeKey: newKey }
+        })
+
+        // Delete the old type
+        await prisma.licenseType.delete({ where: { key: key } })
+
+    }
+    return { ok: true }
 }
 
 export async function deleteLicenseType(key: string) {

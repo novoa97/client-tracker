@@ -22,12 +22,14 @@ const deviceSchema = z.object({
 
 type DeviceTypeFormProps = {
   defaultValues?: DeviceType | null;
+  isLoading?: boolean;
   onSubmit: (data: z.infer<typeof deviceSchema>) => Promise<void>;
 };
 
 export function DeviceTypeForm({
   onSubmit,
   defaultValues,
+  isLoading,
 }: DeviceTypeFormProps) {
   const t = useTranslations();
 
@@ -94,10 +96,9 @@ export function DeviceTypeForm({
           )}
         />
         <div className="flex justify-end gap-2">
-          <Button type="button" variant="outline">
-            Cancel
+          <Button className="w-full" type="submit">
+            {isLoading ? t("Saving") : t("Save")}
           </Button>
-          <Button type="submit">Create</Button>
         </div>
       </form>
     </Form>

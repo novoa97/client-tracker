@@ -23,6 +23,9 @@ export async function getClientTypes(): Promise<ClientTypeWithInUse[]> {
                 },
             },
         },
+        orderBy: {
+            name: "asc",
+        },
     });
     return types.map((type) => ({
         ...type,
@@ -62,16 +65,44 @@ export async function addClientType(data: ClientTypeData): Promise<ActionRespons
 export async function editClientType(key: string, data: ClientTypeData): Promise<ActionResponse> {
     const { name, color, icon } = data;
 
-    await prisma.clientType.update({
-        where: { key },
-        data: {
-            name,
-            color,
-            icon,
-        },
-    });
+    const newKey = slugify(data.name)
 
+    if (newKey !== key) {
+        const type = await prisma.clientType.findFirst({ where: { key: newKey } })
+        if (type) throw new ActionError("Client type already exists")
+
+        // Create new type
+        await prisma.clientType.create({
+            data: {
+                key: newKey,
+                name,
+                color,
+                icon,
+            },
+        });
+
+        // Update all clients with the old key to the new key
+        await prisma.client.updateMany({
+            where: { typeKey: key },
+            data: { typeKey: newKey }
+        })
+
+        // Delete the old type
+        await prisma.clientType.delete({ where: { key: key } })
+
+    }
+    else {
+        await prisma.clientType.update({
+            where: { key },
+            data: {
+                color,
+                icon,
+            },
+        });
+
+    }
     return { ok: true };
+
 }
 
 export async function deleteClientType(id: string) {

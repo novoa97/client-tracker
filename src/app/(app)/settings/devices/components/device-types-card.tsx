@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Pencil, Trash } from "lucide-react";
+import { Check, CircleX, Pencil, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TableRow, TableCell } from "@/components/ui/table";
 import { CardList } from "@/components/card-list";
@@ -33,6 +33,7 @@ export function DeviceTypesCard({ types }: Props) {
   const router = useRouter();
   const [items, setItems] = useState<DeviceTypeWithInUse[] | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [editingDevice, setEditingDevice] = useState<DeviceType | null>(null);
 
   useEffect(() => {
@@ -41,35 +42,66 @@ export function DeviceTypesCard({ types }: Props) {
 
   const handleCreate = async (data: { name: string; icon: string }) => {
     try {
+      setIsLoading(true);
       const response = await addDeviceType(data);
       if (response.ok) {
         setIsDialogOpen(false);
+        setIsLoading(false);
         router.refresh();
+        toast.success(t("Device type created"), {
+          description: t("Device type created description"),
+          duration: 2000,
+          icon: <Check className="h-4 w-4 text-green-500" />,
+        });
       } else {
+        setIsLoading(false);
         toast.error(t("Error creating device type"), {
           description: t(response.message),
-          duration: 3000,
+          duration: 2000,
+          icon: <CircleX className="h-4 w-4 text-red-500" />,
         });
       }
     } catch (error) {
       console.error(error);
       toast.error(t("Error creating device type"), {
         description: t("There was a problem creating the device type"),
-        duration: 3000,
+        duration: 2000,
+        icon: <CircleX className="h-4 w-4 text-red-500" />,
       });
     }
   };
 
   const handleEdit = async (data: { name: string; icon: string }) => {
-    if (!editingDevice) return;
-    await editDeviceType(editingDevice.key, data);
-    setIsDialogOpen(false);
-    setTimeout(() => setEditingDevice(null), 100);
-    router.refresh();
-    toast.success(t("Device type updated"), {
-      description: t("Device type updated description"),
-      duration: 2000,
-    });
+    try {
+      if (!editingDevice) return;
+      setIsLoading(true);
+      const response = await editDeviceType(editingDevice.key, data);
+      if (response.ok) {
+        setIsDialogOpen(false);
+        setIsLoading(false);
+        setTimeout(() => setEditingDevice(null), 100);
+        router.refresh();
+        toast.success(t("Device type updated"), {
+          description: t("Device type updated description"),
+          duration: 2000,
+          icon: <Check className="h-4 w-4 text-green-500" />,
+        });
+      } else {
+        setIsLoading(false);
+        toast.error(t("Error updating device type"), {
+          description: t(response.message),
+          duration: 2000,
+          icon: <CircleX className="h-4 w-4 text-red-500" />,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(t("Error updating device type"), {
+        description: t("There was a problem updating the device type"),
+        duration: 2000,
+        icon: <CircleX className="h-4 w-4 text-red-500" />,
+      });
+    }
   };
 
   const handleDelete = async (id: string) => {
@@ -78,6 +110,7 @@ export function DeviceTypesCard({ types }: Props) {
     toast.success(t("Device type deleted"), {
       description: t("Device type deleted description"),
       duration: 2000,
+      icon: <Check className="h-4 w-4 text-green-500" />,
     });
   };
 
@@ -157,6 +190,7 @@ export function DeviceTypesCard({ types }: Props) {
         <DeviceTypeForm
           onSubmit={editingDevice ? handleEdit : handleCreate}
           defaultValues={editingDevice}
+          isLoading={isLoading}
         />
       </DialogContainer>
     </>

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 import { TableRow, TableCell } from "@/components/ui/table";
-import { Pencil, Trash } from "lucide-react";
+import { Check, CircleX, Pencil, Trash } from "lucide-react";
 import { CardList } from "@/components/card-list";
 import { LicenseType } from "@/generated/prisma";
 import { useTranslations } from "next-intl";
@@ -55,12 +55,14 @@ export function LicenseTypesCard({ types }: Props) {
       toast.success(t("License type created"), {
         description: t("License type created description"),
         duration: 2000,
+        icon: <Check className="h-4 w-4 text-green-500" />,
       });
     } else {
       setIsLoading(false);
       toast.error(t("License type creation failed"), {
         description: t(response.message),
         duration: 2000,
+        icon: <CircleX className="h-4 w-4 text-red-500" />,
       });
     }
   };
@@ -74,6 +76,7 @@ export function LicenseTypesCard({ types }: Props) {
       setIsLoading(true);
       if (licenseType) {
         editLicenseType(licenseType.key, data.name);
+        setLicenseType(null);
       }
       setIsLoading(false);
       setIsDialogOpen(false);
@@ -81,6 +84,7 @@ export function LicenseTypesCard({ types }: Props) {
       toast.success(t("License type updated"), {
         description: t("License type updated description"),
         duration: 2000,
+        icon: <Check className="h-4 w-4 text-green-500" />,
       });
     } catch (error) {
       console.error(error);
@@ -101,6 +105,7 @@ export function LicenseTypesCard({ types }: Props) {
       toast.success(t("License type deleted"), {
         description: t("License type deleted description"),
         duration: 2000,
+        icon: <Check className="h-4 w-4 text-green-500" />,
       });
       router.refresh();
     } catch (error) {
@@ -108,6 +113,7 @@ export function LicenseTypesCard({ types }: Props) {
       toast.error(t("License type deletion failed"), {
         description: t("License type deletion failed description"),
         duration: 2000,
+        icon: <CircleX className="h-4 w-4 text-red-500" />,
       });
     }
   };
