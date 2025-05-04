@@ -100,6 +100,7 @@ export function LicenseForm({
           <FormField
             control={form.control}
             name="id"
+            disabled={mode === "edit"}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{t("License ID")}</FormLabel>

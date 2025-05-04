@@ -8,7 +8,7 @@ import { ClientWithType } from "@/app/types";
 import { generateMarkerIcon } from "@/lib/marker";
 import { renderToStaticMarkup } from "react-dom/server";
 import DynamicIcon from "@/components/icon";
-
+import { getTextColor } from "@/lib/colors";
 type Props = {
   client: ClientWithType;
 };
@@ -49,6 +49,7 @@ export default function ClientMap({ client }: Props) {
                   <DynamicIcon
                     name={client.type.icon}
                     className="text-white w-4 h-4"
+                    style={{ color: getTextColor(client.type.color) }}
                   />
                 )
               )}

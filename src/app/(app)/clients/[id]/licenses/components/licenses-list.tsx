@@ -12,6 +12,7 @@ import { LicenseActions } from "./license-actions";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { SublicensesList } from "./sublicenses-dialog";
+import { Check, CircleX, Trash } from "lucide-react";
 
 interface Props {
   clientId: string;
@@ -30,51 +31,86 @@ export function LicensesList({ types, licenses, clientId }: Props) {
   const [editingLicense, setEditingLicense] =
     useState<LicenseWithRelations | null>(null);
 
+  /**
+   * Handles the submission of a new license
+   * @param values - The values of the license to be created
+   */
   const handleSubmit = async (values: LicenseFormValues) => {
     setIsLoading(true);
     try {
-      const response = await addLicense({
-        id: values.id,
-        type: values.type,
-        clientId: clientId,
-        subLicenses: values.subLicenses,
-      });
+      const response = await addLicense(clientId, values);
       if (response.ok) {
         setIsDialogOpen(false);
         router.refresh();
-        toast.success(t("License created successfully"));
+        toast.success(t("License created successfully"), {
+          duration: 2000,
+          icon: <Check className="h-4 w-4 text-green-500" />,
+        });
       } else {
-        toast.error(t(response.message));
+        toast.error(t(response.message), {
+          duration: 2000,
+          icon: <CircleX className="h-4 w-4 text-red-500" />,
+        });
       }
     } catch (error) {
       console.error("Error creating license:", error);
+      toast.error(t("Error creating license"), {
+        duration: 2000,
+        icon: <CircleX className="h-4 w-4 text-red-500" />,
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleDelete = async (id: string): Promise<void> => {
-    await deleteLicense(id);
-    toast.success(t("License deleted successfully"));
-    router.refresh();
-  };
-
+  /**
+   * Handles the submission of an edited license
+   * @param values - The values of the license to be edited
+   */
   const handleEdit = async (values: LicenseFormValues): Promise<void> => {
+    if (!editingLicense) return;
+    setIsLoading(true);
     try {
-      setIsLoading(true);
-      const response = await editLicense(values);
+      const response = await editLicense(editingLicense.id, values);
       if (response.ok) {
-        toast.success(t("License edited successfully"));
+        toast.success(t("License edited successfully"), {
+          duration: 2000,
+          icon: <Check className="h-4 w-4 text-green-500" />,
+        });
         setIsDialogOpen(false);
         setEditingLicense(null);
         router.refresh();
       } else {
-        toast.error(t(response.message));
+        toast.error(t(response.message), {
+          duration: 2000,
+          icon: <CircleX className="h-4 w-4 text-red-500" />,
+        });
       }
     } catch (error) {
       console.error("Error editing license:", error);
+      toast.error(t("Error editing license"), {
+        duration: 2000,
+        icon: <CircleX className="h-4 w-4 text-red-500" />,
+      });
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  /**
+   * Handles the deletion of a license
+   * @param id - The id of the license to be deleted
+   */
+  const handleDelete = async (id: string): Promise<void> => {
+    try {
+      await deleteLicense(id);
+      toast.success(t("License deleted successfully"), {
+        duration: 2000,
+        icon: <Trash className="h-4 w-4 text-green-500" />,
+      });
+      router.refresh();
+    } catch (error) {
+      console.error("Error deleting license:", error);
     }
   };
 

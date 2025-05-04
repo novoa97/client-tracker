@@ -50,7 +50,7 @@ export function Pagination({ page, pageSize, total }: Props) {
           </Button>
         </div>
       </div>
-      <div className="flex md:hidden flex-col items-center justify-between border-t py-3 text-sm w-full">
+      <div className="flex md:hidden flex-col gap-4 items-stretch justify-between border-t py-3 text-sm w-full">
         <div className="flex w-full gap-2">
           <Button
             variant="outline"
@@ -71,7 +71,7 @@ export function Pagination({ page, pageSize, total }: Props) {
             Siguiente →
           </Button>
         </div>
-        <div className="text-muted-foreground">
+        <div className="text-muted-foreground text-center w-full">
           Mostrando {total === 0 ? 0 : `${start}-${end}`} de {total} cliente
           {total === 1 ? "" : "s"}
         </div>

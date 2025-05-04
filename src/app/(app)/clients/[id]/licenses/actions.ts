@@ -6,13 +6,22 @@ import { ActionResponse } from "@/types/action-response";
 type AddLicenseInput = {
   id: string;
   type: string;
-  clientId: string;
   subLicenses?: { id: string; type: string }[];
 };
 
-export async function addLicense(
-  data: AddLicenseInput
-): Promise<ActionResponse> {
+type EditLicense = {
+  type: string;
+  subLicenses: { id: string; type: string }[];
+};
+
+/**
+ * Handles the submission of a new license
+ * @param clientId - The id of the client
+ * @param data - The data of the license to be created
+ * @returns The response of the action
+ * @throws An error if the license already exists or if one or more sub licenses already exist
+ */
+export async function addLicense(clientId: string, data: AddLicenseInput): Promise<ActionResponse> {
   try {
     // Check if the license already exists
     const existingLicense = await prisma.license.findUnique({
@@ -37,7 +46,7 @@ export async function addLicense(
     await prisma.license.create({
       data: {
         id: data.id,
-        clientId: data.clientId,
+        clientId: clientId,
         typeKey: data.type,
       },
     });
@@ -47,7 +56,7 @@ export async function addLicense(
         await prisma.license.create({
           data: {
             id: license.id,
-            clientId: data.clientId,
+            clientId: clientId,
             typeKey: license.type,
             parentId: data.id,
           },
@@ -62,17 +71,18 @@ export async function addLicense(
   }
 }
 
-type EditLicense = {
-  id: string;
-  type: string;
-  subLicenses: { id: string; type: string }[];
-};
-
-export async function editLicense(data: EditLicense): Promise<ActionResponse> {
+/**
+ * Handles the submission of an edited license
+ * @param id - The id of the license
+ * @param data - The data of the license to be edited
+ * @returns The response of the action
+ * @throws An error if the license does not exist or if one or more sub licenses already exist
+ */
+export async function editLicense(id: string, data: EditLicense): Promise<ActionResponse> {
   try {
     // Check if the license exists
     const license = await prisma.license.findUnique({
-      where: { id: data.id },
+      where: { id: id },
       include: {
         client: true,
         subLicenses: true,
@@ -80,10 +90,11 @@ export async function editLicense(data: EditLicense): Promise<ActionResponse> {
     });
     if (!license) throw new ActionError("License not found");
 
+    // Edit the sub licenses if they exist
     if (data.subLicenses.length > 0) {
       const oldSubLicenses = await prisma.license.findMany({
         where: {
-          parentId: data.id,
+          parentId: id,
         },
       });
 
@@ -98,30 +109,55 @@ export async function editLicense(data: EditLicense): Promise<ActionResponse> {
       const toUpdate = data.subLicenses.filter((l) =>
         existingIds.includes(l.id)
       );
+
+
       const toDelete = oldSubLicenses.filter((l) => !inputIds.includes(l.id));
 
-      await createSubLicenses(data.id, license.client.id, toCreate);
+      if (toCreate.length > 0) await createSubLicenses(id, license.client.id, toCreate);
+      if (toDelete.length > 0) await deleteSubLicenses(toDelete.map((l) => l.id));
+      if (toUpdate.length > 0) await updateSubLicenses(toUpdate);
 
-      await deleteSubLicenses(toDelete.map((l) => l.id));
-
-      await updateSubLicenses(toUpdate);
-    } else {
+    } else if (license.subLicenses.length > 0) {
       await deleteSubLicenses(license.subLicenses.map((l) => l.id));
     }
 
-    // Edit the license
-    await prisma.license.update({
-      where: { id: data.id },
-      data: { typeKey: data.type },
-    });
+    // Edit the license type if it has changed
+    if (data.type && data.type !== license.typeKey) {
+      await prisma.license.update({
+        where: { id: id },
+        data: { typeKey: data.type },
+      });
+    }
 
     return { ok: true };
   } catch (error) {
+    console.error(error);
     if (error instanceof ActionError) return error.toResponse();
     throw error;
   }
 }
 
+/**
+ * Deletes the license
+ * @param id - The id of the license
+ */
+export async function deleteLicense(id: string) {
+  // Delete all sub licenses
+  await prisma.license.deleteMany({
+    where: {
+      parentId: id,
+    },
+  });
+  // Delete the license
+  await prisma.license.delete({
+    where: { id },
+  });
+}
+
+/**
+ * Deletes the sub licenses
+ * @param ids - The ids of the sub licenses to be deleted
+ */
 async function deleteSubLicenses(ids: string[]) {
   await prisma.license.deleteMany({
     where: {
@@ -130,6 +166,12 @@ async function deleteSubLicenses(ids: string[]) {
   });
 }
 
+/**
+ * Creates the sub licenses
+ * @param parentId - The id of the parent license
+ * @param clientId - The id of the client
+ * @param licenses - The licenses to be created
+ */
 async function createSubLicenses(
   parentId: string,
   clientId: string,
@@ -153,7 +195,12 @@ async function createSubLicenses(
   });
 }
 
+/**
+ * Updates the sub licenses
+ * @param licenses - The licenses to be updated
+ */
 async function updateSubLicenses(licenses: { id: string; type: string }[]) {
+
   for (const license of licenses) {
     await prisma.license.update({
       where: { id: license.id },
@@ -162,15 +209,3 @@ async function updateSubLicenses(licenses: { id: string; type: string }[]) {
   }
 }
 
-export async function deleteLicense(id: string) {
-  // Delete all sub licenses
-  await prisma.license.deleteMany({
-    where: {
-      parentId: id,
-    },
-  });
-  // Delete the license
-  await prisma.license.delete({
-    where: { id },
-  });
-}
