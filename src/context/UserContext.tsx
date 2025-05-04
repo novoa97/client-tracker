@@ -1,11 +1,16 @@
 "use client";
 
 import { User } from "@/generated/prisma";
-import { createContext, useContext, useState } from "react";
+import { useChangeLocale } from "@/hooks/useChangeLocale";
+import { changeLanguage as changeLanguageDatabase } from "@/lib/auth";
+import { useRouter } from "next/navigation";
+import { createContext, useEffect, useState } from "react";
 
 type UserContextType = {
   /** User of active session */
   user: User;
+  /** Change the language of the user */
+  changeLanguage: (code: string) => Promise<void>;
 };
 
 export const UserContext = createContext<UserContextType | undefined>(
@@ -19,9 +24,27 @@ export function UserProvider({
   user: User;
   children: React.ReactNode;
 }) {
-  const [user] = useState(initialUser);
+  const { locale, setLocale } = useChangeLocale();
+  const [user, setUser] = useState(initialUser);
+
+  useEffect(() => {
+    if (locale !== user.lang) {
+      setLocale(user.lang);
+    }
+  }, [user, locale]);
+
+  const changeLanguage = async (code: string) => {
+    // Update the user in the database
+    await changeLanguageDatabase(user.id, code);
+    // Update the user in the context
+    setUser({ ...user, lang: code });
+    // Update locale app
+    setLocale(code);
+  };
 
   return (
-    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, changeLanguage }}>
+      {children}
+    </UserContext.Provider>
   );
 }

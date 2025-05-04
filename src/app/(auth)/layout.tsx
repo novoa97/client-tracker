@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import LoginForm from "./components/login-form";
 import Image from "next/image";
 
 export default function AuthLayout({

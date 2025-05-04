@@ -1,7 +1,7 @@
 // app/clients/new/page.tsx
 "use client";
 
-import AddClientForm from "@/app/clients/new/components/add-client-form";
+import AddClientForm from "@/app/(app)/clients/new/components/add-client-form";
 import { addClient } from "../actions/add-client";
 import { useState, useEffect } from "react";
 import { Header } from "@/components/header";

@@ -23,7 +23,7 @@ import {
   editClientType,
   deleteClientType,
 } from "../actions";
-import { darkenColor } from "@/lib/colors";
+import { darkenColor, getTextColor } from "@/lib/colors";
 
 interface Props {
   types: ClientTypeWithInUse[];
@@ -121,7 +121,13 @@ export function ClientTypesCard({ types }: Props) {
                   borderColor: darkenColor(type?.color, 30),
                 }}
               >
-                <DynamicIcon name={type.icon} className="text-white h-5 w-5" />
+                <DynamicIcon
+                  name={type.icon}
+                  className="h-5 w-5"
+                  style={{
+                    color: getTextColor(type.color),
+                  }}
+                />
               </div>
             </TableCell>
             <TableCell>{type.name}</TableCell>

@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { UserProvider } from "@/context/UserContext";
+import { decodeJWT, verifyJWT } from "@/lib/jwt";
 
 const navigationLinks = [
   { href: "/", label: "Map", icon: "map" },
@@ -29,13 +30,25 @@ export default async function AppLayout({
     return redirect("/login");
   }
 
+  const { success, payload } = await decodeJWT(session.value);
+
+  if (!success) {
+    return redirect("/logout");
+  }
+
   const user = await prisma.user.findUnique({
     where: {
-      id: session.value,
+      id: payload!.id,
     },
   });
 
   if (!user) {
+    return redirect("/logout");
+  }
+
+  const { success: verified } = await verifyJWT(user, session.value);
+
+  if (!verified) {
     return redirect("/logout");
   }
 

@@ -4,9 +4,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
 import Script from "next/script";
 import { Toaster } from "@/components/ui/sonner";
-import { prisma } from "@/lib/prisma";
-import { redirect } from "next/navigation";
-import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "ClientTracker",

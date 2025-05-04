@@ -1,5 +1,5 @@
 "use server"
-import { hash } from 'crypto';
+import { hash, randomBytes } from 'crypto';
 import { prisma } from './prisma'
 import { User } from '@/generated/prisma';
 
@@ -26,10 +26,13 @@ export async function createUser(username: string, password: string): Promise<Au
 
     const hashedPassword = await hash("sha256", password);
 
+    const secret = randomBytes(64).toString('hex')
+
     const user = await prisma.user.create({
         data: {
             username,
             password: hashedPassword,
+            secret,
         },
     });
 
@@ -78,6 +81,22 @@ export async function changePassword(id: string, data: {
 
     const hashedNewPassword = await hash("sha256", data.newPassword);
     await prisma.user.update({ where: { id: id }, data: { password: hashedNewPassword } });
+
+    return { success: true }
+}
+
+/**
+ * Change the language of a user
+ * @param id - The id of the user
+ * @param lang - The language of the user
+ * @returns The user
+ * @throws If the user is not found or the language is invalid
+ */
+export async function changeLanguage(id: string, lang: string): Promise<AuthResponse> {
+    const user = await prisma.user.findUnique({ where: { id: id } })
+    if (!user) return { success: false, error: 'User not found' }
+
+    await prisma.user.update({ where: { id: id }, data: { lang: lang } })
 
     return { success: true }
 }

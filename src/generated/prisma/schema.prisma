@@ -98,6 +98,7 @@ model User {
   username  String   @unique
   password  String
   lang      String   @default("en")
+  secret    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

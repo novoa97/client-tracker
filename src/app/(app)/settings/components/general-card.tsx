@@ -33,15 +33,15 @@ import { toast } from "sonner";
 export function GeneralCard() {
   const t = useTranslations();
   const locale = useLocale();
-  const { user } = useUser();
-  const { setLocale } = useChangeLocale();
+  const { user, changeLanguage } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isChangePasswordDialogOpen, setIsChangePasswordDialogOpen] =
     useState(false);
 
-  function handleChange(language: string) {
-    setLocale(language);
+  async function handleChange(language: string) {
+    await changeLanguage(language);
+    toast.success(t("Language changed successfully"), { duration: 2000 });
   }
 
   async function handleChangePassword(data: {
@@ -70,7 +70,6 @@ export function GeneralCard() {
             {t("Configure general application settings")}
           </CardDescription>
         </CardHeader>
-        {/* Add scrollbar to the card content and max height */}
         <CardContent className="w-full flex-1 overflow-y-auto">
           <div>
             <label className="text-sm font-medium">{t("Language")}</label>
@@ -98,7 +97,6 @@ export function GeneralCard() {
             <p className="text-muted-foreground text-sm">
               {t("Change your password to keep your account secure")}
             </p>
-            {/* Full width button only on mobile */}
             <Button
               variant="outline"
               className="text-sm mt-4 w-full md:w-auto"
@@ -110,6 +108,9 @@ export function GeneralCard() {
               open={isChangePasswordDialogOpen}
               onOpenChange={setIsChangePasswordDialogOpen}
               title={t("Change Password")}
+              description={t(
+                "Change your password to keep your account secure"
+              )}
             >
               <ChangePasswordForm
                 isLoading={isLoading}

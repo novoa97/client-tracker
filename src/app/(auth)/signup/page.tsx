@@ -1,6 +1,4 @@
 import SignupForm from "../components/signup-form";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 

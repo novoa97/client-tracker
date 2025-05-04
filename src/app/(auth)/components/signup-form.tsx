@@ -8,9 +8,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { CheckCircleIcon, EyeIcon, EyeOffIcon } from "lucide-react";
 import { createUser } from "../actions";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const schema = z
   .object({
@@ -29,14 +30,12 @@ export default function SignupForm() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
@@ -46,9 +45,11 @@ export default function SignupForm() {
     try {
       setIsSubmitting(true);
       await createUser(data);
-      setSuccess("Account created!");
       router.push("/login");
-      reset(); // opcional
+      toast.success("Account created!", {
+        duration: 2000,
+        icon: <CheckCircleIcon className="h-4 w-4 text-green-600" />,
+      });
     } catch (err) {
       setError("An unexpected error occurred");
       console.error(err);
@@ -62,11 +63,6 @@ export default function SignupForm() {
       {error && (
         <div className="rounded-md bg-red-50 p-3 text-sm text-red-500">
           {error}
-        </div>
-      )}
-      {success && (
-        <div className="rounded-md bg-green-50 p-3 text-sm text-green-500">
-          {success}
         </div>
       )}
 
@@ -92,6 +88,8 @@ export default function SignupForm() {
             id="password"
             type={showPassword ? "text" : "password"}
             {...register("password")}
+            autoComplete="new-password"
+            placeholder="Enter your password"
           />
           <Button
             type="button"
@@ -120,6 +118,8 @@ export default function SignupForm() {
           id="confirmPassword"
           type={showPassword ? "text" : "password"}
           {...register("confirmPassword")}
+          autoComplete="new-password"
+          placeholder="Confirm your password"
         />
         {errors.confirmPassword && (
           <p className="text-sm text-red-500">

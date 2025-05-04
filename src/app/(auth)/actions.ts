@@ -2,6 +2,8 @@
 import { z } from 'zod'
 import { createUser as create, validateUser } from '@/lib/auth'
 import { cookies } from 'next/headers'
+import { createJWT } from '@/lib/jwt'
+import { redirect } from 'next/navigation'
 
 const signupSchema = z.object({
     username: z.string().min(1),
@@ -32,19 +34,24 @@ export async function login(data: { username: string; password: string }): Promi
         return { success: false, error: 'Invalid input' }
     }
 
-    const user = await validateUser(result.data.username, result.data.password)
+    const response = await validateUser(result.data.username, result.data.password)
 
-    if (!user) {
-        return { success: false, error: 'Invalid credentials' }
+    if (!response.success) {
+        return { success: false, error: "Invalid username or password" }
     }
 
+    const user = response.user!
+
     // Create session cookie
+    const token = await createJWT(user)
+
     const authCookie = await cookies()
-    authCookie.set('session', user.id, {
+    authCookie.set('session', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         maxAge: 60 * 60 * 24 * 30, // 30 days
         path: '/',
     })
-    return { success: true }
+
+    redirect('/')
 }

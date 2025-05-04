@@ -7412,6 +7412,7 @@ export namespace Prisma {
     username: string | null
     password: string | null
     lang: string | null
+    secret: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7421,6 +7422,7 @@ export namespace Prisma {
     username: string | null
     password: string | null
     lang: string | null
+    secret: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -7430,6 +7432,7 @@ export namespace Prisma {
     username: number
     password: number
     lang: number
+    secret: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -7441,6 +7444,7 @@ export namespace Prisma {
     username?: true
     password?: true
     lang?: true
+    secret?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7450,6 +7454,7 @@ export namespace Prisma {
     username?: true
     password?: true
     lang?: true
+    secret?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -7459,6 +7464,7 @@ export namespace Prisma {
     username?: true
     password?: true
     lang?: true
+    secret?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -7541,6 +7547,7 @@ export namespace Prisma {
     username: string
     password: string
     lang: string
+    secret: string
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -7567,6 +7574,7 @@ export namespace Prisma {
     username?: boolean
     password?: boolean
     lang?: boolean
+    secret?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -7578,11 +7586,12 @@ export namespace Prisma {
     username?: boolean
     password?: boolean
     lang?: boolean
+    secret?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "password" | "lang" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "password" | "lang" | "secret" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
@@ -7592,6 +7601,7 @@ export namespace Prisma {
       username: string
       password: string
       lang: string
+      secret: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -7967,6 +7977,7 @@ export namespace Prisma {
     readonly username: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly lang: FieldRef<"User", 'String'>
+    readonly secret: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -8381,6 +8392,7 @@ export namespace Prisma {
     username: 'username',
     password: 'password',
     lang: 'lang',
+    secret: 'secret',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -8472,7 +8484,8 @@ export namespace Prisma {
     id: 'id',
     username: 'username',
     password: 'password',
-    lang: 'lang'
+    lang: 'lang',
+    secret: 'secret'
   };
 
   export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
@@ -8908,6 +8921,7 @@ export namespace Prisma {
     username?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     lang?: StringFilter<"User"> | string
+    secret?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
   }
@@ -8917,6 +8931,7 @@ export namespace Prisma {
     username?: SortOrder
     password?: SortOrder
     lang?: SortOrder
+    secret?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _relevance?: UserOrderByRelevanceInput
@@ -8930,6 +8945,7 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
     lang?: StringFilter<"User"> | string
+    secret?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
   }, "id" | "username">
@@ -8939,6 +8955,7 @@ export namespace Prisma {
     username?: SortOrder
     password?: SortOrder
     lang?: SortOrder
+    secret?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -8954,6 +8971,7 @@ export namespace Prisma {
     username?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     lang?: StringWithAggregatesFilter<"User"> | string
+    secret?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -9359,6 +9377,7 @@ export namespace Prisma {
     username: string
     password: string
     lang?: string
+    secret: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9368,6 +9387,7 @@ export namespace Prisma {
     username: string
     password: string
     lang?: string
+    secret: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9377,6 +9397,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     lang?: StringFieldUpdateOperationsInput | string
+    secret?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9386,6 +9407,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     lang?: StringFieldUpdateOperationsInput | string
+    secret?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9395,6 +9417,7 @@ export namespace Prisma {
     username: string
     password: string
     lang?: string
+    secret: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9404,6 +9427,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     lang?: StringFieldUpdateOperationsInput | string
+    secret?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9413,6 +9437,7 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     lang?: StringFieldUpdateOperationsInput | string
+    secret?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9814,6 +9839,7 @@ export namespace Prisma {
     username?: SortOrder
     password?: SortOrder
     lang?: SortOrder
+    secret?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9823,6 +9849,7 @@ export namespace Prisma {
     username?: SortOrder
     password?: SortOrder
     lang?: SortOrder
+    secret?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9832,6 +9859,7 @@ export namespace Prisma {
     username?: SortOrder
     password?: SortOrder
     lang?: SortOrder
+    secret?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }

@@ -176,6 +176,7 @@ exports.Prisma.UserScalarFieldEnum = {
   username: 'username',
   password: 'password',
   lang: 'lang',
+  secret: 'secret',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -240,7 +241,8 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   id: 'id',
   username: 'username',
   password: 'password',
-  lang: 'lang'
+  lang: 'lang',
+  secret: 'secret'
 };
 
 

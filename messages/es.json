@@ -103,8 +103,7 @@
   "Configure general application settings": "Configura las opciones generales de la aplicación.",
   "Language": "Idioma",
   "Select a language": "Selecciona un idioma",
-  "English": "English",
-  "Spanish": "Español",
+  "Language changed successfully": "Idioma cambiado correctamente",
   "This is the language that will be used throughout the application": "Este es el idioma que se utilizará en toda la aplicación.",
   "Change Password": "Cambiar contraseña",
   "Change your password to keep your account secure": "Cambia tu contraseña para mantener tu cuenta segura.",
@@ -175,5 +174,15 @@
   "License type deleted": "Tipo de licencia eliminado correctamente",
   "License type deleted description": "El tipo de licencia se ha eliminado correctamente",
   "License type deletion failed": "Error al eliminar el tipo de licencia",
-  "License type deletion failed description": "El tipo de licencia no se ha eliminado"
+  "License type deletion failed description": "El tipo de licencia no se ha eliminado",
+
+  "**AUTH**": "AUTH",
+  "Username": "Nombre de usuario",
+  "Password": "Contraseña",
+  "Enter your username": "Introduce tu nombre de usuario",
+  "Enter your password": "Introduce tu contraseña",
+  "Login": "Iniciar sesión",
+  "Logging in": "Iniciando sesión...",
+  "Hide password": "Esconder contraseña",
+  "Show password": "Mostrar contraseña"
 }

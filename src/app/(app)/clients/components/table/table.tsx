@@ -17,7 +17,8 @@ import { useTranslations } from "next-intl";
 import dayjs from "dayjs";
 import { ClientWithType } from "@/app/types";
 import { Badge } from "@/components/ui/badge";
-import { darkenColor } from "@/lib/colors";
+import { darkenColor, getTextColor } from "@/lib/colors";
+
 type Props = {
   clients: ClientWithType[];
   onDelete: (id: string) => Promise<void>;
@@ -56,7 +57,7 @@ export function ClientTable({ clients, onDelete }: Props) {
                 variant="outline"
                 style={{
                   backgroundColor: client.type?.color,
-                  color: "white",
+                  color: getTextColor(client.type?.color),
                   borderWidth: 3,
                   borderColor: darkenColor(client.type?.color, 30),
                 }}

@@ -21,7 +21,7 @@ import { DropdownMenuLabel } from "@/components/ui/dropdown-menu";
 import { useTranslations } from "next-intl";
 import { ClientType } from "@/generated/prisma";
 import { Badge } from "@/components/ui/badge";
-import { darkenColor } from "@/lib/colors";
+import { darkenColor, getTextColor } from "@/lib/colors";
 
 export function ClientSearchForm({
   types,
@@ -117,7 +117,7 @@ export function ClientSearchForm({
                         variant="outline"
                         style={{
                           backgroundColor: type.color,
-                          color: "white",
+                          color: getTextColor(type.color),
                           borderColor: darkenColor(type.color, 30),
                           borderWidth: 3,
                         }}

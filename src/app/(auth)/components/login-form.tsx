@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { login } from "../actions";
+import { useTranslations } from "next-intl";
 
 const schema = z.object({
   username: z.string().min(1, "Username is required"),
@@ -21,6 +22,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function LoginForm() {
+  const t = useTranslations();
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,13 +41,16 @@ export default function LoginForm() {
     try {
       setIsSubmitting(true);
       const result = await login(data);
+      console.log(result);
       if (result.success) router.push("/");
       else {
         setError(result.error || "Failed to login");
+        setIsSubmitting(false);
       }
     } catch (err) {
       setError("An unexpected error occurred");
       console.error(err);
+      setIsSubmitting(false);
     }
   };
 
@@ -58,11 +63,11 @@ export default function LoginForm() {
       )}
 
       <div className="space-y-2">
-        <Label htmlFor="username">Username</Label>
+        <Label htmlFor="username">{t("Username")}</Label>
         <Input
           id="username"
           type="text"
-          placeholder="Enter your username"
+          placeholder={t("Enter your username")}
           {...register("username")}
         />
         {errors.username && (
@@ -71,12 +76,12 @@ export default function LoginForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="password">Password</Label>
+        <Label htmlFor="password">{t("Password")}</Label>
         <div className="relative">
           <Input
             id="password"
             type={showPassword ? "text" : "password"}
-            placeholder="Enter your password"
+            placeholder={t("Enter your password")}
             {...register("password")}
           />
           <Button
@@ -85,7 +90,7 @@ export default function LoginForm() {
             size="sm"
             className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
             onClick={() => setShowPassword(!showPassword)}
-            aria-label={showPassword ? "Hide password" : "Show password"}
+            aria-label={showPassword ? t("Hide password") : t("Show password")}
           >
             {showPassword ? (
               <EyeOffIcon className="h-4 w-4 text-gray-500" />
@@ -100,7 +105,7 @@ export default function LoginForm() {
       </div>
 
       <Button type="submit" className="w-full mt-2" disabled={isSubmitting}>
-        {isSubmitting ? "Logging in..." : "Login"}
+        {isSubmitting ? t("Logging in") : t("Login")}
       </Button>
     </form>
   );

@@ -1,7 +1,20 @@
+import { prisma } from "@/lib/prisma";
 import LoginForm from "../components/login-form";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Image from "next/image";
+import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const count = await prisma.user.count();
+
+  if (count === 0) {
+    return redirect("/signup");
+  }
+
+  const cookieStore = await cookies();
+  const session = cookieStore.get("session");
+  if (session) {
+    return redirect("/");
+  }
+
   return <LoginForm />;
 }
