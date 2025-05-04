@@ -47,56 +47,58 @@ export function DeviceTypeForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("Name")}</FormLabel>
-              <FormControl>
-                <Input placeholder={t("Type name")} {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="icon"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Icon</FormLabel>
-              <div className="relative">
-                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-                  <DynamicIcon name={field.value} className="h-4 w-4" />
-                </div>
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
+        <div className="space-y-4">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("Name")}</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Enter an icon name (e.g. monitor)"
-                    className={"pl-9"}
-                    {...field}
-                  />
+                  <Input placeholder={t("Type name")} {...field} />
                 </FormControl>
-              </div>
-              <p className="mt-1 text-xs text-muted-foreground">
-                {t("You can browse icon names at")}{" "}
-                <a
-                  href="https://lucide.dev/icons/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline hover:text-primary"
-                >
-                  lucide.dev/icons
-                </a>
-                .
-              </p>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="icon"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Icon</FormLabel>
+                <div className="relative">
+                  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+                    <DynamicIcon name={field.value} className="h-4 w-4" />
+                  </div>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter an icon name (e.g. monitor)"
+                      className={"pl-9"}
+                      {...field}
+                    />
+                  </FormControl>
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  {t("You can browse icon names at")}{" "}
+                  <a
+                    href="https://lucide.dev/icons/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-primary"
+                  >
+                    lucide.dev/icons
+                  </a>
+                  .
+                </p>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <div className="flex justify-end gap-2">
-          <Button className="w-full" type="submit">
+          <Button className="w-full" type="submit" disabled={isLoading}>
             {isLoading ? t("Saving") : t("Save")}
           </Button>
         </div>

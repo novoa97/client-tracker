@@ -76,111 +76,112 @@ export function DeviceForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("Name")}</FormLabel>
-              <FormControl>
-                <Input placeholder={t("Device name")} {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="type"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("Type")}</FormLabel>
-              <Select
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-                disabled={types.length === 0}
-              >
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
+        <div className="space-y-4">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("Name")}</FormLabel>
                 <FormControl>
-                  <SelectTrigger
-                    id="type"
-                    name="type"
-                    className="w-full"
-                    tabIndex={0}
-                  >
-                    <SelectValue placeholder={t("Select device type")} />
-                  </SelectTrigger>
+                  <Input placeholder={t("Device name")} {...field} />
                 </FormControl>
-                <SelectContent>
-                  {types.map((type) => (
-                    <SelectItem key={type.key} value={type.key}>
-                      <div className="flex items-center gap-2">
-                        <DynamicIcon name={type.icon} className="h-4 w-4" />
-                        {type.name}
-                      </div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="serialNumber"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                {t("Serial Number")} ({t("Optional")})
-              </FormLabel>
-              <FormControl>
-                <Input placeholder="e.g. SMPH00123" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="type"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("Type")}</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  disabled={types.length === 0}
+                >
+                  <FormControl>
+                    <SelectTrigger
+                      id="type"
+                      name="type"
+                      className="w-full"
+                      tabIndex={0}
+                    >
+                      <SelectValue placeholder={t("Select device type")} />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {types.map((type) => (
+                      <SelectItem key={type.key} value={type.key}>
+                        <div className="flex items-center gap-2">
+                          <DynamicIcon name={type.icon} className="h-4 w-4" />
+                          {type.name}
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="anyDesk"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Anydesk ({t("Optional")})</FormLabel>
-              <FormControl>
-                <Input placeholder="e.g. 123 456 789" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="serialNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  {t("Serial Number")} ({t("Optional")})
+                </FormLabel>
+                <FormControl>
+                  <Input placeholder="e.g. SMPH00123" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="ip"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>
-                {t("IP Address")} ({t("Optional")})
-              </FormLabel>
-              <FormControl>
-                <Input placeholder="e.g. 192.168.1.10" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="anyDesk"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Anydesk ({t("Optional")})</FormLabel>
+                <FormControl>
+                  <Input placeholder="e.g. 123 456 789" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
+          <FormField
+            control={form.control}
+            name="ip"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>
+                  {t("IP Address")} ({t("Optional")})
+                </FormLabel>
+                <FormControl>
+                  <Input placeholder="e.g. 192.168.1.10" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <div className="flex justify-end gap-2">
           {onCancel && (
             <Button type="button" variant="outline" onClick={onCancel}>
               Cancel
             </Button>
           )}
-          <Button type="submit" disabled={isLoading}>
+          <Button type="submit" disabled={isLoading} className="w-full">
             {isLoading ? t("Saving") : t("Save")}
           </Button>
         </div>

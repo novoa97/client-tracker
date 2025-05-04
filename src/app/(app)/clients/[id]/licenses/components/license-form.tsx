@@ -24,6 +24,7 @@ import {
 import { LicenseType } from "@/generated/prisma";
 import { LicenseWithRelations } from "@/app/types";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 
 // Define the schema for sublicense
 const sublicenseSchema = z.object({
@@ -76,6 +77,13 @@ export function LicenseForm({
     form.setValue("subLicenses", [...currentSubLicenses, { id: "", type: "" }]);
   };
 
+  useEffect(() => {
+    const sublicenseList = document.getElementById("sublicense-list");
+    if (sublicenseList) {
+      sublicenseList.scrollTop = sublicenseList.scrollHeight;
+    }
+  }, [form.watch("subLicenses")]);
+
   // Function to remove a sublicense
   const removeSublicense = (index: number) => {
     const currentSubLicenses = form.getValues("subLicenses");
@@ -95,7 +103,7 @@ export function LicenseForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
         <div className="space-y-4">
           <FormField
             control={form.control}
@@ -168,7 +176,10 @@ export function LicenseForm({
             </div>
 
             {form.watch("subLicenses").length > 0 ? (
-              <div className="space-y-4">
+              <div
+                className="space-y-4 overflow-y-auto max-h-[300px]"
+                id="sublicense-list"
+              >
                 {form.watch("subLicenses").map((_, index) => (
                   <div key={index} className="rounded-md border p-4 relative">
                     <Button
@@ -242,9 +253,12 @@ export function LicenseForm({
             )}
           </div>
         </div>
-
         <div className="flex justify-end gap-2">
-          <Button type="submit" disabled={isSubmitting || types.length === 0}>
+          <Button
+            type="submit"
+            disabled={isSubmitting || types.length === 0}
+            className="w-full"
+          >
             {isSubmitting
               ? mode === "create"
                 ? t("Creating")

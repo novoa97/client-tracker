@@ -111,7 +111,6 @@ export function ClientInfo({ client, types }: Props) {
           types={types}
           defaultValues={client}
           onSubmit={handleSubmit}
-          onCancel={() => setIsEditing(false)}
           isLoading={false}
         />
       </DialogContainer>

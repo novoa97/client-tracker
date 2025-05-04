@@ -41,13 +41,13 @@ export default function LoginForm() {
     try {
       setIsSubmitting(true);
       const result = await login(data);
-      console.log(result);
       if (result.success) router.push("/");
       else {
         setError(result.error || "Failed to login");
         setIsSubmitting(false);
       }
     } catch (err) {
+      console.log("err", err);
       setError("An unexpected error occurred");
       console.error(err);
       setIsSubmitting(false);
@@ -103,7 +103,6 @@ export default function LoginForm() {
           <p className="text-sm text-red-500">{errors.password.message}</p>
         )}
       </div>
-
       <Button type="submit" className="w-full mt-2" disabled={isSubmitting}>
         {isSubmitting ? t("Logging in") : t("Login")}
       </Button>

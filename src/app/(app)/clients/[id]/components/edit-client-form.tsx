@@ -47,7 +47,6 @@ interface EditClientFormProps {
       city: string;
     }
   ) => void;
-  onCancel?: () => void;
   isLoading?: boolean;
 }
 
@@ -55,7 +54,6 @@ export function EditClientForm({
   defaultValues,
   types,
   onSubmit,
-  onCancel,
   isLoading,
 }: EditClientFormProps) {
   const t = useTranslations();
@@ -86,105 +84,102 @@ export function EditClientForm({
         onSubmit={form.handleSubmit((values) =>
           onSubmit({ ...values, ...coords })
         )}
-        className="space-y-4"
+        className="space-y-8"
       >
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("Name")}</FormLabel>
-              <FormControl>
-                <Input placeholder={t("Name")} {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="space-y-4">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("Name")}</FormLabel>
+                <FormControl>
+                  <Input placeholder={t("Name")} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="type"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("Type")}</FormLabel>
-              <FormControl>
-                <Select
-                  value={field.value}
-                  onValueChange={field.onChange}
-                  disabled={types.length === 0}
-                >
-                  <SelectTrigger className="w-full" tabIndex={0}>
-                    <SelectValue placeholder={t("Select a type")} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {types.map((type) => (
-                      <SelectItem key={type.key} value={type.key}>
-                        {type.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="type"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("Type")}</FormLabel>
+                <FormControl>
+                  <Select
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    disabled={types.length === 0}
+                  >
+                    <SelectTrigger className="w-full" tabIndex={0}>
+                      <SelectValue placeholder={t("Select a type")} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {types.map((type) => (
+                        <SelectItem key={type.key} value={type.key}>
+                          {type.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="legalName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("Legal Name")}</FormLabel>
-              <FormControl>
-                <Input placeholder={t("Legal Name")} {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="legalName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("Legal Name")}</FormLabel>
+                <FormControl>
+                  <Input placeholder={t("Legal Name")} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="taxId"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("VAT")}</FormLabel>
-              <FormControl>
-                <Input placeholder={t("VAT")} {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="taxId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("VAT")}</FormLabel>
+                <FormControl>
+                  <Input placeholder={t("VAT")} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="address"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <AddressAutocomplete
-                  value={field.value}
-                  onChange={field.onChange}
-                  onSelect={(address, lat, lng, city) => {
-                    field.onChange(address);
-                    setCoords({ latitude: lat, longitude: lng, city: city });
-                  }}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={form.control}
+            name="address"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <AddressAutocomplete
+                    value={field.value}
+                    onChange={field.onChange}
+                    onSelect={(address, lat, lng, city) => {
+                      field.onChange(address);
+                      setCoords({ latitude: lat, longitude: lng, city: city });
+                    }}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <div className="flex justify-end gap-2">
-          {onCancel && (
-            <Button type="button" variant="outline" onClick={onCancel}>
-              Cancelar
-            </Button>
-          )}
-          <Button type="submit" disabled={isLoading}>
+          <Button type="submit" disabled={isLoading} className="w-full">
             {isLoading ? "Guardando..." : "Guardar"}
           </Button>
         </div>

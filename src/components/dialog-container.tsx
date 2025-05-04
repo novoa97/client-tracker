@@ -31,7 +31,7 @@ export function DialogContainer({
           <DialogTitle>{title}</DialogTitle>
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
-        <div className="py-4">{children}</div>
+        <div className="pt-4">{children}</div>
       </DialogContent>
     </Dialog>
   );
