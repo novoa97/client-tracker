@@ -19,7 +19,6 @@ import {
 
 import ChangePasswordForm from "./change-password-form";
 import { LogOut } from "lucide-react";
-import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -28,8 +27,10 @@ import { useState } from "react";
 import { useUser } from "@/hooks/useUser";
 import { changePassword } from "@/lib/auth";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export function GeneralCard() {
+  const router = useRouter();
   const t = useTranslations();
   const locale = useLocale();
   const { user, changeLanguage } = useUser();
@@ -58,6 +59,10 @@ export function GeneralCard() {
       setError(result.error!);
     }
     setIsLoading(false);
+  }
+
+  async function handleLogout() {
+    router.push("/logout");
   }
 
   return (
@@ -121,13 +126,14 @@ export function GeneralCard() {
         </CardContent>
         <CardFooter className="justify-center">
           <div>
-            <Link
-              href="/logout"
+            <Button
+              variant="link"
               className="flex items-center justify-center text-grey-500 gap-2 text-sm px-3 py-2 rounded transition"
+              onClick={handleLogout}
             >
               <span>{t("Logout")}</span>
               <LogOut className="w-4 h-4" />
-            </Link>
+            </Button>
           </div>
         </CardFooter>
       </Card>
