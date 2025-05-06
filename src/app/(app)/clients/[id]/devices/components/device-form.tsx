@@ -23,6 +23,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Device, DeviceType } from "@/generated/prisma";
 import DynamicIcon from "@/components/icon";
 import { useTranslations } from "next-intl";
+import Combobox from "@/components/combobox";
 // valid IP regex
 const ipRegex =
   /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/;
@@ -98,32 +99,35 @@ export function DeviceForm({
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{t("Type")}</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  disabled={types.length === 0}
-                >
-                  <FormControl>
-                    <SelectTrigger
-                      id="type"
-                      name="type"
-                      className="w-full"
-                      tabIndex={0}
-                    >
-                      <SelectValue placeholder={t("Select device type")} />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {types.map((type) => (
-                      <SelectItem key={type.key} value={type.key}>
-                        <div className="flex items-center gap-2">
-                          <DynamicIcon name={type.icon} className="h-4 w-4" />
-                          {type.name}
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <FormControl>
+                  <Combobox
+                    hasIcons
+                    options={types.map((type) => ({
+                      label: type.name,
+                      value: type.key,
+                      icon: type.icon, // icono como string
+                    }))}
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder={t("Select device type")}
+                    renderOption={(option, selected) => (
+                      <div className="flex items-center gap-2">
+                        {option.icon && (
+                          <DynamicIcon
+                            name={option.icon}
+                            className="h-4 w-4 text-muted-foreground"
+                          />
+                        )}
+                        <span>{option.label}</span>
+                        {selected && (
+                          <span className="ml-auto text-sm text-green-600">
+                            ✓
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
