@@ -47,7 +47,9 @@ export function LicenseActions({ license, onDelete, onEdit }: Props) {
         <DropdownMenuContent align="end" className="w-36">
           <DropdownMenuItem
             onClick={() => {
-              onEdit();
+              setTimeout(() => {
+                onEdit();
+              }, 0);
             }}
           >
             <Edit className="mr-2 h-4 w-4" />
