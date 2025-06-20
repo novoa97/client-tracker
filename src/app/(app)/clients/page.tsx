@@ -13,6 +13,7 @@ import { Pagination } from "./components/pagination";
 import { Header } from "@/components/header";
 import { Users } from "lucide-react";
 import { Prisma } from "@/generated/prisma";
+import { getTranslations } from "next-intl/server";
 
 type Props = {
   searchParams: Promise<{
@@ -42,6 +43,7 @@ const getOrder = (order: string) => {
 };
 
 export default async function ClientsPage({ searchParams }: Props) {
+  const t = await getTranslations();
   const { page, search, type, city, order } = await searchParams;
 
   const orderBy = order ? getOrder(order) : { name: "desc" };
@@ -104,7 +106,7 @@ export default async function ClientsPage({ searchParams }: Props) {
 
   return (
     <div className="p-4 md:p-8 space-y-4 flex flex-col h-full">
-      <Header icon={Users} title={"Clients"}>
+      <Header icon={Users} title={t("Clients")}>
         <AddClientButton types={types}></AddClientButton>
       </Header>
       <Card className="flex-1 flex flex-col h-full overflow-hidden">
