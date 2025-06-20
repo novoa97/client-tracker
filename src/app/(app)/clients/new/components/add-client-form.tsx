@@ -37,6 +37,7 @@ const schema = z.object({
   latitude: z.number().min(-90).max(90),
   longitude: z.number().min(-180).max(180),
   type: z.string().min(1, "El tipo de cliente es obligatorio"),
+  referenceCode: z.string().optional(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -70,6 +71,7 @@ export default function AddClientForm({
       latitude: 0,
       longitude: 0,
       type: "",
+      referenceCode: "",
     },
   });
 
@@ -198,6 +200,20 @@ export default function AddClientForm({
                           onChange({ latitude: lat, longitude: lng });
                       }}
                     />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="referenceCode"
+                render={({ field }) => (
+                  <FormItem>
+                    <Label htmlFor="referenceCode">{t("Reference Code")}</Label>
+                    <FormControl>
+                      <Input id="referenceCode" {...field} />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}

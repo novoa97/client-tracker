@@ -33,6 +33,7 @@ const clientSchema = z.object({
     .min(2, "La razón social debe tener al menos 2 caracteres"),
   taxId: z.string().min(1, "CIF / VAT es obligatorio"),
   address: z.string().min(1, "La dirección es obligatoria"),
+  referenceCode: z.string().optional(),
 });
 
 export type EditClientFormValues = z.infer<typeof clientSchema>;
@@ -65,6 +66,7 @@ export function EditClientForm({
       taxId: defaultValues.taxId || "",
       name: defaultValues.name,
       address: defaultValues.address,
+      referenceCode: defaultValues.referenceCode || "",
     },
   });
 
@@ -172,6 +174,20 @@ export function EditClientForm({
                       setCoords({ latitude: lat, longitude: lng, city: city });
                     }}
                   />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="referenceCode"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("Reference Code")}</FormLabel>
+                <FormControl>
+                  <Input placeholder={t("Reference Code")} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

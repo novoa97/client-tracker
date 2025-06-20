@@ -2509,6 +2509,7 @@ export namespace Prisma {
     latitude: number | null
     longitude: number | null
     notes: string | null
+    referenceCode: string | null
     typeKey: string | null
     createdAt: Date | null
   }
@@ -2523,6 +2524,7 @@ export namespace Prisma {
     latitude: number | null
     longitude: number | null
     notes: string | null
+    referenceCode: string | null
     typeKey: string | null
     createdAt: Date | null
   }
@@ -2537,6 +2539,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes: number
+    referenceCode: number
     typeKey: number
     createdAt: number
     _all: number
@@ -2563,6 +2566,7 @@ export namespace Prisma {
     latitude?: true
     longitude?: true
     notes?: true
+    referenceCode?: true
     typeKey?: true
     createdAt?: true
   }
@@ -2577,6 +2581,7 @@ export namespace Prisma {
     latitude?: true
     longitude?: true
     notes?: true
+    referenceCode?: true
     typeKey?: true
     createdAt?: true
   }
@@ -2591,6 +2596,7 @@ export namespace Prisma {
     latitude?: true
     longitude?: true
     notes?: true
+    referenceCode?: true
     typeKey?: true
     createdAt?: true
     _all?: true
@@ -2692,6 +2698,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes: string | null
+    referenceCode: string | null
     typeKey: string
     createdAt: Date
     _count: ClientCountAggregateOutputType | null
@@ -2725,6 +2732,7 @@ export namespace Prisma {
     latitude?: boolean
     longitude?: boolean
     notes?: boolean
+    referenceCode?: boolean
     typeKey?: boolean
     createdAt?: boolean
     type?: boolean | ClientTypeDefaultArgs<ExtArgs>
@@ -2745,11 +2753,12 @@ export namespace Prisma {
     latitude?: boolean
     longitude?: boolean
     notes?: boolean
+    referenceCode?: boolean
     typeKey?: boolean
     createdAt?: boolean
   }
 
-  export type ClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "legalName" | "taxId" | "address" | "city" | "latitude" | "longitude" | "notes" | "typeKey" | "createdAt", ExtArgs["result"]["client"]>
+  export type ClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "legalName" | "taxId" | "address" | "city" | "latitude" | "longitude" | "notes" | "referenceCode" | "typeKey" | "createdAt", ExtArgs["result"]["client"]>
   export type ClientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     type?: boolean | ClientTypeDefaultArgs<ExtArgs>
     licenses?: boolean | Client$licensesArgs<ExtArgs>
@@ -2774,6 +2783,7 @@ export namespace Prisma {
       latitude: number
       longitude: number
       notes: string | null
+      referenceCode: string | null
       typeKey: string
       createdAt: Date
     }, ExtArgs["result"]["client"]>
@@ -3157,6 +3167,7 @@ export namespace Prisma {
     readonly latitude: FieldRef<"Client", 'Float'>
     readonly longitude: FieldRef<"Client", 'Float'>
     readonly notes: FieldRef<"Client", 'String'>
+    readonly referenceCode: FieldRef<"Client", 'String'>
     readonly typeKey: FieldRef<"Client", 'String'>
     readonly createdAt: FieldRef<"Client", 'DateTime'>
   }
@@ -8336,6 +8347,7 @@ export namespace Prisma {
     latitude: 'latitude',
     longitude: 'longitude',
     notes: 'notes',
+    referenceCode: 'referenceCode',
     typeKey: 'typeKey',
     createdAt: 'createdAt'
   };
@@ -8434,6 +8446,7 @@ export namespace Prisma {
     address: 'address',
     city: 'city',
     notes: 'notes',
+    referenceCode: 'referenceCode',
     typeKey: 'typeKey'
   };
 
@@ -8596,6 +8609,7 @@ export namespace Prisma {
     latitude?: FloatFilter<"Client"> | number
     longitude?: FloatFilter<"Client"> | number
     notes?: StringNullableFilter<"Client"> | string | null
+    referenceCode?: StringNullableFilter<"Client"> | string | null
     typeKey?: StringFilter<"Client"> | string
     createdAt?: DateTimeFilter<"Client"> | Date | string
     type?: XOR<ClientTypeScalarRelationFilter, ClientTypeWhereInput>
@@ -8613,6 +8627,7 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     notes?: SortOrderInput | SortOrder
+    referenceCode?: SortOrderInput | SortOrder
     typeKey?: SortOrder
     createdAt?: SortOrder
     type?: ClientTypeOrderByWithRelationInput
@@ -8634,6 +8649,7 @@ export namespace Prisma {
     latitude?: FloatFilter<"Client"> | number
     longitude?: FloatFilter<"Client"> | number
     notes?: StringNullableFilter<"Client"> | string | null
+    referenceCode?: StringNullableFilter<"Client"> | string | null
     typeKey?: StringFilter<"Client"> | string
     createdAt?: DateTimeFilter<"Client"> | Date | string
     type?: XOR<ClientTypeScalarRelationFilter, ClientTypeWhereInput>
@@ -8651,6 +8667,7 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     notes?: SortOrderInput | SortOrder
+    referenceCode?: SortOrderInput | SortOrder
     typeKey?: SortOrder
     createdAt?: SortOrder
     _count?: ClientCountOrderByAggregateInput
@@ -8673,6 +8690,7 @@ export namespace Prisma {
     latitude?: FloatWithAggregatesFilter<"Client"> | number
     longitude?: FloatWithAggregatesFilter<"Client"> | number
     notes?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    referenceCode?: StringNullableWithAggregatesFilter<"Client"> | string | null
     typeKey?: StringWithAggregatesFilter<"Client"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Client"> | Date | string
   }
@@ -9046,6 +9064,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes?: string | null
+    referenceCode?: string | null
     createdAt?: Date | string
     type: ClientTypeCreateNestedOneWithoutClientsInput
     licenses?: LicenseCreateNestedManyWithoutClientInput
@@ -9062,6 +9081,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes?: string | null
+    referenceCode?: string | null
     typeKey: string
     createdAt?: Date | string
     licenses?: LicenseUncheckedCreateNestedManyWithoutClientInput
@@ -9078,6 +9098,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: ClientTypeUpdateOneRequiredWithoutClientsNestedInput
     licenses?: LicenseUpdateManyWithoutClientNestedInput
@@ -9094,6 +9115,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceCode?: NullableStringFieldUpdateOperationsInput | string | null
     typeKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licenses?: LicenseUncheckedUpdateManyWithoutClientNestedInput
@@ -9110,6 +9132,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes?: string | null
+    referenceCode?: string | null
     typeKey: string
     createdAt?: Date | string
   }
@@ -9124,6 +9147,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -9137,6 +9161,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceCode?: NullableStringFieldUpdateOperationsInput | string | null
     typeKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9612,6 +9637,7 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     notes?: SortOrder
+    referenceCode?: SortOrder
     typeKey?: SortOrder
     createdAt?: SortOrder
   }
@@ -9631,6 +9657,7 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     notes?: SortOrder
+    referenceCode?: SortOrder
     typeKey?: SortOrder
     createdAt?: SortOrder
   }
@@ -9645,6 +9672,7 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     notes?: SortOrder
+    referenceCode?: SortOrder
     typeKey?: SortOrder
     createdAt?: SortOrder
   }
@@ -10372,6 +10400,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes?: string | null
+    referenceCode?: string | null
     createdAt?: Date | string
     licenses?: LicenseCreateNestedManyWithoutClientInput
     devices?: DeviceCreateNestedManyWithoutClientInput
@@ -10387,6 +10416,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes?: string | null
+    referenceCode?: string | null
     createdAt?: Date | string
     licenses?: LicenseUncheckedCreateNestedManyWithoutClientInput
     devices?: DeviceUncheckedCreateNestedManyWithoutClientInput
@@ -10431,6 +10461,7 @@ export namespace Prisma {
     latitude?: FloatFilter<"Client"> | number
     longitude?: FloatFilter<"Client"> | number
     notes?: StringNullableFilter<"Client"> | string | null
+    referenceCode?: StringNullableFilter<"Client"> | string | null
     typeKey?: StringFilter<"Client"> | string
     createdAt?: DateTimeFilter<"Client"> | Date | string
   }
@@ -10606,6 +10637,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes?: string | null
+    referenceCode?: string | null
     createdAt?: Date | string
     type: ClientTypeCreateNestedOneWithoutClientsInput
     devices?: DeviceCreateNestedManyWithoutClientInput
@@ -10621,6 +10653,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes?: string | null
+    referenceCode?: string | null
     typeKey: string
     createdAt?: Date | string
     devices?: DeviceUncheckedCreateNestedManyWithoutClientInput
@@ -10716,6 +10749,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: ClientTypeUpdateOneRequiredWithoutClientsNestedInput
     devices?: DeviceUpdateManyWithoutClientNestedInput
@@ -10731,6 +10765,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceCode?: NullableStringFieldUpdateOperationsInput | string | null
     typeKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devices?: DeviceUncheckedUpdateManyWithoutClientNestedInput
@@ -10919,6 +10954,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes?: string | null
+    referenceCode?: string | null
     createdAt?: Date | string
     type: ClientTypeCreateNestedOneWithoutClientsInput
     licenses?: LicenseCreateNestedManyWithoutClientInput
@@ -10934,6 +10970,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes?: string | null
+    referenceCode?: string | null
     typeKey: string
     createdAt?: Date | string
     licenses?: LicenseUncheckedCreateNestedManyWithoutClientInput
@@ -10990,6 +11027,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: ClientTypeUpdateOneRequiredWithoutClientsNestedInput
     licenses?: LicenseUpdateManyWithoutClientNestedInput
@@ -11005,6 +11043,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceCode?: NullableStringFieldUpdateOperationsInput | string | null
     typeKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licenses?: LicenseUncheckedUpdateManyWithoutClientNestedInput
@@ -11020,6 +11059,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     notes?: string | null
+    referenceCode?: string | null
     createdAt?: Date | string
   }
 
@@ -11033,6 +11073,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licenses?: LicenseUpdateManyWithoutClientNestedInput
     devices?: DeviceUpdateManyWithoutClientNestedInput
@@ -11048,6 +11089,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licenses?: LicenseUncheckedUpdateManyWithoutClientNestedInput
     devices?: DeviceUncheckedUpdateManyWithoutClientNestedInput
@@ -11063,6 +11105,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceCode?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
