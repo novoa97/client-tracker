@@ -38,6 +38,7 @@ export default async function ClientsPage({ searchParams }: Props) {
       { address: { contains: searchText } },
       { city: { contains: searchText } },
       { taxId: { contains: searchText } },
+      { referenceCode: { contains: searchText } },
     ],
   };
 

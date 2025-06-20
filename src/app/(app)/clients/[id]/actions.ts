@@ -12,6 +12,7 @@ export type EditClientData = {
     longitude: number;
     city: string;
     type: string;
+    referenceCode?: string;
 }
 
 
@@ -27,6 +28,7 @@ export async function editClient(id: string, data: EditClientData) {
             longitude: data.longitude,
             city: data.city,
             typeKey: data.type,
+            referenceCode: data.referenceCode,
         },
     });
 }
