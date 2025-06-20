@@ -20,12 +20,31 @@ type Props = {
     search?: string;
     type?: string;
     city?: string;
+    order?: string;
   }>;
 };
 
-export default async function ClientsPage({ searchParams }: Props) {
-  const { page, search, type, city } = await searchParams;
+const getOrder = (order: string) => {
+  const dir = order.startsWith("-") ? "desc" : "asc";
+  const field = order.startsWith("-") ? order.substring(1) : order;
 
+  // Map frontend field names to database fields
+  const fieldMap: { [key: string]: any } = {
+    name: { name: dir },
+    type: { type: { name: dir } },
+    licenses: { licenses: { _count: dir } },
+    devices: { devices: { _count: dir } },
+    city: { city: dir },
+    createdAt: { createdAt: dir },
+  };
+
+  return fieldMap[field] || { name: dir };
+};
+
+export default async function ClientsPage({ searchParams }: Props) {
+  const { page, search, type, city, order } = await searchParams;
+
+  const orderBy = order ? getOrder(order) : { name: "desc" };
   const pageNumber = Number(page ?? "1");
   const pageSize = 15;
   const searchText = search || "";
@@ -58,7 +77,7 @@ export default async function ClientsPage({ searchParams }: Props) {
     where,
     skip: (pageNumber - 1) * pageSize,
     take: pageSize,
-    orderBy: { createdAt: "desc" },
+    orderBy: orderBy,
     include: {
       type: true,
       _count: {
