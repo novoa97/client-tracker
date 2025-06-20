@@ -61,6 +61,12 @@ export default async function ClientsPage({ searchParams }: Props) {
     orderBy: { createdAt: "desc" },
     include: {
       type: true,
+      _count: {
+        select: {
+          licenses: true,
+          devices: true,
+        },
+      },
     },
   });
 

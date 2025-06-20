@@ -15,12 +15,13 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import dayjs from "dayjs";
-import { ClientWithType } from "@/app/types";
+import { ClientWithTypeAndCount } from "@/app/types";
 import { Badge } from "@/components/ui/badge";
 import { darkenColor, getTextColor } from "@/lib/colors";
+import { Computer, Key } from "lucide-react";
 
 type Props = {
-  clients: ClientWithType[];
+  clients: ClientWithTypeAndCount[];
   onDelete: (id: string) => Promise<void>;
 };
 
@@ -28,8 +29,12 @@ export function ClientTable({ clients, onDelete }: Props) {
   const t = useTranslations();
   const router = useRouter();
 
-  const handleRowClick = (id: string) => {
-    router.push(`/clients/${id}`);
+  const handleRowClick = (id: string, path?: "licenses" | "devices") => {
+    if (path) {
+      router.push(`/clients/${id}/${path}`);
+    } else {
+      router.push(`/clients/${id}`);
+    }
   };
 
   return (
@@ -38,7 +43,8 @@ export function ClientTable({ clients, onDelete }: Props) {
         <TableRow>
           <TableHead>{t("Name")}</TableHead>
           <TableHead>{t("Type")}</TableHead>
-          <TableHead>{t("VAT")}</TableHead>
+          <TableHead>{t("Licenses")}</TableHead>
+          <TableHead>{t("Devices")}</TableHead>
           <TableHead>{t("City")}</TableHead>
           <TableHead>{t("Created At")}</TableHead>
           <TableHead className="text-right">{t("Actions")}</TableHead>
@@ -65,7 +71,31 @@ export function ClientTable({ clients, onDelete }: Props) {
                 {client.type?.name}
               </Badge>
             </TableCell>
-            <TableCell>{client.taxId}</TableCell>
+            {/** Licenses */}
+            <TableCell
+              onClick={(e) => {
+                e.stopPropagation();
+                handleRowClick(client.id, "licenses");
+              }}
+            >
+              <Badge variant="secondary" className="text-sm">
+                <Key className="h-6 w-6" />
+                {client._count.licenses}
+              </Badge>
+            </TableCell>
+            {/** Devices */}
+            <TableCell
+              onClick={(e) => {
+                e.stopPropagation();
+                handleRowClick(client.id, "devices");
+              }}
+            >
+              <Badge variant="secondary" className="text-sm">
+                <Computer className="h-6 w-6" />
+                {client._count.devices}
+              </Badge>
+            </TableCell>
+            {/** City */}
             <TableCell>{client.city}</TableCell>
             <TableCell>
               {dayjs(client.createdAt).format("DD/MM/YYYY")}
