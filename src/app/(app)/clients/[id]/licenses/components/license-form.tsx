@@ -77,12 +77,15 @@ export function LicenseForm({
     form.setValue("subLicenses", [...currentSubLicenses, { id: "", type: "" }]);
   };
 
+  // Watch subLicenses for changes
+  const subLicenses = form.watch("subLicenses");
+
   useEffect(() => {
     const sublicenseList = document.getElementById("sublicense-list");
     if (sublicenseList) {
       sublicenseList.scrollTop = sublicenseList.scrollHeight;
     }
-  }, [form.watch("subLicenses")]);
+  }, [subLicenses]);
 
   // Function to remove a sublicense
   const removeSublicense = (index: number) => {
