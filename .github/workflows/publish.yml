@@ -74,6 +74,11 @@ jobs:
           docker build -t $IMAGE_NAME:${{ env.VERSION }} .
           docker tag $IMAGE_NAME:${{ env.VERSION }} $IMAGE_NAME:latest
 
+      - name: Push Docker image
+        run: |
+          docker push $IMAGE_NAME:${{ env.VERSION }}
+          docker push $IMAGE_NAME:latest
+
       - name: Extract last release notes from CHANGELOG.md
         id: changelog
         run: |

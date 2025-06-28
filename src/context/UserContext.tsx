@@ -30,7 +30,7 @@ export function UserProvider({
     if (locale !== user.lang) {
       setLocale(user.lang);
     }
-  }, [user, locale]);
+  }, [user, locale, setLocale]);
 
   const changeLanguage = async (code: string) => {
     // Update the user in the database

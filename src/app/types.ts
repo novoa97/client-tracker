@@ -31,4 +31,17 @@ export const ClientWithType = Prisma.validator<Prisma.ClientDefaultArgs>()({
     }
 })
 
+export const ClientWithTypeAndCount = Prisma.validator<Prisma.ClientDefaultArgs>()({
+    include: {
+        type: true,
+        _count: {
+            select: {
+                licenses: true,
+                devices: true,
+            }
+        }
+    }
+})
+
 export type ClientWithType = Prisma.ClientGetPayload<typeof ClientWithType>
+export type ClientWithTypeAndCount = Prisma.ClientGetPayload<typeof ClientWithTypeAndCount>

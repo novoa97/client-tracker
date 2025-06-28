@@ -35,6 +35,7 @@ model Client {
   latitude   Float
   longitude  Float
   notes      String? @db.MediumText
+  referenceCode String?
   typeKey String
   type   ClientType @relation(fields: [typeKey], references: [key])
   licenses License[]

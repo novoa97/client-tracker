@@ -10,6 +10,7 @@ type AddClientInput = {
     legalName: string
     city: string;
     type: string;
+    referenceCode?: string;
 };
 
 export async function addClient(input: AddClientInput) {
@@ -24,6 +25,7 @@ export async function addClient(input: AddClientInput) {
             legalName: input.legalName,
             city: input.city,
             typeKey: input.type,
+            referenceCode: input.referenceCode,
         },
     });
 

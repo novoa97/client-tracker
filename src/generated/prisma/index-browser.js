@@ -135,6 +135,7 @@ exports.Prisma.ClientScalarFieldEnum = {
   latitude: 'latitude',
   longitude: 'longitude',
   notes: 'notes',
+  referenceCode: 'referenceCode',
   typeKey: 'typeKey',
   createdAt: 'createdAt'
 };
@@ -206,6 +207,7 @@ exports.Prisma.ClientOrderByRelevanceFieldEnum = {
   address: 'address',
   city: 'city',
   notes: 'notes',
+  referenceCode: 'referenceCode',
   typeKey: 'typeKey'
 };
 

@@ -10,6 +10,7 @@ import {
   ChevronDown,
   ChevronUp,
   Edit,
+  SearchCode,
 } from "lucide-react";
 import { useTranslations } from "use-intl";
 import { Button } from "@/components/ui/button";
@@ -64,7 +65,11 @@ export function ClientInfo({ client, types }: Props) {
         </CardHeader>
 
         <CardContent className={`${isOpen ? "block" : "hidden"} md:block`}>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div
+            className={`grid grid-cols-1 ${
+              client.referenceCode ? "md:grid-cols-5" : "md:grid-cols-4"
+            } gap-4`}
+          >
             <div className="flex items-center gap-2">
               <Building className="h-5 w-5 text-muted-foreground flex-shrink-0" />
               <div>
@@ -82,6 +87,18 @@ export function ClientInfo({ client, types }: Props) {
                 <p className="font-medium">{client.taxId}</p>
               </div>
             </div>
+
+            {client.referenceCode && (
+              <div className="flex items-center gap-2">
+                <SearchCode className="h-5 w-5 text-muted-foreground flex-shrink-0" />
+                <div>
+                  <p className="text-xs text-muted-foreground">
+                    {t("Reference Code")}
+                  </p>
+                  <p className="font-medium">{client.referenceCode}</p>
+                </div>
+              </div>
+            )}
 
             <div className="flex items-center gap-2 md:col-span-2">
               <MapPin className="h-5 w-5 text-muted-foreground flex-shrink-0" />

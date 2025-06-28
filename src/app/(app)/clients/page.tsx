@@ -13,6 +13,7 @@ import { Pagination } from "./components/pagination";
 import { Header } from "@/components/header";
 import { Users } from "lucide-react";
 import { Prisma } from "@/generated/prisma";
+import { getTranslations } from "next-intl/server";
 
 type Props = {
   searchParams: Promise<{
@@ -20,12 +21,32 @@ type Props = {
     search?: string;
     type?: string;
     city?: string;
+    order?: string;
   }>;
 };
 
-export default async function ClientsPage({ searchParams }: Props) {
-  const { page, search, type, city } = await searchParams;
+const getOrder = (order: string) => {
+  const dir = order.startsWith("-") ? "desc" : "asc";
+  const field = order.startsWith("-") ? order.substring(1) : order;
 
+  // Map frontend field names to database fields
+  const fieldMap = {
+    name: { name: dir },
+    type: { type: { name: dir } },
+    licenses: { licenses: { _count: dir } },
+    devices: { devices: { _count: dir } },
+    city: { city: dir },
+    createdAt: { createdAt: dir },
+  };
+
+  return fieldMap[field as keyof typeof fieldMap] || { name: dir };
+};
+
+export default async function ClientsPage({ searchParams }: Props) {
+  const t = await getTranslations();
+  const { page, search, type, city, order } = await searchParams;
+
+  const orderBy = order ? getOrder(order) : { name: "desc" };
   const pageNumber = Number(page ?? "1");
   const pageSize = 15;
   const searchText = search || "";
@@ -38,6 +59,7 @@ export default async function ClientsPage({ searchParams }: Props) {
       { address: { contains: searchText } },
       { city: { contains: searchText } },
       { taxId: { contains: searchText } },
+      { referenceCode: { contains: searchText } },
     ],
   };
 
@@ -57,9 +79,15 @@ export default async function ClientsPage({ searchParams }: Props) {
     where,
     skip: (pageNumber - 1) * pageSize,
     take: pageSize,
-    orderBy: { createdAt: "desc" },
+    orderBy: orderBy as Prisma.ClientOrderByWithRelationInput,
     include: {
       type: true,
+      _count: {
+        select: {
+          licenses: true,
+          devices: true,
+        },
+      },
     },
   });
 
@@ -78,7 +106,7 @@ export default async function ClientsPage({ searchParams }: Props) {
 
   return (
     <div className="p-4 md:p-8 space-y-4 flex flex-col h-full">
-      <Header icon={Users} title={"Clients"}>
+      <Header icon={Users} title={t("Clients")}>
         <AddClientButton types={types}></AddClientButton>
       </Header>
       <Card className="flex-1 flex flex-col h-full overflow-hidden">
