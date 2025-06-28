@@ -182,6 +182,17 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.IncidenceScalarFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  title: 'title',
+  description: 'description',
+  date: 'date',
+  closed: 'closed',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -247,6 +258,13 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   secret: 'secret'
 };
 
+exports.Prisma.IncidenceOrderByRelevanceFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  title: 'title',
+  description: 'description'
+};
+
 
 exports.Prisma.ModelName = {
   ClientType: 'ClientType',
@@ -255,7 +273,8 @@ exports.Prisma.ModelName = {
   LicenseType: 'LicenseType',
   DeviceType: 'DeviceType',
   Device: 'Device',
-  User: 'User'
+  User: 'User',
+  Incidence: 'Incidence'
 };
 
 /**

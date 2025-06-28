@@ -48,6 +48,11 @@ export type Device = $Result.DefaultSelection<Prisma.$DevicePayload>
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model Incidence
+ * 
+ */
+export type Incidence = $Result.DefaultSelection<Prisma.$IncidencePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -243,6 +248,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.incidence`: Exposes CRUD operations for the **Incidence** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Incidences
+    * const incidences = await prisma.incidence.findMany()
+    * ```
+    */
+  get incidence(): Prisma.IncidenceDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -689,7 +704,8 @@ export namespace Prisma {
     LicenseType: 'LicenseType',
     DeviceType: 'DeviceType',
     Device: 'Device',
-    User: 'User'
+    User: 'User',
+    Incidence: 'Incidence'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -708,7 +724,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "clientType" | "client" | "license" | "licenseType" | "deviceType" | "device" | "user"
+      modelProps: "clientType" | "client" | "license" | "licenseType" | "deviceType" | "device" | "user" | "incidence"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1174,6 +1190,72 @@ export namespace Prisma {
           }
         }
       }
+      Incidence: {
+        payload: Prisma.$IncidencePayload<ExtArgs>
+        fields: Prisma.IncidenceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IncidenceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidencePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IncidenceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidencePayload>
+          }
+          findFirst: {
+            args: Prisma.IncidenceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidencePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IncidenceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidencePayload>
+          }
+          findMany: {
+            args: Prisma.IncidenceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidencePayload>[]
+          }
+          create: {
+            args: Prisma.IncidenceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidencePayload>
+          }
+          createMany: {
+            args: Prisma.IncidenceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.IncidenceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidencePayload>
+          }
+          update: {
+            args: Prisma.IncidenceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidencePayload>
+          }
+          deleteMany: {
+            args: Prisma.IncidenceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IncidenceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.IncidenceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidencePayload>
+          }
+          aggregate: {
+            args: Prisma.IncidenceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIncidence>
+          }
+          groupBy: {
+            args: Prisma.IncidenceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IncidenceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IncidenceCountArgs<ExtArgs>
+            result: $Utils.Optional<IncidenceCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1265,6 +1347,7 @@ export namespace Prisma {
     deviceType?: DeviceTypeOmit
     device?: DeviceOmit
     user?: UserOmit
+    incidence?: IncidenceOmit
   }
 
   /* Types for Logging */
@@ -1392,11 +1475,13 @@ export namespace Prisma {
   export type ClientCountOutputType = {
     licenses: number
     devices: number
+    incidences: number
   }
 
   export type ClientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     licenses?: boolean | ClientCountOutputTypeCountLicensesArgs
     devices?: boolean | ClientCountOutputTypeCountDevicesArgs
+    incidences?: boolean | ClientCountOutputTypeCountIncidencesArgs
   }
 
   // Custom InputTypes
@@ -1422,6 +1507,13 @@ export namespace Prisma {
    */
   export type ClientCountOutputTypeCountDevicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DeviceWhereInput
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountIncidencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IncidenceWhereInput
   }
 
 
@@ -2738,6 +2830,7 @@ export namespace Prisma {
     type?: boolean | ClientTypeDefaultArgs<ExtArgs>
     licenses?: boolean | Client$licensesArgs<ExtArgs>
     devices?: boolean | Client$devicesArgs<ExtArgs>
+    incidences?: boolean | Client$incidencesArgs<ExtArgs>
     _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["client"]>
 
@@ -2763,6 +2856,7 @@ export namespace Prisma {
     type?: boolean | ClientTypeDefaultArgs<ExtArgs>
     licenses?: boolean | Client$licensesArgs<ExtArgs>
     devices?: boolean | Client$devicesArgs<ExtArgs>
+    incidences?: boolean | Client$incidencesArgs<ExtArgs>
     _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2772,6 +2866,7 @@ export namespace Prisma {
       type: Prisma.$ClientTypePayload<ExtArgs>
       licenses: Prisma.$LicensePayload<ExtArgs>[]
       devices: Prisma.$DevicePayload<ExtArgs>[]
+      incidences: Prisma.$IncidencePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3129,6 +3224,7 @@ export namespace Prisma {
     type<T extends ClientTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientTypeDefaultArgs<ExtArgs>>): Prisma__ClientTypeClient<$Result.GetResult<Prisma.$ClientTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     licenses<T extends Client$licensesArgs<ExtArgs> = {}>(args?: Subset<T, Client$licensesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LicensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     devices<T extends Client$devicesArgs<ExtArgs> = {}>(args?: Subset<T, Client$devicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DevicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    incidences<T extends Client$incidencesArgs<ExtArgs> = {}>(args?: Subset<T, Client$incidencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncidencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3558,6 +3654,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DeviceScalarFieldEnum | DeviceScalarFieldEnum[]
+  }
+
+  /**
+   * Client.incidences
+   */
+  export type Client$incidencesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incidence
+     */
+    select?: IncidenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incidence
+     */
+    omit?: IncidenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidenceInclude<ExtArgs> | null
+    where?: IncidenceWhereInput
+    orderBy?: IncidenceOrderByWithRelationInput | IncidenceOrderByWithRelationInput[]
+    cursor?: IncidenceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IncidenceScalarFieldEnum | IncidenceScalarFieldEnum[]
   }
 
   /**
@@ -8313,6 +8433,968 @@ export namespace Prisma {
 
 
   /**
+   * Model Incidence
+   */
+
+  export type AggregateIncidence = {
+    _count: IncidenceCountAggregateOutputType | null
+    _min: IncidenceMinAggregateOutputType | null
+    _max: IncidenceMaxAggregateOutputType | null
+  }
+
+  export type IncidenceMinAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    title: string | null
+    description: string | null
+    date: Date | null
+    closed: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type IncidenceMaxAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    title: string | null
+    description: string | null
+    date: Date | null
+    closed: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type IncidenceCountAggregateOutputType = {
+    id: number
+    clientId: number
+    title: number
+    description: number
+    date: number
+    closed: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type IncidenceMinAggregateInputType = {
+    id?: true
+    clientId?: true
+    title?: true
+    description?: true
+    date?: true
+    closed?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type IncidenceMaxAggregateInputType = {
+    id?: true
+    clientId?: true
+    title?: true
+    description?: true
+    date?: true
+    closed?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type IncidenceCountAggregateInputType = {
+    id?: true
+    clientId?: true
+    title?: true
+    description?: true
+    date?: true
+    closed?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type IncidenceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Incidence to aggregate.
+     */
+    where?: IncidenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Incidences to fetch.
+     */
+    orderBy?: IncidenceOrderByWithRelationInput | IncidenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IncidenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Incidences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Incidences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Incidences
+    **/
+    _count?: true | IncidenceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IncidenceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IncidenceMaxAggregateInputType
+  }
+
+  export type GetIncidenceAggregateType<T extends IncidenceAggregateArgs> = {
+        [P in keyof T & keyof AggregateIncidence]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIncidence[P]>
+      : GetScalarType<T[P], AggregateIncidence[P]>
+  }
+
+
+
+
+  export type IncidenceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IncidenceWhereInput
+    orderBy?: IncidenceOrderByWithAggregationInput | IncidenceOrderByWithAggregationInput[]
+    by: IncidenceScalarFieldEnum[] | IncidenceScalarFieldEnum
+    having?: IncidenceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IncidenceCountAggregateInputType | true
+    _min?: IncidenceMinAggregateInputType
+    _max?: IncidenceMaxAggregateInputType
+  }
+
+  export type IncidenceGroupByOutputType = {
+    id: string
+    clientId: string
+    title: string
+    description: string | null
+    date: Date
+    closed: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: IncidenceCountAggregateOutputType | null
+    _min: IncidenceMinAggregateOutputType | null
+    _max: IncidenceMaxAggregateOutputType | null
+  }
+
+  type GetIncidenceGroupByPayload<T extends IncidenceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IncidenceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IncidenceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IncidenceGroupByOutputType[P]>
+            : GetScalarType<T[P], IncidenceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IncidenceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    title?: boolean
+    description?: boolean
+    date?: boolean
+    closed?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["incidence"]>
+
+
+
+  export type IncidenceSelectScalar = {
+    id?: boolean
+    clientId?: boolean
+    title?: boolean
+    description?: boolean
+    date?: boolean
+    closed?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type IncidenceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "title" | "description" | "date" | "closed" | "createdAt" | "updatedAt", ExtArgs["result"]["incidence"]>
+  export type IncidenceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+  }
+
+  export type $IncidencePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Incidence"
+    objects: {
+      client: Prisma.$ClientPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clientId: string
+      title: string
+      description: string | null
+      date: Date
+      closed: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["incidence"]>
+    composites: {}
+  }
+
+  type IncidenceGetPayload<S extends boolean | null | undefined | IncidenceDefaultArgs> = $Result.GetResult<Prisma.$IncidencePayload, S>
+
+  type IncidenceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IncidenceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IncidenceCountAggregateInputType | true
+    }
+
+  export interface IncidenceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Incidence'], meta: { name: 'Incidence' } }
+    /**
+     * Find zero or one Incidence that matches the filter.
+     * @param {IncidenceFindUniqueArgs} args - Arguments to find a Incidence
+     * @example
+     * // Get one Incidence
+     * const incidence = await prisma.incidence.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IncidenceFindUniqueArgs>(args: SelectSubset<T, IncidenceFindUniqueArgs<ExtArgs>>): Prisma__IncidenceClient<$Result.GetResult<Prisma.$IncidencePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Incidence that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IncidenceFindUniqueOrThrowArgs} args - Arguments to find a Incidence
+     * @example
+     * // Get one Incidence
+     * const incidence = await prisma.incidence.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IncidenceFindUniqueOrThrowArgs>(args: SelectSubset<T, IncidenceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IncidenceClient<$Result.GetResult<Prisma.$IncidencePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Incidence that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncidenceFindFirstArgs} args - Arguments to find a Incidence
+     * @example
+     * // Get one Incidence
+     * const incidence = await prisma.incidence.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IncidenceFindFirstArgs>(args?: SelectSubset<T, IncidenceFindFirstArgs<ExtArgs>>): Prisma__IncidenceClient<$Result.GetResult<Prisma.$IncidencePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Incidence that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncidenceFindFirstOrThrowArgs} args - Arguments to find a Incidence
+     * @example
+     * // Get one Incidence
+     * const incidence = await prisma.incidence.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IncidenceFindFirstOrThrowArgs>(args?: SelectSubset<T, IncidenceFindFirstOrThrowArgs<ExtArgs>>): Prisma__IncidenceClient<$Result.GetResult<Prisma.$IncidencePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Incidences that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncidenceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Incidences
+     * const incidences = await prisma.incidence.findMany()
+     * 
+     * // Get first 10 Incidences
+     * const incidences = await prisma.incidence.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const incidenceWithIdOnly = await prisma.incidence.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends IncidenceFindManyArgs>(args?: SelectSubset<T, IncidenceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncidencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Incidence.
+     * @param {IncidenceCreateArgs} args - Arguments to create a Incidence.
+     * @example
+     * // Create one Incidence
+     * const Incidence = await prisma.incidence.create({
+     *   data: {
+     *     // ... data to create a Incidence
+     *   }
+     * })
+     * 
+     */
+    create<T extends IncidenceCreateArgs>(args: SelectSubset<T, IncidenceCreateArgs<ExtArgs>>): Prisma__IncidenceClient<$Result.GetResult<Prisma.$IncidencePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Incidences.
+     * @param {IncidenceCreateManyArgs} args - Arguments to create many Incidences.
+     * @example
+     * // Create many Incidences
+     * const incidence = await prisma.incidence.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IncidenceCreateManyArgs>(args?: SelectSubset<T, IncidenceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Incidence.
+     * @param {IncidenceDeleteArgs} args - Arguments to delete one Incidence.
+     * @example
+     * // Delete one Incidence
+     * const Incidence = await prisma.incidence.delete({
+     *   where: {
+     *     // ... filter to delete one Incidence
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IncidenceDeleteArgs>(args: SelectSubset<T, IncidenceDeleteArgs<ExtArgs>>): Prisma__IncidenceClient<$Result.GetResult<Prisma.$IncidencePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Incidence.
+     * @param {IncidenceUpdateArgs} args - Arguments to update one Incidence.
+     * @example
+     * // Update one Incidence
+     * const incidence = await prisma.incidence.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IncidenceUpdateArgs>(args: SelectSubset<T, IncidenceUpdateArgs<ExtArgs>>): Prisma__IncidenceClient<$Result.GetResult<Prisma.$IncidencePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Incidences.
+     * @param {IncidenceDeleteManyArgs} args - Arguments to filter Incidences to delete.
+     * @example
+     * // Delete a few Incidences
+     * const { count } = await prisma.incidence.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IncidenceDeleteManyArgs>(args?: SelectSubset<T, IncidenceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Incidences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncidenceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Incidences
+     * const incidence = await prisma.incidence.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IncidenceUpdateManyArgs>(args: SelectSubset<T, IncidenceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Incidence.
+     * @param {IncidenceUpsertArgs} args - Arguments to update or create a Incidence.
+     * @example
+     * // Update or create a Incidence
+     * const incidence = await prisma.incidence.upsert({
+     *   create: {
+     *     // ... data to create a Incidence
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Incidence we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IncidenceUpsertArgs>(args: SelectSubset<T, IncidenceUpsertArgs<ExtArgs>>): Prisma__IncidenceClient<$Result.GetResult<Prisma.$IncidencePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Incidences.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncidenceCountArgs} args - Arguments to filter Incidences to count.
+     * @example
+     * // Count the number of Incidences
+     * const count = await prisma.incidence.count({
+     *   where: {
+     *     // ... the filter for the Incidences we want to count
+     *   }
+     * })
+    **/
+    count<T extends IncidenceCountArgs>(
+      args?: Subset<T, IncidenceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IncidenceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Incidence.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncidenceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IncidenceAggregateArgs>(args: Subset<T, IncidenceAggregateArgs>): Prisma.PrismaPromise<GetIncidenceAggregateType<T>>
+
+    /**
+     * Group by Incidence.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncidenceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IncidenceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IncidenceGroupByArgs['orderBy'] }
+        : { orderBy?: IncidenceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IncidenceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIncidenceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Incidence model
+   */
+  readonly fields: IncidenceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Incidence.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IncidenceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Incidence model
+   */
+  interface IncidenceFieldRefs {
+    readonly id: FieldRef<"Incidence", 'String'>
+    readonly clientId: FieldRef<"Incidence", 'String'>
+    readonly title: FieldRef<"Incidence", 'String'>
+    readonly description: FieldRef<"Incidence", 'String'>
+    readonly date: FieldRef<"Incidence", 'DateTime'>
+    readonly closed: FieldRef<"Incidence", 'Boolean'>
+    readonly createdAt: FieldRef<"Incidence", 'DateTime'>
+    readonly updatedAt: FieldRef<"Incidence", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Incidence findUnique
+   */
+  export type IncidenceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incidence
+     */
+    select?: IncidenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incidence
+     */
+    omit?: IncidenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Incidence to fetch.
+     */
+    where: IncidenceWhereUniqueInput
+  }
+
+  /**
+   * Incidence findUniqueOrThrow
+   */
+  export type IncidenceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incidence
+     */
+    select?: IncidenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incidence
+     */
+    omit?: IncidenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Incidence to fetch.
+     */
+    where: IncidenceWhereUniqueInput
+  }
+
+  /**
+   * Incidence findFirst
+   */
+  export type IncidenceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incidence
+     */
+    select?: IncidenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incidence
+     */
+    omit?: IncidenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Incidence to fetch.
+     */
+    where?: IncidenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Incidences to fetch.
+     */
+    orderBy?: IncidenceOrderByWithRelationInput | IncidenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Incidences.
+     */
+    cursor?: IncidenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Incidences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Incidences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Incidences.
+     */
+    distinct?: IncidenceScalarFieldEnum | IncidenceScalarFieldEnum[]
+  }
+
+  /**
+   * Incidence findFirstOrThrow
+   */
+  export type IncidenceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incidence
+     */
+    select?: IncidenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incidence
+     */
+    omit?: IncidenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Incidence to fetch.
+     */
+    where?: IncidenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Incidences to fetch.
+     */
+    orderBy?: IncidenceOrderByWithRelationInput | IncidenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Incidences.
+     */
+    cursor?: IncidenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Incidences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Incidences.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Incidences.
+     */
+    distinct?: IncidenceScalarFieldEnum | IncidenceScalarFieldEnum[]
+  }
+
+  /**
+   * Incidence findMany
+   */
+  export type IncidenceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incidence
+     */
+    select?: IncidenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incidence
+     */
+    omit?: IncidenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidenceInclude<ExtArgs> | null
+    /**
+     * Filter, which Incidences to fetch.
+     */
+    where?: IncidenceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Incidences to fetch.
+     */
+    orderBy?: IncidenceOrderByWithRelationInput | IncidenceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Incidences.
+     */
+    cursor?: IncidenceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Incidences from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Incidences.
+     */
+    skip?: number
+    distinct?: IncidenceScalarFieldEnum | IncidenceScalarFieldEnum[]
+  }
+
+  /**
+   * Incidence create
+   */
+  export type IncidenceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incidence
+     */
+    select?: IncidenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incidence
+     */
+    omit?: IncidenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidenceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Incidence.
+     */
+    data: XOR<IncidenceCreateInput, IncidenceUncheckedCreateInput>
+  }
+
+  /**
+   * Incidence createMany
+   */
+  export type IncidenceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Incidences.
+     */
+    data: IncidenceCreateManyInput | IncidenceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Incidence update
+   */
+  export type IncidenceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incidence
+     */
+    select?: IncidenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incidence
+     */
+    omit?: IncidenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidenceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Incidence.
+     */
+    data: XOR<IncidenceUpdateInput, IncidenceUncheckedUpdateInput>
+    /**
+     * Choose, which Incidence to update.
+     */
+    where: IncidenceWhereUniqueInput
+  }
+
+  /**
+   * Incidence updateMany
+   */
+  export type IncidenceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Incidences.
+     */
+    data: XOR<IncidenceUpdateManyMutationInput, IncidenceUncheckedUpdateManyInput>
+    /**
+     * Filter which Incidences to update
+     */
+    where?: IncidenceWhereInput
+    /**
+     * Limit how many Incidences to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Incidence upsert
+   */
+  export type IncidenceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incidence
+     */
+    select?: IncidenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incidence
+     */
+    omit?: IncidenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidenceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Incidence to update in case it exists.
+     */
+    where: IncidenceWhereUniqueInput
+    /**
+     * In case the Incidence found by the `where` argument doesn't exist, create a new Incidence with this data.
+     */
+    create: XOR<IncidenceCreateInput, IncidenceUncheckedCreateInput>
+    /**
+     * In case the Incidence was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IncidenceUpdateInput, IncidenceUncheckedUpdateInput>
+  }
+
+  /**
+   * Incidence delete
+   */
+  export type IncidenceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incidence
+     */
+    select?: IncidenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incidence
+     */
+    omit?: IncidenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidenceInclude<ExtArgs> | null
+    /**
+     * Filter which Incidence to delete.
+     */
+    where: IncidenceWhereUniqueInput
+  }
+
+  /**
+   * Incidence deleteMany
+   */
+  export type IncidenceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Incidences to delete
+     */
+    where?: IncidenceWhereInput
+    /**
+     * Limit how many Incidences to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Incidence without action
+   */
+  export type IncidenceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incidence
+     */
+    select?: IncidenceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incidence
+     */
+    omit?: IncidenceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidenceInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -8412,6 +9494,20 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const IncidenceScalarFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    title: 'title',
+    description: 'description',
+    date: 'date',
+    closed: 'closed',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type IncidenceScalarFieldEnum = (typeof IncidenceScalarFieldEnum)[keyof typeof IncidenceScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -8504,6 +9600,16 @@ export namespace Prisma {
   export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
 
 
+  export const IncidenceOrderByRelevanceFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    title: 'title',
+    description: 'description'
+  };
+
+  export type IncidenceOrderByRelevanceFieldEnum = (typeof IncidenceOrderByRelevanceFieldEnum)[keyof typeof IncidenceOrderByRelevanceFieldEnum]
+
+
   /**
    * Field references
    */
@@ -8527,6 +9633,13 @@ export namespace Prisma {
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -8615,6 +9728,7 @@ export namespace Prisma {
     type?: XOR<ClientTypeScalarRelationFilter, ClientTypeWhereInput>
     licenses?: LicenseListRelationFilter
     devices?: DeviceListRelationFilter
+    incidences?: IncidenceListRelationFilter
   }
 
   export type ClientOrderByWithRelationInput = {
@@ -8633,6 +9747,7 @@ export namespace Prisma {
     type?: ClientTypeOrderByWithRelationInput
     licenses?: LicenseOrderByRelationAggregateInput
     devices?: DeviceOrderByRelationAggregateInput
+    incidences?: IncidenceOrderByRelationAggregateInput
     _relevance?: ClientOrderByRelevanceInput
   }
 
@@ -8655,6 +9770,7 @@ export namespace Prisma {
     type?: XOR<ClientTypeScalarRelationFilter, ClientTypeWhereInput>
     licenses?: LicenseListRelationFilter
     devices?: DeviceListRelationFilter
+    incidences?: IncidenceListRelationFilter
   }, "id">
 
   export type ClientOrderByWithAggregationInput = {
@@ -8994,6 +10110,77 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
+  export type IncidenceWhereInput = {
+    AND?: IncidenceWhereInput | IncidenceWhereInput[]
+    OR?: IncidenceWhereInput[]
+    NOT?: IncidenceWhereInput | IncidenceWhereInput[]
+    id?: StringFilter<"Incidence"> | string
+    clientId?: StringFilter<"Incidence"> | string
+    title?: StringFilter<"Incidence"> | string
+    description?: StringNullableFilter<"Incidence"> | string | null
+    date?: DateTimeFilter<"Incidence"> | Date | string
+    closed?: BoolFilter<"Incidence"> | boolean
+    createdAt?: DateTimeFilter<"Incidence"> | Date | string
+    updatedAt?: DateTimeFilter<"Incidence"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+  }
+
+  export type IncidenceOrderByWithRelationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    date?: SortOrder
+    closed?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    client?: ClientOrderByWithRelationInput
+    _relevance?: IncidenceOrderByRelevanceInput
+  }
+
+  export type IncidenceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: IncidenceWhereInput | IncidenceWhereInput[]
+    OR?: IncidenceWhereInput[]
+    NOT?: IncidenceWhereInput | IncidenceWhereInput[]
+    clientId?: StringFilter<"Incidence"> | string
+    title?: StringFilter<"Incidence"> | string
+    description?: StringNullableFilter<"Incidence"> | string | null
+    date?: DateTimeFilter<"Incidence"> | Date | string
+    closed?: BoolFilter<"Incidence"> | boolean
+    createdAt?: DateTimeFilter<"Incidence"> | Date | string
+    updatedAt?: DateTimeFilter<"Incidence"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+  }, "id">
+
+  export type IncidenceOrderByWithAggregationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    date?: SortOrder
+    closed?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: IncidenceCountOrderByAggregateInput
+    _max?: IncidenceMaxOrderByAggregateInput
+    _min?: IncidenceMinOrderByAggregateInput
+  }
+
+  export type IncidenceScalarWhereWithAggregatesInput = {
+    AND?: IncidenceScalarWhereWithAggregatesInput | IncidenceScalarWhereWithAggregatesInput[]
+    OR?: IncidenceScalarWhereWithAggregatesInput[]
+    NOT?: IncidenceScalarWhereWithAggregatesInput | IncidenceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Incidence"> | string
+    clientId?: StringWithAggregatesFilter<"Incidence"> | string
+    title?: StringWithAggregatesFilter<"Incidence"> | string
+    description?: StringNullableWithAggregatesFilter<"Incidence"> | string | null
+    date?: DateTimeWithAggregatesFilter<"Incidence"> | Date | string
+    closed?: BoolWithAggregatesFilter<"Incidence"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Incidence"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Incidence"> | Date | string
+  }
+
   export type ClientTypeCreateInput = {
     key: string
     name: string
@@ -9069,6 +10256,7 @@ export namespace Prisma {
     type: ClientTypeCreateNestedOneWithoutClientsInput
     licenses?: LicenseCreateNestedManyWithoutClientInput
     devices?: DeviceCreateNestedManyWithoutClientInput
+    incidences?: IncidenceCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateInput = {
@@ -9086,6 +10274,7 @@ export namespace Prisma {
     createdAt?: Date | string
     licenses?: LicenseUncheckedCreateNestedManyWithoutClientInput
     devices?: DeviceUncheckedCreateNestedManyWithoutClientInput
+    incidences?: IncidenceUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientUpdateInput = {
@@ -9103,6 +10292,7 @@ export namespace Prisma {
     type?: ClientTypeUpdateOneRequiredWithoutClientsNestedInput
     licenses?: LicenseUpdateManyWithoutClientNestedInput
     devices?: DeviceUpdateManyWithoutClientNestedInput
+    incidences?: IncidenceUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateInput = {
@@ -9120,6 +10310,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licenses?: LicenseUncheckedUpdateManyWithoutClientNestedInput
     devices?: DeviceUncheckedUpdateManyWithoutClientNestedInput
+    incidences?: IncidenceUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientCreateManyInput = {
@@ -9467,6 +10658,82 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type IncidenceCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    date: Date | string
+    closed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutIncidencesInput
+  }
+
+  export type IncidenceUncheckedCreateInput = {
+    id?: string
+    clientId: string
+    title: string
+    description?: string | null
+    date: Date | string
+    closed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IncidenceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    closed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutIncidencesNestedInput
+  }
+
+  export type IncidenceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    closed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncidenceCreateManyInput = {
+    id?: string
+    clientId: string
+    title: string
+    description?: string | null
+    date: Date | string
+    closed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IncidenceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    closed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncidenceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    closed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -9608,6 +10875,12 @@ export namespace Prisma {
     none?: DeviceWhereInput
   }
 
+  export type IncidenceListRelationFilter = {
+    every?: IncidenceWhereInput
+    some?: IncidenceWhereInput
+    none?: IncidenceWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -9618,6 +10891,10 @@ export namespace Prisma {
   }
 
   export type DeviceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type IncidenceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9892,6 +11169,58 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type IncidenceOrderByRelevanceInput = {
+    fields: IncidenceOrderByRelevanceFieldEnum | IncidenceOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type IncidenceCountOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    date?: SortOrder
+    closed?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IncidenceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    date?: SortOrder
+    closed?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type IncidenceMinOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    date?: SortOrder
+    closed?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type ClientCreateNestedManyWithoutTypeInput = {
     create?: XOR<ClientCreateWithoutTypeInput, ClientUncheckedCreateWithoutTypeInput> | ClientCreateWithoutTypeInput[] | ClientUncheckedCreateWithoutTypeInput[]
     connectOrCreate?: ClientCreateOrConnectWithoutTypeInput | ClientCreateOrConnectWithoutTypeInput[]
@@ -9962,6 +11291,13 @@ export namespace Prisma {
     connect?: DeviceWhereUniqueInput | DeviceWhereUniqueInput[]
   }
 
+  export type IncidenceCreateNestedManyWithoutClientInput = {
+    create?: XOR<IncidenceCreateWithoutClientInput, IncidenceUncheckedCreateWithoutClientInput> | IncidenceCreateWithoutClientInput[] | IncidenceUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: IncidenceCreateOrConnectWithoutClientInput | IncidenceCreateOrConnectWithoutClientInput[]
+    createMany?: IncidenceCreateManyClientInputEnvelope
+    connect?: IncidenceWhereUniqueInput | IncidenceWhereUniqueInput[]
+  }
+
   export type LicenseUncheckedCreateNestedManyWithoutClientInput = {
     create?: XOR<LicenseCreateWithoutClientInput, LicenseUncheckedCreateWithoutClientInput> | LicenseCreateWithoutClientInput[] | LicenseUncheckedCreateWithoutClientInput[]
     connectOrCreate?: LicenseCreateOrConnectWithoutClientInput | LicenseCreateOrConnectWithoutClientInput[]
@@ -9974,6 +11310,13 @@ export namespace Prisma {
     connectOrCreate?: DeviceCreateOrConnectWithoutClientInput | DeviceCreateOrConnectWithoutClientInput[]
     createMany?: DeviceCreateManyClientInputEnvelope
     connect?: DeviceWhereUniqueInput | DeviceWhereUniqueInput[]
+  }
+
+  export type IncidenceUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<IncidenceCreateWithoutClientInput, IncidenceUncheckedCreateWithoutClientInput> | IncidenceCreateWithoutClientInput[] | IncidenceUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: IncidenceCreateOrConnectWithoutClientInput | IncidenceCreateOrConnectWithoutClientInput[]
+    createMany?: IncidenceCreateManyClientInputEnvelope
+    connect?: IncidenceWhereUniqueInput | IncidenceWhereUniqueInput[]
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -10024,6 +11367,20 @@ export namespace Prisma {
     deleteMany?: DeviceScalarWhereInput | DeviceScalarWhereInput[]
   }
 
+  export type IncidenceUpdateManyWithoutClientNestedInput = {
+    create?: XOR<IncidenceCreateWithoutClientInput, IncidenceUncheckedCreateWithoutClientInput> | IncidenceCreateWithoutClientInput[] | IncidenceUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: IncidenceCreateOrConnectWithoutClientInput | IncidenceCreateOrConnectWithoutClientInput[]
+    upsert?: IncidenceUpsertWithWhereUniqueWithoutClientInput | IncidenceUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: IncidenceCreateManyClientInputEnvelope
+    set?: IncidenceWhereUniqueInput | IncidenceWhereUniqueInput[]
+    disconnect?: IncidenceWhereUniqueInput | IncidenceWhereUniqueInput[]
+    delete?: IncidenceWhereUniqueInput | IncidenceWhereUniqueInput[]
+    connect?: IncidenceWhereUniqueInput | IncidenceWhereUniqueInput[]
+    update?: IncidenceUpdateWithWhereUniqueWithoutClientInput | IncidenceUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: IncidenceUpdateManyWithWhereWithoutClientInput | IncidenceUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: IncidenceScalarWhereInput | IncidenceScalarWhereInput[]
+  }
+
   export type LicenseUncheckedUpdateManyWithoutClientNestedInput = {
     create?: XOR<LicenseCreateWithoutClientInput, LicenseUncheckedCreateWithoutClientInput> | LicenseCreateWithoutClientInput[] | LicenseUncheckedCreateWithoutClientInput[]
     connectOrCreate?: LicenseCreateOrConnectWithoutClientInput | LicenseCreateOrConnectWithoutClientInput[]
@@ -10050,6 +11407,20 @@ export namespace Prisma {
     update?: DeviceUpdateWithWhereUniqueWithoutClientInput | DeviceUpdateWithWhereUniqueWithoutClientInput[]
     updateMany?: DeviceUpdateManyWithWhereWithoutClientInput | DeviceUpdateManyWithWhereWithoutClientInput[]
     deleteMany?: DeviceScalarWhereInput | DeviceScalarWhereInput[]
+  }
+
+  export type IncidenceUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<IncidenceCreateWithoutClientInput, IncidenceUncheckedCreateWithoutClientInput> | IncidenceCreateWithoutClientInput[] | IncidenceUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: IncidenceCreateOrConnectWithoutClientInput | IncidenceCreateOrConnectWithoutClientInput[]
+    upsert?: IncidenceUpsertWithWhereUniqueWithoutClientInput | IncidenceUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: IncidenceCreateManyClientInputEnvelope
+    set?: IncidenceWhereUniqueInput | IncidenceWhereUniqueInput[]
+    disconnect?: IncidenceWhereUniqueInput | IncidenceWhereUniqueInput[]
+    delete?: IncidenceWhereUniqueInput | IncidenceWhereUniqueInput[]
+    connect?: IncidenceWhereUniqueInput | IncidenceWhereUniqueInput[]
+    update?: IncidenceUpdateWithWhereUniqueWithoutClientInput | IncidenceUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: IncidenceUpdateManyWithWhereWithoutClientInput | IncidenceUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: IncidenceScalarWhereInput | IncidenceScalarWhereInput[]
   }
 
   export type ClientCreateNestedOneWithoutLicensesInput = {
@@ -10250,6 +11621,24 @@ export namespace Prisma {
     update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutDevicesInput, ClientUpdateWithoutDevicesInput>, ClientUncheckedUpdateWithoutDevicesInput>
   }
 
+  export type ClientCreateNestedOneWithoutIncidencesInput = {
+    create?: XOR<ClientCreateWithoutIncidencesInput, ClientUncheckedCreateWithoutIncidencesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutIncidencesInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type ClientUpdateOneRequiredWithoutIncidencesNestedInput = {
+    create?: XOR<ClientCreateWithoutIncidencesInput, ClientUncheckedCreateWithoutIncidencesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutIncidencesInput
+    upsert?: ClientUpsertWithoutIncidencesInput
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutIncidencesInput, ClientUpdateWithoutIncidencesInput>, ClientUncheckedUpdateWithoutIncidencesInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -10390,6 +11779,19 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type ClientCreateWithoutTypeInput = {
     id?: string
     name: string
@@ -10404,6 +11806,7 @@ export namespace Prisma {
     createdAt?: Date | string
     licenses?: LicenseCreateNestedManyWithoutClientInput
     devices?: DeviceCreateNestedManyWithoutClientInput
+    incidences?: IncidenceCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutTypeInput = {
@@ -10420,6 +11823,7 @@ export namespace Prisma {
     createdAt?: Date | string
     licenses?: LicenseUncheckedCreateNestedManyWithoutClientInput
     devices?: DeviceUncheckedCreateNestedManyWithoutClientInput
+    incidences?: IncidenceUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutTypeInput = {
@@ -10543,6 +11947,36 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type IncidenceCreateWithoutClientInput = {
+    id?: string
+    title: string
+    description?: string | null
+    date: Date | string
+    closed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IncidenceUncheckedCreateWithoutClientInput = {
+    id?: string
+    title: string
+    description?: string | null
+    date: Date | string
+    closed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type IncidenceCreateOrConnectWithoutClientInput = {
+    where: IncidenceWhereUniqueInput
+    create: XOR<IncidenceCreateWithoutClientInput, IncidenceUncheckedCreateWithoutClientInput>
+  }
+
+  export type IncidenceCreateManyClientInputEnvelope = {
+    data: IncidenceCreateManyClientInput | IncidenceCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ClientTypeUpsertWithoutClientsInput = {
     update: XOR<ClientTypeUpdateWithoutClientsInput, ClientTypeUncheckedUpdateWithoutClientsInput>
     create: XOR<ClientTypeCreateWithoutClientsInput, ClientTypeUncheckedCreateWithoutClientsInput>
@@ -10627,6 +12061,36 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Device"> | Date | string
   }
 
+  export type IncidenceUpsertWithWhereUniqueWithoutClientInput = {
+    where: IncidenceWhereUniqueInput
+    update: XOR<IncidenceUpdateWithoutClientInput, IncidenceUncheckedUpdateWithoutClientInput>
+    create: XOR<IncidenceCreateWithoutClientInput, IncidenceUncheckedCreateWithoutClientInput>
+  }
+
+  export type IncidenceUpdateWithWhereUniqueWithoutClientInput = {
+    where: IncidenceWhereUniqueInput
+    data: XOR<IncidenceUpdateWithoutClientInput, IncidenceUncheckedUpdateWithoutClientInput>
+  }
+
+  export type IncidenceUpdateManyWithWhereWithoutClientInput = {
+    where: IncidenceScalarWhereInput
+    data: XOR<IncidenceUpdateManyMutationInput, IncidenceUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type IncidenceScalarWhereInput = {
+    AND?: IncidenceScalarWhereInput | IncidenceScalarWhereInput[]
+    OR?: IncidenceScalarWhereInput[]
+    NOT?: IncidenceScalarWhereInput | IncidenceScalarWhereInput[]
+    id?: StringFilter<"Incidence"> | string
+    clientId?: StringFilter<"Incidence"> | string
+    title?: StringFilter<"Incidence"> | string
+    description?: StringNullableFilter<"Incidence"> | string | null
+    date?: DateTimeFilter<"Incidence"> | Date | string
+    closed?: BoolFilter<"Incidence"> | boolean
+    createdAt?: DateTimeFilter<"Incidence"> | Date | string
+    updatedAt?: DateTimeFilter<"Incidence"> | Date | string
+  }
+
   export type ClientCreateWithoutLicensesInput = {
     id?: string
     name: string
@@ -10641,6 +12105,7 @@ export namespace Prisma {
     createdAt?: Date | string
     type: ClientTypeCreateNestedOneWithoutClientsInput
     devices?: DeviceCreateNestedManyWithoutClientInput
+    incidences?: IncidenceCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutLicensesInput = {
@@ -10657,6 +12122,7 @@ export namespace Prisma {
     typeKey: string
     createdAt?: Date | string
     devices?: DeviceUncheckedCreateNestedManyWithoutClientInput
+    incidences?: IncidenceUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutLicensesInput = {
@@ -10753,6 +12219,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: ClientTypeUpdateOneRequiredWithoutClientsNestedInput
     devices?: DeviceUpdateManyWithoutClientNestedInput
+    incidences?: IncidenceUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutLicensesInput = {
@@ -10769,6 +12236,7 @@ export namespace Prisma {
     typeKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devices?: DeviceUncheckedUpdateManyWithoutClientNestedInput
+    incidences?: IncidenceUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type LicenseTypeUpsertWithoutLicensesInput = {
@@ -10958,6 +12426,7 @@ export namespace Prisma {
     createdAt?: Date | string
     type: ClientTypeCreateNestedOneWithoutClientsInput
     licenses?: LicenseCreateNestedManyWithoutClientInput
+    incidences?: IncidenceCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutDevicesInput = {
@@ -10974,6 +12443,7 @@ export namespace Prisma {
     typeKey: string
     createdAt?: Date | string
     licenses?: LicenseUncheckedCreateNestedManyWithoutClientInput
+    incidences?: IncidenceUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutDevicesInput = {
@@ -11031,6 +12501,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: ClientTypeUpdateOneRequiredWithoutClientsNestedInput
     licenses?: LicenseUpdateManyWithoutClientNestedInput
+    incidences?: IncidenceUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutDevicesInput = {
@@ -11047,6 +12518,91 @@ export namespace Prisma {
     typeKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licenses?: LicenseUncheckedUpdateManyWithoutClientNestedInput
+    incidences?: IncidenceUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientCreateWithoutIncidencesInput = {
+    id?: string
+    name: string
+    legalName: string
+    taxId: string
+    address: string
+    city: string
+    latitude: number
+    longitude: number
+    notes?: string | null
+    referenceCode?: string | null
+    createdAt?: Date | string
+    type: ClientTypeCreateNestedOneWithoutClientsInput
+    licenses?: LicenseCreateNestedManyWithoutClientInput
+    devices?: DeviceCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutIncidencesInput = {
+    id?: string
+    name: string
+    legalName: string
+    taxId: string
+    address: string
+    city: string
+    latitude: number
+    longitude: number
+    notes?: string | null
+    referenceCode?: string | null
+    typeKey: string
+    createdAt?: Date | string
+    licenses?: LicenseUncheckedCreateNestedManyWithoutClientInput
+    devices?: DeviceUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutIncidencesInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutIncidencesInput, ClientUncheckedCreateWithoutIncidencesInput>
+  }
+
+  export type ClientUpsertWithoutIncidencesInput = {
+    update: XOR<ClientUpdateWithoutIncidencesInput, ClientUncheckedUpdateWithoutIncidencesInput>
+    create: XOR<ClientCreateWithoutIncidencesInput, ClientUncheckedCreateWithoutIncidencesInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutIncidencesInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutIncidencesInput, ClientUncheckedUpdateWithoutIncidencesInput>
+  }
+
+  export type ClientUpdateWithoutIncidencesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    legalName?: StringFieldUpdateOperationsInput | string
+    taxId?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: ClientTypeUpdateOneRequiredWithoutClientsNestedInput
+    licenses?: LicenseUpdateManyWithoutClientNestedInput
+    devices?: DeviceUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutIncidencesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    legalName?: StringFieldUpdateOperationsInput | string
+    taxId?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceCode?: NullableStringFieldUpdateOperationsInput | string | null
+    typeKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    licenses?: LicenseUncheckedUpdateManyWithoutClientNestedInput
+    devices?: DeviceUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientCreateManyTypeInput = {
@@ -11077,6 +12633,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licenses?: LicenseUpdateManyWithoutClientNestedInput
     devices?: DeviceUpdateManyWithoutClientNestedInput
+    incidences?: IncidenceUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutTypeInput = {
@@ -11093,6 +12650,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licenses?: LicenseUncheckedUpdateManyWithoutClientNestedInput
     devices?: DeviceUncheckedUpdateManyWithoutClientNestedInput
+    incidences?: IncidenceUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateManyWithoutTypeInput = {
@@ -11124,6 +12682,16 @@ export namespace Prisma {
     anyDesk?: string | null
     typeKey: string
     createdAt?: Date | string
+  }
+
+  export type IncidenceCreateManyClientInput = {
+    id?: string
+    title: string
+    description?: string | null
+    date: Date | string
+    closed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type LicenseUpdateWithoutClientInput = {
@@ -11177,6 +12745,36 @@ export namespace Prisma {
     anyDesk?: NullableStringFieldUpdateOperationsInput | string | null
     typeKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncidenceUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    closed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncidenceUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    closed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncidenceUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    closed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LicenseCreateManyParentInput = {

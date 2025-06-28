@@ -4,6 +4,7 @@
 
   "Create": "Create",
   "Cancel": "Cancel",
+
   "Edit": "Edit",
   "Creating": "Creating...",
   "Updating": "Updating...",
@@ -12,6 +13,9 @@
   "Saved": "Saved",
   "Optional": "Optional",
   "Filters": "Filters",
+  "Title": "Title",
+  "Description": "Description",
+  "Date": "Date",
   "You can browse icon names at": "You can browse icon names at",
 
   "Color": "Color",
@@ -103,6 +107,19 @@
   "Add a new device": "Add a new device",
   "Device added successfully": "Device added successfully",
   "Device added successfully description": "The device has been added successfully",
+
+  "**INCIDENCES**": "INCIDENCES",
+  "Incidents": "Incidents",
+  "Incidents description": "All incidents associated with this client",
+  "Add Incident": "Add Incident",
+  "Add a new incident": "Add a new incident",
+  "Incident added successfully": "Incident added successfully",
+  "Incident added successfully description": "The incident has been added successfully",
+  "No incidents found": "No incidents found",
+  "Incidence updated": "Incidence updated",
+  "Incidence added": "Incidence added",
+  "Incidence closed": "Incidence closed",
+  "Incidence deleted": "Incidence deleted",
 
   "General Settings": "General Settings",
   "Configure general application settings": "Configure general application settings.",
