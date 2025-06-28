@@ -30,7 +30,7 @@ const getOrder = (order: string) => {
   const field = order.startsWith("-") ? order.substring(1) : order;
 
   // Map frontend field names to database fields
-  const fieldMap: { [key: string]: any } = {
+  const fieldMap = {
     name: { name: dir },
     type: { type: { name: dir } },
     licenses: { licenses: { _count: dir } },
@@ -39,7 +39,7 @@ const getOrder = (order: string) => {
     createdAt: { createdAt: dir },
   };
 
-  return fieldMap[field] || { name: dir };
+  return fieldMap[field as keyof typeof fieldMap] || { name: dir };
 };
 
 export default async function ClientsPage({ searchParams }: Props) {
@@ -79,7 +79,7 @@ export default async function ClientsPage({ searchParams }: Props) {
     where,
     skip: (pageNumber - 1) * pageSize,
     take: pageSize,
-    orderBy: orderBy,
+    orderBy: orderBy as Prisma.ClientOrderByWithRelationInput,
     include: {
       type: true,
       _count: {
