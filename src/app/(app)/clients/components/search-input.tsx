@@ -2,7 +2,12 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/input";
-import { ChevronDown, Search, SlidersHorizontal } from "lucide-react";
+import {
+  ChevronDown,
+  Search,
+  SlidersHorizontal,
+  ArrowUpDown,
+} from "lucide-react";
 import { useTransition } from "react";
 import {
   DropdownMenu,
@@ -37,6 +42,7 @@ export function ClientSearchForm({
   const currentSearch = searchParams.get("search") || "";
   const currentType = searchParams.get("type") || "";
   const currentCity = searchParams.get("city") || "";
+  const currentOrder = searchParams.get("order") || "name";
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -74,20 +80,30 @@ export function ClientSearchForm({
     router.push(`/clients?${params.toString()}`);
   }
 
+  function handleOrderChange(value: string): void {
+    const params = new URLSearchParams(searchParams);
+    if (value === "name") {
+      params.delete("order");
+    } else {
+      params.set("order", value);
+    }
+    router.push(`/clients?${params.toString()}`);
+  }
+
   return (
     <>
       <form onSubmit={handleSearch} className="flex gap-2 w-full my-1">
         <Input
           type="text"
           name="search"
-          placeholder="Buscar cliente..."
+          placeholder="Search client..."
           defaultValue={currentSearch}
-          className="flex-1"
+          className="flex-1 h-10"
         />
         <Button type="submit" variant="outline" className="h-10">
           <Search className="h-4 w-4 mr-2" />
           <p className="hidden md:block">
-            {isPending ? "Buscando..." : "Buscar"}
+            {isPending ? "Searching..." : "Search"}
           </p>
         </Button>
         <DropdownMenu>
@@ -140,6 +156,53 @@ export function ClientSearchForm({
                       {city}
                     </SelectItem>
                   ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="h-10">
+              <ArrowUpDown className="mr-2 h-4 w-4" />
+              <span className="hidden md:block">Sort</span>
+              <ChevronDown className="ml-2 h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+
+          <DropdownMenuContent
+            align="end"
+            className="z-50 w-[220px] rounded-md border bg-white bg-popover p-2 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[side=bottom]:slide-in-from-top-2"
+          >
+            <div className="space-y-2">
+              <DropdownMenuLabel>Sort by</DropdownMenuLabel>
+              <Select value={currentOrder} onValueChange={handleOrderChange}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Sort by" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="name">Name (A-Z)</SelectItem>
+                  <SelectItem value="-name">Name (Z-A)</SelectItem>
+                  <SelectItem value="type">Type (A-Z)</SelectItem>
+                  <SelectItem value="-type">Type (Z-A)</SelectItem>
+                  <SelectItem value="city">City (A-Z)</SelectItem>
+                  <SelectItem value="-city">City (Z-A)</SelectItem>
+                  <SelectItem value="licenses">
+                    Licenses (Low to High)
+                  </SelectItem>
+                  <SelectItem value="-licenses">
+                    Licenses (High to Low)
+                  </SelectItem>
+                  <SelectItem value="devices">Devices (Low to High)</SelectItem>
+                  <SelectItem value="-devices">
+                    Devices (High to Low)
+                  </SelectItem>
+                  <SelectItem value="createdAt">
+                    Created Date (Oldest)
+                  </SelectItem>
+                  <SelectItem value="-createdAt">
+                    Created Date (Newest)
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
