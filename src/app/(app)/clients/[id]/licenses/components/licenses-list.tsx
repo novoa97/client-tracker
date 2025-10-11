@@ -1,5 +1,4 @@
 "use client";
-import { CardList } from "@/components/card-list";
 import { useState } from "react";
 import { DialogContainer } from "@/components/dialog-container";
 import { LicenseForm, LicenseFormValues } from "./license-form";
@@ -8,11 +7,9 @@ import { LicenseWithRelations } from "@/app/types";
 import { addLicense, editLicense, deleteLicense } from "../actions";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { LicenseActions } from "./license-actions";
 import { toast } from "sonner";
-import { Badge } from "@/components/ui/badge";
 import { SublicensesList } from "./sublicenses-dialog";
-import { Check, CircleX, Key, LineChart, Trash } from "lucide-react";
+import { Check, CircleX, Key, Trash } from "lucide-react";
 import { ClientPage } from "../../components/client-page";
 import { LicenseItem } from "./license-item";
 
@@ -121,11 +118,10 @@ export function LicensesList({ types, licenses, clientId }: Props) {
       <ClientPage
         title={t("Licenses")}
         subtitle={t("All licenses associated with this client")}
-        buttonText={t("Add License")}
         empty={licenses.length === 0}
         emptyMessage={t("No licenses found")}
         emptyIcon={<Key />}
-        onButtonClick={() => {
+        addAction={() => {
           setEditingLicense(null);
           setIsDialogOpen(true);
         }}

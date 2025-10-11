@@ -24,7 +24,6 @@ interface InfiniteClientListProps {
 export function InfiniteClientList({
   initialClients,
   initialHasNextPage,
-  initialTotal,
   searchParams,
   types,
   cities,
@@ -75,9 +74,11 @@ export function InfiniteClientList({
   }, [isFetching, hasNextPage, page, searchParams]);
 
   return (
-    <div className="flex flex-col gap-4 h-full">
-      <ClientSearchForm types={types} cities={cities} />
-      <div className="flex-1 min-h-0">
+    <div className="h-full flex flex-col">
+      <div className="p-4 pb-2">
+        <ClientSearchForm types={types} cities={cities} />
+      </div>
+      <div className="flex-1 overflow-hidden px-4 pb-4">
         <ClientList
           clients={clients}
           hasNextPage={hasNextPage}

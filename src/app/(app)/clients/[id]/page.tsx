@@ -1,7 +1,5 @@
-import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import { ClientInfo } from "./components/client-info";
-import { ClientNotes } from "./components/client-notes";
+import { notFound } from "next/navigation";
 import ClientMapWrapper from "./components/client-map-wrapper";
 import { ClientSidebar } from "./components/client-sidebar";
 

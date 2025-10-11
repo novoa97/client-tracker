@@ -5,6 +5,8 @@
   "Create": "Create",
   "Cancel": "Cancel",
   "Edit": "Edit",
+  "Add": "Add",
+  "Delete": "Delete",
   "Creating": "Creating...",
   "Updating": "Updating...",
   "Save": "Save",
@@ -61,6 +63,8 @@
   "Select a city": "Select a city...",
 
   "**LICENSES**": "LICENSES",
+  "license": "license",
+  "licenses": "licenses",
   "Create New License": "Create New License",
   "No types available client types": "No client types available.",
   "Fill in the details to create a new license": "Fill in the details to create a new license. Add sublicenses as needed.",
@@ -94,6 +98,8 @@
   "Sublicenses already exist": "Some sublicenses to add already exist",
 
   "**DEVICES**": "DEVICES",
+  "device": "device",
+  "devices": "devices",
   "Device name": "Device name",
   "Select device type": "Select device type...",
   "Serial Number": "Serial Number",

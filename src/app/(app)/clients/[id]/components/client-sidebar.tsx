@@ -12,6 +12,7 @@ import {
   Calendar,
   Computer,
   Pencil,
+  Trash,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Key } from "lucide-react";
@@ -27,6 +28,7 @@ import { ClientEdit } from "./client-edit";
 import { ClientType } from "@/generated/prisma";
 import dayjs from "dayjs";
 import { toast } from "sonner";
+import { PageHeader } from "@/components/page-header";
 
 interface Props {
   client: ClientWithType;
@@ -64,6 +66,25 @@ export function ClientSidebar({ client, types, className }: Props) {
 
   return (
     <>
+      <PageHeader title={t("Client")} icon={"user"}>
+        <Button
+          className="hidden md:flex"
+          size="sm"
+          variant="default"
+          onClick={() => setIsEditing(true)}
+        >
+          <Pencil className="mr-2 h-4 w-4" />
+          {t("Edit")}
+        </Button>
+        <Button
+          variant="destructive"
+          size="sm"
+          onClick={() => setIsEditing(true)}
+        >
+          <Trash className="mr-2 h-4 w-4" />
+          {t("Delete")}
+        </Button>
+      </PageHeader>
       <div
         style={{
           boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
@@ -165,7 +186,7 @@ export function ClientSidebar({ client, types, className }: Props) {
           </div>
         </div>
         {/** Edit button */}
-        <div className="h-10">
+        <div className="h-10 md:hidden">
           <Button
             variant="default"
             className="w-full"
@@ -199,7 +220,7 @@ function InfoItem({
 }: {
   label: string;
   value: string;
-  icon: any;
+  icon: LucideIcon;
 }) {
   return (
     <div className="flex items-center flex-row align-middle gap-2">

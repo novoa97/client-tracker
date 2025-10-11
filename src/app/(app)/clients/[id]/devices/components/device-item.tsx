@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Check, Copy, Globe, Hash } from "lucide-react";
 import {
   Tooltip,

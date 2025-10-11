@@ -1,10 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { AddClientButton } from "./components/add-client-button";
-import { Header } from "@/components/header";
-import { Users } from "lucide-react";
-import { getTranslations } from "next-intl/server";
 import { InfiniteClientList } from "./components/infinite-client-list";
 import { getClients } from "./actions/get-clients";
+import { PageHeader } from "@/components/page-header";
 
 type Props = {
   searchParams: Promise<{
@@ -17,7 +15,6 @@ type Props = {
 };
 
 export default async function ClientsPage({ searchParams }: Props) {
-  const t = await getTranslations();
   const { search, type, city, order } = await searchParams;
 
   const searchText = search || "";
@@ -49,11 +46,11 @@ export default async function ClientsPage({ searchParams }: Props) {
   });
 
   return (
-    <div className="p-4 md:p-8 space-y-4 flex flex-col h-full">
-      <Header icon={Users} title={t("Clients")}>
-        <AddClientButton types={types}></AddClientButton>
-      </Header>
-      <div className="flex-1 min-h-0">
+    <div className="h-full flex flex-col">
+      <PageHeader title="Clients" icon="users">
+        <AddClientButton types={types} />
+      </PageHeader>
+      <div className="flex-1 overflow-hidden">
         <InfiniteClientList
           initialClients={initialData.clients}
           initialHasNextPage={initialData.hasNextPage}

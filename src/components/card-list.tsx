@@ -36,7 +36,6 @@ export const CardList = ({
   description,
   buttonText,
   emptyMessage,
-  backButton = false,
   headers = [],
   onCreateClick,
   variant = "table",

@@ -1,7 +1,7 @@
 "use client";
 
 import { ClientWithTypeAndCount } from "@/app/types";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { darkenColor, getTextColor } from "@/lib/colors";
 import { Computer, Key, MapPin } from "lucide-react";

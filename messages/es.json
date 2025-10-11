@@ -5,6 +5,8 @@
   "Create": "Crear",
   "Cancel": "Cancelar",
   "Edit": "Editar",
+  "Add": "Añadir",
+  "Delete": "Eliminar",
   "Creating": "Creando...",
   "Updating": "Actualizando...",
   "Save": "Guardar",
@@ -62,6 +64,8 @@
   "Select a city": "Selecciona una ciudad...",
 
   "**LICENSES**": "LICENCIAS",
+  "license": "licencia",
+  "licenses": "licencias",
   "Create New License": "Crear Nueva Licencia",
   "No types available client types": "No hay tipos de clientes disponibles.",
   "Fill in the details to create a new license": "Rellena los detalles para crear una nueva licencia. Añade sublicencias según sea necesario.",
@@ -94,6 +98,9 @@
   "All sublicenses associated with this license": "Todas las sublicencias asociadas a esta licencia",
   "Sublicenses already exist": "Algunas sublicencias a añadir ya existen",
 
+  "**DEVICES**": "DEVICES",
+  "devices": "dispositivos",
+  "device": "dispositivo",
   "Device name": "Nombre del Dispositivo",
   "Select device type": "Selecciona un tipo de dispositivo...",
   "Serial Number": "Número de Serie",

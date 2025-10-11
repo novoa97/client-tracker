@@ -7,6 +7,7 @@ import {
   Popup,
   LayersControl,
   LayerGroup,
+  useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Link from "next/link";
@@ -15,13 +16,15 @@ import { renderToStaticMarkup } from "react-dom/server";
 import DynamicIcon from "./icon";
 import { generateMarkerIcon } from "@/lib/marker";
 import { getTextColor } from "@/lib/colors";
-
+import { useEffect } from "react";
+import { useSidebar } from "./ui/sidebar";
 interface Props {
   clients: ClientWithType[];
 }
 
 export default function GeneralMap({ clients }: Props) {
   // Agrupar clientes por tipo dinámicamente
+  const { open: sidebarOpen } = useSidebar();
   const clientsByType = clients.reduce<Record<string, ClientWithType[]>>(
     (acc, client) => {
       if (!acc[client.type.name]) {
@@ -32,6 +35,16 @@ export default function GeneralMap({ clients }: Props) {
     },
     {}
   );
+
+  const MapUpdater = ({ sidebarOpen }: { sidebarOpen: boolean }) => {
+    const map = useMap();
+    useEffect(() => {
+      console.log("resize");
+      map.invalidateSize();
+    }, [sidebarOpen, map]);
+
+    return null;
+  };
 
   return (
     <MapContainer
@@ -85,6 +98,7 @@ export default function GeneralMap({ clients }: Props) {
           </LayersControl.Overlay>
         ))}
       </LayersControl>
+      <MapUpdater sidebarOpen={sidebarOpen} />
     </MapContainer>
   );
 }

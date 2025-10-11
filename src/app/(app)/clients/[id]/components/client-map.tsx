@@ -1,6 +1,4 @@
 "use client";
-
-import { Card } from "@/components/ui/card";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect } from "react";

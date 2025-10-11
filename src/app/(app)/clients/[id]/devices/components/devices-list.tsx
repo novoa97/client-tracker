@@ -1,7 +1,6 @@
 "use client";
 
 import { Computer, CopyCheck, Plus } from "lucide-react";
-import { CardList } from "@/components/card-list";
 import { useTranslations } from "next-intl";
 import { DialogContainer } from "@/components/dialog-container";
 import { DeviceForm } from "./device-form";
@@ -104,8 +103,7 @@ export function DevicesList({ clientId, devices, types }: Props) {
       <ClientPage
         title={t("Devices")}
         subtitle={t("Registered devices for this client")}
-        buttonText={t("Add Device")}
-        onButtonClick={() => setIsDialogOpen(true)}
+        addAction={() => setIsDialogOpen(true)}
         onBackClick={() => router.push("/clients/" + clientId)}
         // Empty state
         empty={devices.length === 0}

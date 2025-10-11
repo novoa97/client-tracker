@@ -3,15 +3,11 @@
 import { ClientPage } from "../components/client-page";
 import { RichTextEditor } from "@/components/rich-text-editor";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Save, FileText } from "lucide-react";
 import { saveNotes, getClientNotes } from "../actions";
 import { useParams } from "next/navigation";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ClientNotesPage() {
   const params = useParams();
@@ -23,7 +19,6 @@ export default function ClientNotesPage() {
   const AUTO_SAVE_DELAY = 1000; // 2 seconds in milliseconds
 
   const [notes, setNotes] = useState("");
-  const [isSaving, setIsSaving] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [autoSaveStatus, setAutoSaveStatus] = useState<
     "idle" | "saving" | "saved" | "error"
@@ -59,12 +54,17 @@ export default function ClientNotesPage() {
         return;
       }
 
+      if (autoSaveStatus === "saving") {
+        return;
+      }
+
       setAutoSaveStatus("saving");
+
       try {
         await saveNotes(clientId, notesToSave);
         setLastSavedNotes(notesToSave);
         setAutoSaveStatus("saved");
-        toast.success("Notes auto-saved");
+        toast.success(t("Saved"));
       } catch (error) {
         console.error("Error auto-saving notes:", error);
         setAutoSaveStatus("error");
@@ -97,21 +97,6 @@ export default function ClientNotesPage() {
       }
     };
   }, [notes, autoSave]);
-
-  const handleSave = async () => {
-    setIsSaving(true);
-    try {
-      await saveNotes(clientId, notes);
-      setLastSavedNotes(notes);
-      setAutoSaveStatus("saved");
-      toast.success("Notes saved successfully");
-    } catch (error) {
-      console.error("Error saving notes:", error);
-      toast.error("Failed to save notes");
-    } finally {
-      setIsSaving(false);
-    }
-  };
 
   const handleBack = () => {
     router.push("/clients/" + clientId);

@@ -1,5 +1,4 @@
 "use server";
-import { Client } from "@/generated/prisma";
 import { prisma } from "@/lib/prisma";
 
 

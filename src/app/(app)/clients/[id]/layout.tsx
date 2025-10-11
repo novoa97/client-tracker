@@ -1,8 +1,5 @@
-import { Header } from "@/components/header";
 import { prisma } from "@/lib/prisma";
-import { User } from "lucide-react";
 import { notFound } from "next/navigation";
-import { ClientTabs } from "./components/client-tabs";
 import { ClientSidebar } from "./components/client-sidebar";
 
 type Props = {
