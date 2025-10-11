@@ -1,3 +1,4 @@
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Check, Copy, Globe, Hash } from "lucide-react";
 import {
   Tooltip,
@@ -80,70 +81,68 @@ export const DeviceItem = ({
   );
 
   return (
-    <>
-      {/* Desktop version */}
-      <div
-        key={device.id + "d"}
-        className="hidden md:flex items-center justify-between border-b pb-3 last:border-0 last:pb-0"
-      >
-        {/* Info */}
-        <div className="flex items-center gap-3 min-w-0 flex-1">
-          <div className="bg-muted rounded-full p-2">
-            <DynamicIcon name={device.type.icon} className="h-5 w-5" />
-          </div>
-          <div className="min-w-0">
-            <h3 className="font-medium truncate mb-1">{device.name}</h3>
-            <p className="text-sm text-muted-foreground truncate">
-              {device.type.name}
-            </p>
-          </div>
-        </div>
-
-        {/* IP + AnyDesk (alineado a izquierda, ancho fijo o auto) */}
-        <div className="flex flex-wrap items-center gap-3 px-6">
-          {renderIdBlocks()}
-        </div>
-
-        {/* Acciones al final */}
-        <div className="flex items-center">
-          <DeviceActions
-            device={device}
-            onDelete={handleDelete}
-            onEdit={onEdit}
-          />
-        </div>
-      </div>
-
-      {/* Mobile version */}
-      <div
-        key={device.id + "m"}
-        className="flex md:hidden flex-col border-b pb-3 last:border-0 last:pb-0"
-      >
-        {/* Info + Acciones */}
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3 min-w-0">
+    <Card className="py-4">
+      <CardContent>
+        <div
+          key={device.id + "d"}
+          className="hidden md:flex items-center justify-between"
+        >
+          {/* Info */}
+          <div className="flex items-center gap-3 min-w-0 flex-1">
             <div className="bg-muted rounded-full p-2">
               <DynamicIcon name={device.type.icon} className="h-5 w-5" />
             </div>
-            <div className="min-w-0">
-              <h3 className="font-medium truncate mb-1">{device.name}</h3>
+            <div className="flex flex-col">
+              <h3 className="font-medium truncate">{device.name}</h3>
               <p className="text-sm text-muted-foreground truncate">
                 {device.type.name}
               </p>
             </div>
           </div>
-          <DeviceActions
-            device={device}
-            onDelete={handleDelete}
-            onEdit={onEdit}
-          />
+
+          {/* IP + AnyDesk (alineado a izquierda, ancho fijo o auto) */}
+          <div className="flex flex-wrap items-center gap-3 px-6">
+            {renderIdBlocks()}
+          </div>
+
+          {/* Acciones al final */}
+          <div className="flex items-center">
+            <DeviceActions
+              device={device}
+              onDelete={handleDelete}
+              onEdit={onEdit}
+            />
+          </div>
         </div>
 
-        {/* IP + AnyDesk (alineado con texto, no icono) */}
-        <div className="mt-2 pl-11 flex flex-wrap gap-3">
-          {renderIdBlocks()}
+        {/* Mobile version */}
+        <div key={device.id + "m"} className="flex md:hidden flex-col">
+          {/* Info + Acciones */}
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="bg-muted rounded-full p-2">
+                <DynamicIcon name={device.type.icon} className="h-5 w-5" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-medium truncate mb-1">{device.name}</h3>
+                <p className="text-sm text-muted-foreground truncate">
+                  {device.type.name}
+                </p>
+              </div>
+            </div>
+            <DeviceActions
+              device={device}
+              onDelete={handleDelete}
+              onEdit={onEdit}
+            />
+          </div>
+
+          {/* IP + AnyDesk (alineado con texto, no icono) */}
+          <div className="mt-2 pl-11 flex flex-wrap gap-3">
+            {renderIdBlocks()}
+          </div>
         </div>
-      </div>
-    </>
+      </CardContent>
+    </Card>
   );
 };

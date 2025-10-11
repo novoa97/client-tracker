@@ -12,7 +12,9 @@ import { LicenseActions } from "./license-actions";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { SublicensesList } from "./sublicenses-dialog";
-import { Check, CircleX, Trash } from "lucide-react";
+import { Check, CircleX, Key, LineChart, Trash } from "lucide-react";
+import { ClientPage } from "../../components/client-page";
+import { LicenseItem } from "./license-item";
 
 interface Props {
   clientId: string;
@@ -116,51 +118,38 @@ export function LicensesList({ types, licenses, clientId }: Props) {
 
   return (
     <>
-      <CardList
+      <ClientPage
         title={t("Licenses")}
-        description={t("All licenses associated with this client")}
+        subtitle={t("All licenses associated with this client")}
         buttonText={t("Add License")}
+        empty={licenses.length === 0}
         emptyMessage={t("No licenses found")}
-        onCreateClick={() => {
+        emptyIcon={<Key />}
+        onButtonClick={() => {
           setEditingLicense(null);
           setIsDialogOpen(true);
         }}
-        variant="list"
+        onBackClick={() => router.push("/clients/" + clientId)}
+        // variant="list
       >
-        {licenses.map((license) => (
-          <div
-            key={license.id}
-            className="flex items-center justify-between border-b pb-3 last:border-0 last:pb-0"
-          >
-            <div>
-              <div className="flex items-center gap-2">
-                <h3 className="font-medium">{license.type.name}</h3>
-                {license.subLicenses && license.subLicenses.length > 0 && (
-                  <Badge
-                    variant="outline"
-                    className="text-xs cursor-pointer"
-                    onClick={() => {
-                      setSelectedLicense(license);
-                      setIsSubLicensesDialogOpen(true);
-                    }}
-                  >
-                    {license.subLicenses.length} {t("Sublicenses")}
-                  </Badge>
-                )}
-              </div>
-              <p className="text-sm text-muted-foreground">ID: {license.id}</p>
-            </div>
-            <LicenseActions
+        <div className="flex flex-col h-full gap-2 overflow-y-auto">
+          {licenses.map((license) => (
+            <LicenseItem
+              key={license.id}
               license={license}
-              onDelete={() => handleDelete(license.id)}
-              onEdit={() => {
+              selectLicense={() => {
+                setSelectedLicense(license);
+                setIsSubLicensesDialogOpen(true);
+              }}
+              editLicense={() => {
                 setEditingLicense(license);
                 setIsDialogOpen(true);
               }}
+              deleteLicense={() => handleDelete(license.id)}
             />
-          </div>
-        ))}
-      </CardList>
+          ))}
+        </div>
+      </ClientPage>
       {/* License Dialog */}
       <DialogContainer
         open={isDialogOpen}

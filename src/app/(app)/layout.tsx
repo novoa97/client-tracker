@@ -54,11 +54,11 @@ export default async function AppLayout({
 
   return (
     <UserProvider user={user}>
-      <div className="flex flex-row">
+      <div className="flex flex-row h-screen overflow-hidden">
         <div className="hidden md:block">
           <Sidebar section={navigationLinks} />
         </div>
-        <div className="flex flex-col w-full h-[100dvh]">
+        <div className="flex flex-col w-full h-[100dvh] min-h-0 overflow-hidden">
           <main className="flex-1 min-h-0 overflow-hidden">{children}</main>
           <div className="md:hidden">
             <BottomNav section={navigationLinks} />

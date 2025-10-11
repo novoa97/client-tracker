@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { User } from "lucide-react";
 import { notFound } from "next/navigation";
 import { ClientTabs } from "./components/client-tabs";
+import { ClientSidebar } from "./components/client-sidebar";
 
 type Props = {
   params: Promise<{
@@ -22,10 +23,17 @@ export default async function ClientLayout({ params, children }: Props) {
 
   if (!client) return notFound();
 
+  const clientTypes = await prisma.clientType.findMany();
+
   return (
-    <div className="p-4 md:p-8 space-y-4 flex flex-col h-full">
-      <Header icon={User} title={client.name}></Header>
-      <ClientTabs client={client}></ClientTabs>
+    <div className="flex flex-row min-h-0 h-full w-full overflow-hidden">
+      <ClientSidebar
+        client={client}
+        types={clientTypes}
+        className="hidden md:flex"
+      ></ClientSidebar>
+      {/* <Header icon={User} title={client.name}></Header>
+      <ClientTabs client={client}></ClientTabs> */}
       <div className="flex-1 flex flex-col min-h-0">{children}</div>
     </div>
   );

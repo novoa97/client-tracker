@@ -14,15 +14,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Plus } from "lucide-react";
+import { ArrowLeft, Plus } from "lucide-react";
 import React from "react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 type CardListProps = {
   title: string;
   description: string;
   buttonText: string;
   emptyMessage: string;
+  backButton?: boolean;
   headers?: string[]; // solo para tabla
   onCreateClick?: () => void;
   variant?: "table" | "list";
@@ -34,17 +36,26 @@ export const CardList = ({
   description,
   buttonText,
   emptyMessage,
+  backButton = false,
   headers = [],
   onCreateClick,
   variant = "table",
   children,
 }: CardListProps) => {
   const t = useTranslations();
+  const router = useRouter();
   const hasRows = React.Children.count(children) > 0;
 
   return (
     <Card className="flex-1 flex flex-col min-h-0">
       <CardHeader className="flex justify-between items-start flex-wrap gap-4">
+        {/* Back */}
+        <div className="md:hidden">
+          <Button size="icon" variant="outline" onClick={() => router.back()}>
+            <ArrowLeft />
+          </Button>
+        </div>
+        {/* Title and description */}
         <div className="flex-1 min-w-0">
           <CardTitle className="mb-1">{title}</CardTitle>
           <CardDescription>{description}</CardDescription>

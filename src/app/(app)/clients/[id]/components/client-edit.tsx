@@ -51,7 +51,7 @@ interface EditClientFormProps {
   isLoading?: boolean;
 }
 
-export function EditClientForm({
+export function ClientEdit({
   defaultValues,
   types,
   onSubmit,

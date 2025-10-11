@@ -1,18 +1,7 @@
 import { prisma } from "@/lib/prisma";
-import { ClientTable } from "./components/table/table";
 import { AddClientButton } from "./components/add-client-button";
-import { deleteClient } from "./actions/delete-client";
-import { ClientSearchForm } from "./components/search-input";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
-import { Pagination } from "./components/pagination";
 import { Header } from "@/components/header";
 import { Users } from "lucide-react";
-import { Prisma } from "@/generated/prisma";
 import { getTranslations } from "next-intl/server";
 import { InfiniteClientList } from "./components/infinite-client-list";
 import { getClients } from "./actions/get-clients";
