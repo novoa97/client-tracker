@@ -75,10 +75,10 @@ export function InfiniteClientList({
 
   return (
     <div className="h-full flex flex-col">
-      <div className="p-4 pb-2">
+      <div className="py-4">
         <ClientSearchForm types={types} cities={cities} />
       </div>
-      <div className="flex-1 overflow-hidden px-4 pb-4">
+      <div className="flex-1 overflow-hidden">
         <ClientList
           clients={clients}
           hasNextPage={hasNextPage}

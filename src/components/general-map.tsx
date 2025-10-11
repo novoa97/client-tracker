@@ -38,9 +38,38 @@ export default function GeneralMap({ clients }: Props) {
 
   const MapUpdater = ({ sidebarOpen }: { sidebarOpen: boolean }) => {
     const map = useMap();
+
     useEffect(() => {
-      console.log("resize");
-      map.invalidateSize();
+      // Force resize with multiple strategies to ensure it works
+      const forceResize = () => {
+        // Immediate resize
+        map.invalidateSize();
+
+        // Delayed resize to handle timing issues
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 100);
+
+        // Additional delayed resize for stubborn cases
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 300);
+      };
+
+      forceResize();
+
+      // Add window resize listener as fallback
+      const handleWindowResize = () => {
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 50);
+      };
+
+      window.addEventListener("resize", handleWindowResize);
+
+      return () => {
+        window.removeEventListener("resize", handleWindowResize);
+      };
     }, [sidebarOpen, map]);
 
     return null;

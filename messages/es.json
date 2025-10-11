@@ -1,7 +1,6 @@
 {
-  "Map": "Mapa",
-  "View details": "Ver detalles",
-
+  "** GENERAL **": "GENERAL",
+  "Search": "Buscar",
   "Create": "Crear",
   "Cancel": "Cancelar",
   "Edit": "Editar",
@@ -23,8 +22,13 @@
   "Enter an icon name": "Introduce un nombre de icono",
   "Type name": "Nombre del Tipo",
 
+  "Map": "Mapa",
+  "View details": "Ver detalles",
+
+  "**CLIENTS**": "CLIENTES",
   "Clients": "Clientes",
   "Client": "Cliente",
+  "Search client": "Buscar cliente",
   "Add Client": "Añadir Cliente",
   "Name": "Nombre",
   "Type": "Tipo",

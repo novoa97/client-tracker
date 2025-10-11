@@ -13,6 +13,7 @@ import {
   Computer,
   Pencil,
   Trash,
+  LucideIcon,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Key } from "lucide-react";
@@ -29,6 +30,7 @@ import { ClientType } from "@/generated/prisma";
 import dayjs from "dayjs";
 import { toast } from "sonner";
 import { PageHeader } from "@/components/page-header";
+import { deleteClient } from "../../actions/delete-client";
 
 interface Props {
   client: ClientWithType;
@@ -50,6 +52,7 @@ export function ClientSidebar({ client, types, className }: Props) {
   const pathname = usePathname();
 
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleSubmit = async (data: EditClientData) => {
     await editClient(client.id, data);
@@ -64,9 +67,14 @@ export function ClientSidebar({ client, types, className }: Props) {
     router.refresh();
   };
 
+  const handleDelete = async () => {
+    await deleteClient(client.id);
+    router.push("/clients");
+  };
+
   return (
     <>
-      <PageHeader title={t("Client")} icon={"user"}>
+      <PageHeader title="Client" icon={"user"}>
         <Button
           className="hidden md:flex"
           size="sm"
@@ -208,6 +216,13 @@ export function ClientSidebar({ client, types, className }: Props) {
           onSubmit={handleSubmit}
           isLoading={false}
         />
+      </DialogContainer>
+      <DialogContainer
+        open={isDeleting}
+        onOpenChange={setIsDeleting}
+        title={t("Delete Client")}
+      >
+        <ClientDelete onSubmit={handleDelete} isLoading={false} />
       </DialogContainer>
     </>
   );

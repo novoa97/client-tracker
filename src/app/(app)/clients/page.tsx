@@ -50,7 +50,7 @@ export default async function ClientsPage({ searchParams }: Props) {
       <PageHeader title="Clients" icon="users">
         <AddClientButton types={types} />
       </PageHeader>
-      <div className="flex-1 overflow-hidden">
+      <div className="flex-1 overflow-hidden px-6">
         <InfiniteClientList
           initialClients={initialData.clients}
           initialHasNextPage={initialData.hasNextPage}

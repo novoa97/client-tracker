@@ -39,7 +39,7 @@ export default function NewClientPage() {
 
   return (
     <div className="h-full flex flex-col">
-      <PageHeader title={t("Add Client")} icon="user-plus"></PageHeader>
+      <PageHeader title="Add Client" icon="user-plus"></PageHeader>
       <div className="flex flex-1">
         <AddClientForm
           clientTypes={clientTypes}

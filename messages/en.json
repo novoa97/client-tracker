@@ -1,7 +1,6 @@
 {
-  "Map": "Map",
-  "View details": "View details",
-
+  "** GENERAL **": "GENERAL",
+  "Search": "Search",
   "Create": "Create",
   "Cancel": "Cancel",
   "Edit": "Edit",
@@ -23,8 +22,13 @@
   "Enter an icon name": "Enter an icon name",
   "Type name": "Type name",
 
+  "Map": "Map",
+  "View details": "View details",
+
+  "**CLIENTS**": "CLIENTS",
   "Clients": "Clients",
   "Client": "Client",
+  "Search client": "Search client",
   "Add Client": "Add Client",
   "Name": "Name",
   "Type": "Type",

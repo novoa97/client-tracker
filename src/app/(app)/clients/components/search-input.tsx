@@ -96,7 +96,7 @@ export function ClientSearchForm({
         <Input
           type="text"
           name="search"
-          placeholder="Search client..."
+          placeholder={t("Search client")}
           defaultValue={currentSearch}
           className="flex-1 h-10"
         />
