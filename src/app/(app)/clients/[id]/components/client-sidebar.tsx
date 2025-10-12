@@ -31,6 +31,7 @@ import dayjs from "dayjs";
 import { toast } from "sonner";
 import { PageHeader } from "@/components/page-header";
 import { deleteClient } from "../../actions/delete-client";
+import { ClientDelete } from "./client-delete";
 
 interface Props {
   client: ClientWithType;
@@ -69,6 +70,11 @@ export function ClientSidebar({ client, types, className }: Props) {
 
   const handleDelete = async () => {
     await deleteClient(client.id);
+
+    toast.success(t("Client deleted successfully"), {
+      duration: 2000,
+    });
+
     router.push("/clients");
   };
 
@@ -87,7 +93,7 @@ export function ClientSidebar({ client, types, className }: Props) {
         <Button
           variant="destructive"
           size="sm"
-          onClick={() => setIsEditing(true)}
+          onClick={() => setIsDeleting(true)}
         >
           <Trash className="mr-2 h-4 w-4" />
           {t("Delete")}
@@ -222,7 +228,7 @@ export function ClientSidebar({ client, types, className }: Props) {
         onOpenChange={setIsDeleting}
         title={t("Delete Client")}
       >
-        <ClientDelete onSubmit={handleDelete} isLoading={false} />
+        <ClientDelete onSubmit={handleDelete} isLoading={isDeleting} />
       </DialogContainer>
     </>
   );

@@ -75,7 +75,7 @@ export function InfiniteClientList({
 
   return (
     <div className="h-full flex flex-col">
-      <div className="py-4">
+      <div className="pt-4 pb-2">
         <ClientSearchForm types={types} cities={cities} />
       </div>
       <div className="flex-1 overflow-hidden">

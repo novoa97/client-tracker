@@ -115,7 +115,7 @@ export default function ClientNotesPage() {
       <RichTextEditor
         content={notes}
         onChange={setNotes}
-        placeholder="Write your client notes here... You can use formatting, lists, links, and more. Changes are automatically saved."
+        placeholder={t("Add notes about this client")}
         className="h-full"
       />
     </ClientPage>
