@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { ClientSidebar } from "./components/client-sidebar";
+import { IncidentStatus } from "@/generated/prisma";
 
 type Props = {
   params: Promise<{
@@ -15,6 +16,15 @@ export default async function ClientLayout({ params, children }: Props) {
     where: { id: id },
     include: {
       type: true,
+      _count: {
+        select: {
+          incidents: {
+            where: {
+              status: IncidentStatus.OPEN,
+            },
+          },
+        },
+      },
     },
   });
 

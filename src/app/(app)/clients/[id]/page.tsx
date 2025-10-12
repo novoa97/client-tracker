@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
+import { IncidentStatus } from "@/generated/prisma";
 import ClientMapWrapper from "./components/client-map-wrapper";
 import { ClientSidebar } from "./components/client-sidebar";
 
@@ -16,6 +17,15 @@ export default async function ClientPage({ params }: Props) {
     where: { id: id },
     include: {
       type: true,
+      _count: {
+        select: {
+          incidents: {
+            where: {
+              status: IncidentStatus.OPEN,
+            },
+          },
+        },
+      },
     },
   });
 

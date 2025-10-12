@@ -204,5 +204,11 @@
   "Login": "Login",
   "Logging in": "Logging in...",
   "Hide password": "Hide password",
-  "Show password": "Show password"
+  "Show password": "Show password",
+
+  "**INCIDENTS**": "INCIDENTS",
+  "Incidents": "Incidents",
+  "Incident": "Incident",
+  "Add Incident": "Add Incident",
+  "Add a new incident": "Add a new incident"
 }

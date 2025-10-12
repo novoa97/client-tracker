@@ -204,5 +204,11 @@
   "Login": "Iniciar sesión",
   "Logging in": "Iniciando sesión...",
   "Hide password": "Esconder contraseña",
-  "Show password": "Mostrar contraseña"
+  "Show password": "Mostrar contraseña",
+
+  "**INCIDENTS**": "INCIDENTS",
+  "Incidents": "Incidencias",
+  "Incident": "Incidencia",
+  "Add Incident": "Añadir Incidencia",
+  "Add a new incident": "Añadir una nueva incidencia"
 }
