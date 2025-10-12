@@ -182,6 +182,18 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.IncidentScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  status: 'status',
+  priority: 'priority',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  clientId: 'clientId',
+  resolvedAt: 'resolvedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -247,6 +259,23 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   secret: 'secret'
 };
 
+exports.Prisma.IncidentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  clientId: 'clientId'
+};
+exports.IncidentStatus = exports.$Enums.IncidentStatus = {
+  OPEN: 'OPEN',
+  RESOLVED: 'RESOLVED'
+};
+
+exports.IncidentPriority = exports.$Enums.IncidentPriority = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+  CRITICAL: 'CRITICAL'
+};
 
 exports.Prisma.ModelName = {
   ClientType: 'ClientType',
@@ -255,7 +284,8 @@ exports.Prisma.ModelName = {
   LicenseType: 'LicenseType',
   DeviceType: 'DeviceType',
   Device: 'Device',
-  User: 'User'
+  User: 'User',
+  Incident: 'Incident'
 };
 
 /**

@@ -40,6 +40,7 @@ model Client {
   type   ClientType @relation(fields: [typeKey], references: [key])
   licenses License[]
   devices Device[] 
+  incidents Incident[]
   createdAt  DateTime @default(now())
   @@map("client")
 }
@@ -99,3 +100,32 @@ model User {
   updatedAt DateTime @updatedAt
   @@map("user")
 }
+
+model Incident {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  status      IncidentStatus @default(OPEN)
+  priority    IncidentPriority @default(MEDIUM)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  // Relación con el cliente
+  clientId    String
+  client      Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  // Resolved
+  resolvedAt  DateTime?
+  @@map("incident")
+}
+
+enum IncidentStatus {
+  OPEN
+  RESOLVED
+}
+
+enum IncidentPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
