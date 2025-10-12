@@ -106,7 +106,7 @@ export function ClientSidebar({ client, types, className }: Props) {
           boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
         }}
         className={cn(
-          "flex flex-col h-full w-3/10 bg-white  border-r p-8 space-y-2 shadow-lg",
+          "flex flex-col h-full w-3/10 bg-white  border-r p-8 space-y-2 shadow-lg overflow-y-auto",
           className
         )}
       >
@@ -211,7 +211,7 @@ export function ClientSidebar({ client, types, className }: Props) {
           </div>
         </div>
         {/** Edit button */}
-        <div className="h-10 md:hidden">
+        <div className="h-10 md:hidden flex flex-col gap-2 my-4">
           <Button
             variant="default"
             className="w-full"
@@ -219,6 +219,14 @@ export function ClientSidebar({ client, types, className }: Props) {
           >
             <Pencil className="mr-2 h-4 w-4" />
             {t("Edit")}
+          </Button>
+          <Button
+            variant="destructive"
+            className="w-full"
+            onClick={() => setIsDeleting(true)}
+          >
+            <Trash className="mr-2 h-4 w-4" />
+            {t("Delete")}
           </Button>
         </div>
       </div>
