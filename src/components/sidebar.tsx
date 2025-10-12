@@ -1,11 +1,19 @@
 "use client";
-
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { clsx } from "clsx";
-import { useTranslations } from "next-intl";
 import DynamicIcon from "./icon";
 import Image from "next/image";
+import {
+  Sidebar,
+  SidebarHeader,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarFooter,
+  SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarMenu,
+} from "@/components/ui/sidebar";
 
 interface Props {
   section?: {
@@ -15,43 +23,64 @@ interface Props {
   }[];
 }
 
-export function Sidebar({ section }: Props) {
-  const t = useTranslations();
+export function AppSidebar({ section }: Props) {
   const pathname = usePathname();
 
   const path = "/" + pathname.split("/")[1];
 
   return (
-    <aside className="w-64 bg-white border-r p-4 space-y-4 min-h-screen">
-      <div className="flex flex-row items-center gap-2">
-        <Image
-          src="/logo.png"
-          alt="ClientTracker"
-          width={32}
-          height={32}
-          className="mb-6"
-        />
-        <h1 className="text-lg font-bold mb-6">ClientTracker</h1>
-      </div>
-      <nav className="flex flex-col gap-2">
-        {section?.map(({ href, label, icon }) => {
-          return (
-            <Link
-              key={href}
-              href={href}
-              className={clsx(
-                "flex items-center gap-2 text-sm px-3 py-2 rounded hover:bg-blue-50 transition",
-                path === href
-                  ? "text-blue-600 font-semibold bg-blue-100"
-                  : "text-gray-700"
-              )}
-            >
-              <DynamicIcon name={icon} className="w-4 h-4" />
-              <span>{t(label)}</span>
-            </Link>
-          );
-        })}
-      </nav>
-    </aside>
+    <Sidebar>
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton size="lg" asChild>
+              <a href="#">
+                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                  <Image
+                    style={{
+                      filter: "invert(1)",
+                    }}
+                    src="/logo.svg"
+                    className="size-6"
+                    width={100}
+                    height={100}
+                    alt="logo"
+                  />
+                </div>
+                <div className="flex flex-col gap-0.5 leading-none">
+                  <span className="font-medium">ClientTracker</span>
+                  <span className="font-sm text-muted-foreground">
+                    v{process.env.NEXT_PUBLIC_APP_VERSION}
+                  </span>
+                </div>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupContent>
+            {section?.map(({ href, label, icon }) => {
+              return (
+                <SidebarMenuItem key={label}>
+                  <SidebarMenuButton
+                    asChild
+                    className={path === href ? "bg-muted font-medium" : ""}
+                  >
+                    <a href={href}>
+                      <DynamicIcon name={icon} className="w-4 h-4" />
+                      <span>{label}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              );
+            })}
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+      <SidebarFooter />
+    </Sidebar>
   );
 }

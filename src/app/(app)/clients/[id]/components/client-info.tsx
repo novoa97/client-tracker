@@ -15,7 +15,7 @@ import {
 import { useTranslations } from "use-intl";
 import { Button } from "@/components/ui/button";
 import { DialogContainer } from "@/components/dialog-container";
-import { EditClientForm } from "./edit-client-form";
+import { ClientEdit } from "./client-edit";
 import { editClient, EditClientData } from "../actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -34,6 +34,8 @@ export function ClientInfo({ client, types }: Props) {
   const handleSubmit = async (data: EditClientData) => {
     await editClient(client.id, data);
     setIsEditing(false);
+
+    console.log("Client updated successfully");
 
     toast.success(t("Client updated successfully"), {
       duration: 2000,
@@ -124,7 +126,7 @@ export function ClientInfo({ client, types }: Props) {
         onOpenChange={setIsEditing}
         title={t("Edit Client Info")}
       >
-        <EditClientForm
+        <ClientEdit
           types={types}
           defaultValues={client}
           onSubmit={handleSubmit}

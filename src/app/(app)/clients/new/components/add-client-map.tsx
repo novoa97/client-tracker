@@ -1,6 +1,4 @@
 "use client";
-
-import { Card } from "@/components/ui/card";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
@@ -48,8 +46,8 @@ export default function AddClientMap({ coordinates, type }: Props) {
   };
 
   return (
-    <Card className="h-full w-full p-0">
-      <div className="h-full w-full rounded-lg overflow-hidden">
+    <div className="h-full w-full p-0">
+      <div className="h-full w-full overflow-hidden">
         <MapContainer
           center={position}
           zoom={8.4}
@@ -79,6 +77,6 @@ export default function AddClientMap({ coordinates, type }: Props) {
           <MapUpdater center={position} />
         </MapContainer>
       </div>
-    </Card>
+    </div>
   );
 }

@@ -1,6 +1,4 @@
 "use client";
-
-import { Card } from "@/components/ui/card";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect } from "react";
@@ -31,33 +29,31 @@ export default function ClientMap({ client }: Props) {
   };
 
   return (
-    <Card className="w-full h-full p-0">
-      <div className="h-full w-full rounded-lg overflow-hidden">
-        <MapContainer
-          center={position}
-          zoom={8.4}
-          scrollWheelZoom={true}
-          className="w-full h-full leaflet-rounded z-0"
-        >
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          {client ? (
-            <Marker
-              position={position}
-              icon={generateMarkerIcon(
-                client.type.color,
-                renderToStaticMarkup(
-                  <DynamicIcon
-                    name={client.type.icon}
-                    className="text-white w-4 h-4"
-                    style={{ color: getTextColor(client.type.color) }}
-                  />
-                )
-              )}
-            ></Marker>
-          ) : null}
-          <MapUpdater center={position} />
-        </MapContainer>
-      </div>
-    </Card>
+    <div className="h-full w-full overflow-hidden">
+      <MapContainer
+        center={position}
+        zoom={8.4}
+        scrollWheelZoom={true}
+        className="w-full h-full"
+      >
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        {client ? (
+          <Marker
+            position={position}
+            icon={generateMarkerIcon(
+              client.type.color,
+              renderToStaticMarkup(
+                <DynamicIcon
+                  name={client.type.icon}
+                  className="text-white w-4 h-4"
+                  style={{ color: getTextColor(client.type.color) }}
+                />
+              )
+            )}
+          ></Marker>
+        ) : null}
+        <MapUpdater center={position} />
+      </MapContainer>
+    </div>
   );
 }

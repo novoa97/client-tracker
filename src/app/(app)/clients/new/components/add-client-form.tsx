@@ -5,7 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -90,148 +90,145 @@ export default function AddClientForm({
   };
 
   return (
-    <Card className="w-full md:w-1/2 h-full">
-      <CardContent className="flex flex-col space-y-4 pt-6 h-full">
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(handleFormSubmit)}
-            className="flex flex-col h-full space-y-4"
-          >
-            <div className="flex-1 space-y-4">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <Label htmlFor="name">{t("Name")}</Label>
-                    <FormControl>
-                      <Input id="name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="type"
-                render={({ field }) => (
-                  <FormItem>
-                    <Label htmlFor="type">{t("Type")}</Label>
-                    <FormControl>
-                      <Select
-                        onValueChange={(value) => {
-                          form.setValue("type", value);
-                          if (onChange)
-                            onChange({
-                              latitude: lat,
-                              longitude: lng,
-                              type:
-                                clientTypes.find(
-                                  (type) => type.key === value
-                                ) ?? undefined,
-                            });
-                        }}
-                        defaultValue={field.value}
-                        disabled={clientTypes.length === 0}
-                      >
-                        <SelectTrigger className="w-full" tabIndex={0}>
-                          <SelectValue placeholder={t("Select a type")} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {clientTypes.map((type) => (
-                            <SelectItem key={type.key} value={type.key}>
-                              {type.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="legalName"
-                render={({ field }) => (
-                  <FormItem>
-                    <Label htmlFor="legalName">{t("Legal Name")}</Label>
-                    <FormControl>
-                      <Input id="legalName" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="taxId"
-                render={({ field }) => (
-                  <FormItem>
-                    <Label htmlFor="taxId">{t("VAT")}</Label>
-                    <FormControl>
-                      <Input id="taxId" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="address"
-                render={({ field }) => (
-                  <FormItem>
-                    <AddressAutocomplete
-                      value={field.value}
-                      onChange={(val) => {
-                        form.setValue("address", val);
-                        form.setValue("latitude", 0);
-                        form.setValue("longitude", 0);
-                      }}
-                      onSelect={(selectedAddress, lat, lng, city) => {
-                        form.setValue("address", selectedAddress);
-                        form.setValue("latitude", lat);
-                        form.setValue("longitude", lng);
-                        form.setValue("city", city);
-                        if (onChange)
-                          onChange({ latitude: lat, longitude: lng });
-                      }}
-                    />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="referenceCode"
-                render={({ field }) => (
-                  <FormItem>
-                    <Label htmlFor="referenceCode">{t("Reference Code")}</Label>
-                    <FormControl>
-                      <Input id="referenceCode" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              {lat !== 0 && lng !== 0 && (
-                <p className="text-sm text-muted-foreground">
-                  Coordenadas: {lat.toFixed(5)}, {lng.toFixed(5)}
-                </p>
+    <div className="p-8 w-full md:w-1/3 h-full border-r">
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(handleFormSubmit)}
+          className="flex flex-col h-full space-y-4"
+        >
+          <div className="flex-1 space-y-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <Label htmlFor="name">{t("Name")}</Label>
+                  <FormControl>
+                    <Input id="name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
               )}
-            </div>
+            />
 
-            <Button type="submit" className="w-full">
-              {t("Add Client")}
-            </Button>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+            <FormField
+              control={form.control}
+              name="type"
+              render={({ field }) => (
+                <FormItem>
+                  <Label htmlFor="type">{t("Type")}</Label>
+                  <FormControl>
+                    <Select
+                      onValueChange={(value) => {
+                        form.setValue("type", value);
+                        if (onChange)
+                          onChange({
+                            latitude: lat,
+                            longitude: lng,
+                            type:
+                              clientTypes.find((type) => type.key === value) ??
+                              undefined,
+                          });
+                      }}
+                      defaultValue={field.value}
+                      disabled={clientTypes.length === 0}
+                    >
+                      <SelectTrigger className="w-full" tabIndex={0}>
+                        <SelectValue placeholder={t("Select a type")} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {clientTypes.map((type) => (
+                          <SelectItem key={type.key} value={type.key}>
+                            {type.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="legalName"
+              render={({ field }) => (
+                <FormItem>
+                  <Label htmlFor="legalName">{t("Legal Name")}</Label>
+                  <FormControl>
+                    <Input id="legalName" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="taxId"
+              render={({ field }) => (
+                <FormItem>
+                  <Label htmlFor="taxId">{t("VAT")}</Label>
+                  <FormControl>
+                    <Input id="taxId" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <AddressAutocomplete
+                    value={field.value}
+                    onChange={(val) => {
+                      form.setValue("address", val);
+                      form.setValue("latitude", 0);
+                      form.setValue("longitude", 0);
+                    }}
+                    onSelect={(selectedAddress, lat, lng, city) => {
+                      form.setValue("address", selectedAddress);
+                      form.setValue("latitude", lat);
+                      form.setValue("longitude", lng);
+                      form.setValue("city", city);
+                      if (onChange) onChange({ latitude: lat, longitude: lng });
+                    }}
+                  />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="referenceCode"
+              render={({ field }) => (
+                <FormItem>
+                  <Label htmlFor="referenceCode">{t("Reference Code")}</Label>
+                  <FormControl>
+                    <Input id="referenceCode" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {lat !== 0 && lng !== 0 && (
+              <p className="text-sm text-muted-foreground">
+                Coordenadas: {lat.toFixed(5)}, {lng.toFixed(5)}
+              </p>
+            )}
+          </div>
+
+          <Button type="submit" className="w-full">
+            <Plus className="h-3.5 w-3.5" />
+            {t("Add Client")}
+          </Button>
+        </form>
+      </Form>
+    </div>
   );
 }

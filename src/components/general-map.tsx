@@ -7,6 +7,7 @@ import {
   Popup,
   LayersControl,
   LayerGroup,
+  useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Link from "next/link";
@@ -15,13 +16,15 @@ import { renderToStaticMarkup } from "react-dom/server";
 import DynamicIcon from "./icon";
 import { generateMarkerIcon } from "@/lib/marker";
 import { getTextColor } from "@/lib/colors";
-
+import { useEffect } from "react";
+import { useSidebar } from "./ui/sidebar";
 interface Props {
   clients: ClientWithType[];
 }
 
 export default function GeneralMap({ clients }: Props) {
   // Agrupar clientes por tipo dinámicamente
+  const { open: sidebarOpen } = useSidebar();
   const clientsByType = clients.reduce<Record<string, ClientWithType[]>>(
     (acc, client) => {
       if (!acc[client.type.name]) {
@@ -32,6 +35,45 @@ export default function GeneralMap({ clients }: Props) {
     },
     {}
   );
+
+  const MapUpdater = ({ sidebarOpen }: { sidebarOpen: boolean }) => {
+    const map = useMap();
+
+    useEffect(() => {
+      // Force resize with multiple strategies to ensure it works
+      const forceResize = () => {
+        // Immediate resize
+        map.invalidateSize();
+
+        // Delayed resize to handle timing issues
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 100);
+
+        // Additional delayed resize for stubborn cases
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 300);
+      };
+
+      forceResize();
+
+      // Add window resize listener as fallback
+      const handleWindowResize = () => {
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 50);
+      };
+
+      window.addEventListener("resize", handleWindowResize);
+
+      return () => {
+        window.removeEventListener("resize", handleWindowResize);
+      };
+    }, [sidebarOpen, map]);
+
+    return null;
+  };
 
   return (
     <MapContainer
@@ -85,6 +127,7 @@ export default function GeneralMap({ clients }: Props) {
           </LayersControl.Overlay>
         ))}
       </LayersControl>
+      <MapUpdater sidebarOpen={sidebarOpen} />
     </MapContainer>
   );
 }

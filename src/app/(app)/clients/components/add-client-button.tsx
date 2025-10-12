@@ -7,7 +7,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ClientType } from "@/generated/prisma";
-import { PlusCircle } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
@@ -21,7 +21,7 @@ export function AddClientButton({ types }: { types: ClientType[] }) {
         <Tooltip>
           <TooltipTrigger>
             <Button size="sm" className="h-8 gap-1" disabled={true}>
-              <PlusCircle className="h-3.5 w-3.5" />
+              <Plus className="h-3.5 w-3.5" />
               <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                 {t("Add Client")}
               </span>
@@ -34,7 +34,7 @@ export function AddClientButton({ types }: { types: ClientType[] }) {
       ) : (
         <Link href={"/clients/new"}>
           <Button size="sm" className="h-8 gap-1" disabled={false}>
-            <PlusCircle className="h-3.5 w-3.5" />
+            <Plus className="h-3.5 w-3.5" />
             <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
               {t("Add Client")}
             </span>
