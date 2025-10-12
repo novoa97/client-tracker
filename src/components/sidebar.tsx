@@ -64,7 +64,7 @@ export function AppSidebar({ section }: Props) {
           <SidebarGroupContent>
             {section?.map(({ href, label, icon }) => {
               return (
-                <SidebarMenuItem key={label}>
+                <SidebarMenuItem key={label} style={{ listStyle: "none" }}>
                   <SidebarMenuButton
                     asChild
                     className={path === href ? "bg-muted font-medium" : ""}
