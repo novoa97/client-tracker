@@ -186,6 +186,7 @@ exports.Prisma.IncidentScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
+  date: 'date',
   status: 'status',
   priority: 'priority',
   createdAt: 'createdAt',

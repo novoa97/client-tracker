@@ -8477,6 +8477,7 @@ export namespace Prisma {
     id: string | null
     title: string | null
     description: string | null
+    date: Date | null
     status: $Enums.IncidentStatus | null
     priority: $Enums.IncidentPriority | null
     createdAt: Date | null
@@ -8489,6 +8490,7 @@ export namespace Prisma {
     id: string | null
     title: string | null
     description: string | null
+    date: Date | null
     status: $Enums.IncidentStatus | null
     priority: $Enums.IncidentPriority | null
     createdAt: Date | null
@@ -8501,6 +8503,7 @@ export namespace Prisma {
     id: number
     title: number
     description: number
+    date: number
     status: number
     priority: number
     createdAt: number
@@ -8515,6 +8518,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    date?: true
     status?: true
     priority?: true
     createdAt?: true
@@ -8527,6 +8531,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    date?: true
     status?: true
     priority?: true
     createdAt?: true
@@ -8539,6 +8544,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    date?: true
     status?: true
     priority?: true
     createdAt?: true
@@ -8624,6 +8630,7 @@ export namespace Prisma {
     id: string
     title: string
     description: string | null
+    date: Date
     status: $Enums.IncidentStatus
     priority: $Enums.IncidentPriority
     createdAt: Date
@@ -8653,6 +8660,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    date?: boolean
     status?: boolean
     priority?: boolean
     createdAt?: boolean
@@ -8668,6 +8676,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    date?: boolean
     status?: boolean
     priority?: boolean
     createdAt?: boolean
@@ -8676,7 +8685,7 @@ export namespace Prisma {
     resolvedAt?: boolean
   }
 
-  export type IncidentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "status" | "priority" | "createdAt" | "updatedAt" | "clientId" | "resolvedAt", ExtArgs["result"]["incident"]>
+  export type IncidentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "date" | "status" | "priority" | "createdAt" | "updatedAt" | "clientId" | "resolvedAt", ExtArgs["result"]["incident"]>
   export type IncidentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | ClientDefaultArgs<ExtArgs>
   }
@@ -8690,6 +8699,7 @@ export namespace Prisma {
       id: string
       title: string
       description: string | null
+      date: Date
       status: $Enums.IncidentStatus
       priority: $Enums.IncidentPriority
       createdAt: Date
@@ -9069,6 +9079,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Incident", 'String'>
     readonly title: FieldRef<"Incident", 'String'>
     readonly description: FieldRef<"Incident", 'String'>
+    readonly date: FieldRef<"Incident", 'DateTime'>
     readonly status: FieldRef<"Incident", 'IncidentStatus'>
     readonly priority: FieldRef<"Incident", 'IncidentPriority'>
     readonly createdAt: FieldRef<"Incident", 'DateTime'>
@@ -9540,6 +9551,7 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     description: 'description',
+    date: 'date',
     status: 'status',
     priority: 'priority',
     createdAt: 'createdAt',
@@ -10167,6 +10179,7 @@ export namespace Prisma {
     id?: StringFilter<"Incident"> | string
     title?: StringFilter<"Incident"> | string
     description?: StringNullableFilter<"Incident"> | string | null
+    date?: DateTimeFilter<"Incident"> | Date | string
     status?: EnumIncidentStatusFilter<"Incident"> | $Enums.IncidentStatus
     priority?: EnumIncidentPriorityFilter<"Incident"> | $Enums.IncidentPriority
     createdAt?: DateTimeFilter<"Incident"> | Date | string
@@ -10180,6 +10193,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
+    date?: SortOrder
     status?: SortOrder
     priority?: SortOrder
     createdAt?: SortOrder
@@ -10197,6 +10211,7 @@ export namespace Prisma {
     NOT?: IncidentWhereInput | IncidentWhereInput[]
     title?: StringFilter<"Incident"> | string
     description?: StringNullableFilter<"Incident"> | string | null
+    date?: DateTimeFilter<"Incident"> | Date | string
     status?: EnumIncidentStatusFilter<"Incident"> | $Enums.IncidentStatus
     priority?: EnumIncidentPriorityFilter<"Incident"> | $Enums.IncidentPriority
     createdAt?: DateTimeFilter<"Incident"> | Date | string
@@ -10210,6 +10225,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
+    date?: SortOrder
     status?: SortOrder
     priority?: SortOrder
     createdAt?: SortOrder
@@ -10228,6 +10244,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Incident"> | string
     title?: StringWithAggregatesFilter<"Incident"> | string
     description?: StringNullableWithAggregatesFilter<"Incident"> | string | null
+    date?: DateTimeWithAggregatesFilter<"Incident"> | Date | string
     status?: EnumIncidentStatusWithAggregatesFilter<"Incident"> | $Enums.IncidentStatus
     priority?: EnumIncidentPriorityWithAggregatesFilter<"Incident"> | $Enums.IncidentPriority
     createdAt?: DateTimeWithAggregatesFilter<"Incident"> | Date | string
@@ -10717,6 +10734,7 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
+    date: Date | string
     status?: $Enums.IncidentStatus
     priority?: $Enums.IncidentPriority
     createdAt?: Date | string
@@ -10729,6 +10747,7 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
+    date: Date | string
     status?: $Enums.IncidentStatus
     priority?: $Enums.IncidentPriority
     createdAt?: Date | string
@@ -10741,6 +10760,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
     priority?: EnumIncidentPriorityFieldUpdateOperationsInput | $Enums.IncidentPriority
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10753,6 +10773,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
     priority?: EnumIncidentPriorityFieldUpdateOperationsInput | $Enums.IncidentPriority
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10765,6 +10786,7 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
+    date: Date | string
     status?: $Enums.IncidentStatus
     priority?: $Enums.IncidentPriority
     createdAt?: Date | string
@@ -10777,6 +10799,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
     priority?: EnumIncidentPriorityFieldUpdateOperationsInput | $Enums.IncidentPriority
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10788,6 +10811,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
     priority?: EnumIncidentPriorityFieldUpdateOperationsInput | $Enums.IncidentPriority
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11266,6 +11290,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    date?: SortOrder
     status?: SortOrder
     priority?: SortOrder
     createdAt?: SortOrder
@@ -11278,6 +11303,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    date?: SortOrder
     status?: SortOrder
     priority?: SortOrder
     createdAt?: SortOrder
@@ -11290,6 +11316,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    date?: SortOrder
     status?: SortOrder
     priority?: SortOrder
     createdAt?: SortOrder
@@ -12116,6 +12143,7 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
+    date: Date | string
     status?: $Enums.IncidentStatus
     priority?: $Enums.IncidentPriority
     createdAt?: Date | string
@@ -12127,6 +12155,7 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
+    date: Date | string
     status?: $Enums.IncidentStatus
     priority?: $Enums.IncidentPriority
     createdAt?: Date | string
@@ -12251,6 +12280,7 @@ export namespace Prisma {
     id?: StringFilter<"Incident"> | string
     title?: StringFilter<"Incident"> | string
     description?: StringNullableFilter<"Incident"> | string | null
+    date?: DateTimeFilter<"Incident"> | Date | string
     status?: EnumIncidentStatusFilter<"Incident"> | $Enums.IncidentStatus
     priority?: EnumIncidentPriorityFilter<"Incident"> | $Enums.IncidentPriority
     createdAt?: DateTimeFilter<"Incident"> | Date | string
@@ -12856,6 +12886,7 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
+    date: Date | string
     status?: $Enums.IncidentStatus
     priority?: $Enums.IncidentPriority
     createdAt?: Date | string
@@ -12920,6 +12951,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
     priority?: EnumIncidentPriorityFieldUpdateOperationsInput | $Enums.IncidentPriority
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12931,6 +12963,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
     priority?: EnumIncidentPriorityFieldUpdateOperationsInput | $Enums.IncidentPriority
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12942,6 +12975,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
     priority?: EnumIncidentPriorityFieldUpdateOperationsInput | $Enums.IncidentPriority
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

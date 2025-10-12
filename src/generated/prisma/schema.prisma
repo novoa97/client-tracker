@@ -108,9 +108,10 @@ model User {
 }
 
 model Incident {
-  id          String           @id @default(cuid())
+  id          String           @id @default(uuid())
   title       String
   description String?
+  date        DateTime         @db.Date
   status      IncidentStatus   @default(OPEN)
   priority    IncidentPriority @default(MEDIUM)
   createdAt   DateTime         @default(now())
