@@ -76,7 +76,7 @@ export function IncidentsPage({ clientId, incidents }: Props) {
       <ClientPage
         icon="alert-circle"
         title={t("Incidents")}
-        subtitle="Incidents"
+        subtitle={t("Incidents registered for this client")}
         onBackClick={() => router.push("/clients")}
         addAction={() => {
           setIncidentToEdit(null);
