@@ -4,18 +4,15 @@
 import AddClientForm from "@/app/(app)/clients/new/components/add-client-form";
 import { addClient } from "../actions/add-client";
 import { useState, useEffect } from "react";
-import { Header } from "@/components/header";
-import { UserPlus } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { getClientType } from "../actions/get-client-type";
 import { ClientType } from "@/generated/prisma";
 import AddClientMapWrapper from "./components/add-client-map-wrapper";
+import { PageHeader } from "@/components/page-header";
 
 export default function NewClientPage() {
   const [coordinates, setCoordinates] = useState<[number, number] | null>(null);
   const [clientTypes, setClientTypes] = useState<ClientType[]>([]);
   const [selectedType, setSelectedType] = useState<ClientType | null>(null);
-  const t = useTranslations();
 
   useEffect(() => {
     const fetchClientTypes = async () => {
@@ -39,16 +36,16 @@ export default function NewClientPage() {
   };
 
   return (
-    <div className="p-8 h-full flex flex-col">
-      <Header icon={UserPlus} title={t("Add Client")}></Header>
-      <div className="flex flex-1 gap-2">
+    <div className="h-full flex flex-col">
+      <PageHeader title="Add Client" icon="user-plus"></PageHeader>
+      <div className="flex flex-1">
         <AddClientForm
           clientTypes={clientTypes}
           onSubmit={addClient}
           onChange={handleFormChange}
         />
         <AddClientMapWrapper
-          className="hidden md:block w-1/2 h-full"
+          className="hidden md:block w-2/3 h-full"
           coordinates={coordinates}
           type={selectedType}
         ></AddClientMapWrapper>

@@ -7,11 +7,26 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ClientType } from "@/generated/prisma";
-import { PlusCircle } from "lucide-react";
+import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-export function AddClientButton({ types }: { types: ClientType[] }) {
+interface Props {
+  types: ClientType[];
+  size?:
+    | "default"
+    | "icon"
+    | "sm"
+    | "lg"
+    | "icon-sm"
+    | "icon-lg"
+    | null
+    | undefined;
+  className?: string;
+}
+
+export function AddClientButton({ types, size, className }: Props) {
   const t = useTranslations();
 
   return (
@@ -21,10 +36,8 @@ export function AddClientButton({ types }: { types: ClientType[] }) {
         <Tooltip>
           <TooltipTrigger>
             <Button size="sm" className="h-8 gap-1" disabled={true}>
-              <PlusCircle className="h-3.5 w-3.5" />
-              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                {t("Add Client")}
-              </span>
+              <Plus className="h-3.5 w-3.5" />
+              {t("Add Client")}
             </Button>
           </TooltipTrigger>
           <TooltipContent>
@@ -33,11 +46,13 @@ export function AddClientButton({ types }: { types: ClientType[] }) {
         </Tooltip>
       ) : (
         <Link href={"/clients/new"}>
-          <Button size="sm" className="h-8 gap-1" disabled={false}>
-            <PlusCircle className="h-3.5 w-3.5" />
-            <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-              {t("Add Client")}
-            </span>
+          <Button
+            size={size}
+            className={cn("h-8 gap-1", className)}
+            disabled={false}
+          >
+            <Plus className="h-3.5 w-3.5" />
+            {t("Add Client")}
           </Button>
         </Link>
       )}

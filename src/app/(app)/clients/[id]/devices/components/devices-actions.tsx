@@ -72,7 +72,7 @@ export function DeviceActions({ device, onEdit, onDelete }: Props) {
               }}
               className="text-red-600 focus:text-red-600"
             >
-              <Trash2 className="mr-2 h-4 w-4" />
+              <Trash2 className="mr-2 h-4 w-4 text-red-600" />
               Eliminar
             </DropdownMenuItem>
           </AlertDialogTrigger>

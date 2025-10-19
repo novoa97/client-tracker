@@ -1,7 +1,6 @@
 "use client";
 
-import { CopyCheck, Plus } from "lucide-react";
-import { CardList } from "@/components/card-list";
+import { Computer, CopyCheck, Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { DialogContainer } from "@/components/dialog-container";
 import { DeviceForm } from "./device-form";
@@ -17,6 +16,7 @@ import {
 import { Device, DeviceType } from "@/generated/prisma";
 import { toast } from "sonner";
 import { DeviceItem } from "./device-item";
+import { ClientPage } from "../../components/client-page";
 
 interface Props {
   clientId: string;
@@ -100,28 +100,33 @@ export function DevicesList({ clientId, devices, types }: Props) {
 
   return (
     <>
-      <CardList
+      <ClientPage
+        icon="computer"
         title={t("Devices")}
-        description={t("Registered devices for this client")}
-        buttonText={t("Add Device")}
+        subtitle={t("Registered devices for this client")}
+        addAction={() => setIsDialogOpen(true)}
+        onBackClick={() => router.push("/clients/" + clientId)}
+        // Empty state
+        empty={devices.length === 0}
         emptyMessage={t("No devices found")}
-        onCreateClick={() => setIsDialogOpen(true)}
-        variant="list"
+        emptyIcon={<Computer />}
       >
-        {devices.map((device) => (
-          <DeviceItem
-            key={device.id}
-            device={device}
-            copyToClipboard={copyToClipboard}
-            isCopied={isCopied}
-            handleDelete={handleDelete}
-            onEdit={(device) => {
-              setEditingDevice(device);
-              setIsDialogOpen(true);
-            }}
-          />
-        ))}
-      </CardList>
+        <div className="flex flex-col h-full gap-2 overflow-y-auto">
+          {devices.map((device) => (
+            <DeviceItem
+              key={device.id}
+              device={device}
+              copyToClipboard={copyToClipboard}
+              isCopied={isCopied}
+              handleDelete={handleDelete}
+              onEdit={(device) => {
+                setEditingDevice(device);
+                setIsDialogOpen(true);
+              }}
+            />
+          ))}
+        </div>
+      </ClientPage>
       <DialogContainer
         open={isDialogOpen}
         onOpenChange={(open) => {

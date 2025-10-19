@@ -1,5 +1,4 @@
 "use server";
-import { Client } from "@/generated/prisma";
 import { prisma } from "@/lib/prisma";
 
 
@@ -34,9 +33,17 @@ export async function editClient(id: string, data: EditClientData) {
 }
 
 
-export async function saveNotes(client: Client, notes: string): Promise<void> {
+export async function saveNotes(clientId: string, notes: string): Promise<void> {
     await prisma.client.update({
-        where: { id: client.id },
+        where: { id: clientId },
         data: { notes: notes },
     });
+}
+
+export async function getClientNotes(clientId: string): Promise<string | null> {
+    const client = await prisma.client.findUnique({
+        where: { id: clientId },
+        select: { notes: true },
+    });
+    return client?.notes || null;
 }

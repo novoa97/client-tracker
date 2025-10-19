@@ -7,21 +7,31 @@ import {
   Popup,
   LayersControl,
   LayerGroup,
+  useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import Link from "next/link";
 import { ClientWithType } from "@/app/types";
 import { renderToStaticMarkup } from "react-dom/server";
 import DynamicIcon from "./icon";
 import { generateMarkerIcon } from "@/lib/marker";
 import { getTextColor } from "@/lib/colors";
+import { useEffect } from "react";
+import { useSidebar } from "./ui/sidebar";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { LatLngExpression } from "leaflet";
 
 interface Props {
   clients: ClientWithType[];
+  center?: LatLngExpression;
 }
 
-export default function GeneralMap({ clients }: Props) {
+export default function GeneralMap({ clients, center }: Props) {
   // Agrupar clientes por tipo dinámicamente
+  const { open: sidebarOpen } = useSidebar();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const clientsByType = clients.reduce<Record<string, ClientWithType[]>>(
     (acc, client) => {
       if (!acc[client.type.name]) {
@@ -33,9 +43,68 @@ export default function GeneralMap({ clients }: Props) {
     {}
   );
 
+  const MapUpdater = ({
+    sidebarOpen,
+    center,
+  }: {
+    sidebarOpen: boolean;
+    center?: LatLngExpression;
+  }) => {
+    const map = useMap();
+
+    useEffect(() => {
+      // Force resize with multiple strategies to ensure it works
+      const forceResize = () => {
+        // Immediate resize
+        map.invalidateSize();
+
+        // Delayed resize to handle timing issues
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 100);
+
+        // Additional delayed resize for stubborn cases
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 300);
+      };
+
+      forceResize();
+
+      // Add window resize listener as fallback
+      const handleWindowResize = () => {
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 50);
+      };
+
+      window.addEventListener("resize", handleWindowResize);
+
+      return () => {
+        window.removeEventListener("resize", handleWindowResize);
+      };
+    }, [sidebarOpen, map]);
+
+    useEffect(() => {
+      if (center) {
+        map.setView(center, 15);
+      }
+    }, [center, map]);
+
+    return null;
+  };
+
+  const onSelectClient = (client: ClientWithType) => {
+    const params = new URLSearchParams(searchParams?.toString());
+    params.set("lat", String(client.latitude));
+    params.set("lng", String(client.longitude));
+    sessionStorage.setItem("backOrigin", pathname + "?" + params.toString());
+    router.push(`/clients/${client.id}`);
+  };
+
   return (
     <MapContainer
-      center={[42.7551, -7.8662]}
+      center={center ?? [42.7551, -7.8662]}
       zoom={8.4}
       scrollWheelZoom={true}
       className="w-full h-full z-0"
@@ -72,11 +141,12 @@ export default function GeneralMap({ clients }: Props) {
                     icon={customIcon}
                   >
                     <Popup>
-                      <Link href={"clients/" + client.id}>
-                        <div className="flex flex-row items-center gap-2 text-md font-bold text-black">
-                          {client.name}
-                        </div>
-                      </Link>
+                      <div
+                        onClick={() => onSelectClient(client)}
+                        className="flex flex-row items-center gap-2 text-md font-bold text-black cursor-pointer"
+                      >
+                        {client.name}
+                      </div>
                     </Popup>
                   </Marker>
                 );
@@ -85,6 +155,7 @@ export default function GeneralMap({ clients }: Props) {
           </LayersControl.Overlay>
         ))}
       </LayersControl>
+      <MapUpdater sidebarOpen={sidebarOpen} center={center} />
     </MapContainer>
   );
 }
