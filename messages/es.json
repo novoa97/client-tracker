@@ -227,5 +227,6 @@
   "Incident completed successfully": "Incidencia completada correctamente",
   "Delete incident?": "¿Eliminar incidencia?",
   "Are you sure you want to permanently delete the incident?": "¿Estás seguro de que quieres eliminar la incidencia?",
-  "Incident deleted successfully": "Incidencia eliminada correctamente"
+  "Incident deleted successfully": "Incidencia eliminada correctamente",
+  "Not exists incidents": "No hay incidencias"
 }

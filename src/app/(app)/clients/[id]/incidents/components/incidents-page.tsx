@@ -15,6 +15,7 @@ import { useState } from "react";
 import { DialogContainer } from "@/components/dialog-container";
 import { IncidentForm } from "./incident-form";
 import { toast } from "sonner";
+import { AlertCircle } from "lucide-react";
 
 interface Props {
   clientId: string;
@@ -81,6 +82,9 @@ export function IncidentsPage({ clientId, incidents }: Props) {
           setIncidentToEdit(null);
           setIsDialogOpen(true);
         }}
+        empty={incidents.length === 0}
+        emptyMessage={t("Not exists incidents")}
+        emptyIcon={<AlertCircle />}
       >
         <div className="flex flex-col h-full gap-2 overflow-y-auto">
           {incidents.map((incident) => (

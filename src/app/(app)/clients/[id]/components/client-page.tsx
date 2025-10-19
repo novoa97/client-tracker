@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Plus } from "lucide-react";
-import { Empty, EmptyHeader, EmptyMedia } from "@/components/ui/empty";
+import { Empty, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
 import { useTranslations } from "next-intl";
 import DynamicIcon from "@/components/icon";
 
@@ -77,9 +77,9 @@ export function ClientPage({
       <div className="flex flex-col h-full w-full min-h-0">
         <div className="flex-1 min-h-0">
           {empty ? (
-            <Empty className="w-full h-full border border-dashed">
+            <Empty className="w-full h-full border border-dashed gap-1">
               <EmptyMedia variant="icon">{emptyIcon}</EmptyMedia>
-              <EmptyHeader>{emptyMessage}</EmptyHeader>
+              <EmptyTitle>{emptyMessage}</EmptyTitle>
             </Empty>
           ) : (
             children

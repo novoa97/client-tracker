@@ -227,5 +227,6 @@
   "Incident completed successfully": "Incident completed successfully",
   "Delete incident?": "Delete incident?",
   "Are you sure you want to permanently delete the incident?": "Are you sure you want to permanently delete the incident?",
-  "Incident deleted successfully": "Incident deleted successfully"
+  "Incident deleted successfully": "Incident deleted successfully",
+  "Not exists incidents": "Not exists incidents"
 }
