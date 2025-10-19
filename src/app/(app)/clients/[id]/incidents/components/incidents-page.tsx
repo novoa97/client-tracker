@@ -77,7 +77,7 @@ export function IncidentsPage({ clientId, incidents }: Props) {
         icon="alert-circle"
         title={t("Incidents")}
         subtitle={t("Incidents registered for this client")}
-        onBackClick={() => router.push("/clients")}
+        onBackClick={() => router.push("/clients/" + clientId)}
         addAction={() => {
           setIncidentToEdit(null);
           setIsDialogOpen(true);

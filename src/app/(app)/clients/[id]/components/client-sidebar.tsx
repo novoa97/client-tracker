@@ -14,6 +14,7 @@ import {
   Pencil,
   Trash,
   LucideIcon,
+  X,
   AlertCircle,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -80,6 +81,16 @@ export function ClientSidebar({ client, types, className }: Props) {
     router.push("/clients");
   };
 
+  const handleClose = () => {
+    const backOrigin = sessionStorage.getItem("backOrigin");
+    if (backOrigin) {
+      sessionStorage.removeItem("backOrigin");
+      router.push(backOrigin);
+    } else {
+      router.push("/clients");
+    }
+  };
+
   return (
     <>
       <PageHeader title="Client" icon={"user"} buttonBack={true}>
@@ -128,12 +139,18 @@ export function ClientSidebar({ client, types, className }: Props) {
               }}
             />
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex-1 flex flex-col gap-1">
             <p className="text-lg font-medium">{client.name}</p>
             <div className="flex items-center gap-1 text-muted-foreground">
               <MapPin className="h-4 w-4" />
               <p className="text-sm">{client.city}</p>
             </div>
+          </div>
+          {/** Close button */}
+          <div className="flex md:hidden">
+            <Button variant="ghost" size="icon" onClick={() => handleClose()}>
+              <X className="h-4 w-4" />
+            </Button>
           </div>
         </div>
         {/* Client info */}
