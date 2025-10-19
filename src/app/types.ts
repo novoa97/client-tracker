@@ -1,4 +1,4 @@
-import { Prisma } from "@/generated/prisma"
+import { IncidentStatus, Prisma } from "@/generated/prisma"
 
 
 export const licenseWithRelations = Prisma.validator<Prisma.LicenseDefaultArgs>()({
@@ -31,6 +31,21 @@ export const ClientWithType = Prisma.validator<Prisma.ClientDefaultArgs>()({
     }
 })
 
+export const ClientWithTypeAndOpenIncidents = Prisma.validator<Prisma.ClientDefaultArgs>()({
+    include: {
+        type: true,
+        _count: {
+            select: {
+                incidents: {
+                    where: {
+                        status: IncidentStatus.OPEN,
+                    },
+                },
+            },
+        },
+    }
+})
+
 export const ClientWithTypeAndCount = Prisma.validator<Prisma.ClientDefaultArgs>()({
     include: {
         type: true,
@@ -44,4 +59,5 @@ export const ClientWithTypeAndCount = Prisma.validator<Prisma.ClientDefaultArgs>
 })
 
 export type ClientWithType = Prisma.ClientGetPayload<typeof ClientWithType>
+export type ClientWithTypeAndOpenIncidents = Prisma.ClientGetPayload<typeof ClientWithTypeAndOpenIncidents>
 export type ClientWithTypeAndCount = Prisma.ClientGetPayload<typeof ClientWithTypeAndCount>

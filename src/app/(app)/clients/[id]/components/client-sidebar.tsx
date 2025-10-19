@@ -1,6 +1,6 @@
 "use client";
 
-import { ClientWithType } from "@/app/types";
+import { ClientWithTypeAndOpenIncidents } from "@/app/types";
 import DynamicIcon from "@/components/icon";
 import { darkenColor, getTextColor } from "@/lib/colors";
 import {
@@ -14,6 +14,7 @@ import {
   Pencil,
   Trash,
   LucideIcon,
+  AlertCircle,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Key } from "lucide-react";
@@ -32,19 +33,20 @@ import { toast } from "sonner";
 import { PageHeader } from "@/components/page-header";
 import { deleteClient } from "../../actions/delete-client";
 import { ClientDelete } from "./client-delete";
+import { Badge } from "@/components/ui/badge";
 
 interface Props {
-  client: ClientWithType;
+  client: ClientWithTypeAndOpenIncidents;
   types: ClientType[];
   className?: string;
 }
 
 const navItems = [
-  { href: "", label: "Mapa", icon: Map, mobile: false },
-  { href: "/notes", label: "Notas", icon: FileText, mobile: true },
+  { href: "", label: "Map", icon: Map, mobile: false },
+  { href: "/notes", label: "Notes", icon: FileText, mobile: true },
   { href: "/devices", label: "Devices", icon: Computer, mobile: true },
-  { href: "/licenses", label: "Licencias", icon: Key, mobile: true },
-  //   { href: "/incidents", label: "Incidencias", icon: AlertCircle, mobile: true },
+  { href: "/licenses", label: "Licenses", icon: Key, mobile: true },
+  { href: "/incidents", label: "Incidents", icon: AlertCircle, mobile: true },
 ];
 
 export function ClientSidebar({ client, types, className }: Props) {
@@ -104,7 +106,7 @@ export function ClientSidebar({ client, types, className }: Props) {
           boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
         }}
         className={cn(
-          "flex flex-col h-full w-3/10 bg-white  border-r p-8 space-y-2 shadow-lg",
+          "flex flex-col h-full w-3/10 bg-white  border-r p-8 space-y-2 shadow-lg overflow-y-auto",
           className
         )}
       >
@@ -191,8 +193,18 @@ export function ClientSidebar({ client, types, className }: Props) {
                       isActive && "bg-muted font-medium"
                     )}
                   >
-                    <Icon className="mr-2 h-4 w-4" />
-                    {item.label}
+                    <div className="flex flex-row gap-2 items-center justify-between w-full">
+                      <div className="flex flex-row gap-2 items-center">
+                        <Icon className="mr-2 h-4 w-4" />
+                        {t(item.label)}
+                      </div>
+                      {item.href === "/incidents" &&
+                        client._count.incidents > 0 && (
+                          <Badge variant="destructive" className="text-xs">
+                            {client._count.incidents}
+                          </Badge>
+                        )}
+                    </div>
                   </Button>
                 </Link>
               );
@@ -200,7 +212,7 @@ export function ClientSidebar({ client, types, className }: Props) {
           </div>
         </div>
         {/** Edit button */}
-        <div className="h-10 md:hidden">
+        <div className="h-10 md:hidden flex flex-col gap-2 my-4">
           <Button
             variant="default"
             className="w-full"
@@ -208,6 +220,14 @@ export function ClientSidebar({ client, types, className }: Props) {
           >
             <Pencil className="mr-2 h-4 w-4" />
             {t("Edit")}
+          </Button>
+          <Button
+            variant="destructive"
+            className="w-full"
+            onClick={() => setIsDeleting(true)}
+          >
+            <Trash className="mr-2 h-4 w-4" />
+            {t("Delete")}
           </Button>
         </div>
       </div>

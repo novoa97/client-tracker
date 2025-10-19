@@ -48,6 +48,42 @@ export type Device = $Result.DefaultSelection<Prisma.$DevicePayload>
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model Incident
+ * 
+ */
+export type Incident = $Result.DefaultSelection<Prisma.$IncidentPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const IncidentStatus: {
+  OPEN: 'OPEN',
+  RESOLVED: 'RESOLVED'
+};
+
+export type IncidentStatus = (typeof IncidentStatus)[keyof typeof IncidentStatus]
+
+
+export const IncidentPriority: {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+  CRITICAL: 'CRITICAL'
+};
+
+export type IncidentPriority = (typeof IncidentPriority)[keyof typeof IncidentPriority]
+
+}
+
+export type IncidentStatus = $Enums.IncidentStatus
+
+export const IncidentStatus: typeof $Enums.IncidentStatus
+
+export type IncidentPriority = $Enums.IncidentPriority
+
+export const IncidentPriority: typeof $Enums.IncidentPriority
 
 /**
  * ##  Prisma Client ʲˢ
@@ -243,6 +279,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.incident`: Exposes CRUD operations for the **Incident** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Incidents
+    * const incidents = await prisma.incident.findMany()
+    * ```
+    */
+  get incident(): Prisma.IncidentDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -689,7 +735,8 @@ export namespace Prisma {
     LicenseType: 'LicenseType',
     DeviceType: 'DeviceType',
     Device: 'Device',
-    User: 'User'
+    User: 'User',
+    Incident: 'Incident'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -708,7 +755,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "clientType" | "client" | "license" | "licenseType" | "deviceType" | "device" | "user"
+      modelProps: "clientType" | "client" | "license" | "licenseType" | "deviceType" | "device" | "user" | "incident"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1174,6 +1221,72 @@ export namespace Prisma {
           }
         }
       }
+      Incident: {
+        payload: Prisma.$IncidentPayload<ExtArgs>
+        fields: Prisma.IncidentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IncidentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IncidentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidentPayload>
+          }
+          findFirst: {
+            args: Prisma.IncidentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IncidentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidentPayload>
+          }
+          findMany: {
+            args: Prisma.IncidentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidentPayload>[]
+          }
+          create: {
+            args: Prisma.IncidentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidentPayload>
+          }
+          createMany: {
+            args: Prisma.IncidentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.IncidentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidentPayload>
+          }
+          update: {
+            args: Prisma.IncidentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidentPayload>
+          }
+          deleteMany: {
+            args: Prisma.IncidentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IncidentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.IncidentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IncidentPayload>
+          }
+          aggregate: {
+            args: Prisma.IncidentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIncident>
+          }
+          groupBy: {
+            args: Prisma.IncidentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IncidentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IncidentCountArgs<ExtArgs>
+            result: $Utils.Optional<IncidentCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1265,6 +1378,7 @@ export namespace Prisma {
     deviceType?: DeviceTypeOmit
     device?: DeviceOmit
     user?: UserOmit
+    incident?: IncidentOmit
   }
 
   /* Types for Logging */
@@ -1392,11 +1506,13 @@ export namespace Prisma {
   export type ClientCountOutputType = {
     licenses: number
     devices: number
+    incidents: number
   }
 
   export type ClientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     licenses?: boolean | ClientCountOutputTypeCountLicensesArgs
     devices?: boolean | ClientCountOutputTypeCountDevicesArgs
+    incidents?: boolean | ClientCountOutputTypeCountIncidentsArgs
   }
 
   // Custom InputTypes
@@ -1422,6 +1538,13 @@ export namespace Prisma {
    */
   export type ClientCountOutputTypeCountDevicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: DeviceWhereInput
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountIncidentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IncidentWhereInput
   }
 
 
@@ -2738,6 +2861,7 @@ export namespace Prisma {
     type?: boolean | ClientTypeDefaultArgs<ExtArgs>
     licenses?: boolean | Client$licensesArgs<ExtArgs>
     devices?: boolean | Client$devicesArgs<ExtArgs>
+    incidents?: boolean | Client$incidentsArgs<ExtArgs>
     _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["client"]>
 
@@ -2763,6 +2887,7 @@ export namespace Prisma {
     type?: boolean | ClientTypeDefaultArgs<ExtArgs>
     licenses?: boolean | Client$licensesArgs<ExtArgs>
     devices?: boolean | Client$devicesArgs<ExtArgs>
+    incidents?: boolean | Client$incidentsArgs<ExtArgs>
     _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2772,6 +2897,7 @@ export namespace Prisma {
       type: Prisma.$ClientTypePayload<ExtArgs>
       licenses: Prisma.$LicensePayload<ExtArgs>[]
       devices: Prisma.$DevicePayload<ExtArgs>[]
+      incidents: Prisma.$IncidentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3129,6 +3255,7 @@ export namespace Prisma {
     type<T extends ClientTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientTypeDefaultArgs<ExtArgs>>): Prisma__ClientTypeClient<$Result.GetResult<Prisma.$ClientTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     licenses<T extends Client$licensesArgs<ExtArgs> = {}>(args?: Subset<T, Client$licensesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LicensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     devices<T extends Client$devicesArgs<ExtArgs> = {}>(args?: Subset<T, Client$devicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DevicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    incidents<T extends Client$incidentsArgs<ExtArgs> = {}>(args?: Subset<T, Client$incidentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncidentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3558,6 +3685,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: DeviceScalarFieldEnum | DeviceScalarFieldEnum[]
+  }
+
+  /**
+   * Client.incidents
+   */
+  export type Client$incidentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incident
+     */
+    select?: IncidentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incident
+     */
+    omit?: IncidentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidentInclude<ExtArgs> | null
+    where?: IncidentWhereInput
+    orderBy?: IncidentOrderByWithRelationInput | IncidentOrderByWithRelationInput[]
+    cursor?: IncidentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: IncidentScalarFieldEnum | IncidentScalarFieldEnum[]
   }
 
   /**
@@ -8313,6 +8464,990 @@ export namespace Prisma {
 
 
   /**
+   * Model Incident
+   */
+
+  export type AggregateIncident = {
+    _count: IncidentCountAggregateOutputType | null
+    _min: IncidentMinAggregateOutputType | null
+    _max: IncidentMaxAggregateOutputType | null
+  }
+
+  export type IncidentMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    date: Date | null
+    status: $Enums.IncidentStatus | null
+    priority: $Enums.IncidentPriority | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    clientId: string | null
+    resolvedAt: Date | null
+  }
+
+  export type IncidentMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    date: Date | null
+    status: $Enums.IncidentStatus | null
+    priority: $Enums.IncidentPriority | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    clientId: string | null
+    resolvedAt: Date | null
+  }
+
+  export type IncidentCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    date: number
+    status: number
+    priority: number
+    createdAt: number
+    updatedAt: number
+    clientId: number
+    resolvedAt: number
+    _all: number
+  }
+
+
+  export type IncidentMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    date?: true
+    status?: true
+    priority?: true
+    createdAt?: true
+    updatedAt?: true
+    clientId?: true
+    resolvedAt?: true
+  }
+
+  export type IncidentMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    date?: true
+    status?: true
+    priority?: true
+    createdAt?: true
+    updatedAt?: true
+    clientId?: true
+    resolvedAt?: true
+  }
+
+  export type IncidentCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    date?: true
+    status?: true
+    priority?: true
+    createdAt?: true
+    updatedAt?: true
+    clientId?: true
+    resolvedAt?: true
+    _all?: true
+  }
+
+  export type IncidentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Incident to aggregate.
+     */
+    where?: IncidentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Incidents to fetch.
+     */
+    orderBy?: IncidentOrderByWithRelationInput | IncidentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IncidentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Incidents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Incidents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Incidents
+    **/
+    _count?: true | IncidentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IncidentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IncidentMaxAggregateInputType
+  }
+
+  export type GetIncidentAggregateType<T extends IncidentAggregateArgs> = {
+        [P in keyof T & keyof AggregateIncident]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIncident[P]>
+      : GetScalarType<T[P], AggregateIncident[P]>
+  }
+
+
+
+
+  export type IncidentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IncidentWhereInput
+    orderBy?: IncidentOrderByWithAggregationInput | IncidentOrderByWithAggregationInput[]
+    by: IncidentScalarFieldEnum[] | IncidentScalarFieldEnum
+    having?: IncidentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IncidentCountAggregateInputType | true
+    _min?: IncidentMinAggregateInputType
+    _max?: IncidentMaxAggregateInputType
+  }
+
+  export type IncidentGroupByOutputType = {
+    id: string
+    title: string
+    description: string | null
+    date: Date
+    status: $Enums.IncidentStatus
+    priority: $Enums.IncidentPriority
+    createdAt: Date
+    updatedAt: Date
+    clientId: string
+    resolvedAt: Date | null
+    _count: IncidentCountAggregateOutputType | null
+    _min: IncidentMinAggregateOutputType | null
+    _max: IncidentMaxAggregateOutputType | null
+  }
+
+  type GetIncidentGroupByPayload<T extends IncidentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IncidentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IncidentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IncidentGroupByOutputType[P]>
+            : GetScalarType<T[P], IncidentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IncidentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    date?: boolean
+    status?: boolean
+    priority?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    clientId?: boolean
+    resolvedAt?: boolean
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["incident"]>
+
+
+
+  export type IncidentSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    date?: boolean
+    status?: boolean
+    priority?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    clientId?: boolean
+    resolvedAt?: boolean
+  }
+
+  export type IncidentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "date" | "status" | "priority" | "createdAt" | "updatedAt" | "clientId" | "resolvedAt", ExtArgs["result"]["incident"]>
+  export type IncidentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+  }
+
+  export type $IncidentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Incident"
+    objects: {
+      client: Prisma.$ClientPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      description: string | null
+      date: Date
+      status: $Enums.IncidentStatus
+      priority: $Enums.IncidentPriority
+      createdAt: Date
+      updatedAt: Date
+      clientId: string
+      resolvedAt: Date | null
+    }, ExtArgs["result"]["incident"]>
+    composites: {}
+  }
+
+  type IncidentGetPayload<S extends boolean | null | undefined | IncidentDefaultArgs> = $Result.GetResult<Prisma.$IncidentPayload, S>
+
+  type IncidentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<IncidentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: IncidentCountAggregateInputType | true
+    }
+
+  export interface IncidentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Incident'], meta: { name: 'Incident' } }
+    /**
+     * Find zero or one Incident that matches the filter.
+     * @param {IncidentFindUniqueArgs} args - Arguments to find a Incident
+     * @example
+     * // Get one Incident
+     * const incident = await prisma.incident.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends IncidentFindUniqueArgs>(args: SelectSubset<T, IncidentFindUniqueArgs<ExtArgs>>): Prisma__IncidentClient<$Result.GetResult<Prisma.$IncidentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Incident that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {IncidentFindUniqueOrThrowArgs} args - Arguments to find a Incident
+     * @example
+     * // Get one Incident
+     * const incident = await prisma.incident.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends IncidentFindUniqueOrThrowArgs>(args: SelectSubset<T, IncidentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IncidentClient<$Result.GetResult<Prisma.$IncidentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Incident that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncidentFindFirstArgs} args - Arguments to find a Incident
+     * @example
+     * // Get one Incident
+     * const incident = await prisma.incident.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends IncidentFindFirstArgs>(args?: SelectSubset<T, IncidentFindFirstArgs<ExtArgs>>): Prisma__IncidentClient<$Result.GetResult<Prisma.$IncidentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Incident that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncidentFindFirstOrThrowArgs} args - Arguments to find a Incident
+     * @example
+     * // Get one Incident
+     * const incident = await prisma.incident.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends IncidentFindFirstOrThrowArgs>(args?: SelectSubset<T, IncidentFindFirstOrThrowArgs<ExtArgs>>): Prisma__IncidentClient<$Result.GetResult<Prisma.$IncidentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Incidents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncidentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Incidents
+     * const incidents = await prisma.incident.findMany()
+     * 
+     * // Get first 10 Incidents
+     * const incidents = await prisma.incident.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const incidentWithIdOnly = await prisma.incident.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends IncidentFindManyArgs>(args?: SelectSubset<T, IncidentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IncidentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Incident.
+     * @param {IncidentCreateArgs} args - Arguments to create a Incident.
+     * @example
+     * // Create one Incident
+     * const Incident = await prisma.incident.create({
+     *   data: {
+     *     // ... data to create a Incident
+     *   }
+     * })
+     * 
+     */
+    create<T extends IncidentCreateArgs>(args: SelectSubset<T, IncidentCreateArgs<ExtArgs>>): Prisma__IncidentClient<$Result.GetResult<Prisma.$IncidentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Incidents.
+     * @param {IncidentCreateManyArgs} args - Arguments to create many Incidents.
+     * @example
+     * // Create many Incidents
+     * const incident = await prisma.incident.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends IncidentCreateManyArgs>(args?: SelectSubset<T, IncidentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Incident.
+     * @param {IncidentDeleteArgs} args - Arguments to delete one Incident.
+     * @example
+     * // Delete one Incident
+     * const Incident = await prisma.incident.delete({
+     *   where: {
+     *     // ... filter to delete one Incident
+     *   }
+     * })
+     * 
+     */
+    delete<T extends IncidentDeleteArgs>(args: SelectSubset<T, IncidentDeleteArgs<ExtArgs>>): Prisma__IncidentClient<$Result.GetResult<Prisma.$IncidentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Incident.
+     * @param {IncidentUpdateArgs} args - Arguments to update one Incident.
+     * @example
+     * // Update one Incident
+     * const incident = await prisma.incident.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends IncidentUpdateArgs>(args: SelectSubset<T, IncidentUpdateArgs<ExtArgs>>): Prisma__IncidentClient<$Result.GetResult<Prisma.$IncidentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Incidents.
+     * @param {IncidentDeleteManyArgs} args - Arguments to filter Incidents to delete.
+     * @example
+     * // Delete a few Incidents
+     * const { count } = await prisma.incident.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends IncidentDeleteManyArgs>(args?: SelectSubset<T, IncidentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Incidents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncidentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Incidents
+     * const incident = await prisma.incident.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends IncidentUpdateManyArgs>(args: SelectSubset<T, IncidentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Incident.
+     * @param {IncidentUpsertArgs} args - Arguments to update or create a Incident.
+     * @example
+     * // Update or create a Incident
+     * const incident = await prisma.incident.upsert({
+     *   create: {
+     *     // ... data to create a Incident
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Incident we want to update
+     *   }
+     * })
+     */
+    upsert<T extends IncidentUpsertArgs>(args: SelectSubset<T, IncidentUpsertArgs<ExtArgs>>): Prisma__IncidentClient<$Result.GetResult<Prisma.$IncidentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Incidents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncidentCountArgs} args - Arguments to filter Incidents to count.
+     * @example
+     * // Count the number of Incidents
+     * const count = await prisma.incident.count({
+     *   where: {
+     *     // ... the filter for the Incidents we want to count
+     *   }
+     * })
+    **/
+    count<T extends IncidentCountArgs>(
+      args?: Subset<T, IncidentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IncidentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Incident.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncidentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IncidentAggregateArgs>(args: Subset<T, IncidentAggregateArgs>): Prisma.PrismaPromise<GetIncidentAggregateType<T>>
+
+    /**
+     * Group by Incident.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IncidentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IncidentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IncidentGroupByArgs['orderBy'] }
+        : { orderBy?: IncidentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IncidentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIncidentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Incident model
+   */
+  readonly fields: IncidentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Incident.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IncidentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Incident model
+   */
+  interface IncidentFieldRefs {
+    readonly id: FieldRef<"Incident", 'String'>
+    readonly title: FieldRef<"Incident", 'String'>
+    readonly description: FieldRef<"Incident", 'String'>
+    readonly date: FieldRef<"Incident", 'DateTime'>
+    readonly status: FieldRef<"Incident", 'IncidentStatus'>
+    readonly priority: FieldRef<"Incident", 'IncidentPriority'>
+    readonly createdAt: FieldRef<"Incident", 'DateTime'>
+    readonly updatedAt: FieldRef<"Incident", 'DateTime'>
+    readonly clientId: FieldRef<"Incident", 'String'>
+    readonly resolvedAt: FieldRef<"Incident", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Incident findUnique
+   */
+  export type IncidentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incident
+     */
+    select?: IncidentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incident
+     */
+    omit?: IncidentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidentInclude<ExtArgs> | null
+    /**
+     * Filter, which Incident to fetch.
+     */
+    where: IncidentWhereUniqueInput
+  }
+
+  /**
+   * Incident findUniqueOrThrow
+   */
+  export type IncidentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incident
+     */
+    select?: IncidentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incident
+     */
+    omit?: IncidentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidentInclude<ExtArgs> | null
+    /**
+     * Filter, which Incident to fetch.
+     */
+    where: IncidentWhereUniqueInput
+  }
+
+  /**
+   * Incident findFirst
+   */
+  export type IncidentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incident
+     */
+    select?: IncidentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incident
+     */
+    omit?: IncidentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidentInclude<ExtArgs> | null
+    /**
+     * Filter, which Incident to fetch.
+     */
+    where?: IncidentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Incidents to fetch.
+     */
+    orderBy?: IncidentOrderByWithRelationInput | IncidentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Incidents.
+     */
+    cursor?: IncidentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Incidents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Incidents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Incidents.
+     */
+    distinct?: IncidentScalarFieldEnum | IncidentScalarFieldEnum[]
+  }
+
+  /**
+   * Incident findFirstOrThrow
+   */
+  export type IncidentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incident
+     */
+    select?: IncidentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incident
+     */
+    omit?: IncidentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidentInclude<ExtArgs> | null
+    /**
+     * Filter, which Incident to fetch.
+     */
+    where?: IncidentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Incidents to fetch.
+     */
+    orderBy?: IncidentOrderByWithRelationInput | IncidentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Incidents.
+     */
+    cursor?: IncidentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Incidents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Incidents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Incidents.
+     */
+    distinct?: IncidentScalarFieldEnum | IncidentScalarFieldEnum[]
+  }
+
+  /**
+   * Incident findMany
+   */
+  export type IncidentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incident
+     */
+    select?: IncidentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incident
+     */
+    omit?: IncidentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidentInclude<ExtArgs> | null
+    /**
+     * Filter, which Incidents to fetch.
+     */
+    where?: IncidentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Incidents to fetch.
+     */
+    orderBy?: IncidentOrderByWithRelationInput | IncidentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Incidents.
+     */
+    cursor?: IncidentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Incidents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Incidents.
+     */
+    skip?: number
+    distinct?: IncidentScalarFieldEnum | IncidentScalarFieldEnum[]
+  }
+
+  /**
+   * Incident create
+   */
+  export type IncidentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incident
+     */
+    select?: IncidentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incident
+     */
+    omit?: IncidentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Incident.
+     */
+    data: XOR<IncidentCreateInput, IncidentUncheckedCreateInput>
+  }
+
+  /**
+   * Incident createMany
+   */
+  export type IncidentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Incidents.
+     */
+    data: IncidentCreateManyInput | IncidentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Incident update
+   */
+  export type IncidentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incident
+     */
+    select?: IncidentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incident
+     */
+    omit?: IncidentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Incident.
+     */
+    data: XOR<IncidentUpdateInput, IncidentUncheckedUpdateInput>
+    /**
+     * Choose, which Incident to update.
+     */
+    where: IncidentWhereUniqueInput
+  }
+
+  /**
+   * Incident updateMany
+   */
+  export type IncidentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Incidents.
+     */
+    data: XOR<IncidentUpdateManyMutationInput, IncidentUncheckedUpdateManyInput>
+    /**
+     * Filter which Incidents to update
+     */
+    where?: IncidentWhereInput
+    /**
+     * Limit how many Incidents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Incident upsert
+   */
+  export type IncidentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incident
+     */
+    select?: IncidentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incident
+     */
+    omit?: IncidentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Incident to update in case it exists.
+     */
+    where: IncidentWhereUniqueInput
+    /**
+     * In case the Incident found by the `where` argument doesn't exist, create a new Incident with this data.
+     */
+    create: XOR<IncidentCreateInput, IncidentUncheckedCreateInput>
+    /**
+     * In case the Incident was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IncidentUpdateInput, IncidentUncheckedUpdateInput>
+  }
+
+  /**
+   * Incident delete
+   */
+  export type IncidentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incident
+     */
+    select?: IncidentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incident
+     */
+    omit?: IncidentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidentInclude<ExtArgs> | null
+    /**
+     * Filter which Incident to delete.
+     */
+    where: IncidentWhereUniqueInput
+  }
+
+  /**
+   * Incident deleteMany
+   */
+  export type IncidentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Incidents to delete
+     */
+    where?: IncidentWhereInput
+    /**
+     * Limit how many Incidents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Incident without action
+   */
+  export type IncidentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Incident
+     */
+    select?: IncidentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Incident
+     */
+    omit?: IncidentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IncidentInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -8412,6 +9547,22 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const IncidentScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    date: 'date',
+    status: 'status',
+    priority: 'priority',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    clientId: 'clientId',
+    resolvedAt: 'resolvedAt'
+  };
+
+  export type IncidentScalarFieldEnum = (typeof IncidentScalarFieldEnum)[keyof typeof IncidentScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -8504,6 +9655,16 @@ export namespace Prisma {
   export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
 
 
+  export const IncidentOrderByRelevanceFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    clientId: 'clientId'
+  };
+
+  export type IncidentOrderByRelevanceFieldEnum = (typeof IncidentOrderByRelevanceFieldEnum)[keyof typeof IncidentOrderByRelevanceFieldEnum]
+
+
   /**
    * Field references
    */
@@ -8527,6 +9688,20 @@ export namespace Prisma {
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'IncidentStatus'
+   */
+  export type EnumIncidentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IncidentStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'IncidentPriority'
+   */
+  export type EnumIncidentPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'IncidentPriority'>
     
 
 
@@ -8615,6 +9790,7 @@ export namespace Prisma {
     type?: XOR<ClientTypeScalarRelationFilter, ClientTypeWhereInput>
     licenses?: LicenseListRelationFilter
     devices?: DeviceListRelationFilter
+    incidents?: IncidentListRelationFilter
   }
 
   export type ClientOrderByWithRelationInput = {
@@ -8633,6 +9809,7 @@ export namespace Prisma {
     type?: ClientTypeOrderByWithRelationInput
     licenses?: LicenseOrderByRelationAggregateInput
     devices?: DeviceOrderByRelationAggregateInput
+    incidents?: IncidentOrderByRelationAggregateInput
     _relevance?: ClientOrderByRelevanceInput
   }
 
@@ -8655,6 +9832,7 @@ export namespace Prisma {
     type?: XOR<ClientTypeScalarRelationFilter, ClientTypeWhereInput>
     licenses?: LicenseListRelationFilter
     devices?: DeviceListRelationFilter
+    incidents?: IncidentListRelationFilter
   }, "id">
 
   export type ClientOrderByWithAggregationInput = {
@@ -8994,6 +10172,87 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
+  export type IncidentWhereInput = {
+    AND?: IncidentWhereInput | IncidentWhereInput[]
+    OR?: IncidentWhereInput[]
+    NOT?: IncidentWhereInput | IncidentWhereInput[]
+    id?: StringFilter<"Incident"> | string
+    title?: StringFilter<"Incident"> | string
+    description?: StringNullableFilter<"Incident"> | string | null
+    date?: DateTimeFilter<"Incident"> | Date | string
+    status?: EnumIncidentStatusFilter<"Incident"> | $Enums.IncidentStatus
+    priority?: EnumIncidentPriorityFilter<"Incident"> | $Enums.IncidentPriority
+    createdAt?: DateTimeFilter<"Incident"> | Date | string
+    updatedAt?: DateTimeFilter<"Incident"> | Date | string
+    clientId?: StringFilter<"Incident"> | string
+    resolvedAt?: DateTimeNullableFilter<"Incident"> | Date | string | null
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+  }
+
+  export type IncidentOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    date?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    clientId?: SortOrder
+    resolvedAt?: SortOrderInput | SortOrder
+    client?: ClientOrderByWithRelationInput
+    _relevance?: IncidentOrderByRelevanceInput
+  }
+
+  export type IncidentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: IncidentWhereInput | IncidentWhereInput[]
+    OR?: IncidentWhereInput[]
+    NOT?: IncidentWhereInput | IncidentWhereInput[]
+    title?: StringFilter<"Incident"> | string
+    description?: StringNullableFilter<"Incident"> | string | null
+    date?: DateTimeFilter<"Incident"> | Date | string
+    status?: EnumIncidentStatusFilter<"Incident"> | $Enums.IncidentStatus
+    priority?: EnumIncidentPriorityFilter<"Incident"> | $Enums.IncidentPriority
+    createdAt?: DateTimeFilter<"Incident"> | Date | string
+    updatedAt?: DateTimeFilter<"Incident"> | Date | string
+    clientId?: StringFilter<"Incident"> | string
+    resolvedAt?: DateTimeNullableFilter<"Incident"> | Date | string | null
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+  }, "id">
+
+  export type IncidentOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    date?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    clientId?: SortOrder
+    resolvedAt?: SortOrderInput | SortOrder
+    _count?: IncidentCountOrderByAggregateInput
+    _max?: IncidentMaxOrderByAggregateInput
+    _min?: IncidentMinOrderByAggregateInput
+  }
+
+  export type IncidentScalarWhereWithAggregatesInput = {
+    AND?: IncidentScalarWhereWithAggregatesInput | IncidentScalarWhereWithAggregatesInput[]
+    OR?: IncidentScalarWhereWithAggregatesInput[]
+    NOT?: IncidentScalarWhereWithAggregatesInput | IncidentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Incident"> | string
+    title?: StringWithAggregatesFilter<"Incident"> | string
+    description?: StringNullableWithAggregatesFilter<"Incident"> | string | null
+    date?: DateTimeWithAggregatesFilter<"Incident"> | Date | string
+    status?: EnumIncidentStatusWithAggregatesFilter<"Incident"> | $Enums.IncidentStatus
+    priority?: EnumIncidentPriorityWithAggregatesFilter<"Incident"> | $Enums.IncidentPriority
+    createdAt?: DateTimeWithAggregatesFilter<"Incident"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Incident"> | Date | string
+    clientId?: StringWithAggregatesFilter<"Incident"> | string
+    resolvedAt?: DateTimeNullableWithAggregatesFilter<"Incident"> | Date | string | null
+  }
+
   export type ClientTypeCreateInput = {
     key: string
     name: string
@@ -9069,6 +10328,7 @@ export namespace Prisma {
     type: ClientTypeCreateNestedOneWithoutClientsInput
     licenses?: LicenseCreateNestedManyWithoutClientInput
     devices?: DeviceCreateNestedManyWithoutClientInput
+    incidents?: IncidentCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateInput = {
@@ -9086,6 +10346,7 @@ export namespace Prisma {
     createdAt?: Date | string
     licenses?: LicenseUncheckedCreateNestedManyWithoutClientInput
     devices?: DeviceUncheckedCreateNestedManyWithoutClientInput
+    incidents?: IncidentUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientUpdateInput = {
@@ -9103,6 +10364,7 @@ export namespace Prisma {
     type?: ClientTypeUpdateOneRequiredWithoutClientsNestedInput
     licenses?: LicenseUpdateManyWithoutClientNestedInput
     devices?: DeviceUpdateManyWithoutClientNestedInput
+    incidents?: IncidentUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateInput = {
@@ -9120,6 +10382,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licenses?: LicenseUncheckedUpdateManyWithoutClientNestedInput
     devices?: DeviceUncheckedUpdateManyWithoutClientNestedInput
+    incidents?: IncidentUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientCreateManyInput = {
@@ -9467,6 +10730,96 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type IncidentCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    date: Date | string
+    status?: $Enums.IncidentStatus
+    priority?: $Enums.IncidentPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    resolvedAt?: Date | string | null
+    client: ClientCreateNestedOneWithoutIncidentsInput
+  }
+
+  export type IncidentUncheckedCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    date: Date | string
+    status?: $Enums.IncidentStatus
+    priority?: $Enums.IncidentPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    clientId: string
+    resolvedAt?: Date | string | null
+  }
+
+  export type IncidentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
+    priority?: EnumIncidentPriorityFieldUpdateOperationsInput | $Enums.IncidentPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    client?: ClientUpdateOneRequiredWithoutIncidentsNestedInput
+  }
+
+  export type IncidentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
+    priority?: EnumIncidentPriorityFieldUpdateOperationsInput | $Enums.IncidentPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type IncidentCreateManyInput = {
+    id?: string
+    title: string
+    description?: string | null
+    date: Date | string
+    status?: $Enums.IncidentStatus
+    priority?: $Enums.IncidentPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    clientId: string
+    resolvedAt?: Date | string | null
+  }
+
+  export type IncidentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
+    priority?: EnumIncidentPriorityFieldUpdateOperationsInput | $Enums.IncidentPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type IncidentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
+    priority?: EnumIncidentPriorityFieldUpdateOperationsInput | $Enums.IncidentPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -9608,6 +10961,12 @@ export namespace Prisma {
     none?: DeviceWhereInput
   }
 
+  export type IncidentListRelationFilter = {
+    every?: IncidentWhereInput
+    some?: IncidentWhereInput
+    none?: IncidentWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -9618,6 +10977,10 @@ export namespace Prisma {
   }
 
   export type DeviceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type IncidentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9892,6 +11255,110 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type EnumIncidentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.IncidentStatus | EnumIncidentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.IncidentStatus[]
+    notIn?: $Enums.IncidentStatus[]
+    not?: NestedEnumIncidentStatusFilter<$PrismaModel> | $Enums.IncidentStatus
+  }
+
+  export type EnumIncidentPriorityFilter<$PrismaModel = never> = {
+    equals?: $Enums.IncidentPriority | EnumIncidentPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.IncidentPriority[]
+    notIn?: $Enums.IncidentPriority[]
+    not?: NestedEnumIncidentPriorityFilter<$PrismaModel> | $Enums.IncidentPriority
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type IncidentOrderByRelevanceInput = {
+    fields: IncidentOrderByRelevanceFieldEnum | IncidentOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type IncidentCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    date?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    clientId?: SortOrder
+    resolvedAt?: SortOrder
+  }
+
+  export type IncidentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    date?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    clientId?: SortOrder
+    resolvedAt?: SortOrder
+  }
+
+  export type IncidentMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    date?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    clientId?: SortOrder
+    resolvedAt?: SortOrder
+  }
+
+  export type EnumIncidentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.IncidentStatus | EnumIncidentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.IncidentStatus[]
+    notIn?: $Enums.IncidentStatus[]
+    not?: NestedEnumIncidentStatusWithAggregatesFilter<$PrismaModel> | $Enums.IncidentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumIncidentStatusFilter<$PrismaModel>
+    _max?: NestedEnumIncidentStatusFilter<$PrismaModel>
+  }
+
+  export type EnumIncidentPriorityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.IncidentPriority | EnumIncidentPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.IncidentPriority[]
+    notIn?: $Enums.IncidentPriority[]
+    not?: NestedEnumIncidentPriorityWithAggregatesFilter<$PrismaModel> | $Enums.IncidentPriority
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumIncidentPriorityFilter<$PrismaModel>
+    _max?: NestedEnumIncidentPriorityFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type ClientCreateNestedManyWithoutTypeInput = {
     create?: XOR<ClientCreateWithoutTypeInput, ClientUncheckedCreateWithoutTypeInput> | ClientCreateWithoutTypeInput[] | ClientUncheckedCreateWithoutTypeInput[]
     connectOrCreate?: ClientCreateOrConnectWithoutTypeInput | ClientCreateOrConnectWithoutTypeInput[]
@@ -9962,6 +11429,13 @@ export namespace Prisma {
     connect?: DeviceWhereUniqueInput | DeviceWhereUniqueInput[]
   }
 
+  export type IncidentCreateNestedManyWithoutClientInput = {
+    create?: XOR<IncidentCreateWithoutClientInput, IncidentUncheckedCreateWithoutClientInput> | IncidentCreateWithoutClientInput[] | IncidentUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: IncidentCreateOrConnectWithoutClientInput | IncidentCreateOrConnectWithoutClientInput[]
+    createMany?: IncidentCreateManyClientInputEnvelope
+    connect?: IncidentWhereUniqueInput | IncidentWhereUniqueInput[]
+  }
+
   export type LicenseUncheckedCreateNestedManyWithoutClientInput = {
     create?: XOR<LicenseCreateWithoutClientInput, LicenseUncheckedCreateWithoutClientInput> | LicenseCreateWithoutClientInput[] | LicenseUncheckedCreateWithoutClientInput[]
     connectOrCreate?: LicenseCreateOrConnectWithoutClientInput | LicenseCreateOrConnectWithoutClientInput[]
@@ -9974,6 +11448,13 @@ export namespace Prisma {
     connectOrCreate?: DeviceCreateOrConnectWithoutClientInput | DeviceCreateOrConnectWithoutClientInput[]
     createMany?: DeviceCreateManyClientInputEnvelope
     connect?: DeviceWhereUniqueInput | DeviceWhereUniqueInput[]
+  }
+
+  export type IncidentUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<IncidentCreateWithoutClientInput, IncidentUncheckedCreateWithoutClientInput> | IncidentCreateWithoutClientInput[] | IncidentUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: IncidentCreateOrConnectWithoutClientInput | IncidentCreateOrConnectWithoutClientInput[]
+    createMany?: IncidentCreateManyClientInputEnvelope
+    connect?: IncidentWhereUniqueInput | IncidentWhereUniqueInput[]
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -10024,6 +11505,20 @@ export namespace Prisma {
     deleteMany?: DeviceScalarWhereInput | DeviceScalarWhereInput[]
   }
 
+  export type IncidentUpdateManyWithoutClientNestedInput = {
+    create?: XOR<IncidentCreateWithoutClientInput, IncidentUncheckedCreateWithoutClientInput> | IncidentCreateWithoutClientInput[] | IncidentUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: IncidentCreateOrConnectWithoutClientInput | IncidentCreateOrConnectWithoutClientInput[]
+    upsert?: IncidentUpsertWithWhereUniqueWithoutClientInput | IncidentUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: IncidentCreateManyClientInputEnvelope
+    set?: IncidentWhereUniqueInput | IncidentWhereUniqueInput[]
+    disconnect?: IncidentWhereUniqueInput | IncidentWhereUniqueInput[]
+    delete?: IncidentWhereUniqueInput | IncidentWhereUniqueInput[]
+    connect?: IncidentWhereUniqueInput | IncidentWhereUniqueInput[]
+    update?: IncidentUpdateWithWhereUniqueWithoutClientInput | IncidentUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: IncidentUpdateManyWithWhereWithoutClientInput | IncidentUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: IncidentScalarWhereInput | IncidentScalarWhereInput[]
+  }
+
   export type LicenseUncheckedUpdateManyWithoutClientNestedInput = {
     create?: XOR<LicenseCreateWithoutClientInput, LicenseUncheckedCreateWithoutClientInput> | LicenseCreateWithoutClientInput[] | LicenseUncheckedCreateWithoutClientInput[]
     connectOrCreate?: LicenseCreateOrConnectWithoutClientInput | LicenseCreateOrConnectWithoutClientInput[]
@@ -10050,6 +11545,20 @@ export namespace Prisma {
     update?: DeviceUpdateWithWhereUniqueWithoutClientInput | DeviceUpdateWithWhereUniqueWithoutClientInput[]
     updateMany?: DeviceUpdateManyWithWhereWithoutClientInput | DeviceUpdateManyWithWhereWithoutClientInput[]
     deleteMany?: DeviceScalarWhereInput | DeviceScalarWhereInput[]
+  }
+
+  export type IncidentUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<IncidentCreateWithoutClientInput, IncidentUncheckedCreateWithoutClientInput> | IncidentCreateWithoutClientInput[] | IncidentUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: IncidentCreateOrConnectWithoutClientInput | IncidentCreateOrConnectWithoutClientInput[]
+    upsert?: IncidentUpsertWithWhereUniqueWithoutClientInput | IncidentUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: IncidentCreateManyClientInputEnvelope
+    set?: IncidentWhereUniqueInput | IncidentWhereUniqueInput[]
+    disconnect?: IncidentWhereUniqueInput | IncidentWhereUniqueInput[]
+    delete?: IncidentWhereUniqueInput | IncidentWhereUniqueInput[]
+    connect?: IncidentWhereUniqueInput | IncidentWhereUniqueInput[]
+    update?: IncidentUpdateWithWhereUniqueWithoutClientInput | IncidentUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: IncidentUpdateManyWithWhereWithoutClientInput | IncidentUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: IncidentScalarWhereInput | IncidentScalarWhereInput[]
   }
 
   export type ClientCreateNestedOneWithoutLicensesInput = {
@@ -10250,6 +11759,32 @@ export namespace Prisma {
     update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutDevicesInput, ClientUpdateWithoutDevicesInput>, ClientUncheckedUpdateWithoutDevicesInput>
   }
 
+  export type ClientCreateNestedOneWithoutIncidentsInput = {
+    create?: XOR<ClientCreateWithoutIncidentsInput, ClientUncheckedCreateWithoutIncidentsInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutIncidentsInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type EnumIncidentStatusFieldUpdateOperationsInput = {
+    set?: $Enums.IncidentStatus
+  }
+
+  export type EnumIncidentPriorityFieldUpdateOperationsInput = {
+    set?: $Enums.IncidentPriority
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type ClientUpdateOneRequiredWithoutIncidentsNestedInput = {
+    create?: XOR<ClientCreateWithoutIncidentsInput, ClientUncheckedCreateWithoutIncidentsInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutIncidentsInput
+    upsert?: ClientUpsertWithoutIncidentsInput
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutIncidentsInput, ClientUpdateWithoutIncidentsInput>, ClientUncheckedUpdateWithoutIncidentsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -10390,6 +11925,65 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedEnumIncidentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.IncidentStatus | EnumIncidentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.IncidentStatus[]
+    notIn?: $Enums.IncidentStatus[]
+    not?: NestedEnumIncidentStatusFilter<$PrismaModel> | $Enums.IncidentStatus
+  }
+
+  export type NestedEnumIncidentPriorityFilter<$PrismaModel = never> = {
+    equals?: $Enums.IncidentPriority | EnumIncidentPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.IncidentPriority[]
+    notIn?: $Enums.IncidentPriority[]
+    not?: NestedEnumIncidentPriorityFilter<$PrismaModel> | $Enums.IncidentPriority
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedEnumIncidentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.IncidentStatus | EnumIncidentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.IncidentStatus[]
+    notIn?: $Enums.IncidentStatus[]
+    not?: NestedEnumIncidentStatusWithAggregatesFilter<$PrismaModel> | $Enums.IncidentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumIncidentStatusFilter<$PrismaModel>
+    _max?: NestedEnumIncidentStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumIncidentPriorityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.IncidentPriority | EnumIncidentPriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.IncidentPriority[]
+    notIn?: $Enums.IncidentPriority[]
+    not?: NestedEnumIncidentPriorityWithAggregatesFilter<$PrismaModel> | $Enums.IncidentPriority
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumIncidentPriorityFilter<$PrismaModel>
+    _max?: NestedEnumIncidentPriorityFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type ClientCreateWithoutTypeInput = {
     id?: string
     name: string
@@ -10404,6 +11998,7 @@ export namespace Prisma {
     createdAt?: Date | string
     licenses?: LicenseCreateNestedManyWithoutClientInput
     devices?: DeviceCreateNestedManyWithoutClientInput
+    incidents?: IncidentCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutTypeInput = {
@@ -10420,6 +12015,7 @@ export namespace Prisma {
     createdAt?: Date | string
     licenses?: LicenseUncheckedCreateNestedManyWithoutClientInput
     devices?: DeviceUncheckedCreateNestedManyWithoutClientInput
+    incidents?: IncidentUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutTypeInput = {
@@ -10543,6 +12139,40 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type IncidentCreateWithoutClientInput = {
+    id?: string
+    title: string
+    description?: string | null
+    date: Date | string
+    status?: $Enums.IncidentStatus
+    priority?: $Enums.IncidentPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    resolvedAt?: Date | string | null
+  }
+
+  export type IncidentUncheckedCreateWithoutClientInput = {
+    id?: string
+    title: string
+    description?: string | null
+    date: Date | string
+    status?: $Enums.IncidentStatus
+    priority?: $Enums.IncidentPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    resolvedAt?: Date | string | null
+  }
+
+  export type IncidentCreateOrConnectWithoutClientInput = {
+    where: IncidentWhereUniqueInput
+    create: XOR<IncidentCreateWithoutClientInput, IncidentUncheckedCreateWithoutClientInput>
+  }
+
+  export type IncidentCreateManyClientInputEnvelope = {
+    data: IncidentCreateManyClientInput | IncidentCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ClientTypeUpsertWithoutClientsInput = {
     update: XOR<ClientTypeUpdateWithoutClientsInput, ClientTypeUncheckedUpdateWithoutClientsInput>
     create: XOR<ClientTypeCreateWithoutClientsInput, ClientTypeUncheckedCreateWithoutClientsInput>
@@ -10627,6 +12257,38 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Device"> | Date | string
   }
 
+  export type IncidentUpsertWithWhereUniqueWithoutClientInput = {
+    where: IncidentWhereUniqueInput
+    update: XOR<IncidentUpdateWithoutClientInput, IncidentUncheckedUpdateWithoutClientInput>
+    create: XOR<IncidentCreateWithoutClientInput, IncidentUncheckedCreateWithoutClientInput>
+  }
+
+  export type IncidentUpdateWithWhereUniqueWithoutClientInput = {
+    where: IncidentWhereUniqueInput
+    data: XOR<IncidentUpdateWithoutClientInput, IncidentUncheckedUpdateWithoutClientInput>
+  }
+
+  export type IncidentUpdateManyWithWhereWithoutClientInput = {
+    where: IncidentScalarWhereInput
+    data: XOR<IncidentUpdateManyMutationInput, IncidentUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type IncidentScalarWhereInput = {
+    AND?: IncidentScalarWhereInput | IncidentScalarWhereInput[]
+    OR?: IncidentScalarWhereInput[]
+    NOT?: IncidentScalarWhereInput | IncidentScalarWhereInput[]
+    id?: StringFilter<"Incident"> | string
+    title?: StringFilter<"Incident"> | string
+    description?: StringNullableFilter<"Incident"> | string | null
+    date?: DateTimeFilter<"Incident"> | Date | string
+    status?: EnumIncidentStatusFilter<"Incident"> | $Enums.IncidentStatus
+    priority?: EnumIncidentPriorityFilter<"Incident"> | $Enums.IncidentPriority
+    createdAt?: DateTimeFilter<"Incident"> | Date | string
+    updatedAt?: DateTimeFilter<"Incident"> | Date | string
+    clientId?: StringFilter<"Incident"> | string
+    resolvedAt?: DateTimeNullableFilter<"Incident"> | Date | string | null
+  }
+
   export type ClientCreateWithoutLicensesInput = {
     id?: string
     name: string
@@ -10641,6 +12303,7 @@ export namespace Prisma {
     createdAt?: Date | string
     type: ClientTypeCreateNestedOneWithoutClientsInput
     devices?: DeviceCreateNestedManyWithoutClientInput
+    incidents?: IncidentCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutLicensesInput = {
@@ -10657,6 +12320,7 @@ export namespace Prisma {
     typeKey: string
     createdAt?: Date | string
     devices?: DeviceUncheckedCreateNestedManyWithoutClientInput
+    incidents?: IncidentUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutLicensesInput = {
@@ -10753,6 +12417,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: ClientTypeUpdateOneRequiredWithoutClientsNestedInput
     devices?: DeviceUpdateManyWithoutClientNestedInput
+    incidents?: IncidentUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutLicensesInput = {
@@ -10769,6 +12434,7 @@ export namespace Prisma {
     typeKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     devices?: DeviceUncheckedUpdateManyWithoutClientNestedInput
+    incidents?: IncidentUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type LicenseTypeUpsertWithoutLicensesInput = {
@@ -10958,6 +12624,7 @@ export namespace Prisma {
     createdAt?: Date | string
     type: ClientTypeCreateNestedOneWithoutClientsInput
     licenses?: LicenseCreateNestedManyWithoutClientInput
+    incidents?: IncidentCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutDevicesInput = {
@@ -10974,6 +12641,7 @@ export namespace Prisma {
     typeKey: string
     createdAt?: Date | string
     licenses?: LicenseUncheckedCreateNestedManyWithoutClientInput
+    incidents?: IncidentUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutDevicesInput = {
@@ -11031,6 +12699,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: ClientTypeUpdateOneRequiredWithoutClientsNestedInput
     licenses?: LicenseUpdateManyWithoutClientNestedInput
+    incidents?: IncidentUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutDevicesInput = {
@@ -11047,6 +12716,91 @@ export namespace Prisma {
     typeKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licenses?: LicenseUncheckedUpdateManyWithoutClientNestedInput
+    incidents?: IncidentUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientCreateWithoutIncidentsInput = {
+    id?: string
+    name: string
+    legalName: string
+    taxId: string
+    address: string
+    city: string
+    latitude: number
+    longitude: number
+    notes?: string | null
+    referenceCode?: string | null
+    createdAt?: Date | string
+    type: ClientTypeCreateNestedOneWithoutClientsInput
+    licenses?: LicenseCreateNestedManyWithoutClientInput
+    devices?: DeviceCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutIncidentsInput = {
+    id?: string
+    name: string
+    legalName: string
+    taxId: string
+    address: string
+    city: string
+    latitude: number
+    longitude: number
+    notes?: string | null
+    referenceCode?: string | null
+    typeKey: string
+    createdAt?: Date | string
+    licenses?: LicenseUncheckedCreateNestedManyWithoutClientInput
+    devices?: DeviceUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutIncidentsInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutIncidentsInput, ClientUncheckedCreateWithoutIncidentsInput>
+  }
+
+  export type ClientUpsertWithoutIncidentsInput = {
+    update: XOR<ClientUpdateWithoutIncidentsInput, ClientUncheckedUpdateWithoutIncidentsInput>
+    create: XOR<ClientCreateWithoutIncidentsInput, ClientUncheckedCreateWithoutIncidentsInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutIncidentsInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutIncidentsInput, ClientUncheckedUpdateWithoutIncidentsInput>
+  }
+
+  export type ClientUpdateWithoutIncidentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    legalName?: StringFieldUpdateOperationsInput | string
+    taxId?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceCode?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: ClientTypeUpdateOneRequiredWithoutClientsNestedInput
+    licenses?: LicenseUpdateManyWithoutClientNestedInput
+    devices?: DeviceUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutIncidentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    legalName?: StringFieldUpdateOperationsInput | string
+    taxId?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    referenceCode?: NullableStringFieldUpdateOperationsInput | string | null
+    typeKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    licenses?: LicenseUncheckedUpdateManyWithoutClientNestedInput
+    devices?: DeviceUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientCreateManyTypeInput = {
@@ -11077,6 +12831,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licenses?: LicenseUpdateManyWithoutClientNestedInput
     devices?: DeviceUpdateManyWithoutClientNestedInput
+    incidents?: IncidentUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutTypeInput = {
@@ -11093,6 +12848,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     licenses?: LicenseUncheckedUpdateManyWithoutClientNestedInput
     devices?: DeviceUncheckedUpdateManyWithoutClientNestedInput
+    incidents?: IncidentUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateManyWithoutTypeInput = {
@@ -11124,6 +12880,18 @@ export namespace Prisma {
     anyDesk?: string | null
     typeKey: string
     createdAt?: Date | string
+  }
+
+  export type IncidentCreateManyClientInput = {
+    id?: string
+    title: string
+    description?: string | null
+    date: Date | string
+    status?: $Enums.IncidentStatus
+    priority?: $Enums.IncidentPriority
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    resolvedAt?: Date | string | null
   }
 
   export type LicenseUpdateWithoutClientInput = {
@@ -11177,6 +12945,42 @@ export namespace Prisma {
     anyDesk?: NullableStringFieldUpdateOperationsInput | string | null
     typeKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type IncidentUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
+    priority?: EnumIncidentPriorityFieldUpdateOperationsInput | $Enums.IncidentPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type IncidentUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
+    priority?: EnumIncidentPriorityFieldUpdateOperationsInput | $Enums.IncidentPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type IncidentUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumIncidentStatusFieldUpdateOperationsInput | $Enums.IncidentStatus
+    priority?: EnumIncidentPriorityFieldUpdateOperationsInput | $Enums.IncidentPriority
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type LicenseCreateManyParentInput = {

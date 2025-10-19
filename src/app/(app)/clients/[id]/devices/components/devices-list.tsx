@@ -101,6 +101,7 @@ export function DevicesList({ clientId, devices, types }: Props) {
   return (
     <>
       <ClientPage
+        icon="computer"
         title={t("Devices")}
         subtitle={t("Registered devices for this client")}
         addAction={() => setIsDialogOpen(true)}

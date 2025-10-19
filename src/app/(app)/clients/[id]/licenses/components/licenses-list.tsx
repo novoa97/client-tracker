@@ -116,6 +116,7 @@ export function LicensesList({ types, licenses, clientId }: Props) {
   return (
     <>
       <ClientPage
+        icon="key"
         title={t("Licenses")}
         subtitle={t("All licenses associated with this client")}
         empty={licenses.length === 0}

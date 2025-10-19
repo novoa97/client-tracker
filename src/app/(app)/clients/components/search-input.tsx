@@ -13,6 +13,8 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
+  DropdownMenuCheckboxItem,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import {
@@ -43,6 +45,7 @@ export function ClientSearchForm({
   const currentType = searchParams.get("type") || "";
   const currentCity = searchParams.get("city") || "";
   const currentOrder = searchParams.get("order") || "name";
+  const currentActiveIncidents = searchParams.get("activeIncidents") === "true";
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -90,6 +93,16 @@ export function ClientSearchForm({
     router.push(`/clients?${params.toString()}`);
   }
 
+  function handleActiveIncidentsToggle(checked: boolean): void {
+    const params = new URLSearchParams(searchParams);
+    if (checked) {
+      params.set("activeIncidents", "true");
+    } else {
+      params.delete("activeIncidents");
+    }
+    router.push(`/clients?${params.toString()}`);
+  }
+
   return (
     <>
       <form onSubmit={handleSearch} className="flex gap-2 w-full my-1">
@@ -119,45 +132,61 @@ export function ClientSearchForm({
             align="end"
             className="z-50 w-[220px] rounded-md border bg-white bg-popover p-2 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[side=bottom]:slide-in-from-top-2"
           >
-            <div className="space-y-2">
-              <DropdownMenuLabel>{t("Type")}</DropdownMenuLabel>
-              <Select value={currentType} onValueChange={handleIndustryChange}>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder={t("All Types")} />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">{t("All Types")}</SelectItem>
-                  {types.map((type) => (
-                    <SelectItem key={type.key} value={type.key}>
-                      <Badge
-                        variant="outline"
-                        style={{
-                          backgroundColor: type.color,
-                          color: getTextColor(type.color),
-                          borderColor: darkenColor(type.color, 30),
-                          borderWidth: 3,
-                        }}
-                      >
-                        {type.name}
-                      </Badge>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <DropdownMenuLabel>{t("City")}</DropdownMenuLabel>
-              <Select value={currentCity} onValueChange={handleCityChange}>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder={t("All Cities")} />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">{t("All Cities")}</SelectItem>
-                  {cities.map((city) => (
-                    <SelectItem key={city} value={city}>
-                      {city}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1">
+                <DropdownMenuLabel>{t("Type")}</DropdownMenuLabel>
+                <Select
+                  value={currentType}
+                  onValueChange={handleIndustryChange}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder={t("All Types")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">{t("All Types")}</SelectItem>
+                    {types.map((type) => (
+                      <SelectItem key={type.key} value={type.key}>
+                        <Badge
+                          variant="outline"
+                          style={{
+                            backgroundColor: type.color,
+                            color: getTextColor(type.color),
+                            borderColor: darkenColor(type.color, 30),
+                            borderWidth: 3,
+                          }}
+                        >
+                          {type.name}
+                        </Badge>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="flex flex-col gap-1">
+                <DropdownMenuLabel>{t("City")}</DropdownMenuLabel>
+                <Select value={currentCity} onValueChange={handleCityChange}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder={t("All Cities")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">{t("All Cities")}</SelectItem>
+                    {cities.map((city) => (
+                      <SelectItem key={city} value={city}>
+                        {city}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <DropdownMenuSeparator />
+              <DropdownMenuCheckboxItem
+                checked={currentActiveIncidents}
+                onCheckedChange={(checked) =>
+                  handleActiveIncidentsToggle(Boolean(checked))
+                }
+              >
+                {t("With active incidents")}
+              </DropdownMenuCheckboxItem>
             </div>
           </DropdownMenuContent>
         </DropdownMenu>
