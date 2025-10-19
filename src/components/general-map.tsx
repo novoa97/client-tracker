@@ -20,9 +20,10 @@ import { useEffect } from "react";
 import { useSidebar } from "./ui/sidebar";
 interface Props {
   clients: ClientWithType[];
+  center?: [number, number];
 }
 
-export default function GeneralMap({ clients }: Props) {
+export default function GeneralMap({ clients, center }: Props) {
   // Agrupar clientes por tipo dinámicamente
   const { open: sidebarOpen } = useSidebar();
   const clientsByType = clients.reduce<Record<string, ClientWithType[]>>(
@@ -72,12 +73,18 @@ export default function GeneralMap({ clients }: Props) {
       };
     }, [sidebarOpen, map]);
 
+    useEffect(() => {
+      if (center) {
+        map.setView(center, 15);
+      }
+    }, [center, map]);
+
     return null;
   };
 
   return (
     <MapContainer
-      center={[42.7551, -7.8662]}
+      center={center ?? [42.7551, -7.8662]}
       zoom={8.4}
       scrollWheelZoom={true}
       className="w-full h-full z-0"

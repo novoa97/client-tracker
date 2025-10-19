@@ -82,7 +82,7 @@ export function ClientSidebar({ client, types, className }: Props) {
 
   return (
     <>
-      <PageHeader title="Client" icon={"user"}>
+      <PageHeader title="Client" icon={"user"} buttonBack={true}>
         <Button
           className="hidden md:flex"
           size="sm"
