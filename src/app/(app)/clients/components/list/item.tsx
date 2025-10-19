@@ -50,7 +50,9 @@ export function ClientListItem({ client }: Props) {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <p className="text-lg font-medium">{client.name}</p>
+              <p className="text-lg font-medium truncate whitespace-nowrap">
+                {client.name}
+              </p>
               <div className="flex items-center gap-1 text-muted-foreground">
                 <MapPin className="h-4 w-4" />
                 <p className="text-sm">{client.city}</p>

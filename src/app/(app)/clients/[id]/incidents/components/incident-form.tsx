@@ -9,24 +9,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Device, DeviceType, Incident } from "@/generated/prisma";
-import DynamicIcon from "@/components/icon";
+import { Incident } from "@/generated/prisma";
 import { useTranslations } from "next-intl";
 import { Textarea } from "@/components/ui/textarea";
+import { CalendarInput } from "@/components/calendar-input";
 
 const incidentSchema = z.object({
   title: z.string().min(2, "Title must be at least 2 characters"),
+  date: z.date({
+    required_error: "Date is required",
+  }),
   description: z.string().optional(),
 });
 
@@ -51,6 +47,7 @@ export function IncidentForm({
     defaultValues: {
       title: defaultValues?.title || "",
       description: defaultValues?.description || "",
+      date: defaultValues?.date || new Date(),
     },
   });
 
@@ -71,6 +68,23 @@ export function IncidentForm({
                 <FormLabel>{t("Title")}</FormLabel>
                 <FormControl>
                   <Input placeholder={t("Enter incident title")} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="date"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("Date")}</FormLabel>
+                <FormControl>
+                  <CalendarInput
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder={t("Select incident date")}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

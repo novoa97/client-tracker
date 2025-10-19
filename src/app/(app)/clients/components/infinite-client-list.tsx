@@ -6,6 +6,7 @@ import { ClientList } from "./list/list";
 import { ClientSearchForm } from "./search-input";
 import { getClients } from "../actions/get-clients";
 import { ClientType } from "@/generated/prisma";
+import { AddClientButton } from "./add-client-button";
 
 interface InfiniteClientListProps {
   initialClients: ClientWithTypeAndCount[];
@@ -16,6 +17,7 @@ interface InfiniteClientListProps {
     type?: string;
     city?: string;
     order?: string;
+    activeIncidents?: string;
   };
   types: ClientType[];
   cities: string[];
@@ -46,6 +48,7 @@ export function InfiniteClientList({
     searchParams.type,
     searchParams.city,
     searchParams.order,
+    searchParams.activeIncidents,
   ]);
 
   const fetchNextPage = useCallback(async () => {
@@ -61,6 +64,7 @@ export function InfiniteClientList({
         type: searchParams.type,
         city: searchParams.city,
         order: searchParams.order,
+        activeIncidents: searchParams.activeIncidents === "true",
       });
 
       setClients((prev) => [...prev, ...result.clients]);
@@ -85,6 +89,9 @@ export function InfiniteClientList({
           isFetching={isFetching}
           fetchNextPage={fetchNextPage}
         />
+      </div>
+      <div className="py-2 w-full md:hidden">
+        <AddClientButton types={types} size="default" className="w-full" />
       </div>
     </div>
   );

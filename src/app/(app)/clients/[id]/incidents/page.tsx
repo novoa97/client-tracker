@@ -12,6 +12,9 @@ export default async function ClientIncidentsPage({
     where: {
       clientId: id,
     },
+    orderBy: {
+      date: "desc",
+    },
   });
 
   return <IncidentsPage clientId={id} incidents={incidents} />;

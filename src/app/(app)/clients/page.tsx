@@ -11,16 +11,18 @@ type Props = {
     type?: string;
     city?: string;
     order?: string;
+    activeIncidents?: string;
   }>;
 };
 
 export default async function ClientsPage({ searchParams }: Props) {
-  const { search, type, city, order } = await searchParams;
+  const { search, type, city, order, activeIncidents } = await searchParams;
 
   const searchText = search || "";
   const typeFilter = type || undefined;
   const cityFilter = city || undefined;
   const orderBy = order || "name";
+  const onlyActiveIncidents = activeIncidents === "true" ? true : undefined;
 
   // Get initial data for infinite scroll
   const initialData = await getClients({
@@ -30,6 +32,7 @@ export default async function ClientsPage({ searchParams }: Props) {
     type: typeFilter,
     city: cityFilter,
     order: orderBy,
+    activeIncidents: onlyActiveIncidents,
   });
 
   const types = await prisma.clientType.findMany({
@@ -60,6 +63,7 @@ export default async function ClientsPage({ searchParams }: Props) {
             type: typeFilter,
             city: cityFilter,
             order: orderBy,
+            activeIncidents: onlyActiveIncidents ? "true" : undefined,
           }}
           types={types}
           cities={cities.map((city) => city.city)}

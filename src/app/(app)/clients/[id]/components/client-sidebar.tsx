@@ -198,11 +198,12 @@ export function ClientSidebar({ client, types, className }: Props) {
                         <Icon className="mr-2 h-4 w-4" />
                         {t(item.label)}
                       </div>
-                      {item.href === "/incidents" && (
-                        <Badge variant="secondary" className="text-xs">
-                          {client._count.incidents}
-                        </Badge>
-                      )}
+                      {item.href === "/incidents" &&
+                        client._count.incidents > 0 && (
+                          <Badge variant="destructive" className="text-xs">
+                            {client._count.incidents}
+                          </Badge>
+                        )}
                     </div>
                   </Button>
                 </Link>

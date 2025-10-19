@@ -108,6 +108,7 @@ export default function ClientNotesPage() {
 
   return (
     <ClientPage
+      icon="file-text"
       title={t("Notes")}
       subtitle={t("Additional information about this client")}
       onBackClick={handleBack}

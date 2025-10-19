@@ -4,7 +4,12 @@ import { ClientPage } from "../../components/client-page";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Incident } from "@/generated/prisma";
-import { addIncident } from "../actions";
+import {
+  addIncident,
+  completeIncident,
+  deleteIncident,
+  editIncident,
+} from "../actions";
 import { IncidentItem } from "./incident-item";
 import { useState } from "react";
 import { DialogContainer } from "@/components/dialog-container";
@@ -19,42 +24,93 @@ interface Props {
 export function IncidentsPage({ clientId, incidents }: Props) {
   const router = useRouter();
   const t = useTranslations();
-  const [isAddIncidentDialogOpen, setIsAddIncidentDialogOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [incidentToEdit, setIncidentToEdit] = useState<Incident | null>(null);
 
   const handleAddIncident = async (data: {
     title: string;
+    date: Date;
     description?: string;
   }) => {
     await addIncident(clientId, {
       title: data.title,
       description: data.description,
+      date: data.date,
     });
-    setIsAddIncidentDialogOpen(false);
+    setIsDialogOpen(false);
     router.refresh();
     toast.success(t("Incident added successfully"));
+  };
+
+  const handleEditIncident = async (data: {
+    title: string;
+    date: Date;
+    description?: string;
+  }) => {
+    await editIncident(incidentToEdit!.id, {
+      title: data.title,
+      date: data.date,
+      description: data.description,
+    });
+    setIsDialogOpen(false);
+    setIncidentToEdit(null);
+    router.refresh();
+    toast.success(t("Incident edited successfully"));
+  };
+
+  const handleCompleteIncident = async (incident: Incident) => {
+    await completeIncident(incident.id);
+    router.refresh();
+    toast.success(t("Incident completed successfully"));
+  };
+
+  const handleDeleteIncident = async (incident: Incident) => {
+    await deleteIncident(incident.id);
+    router.refresh();
+    toast.success(t("Incident deleted successfully"));
   };
 
   return (
     <>
       <ClientPage
+        icon="alert-circle"
         title={t("Incidents")}
         subtitle="Incidents"
         onBackClick={() => router.push("/clients")}
-        addAction={() => setIsAddIncidentDialogOpen(true)}
+        addAction={() => {
+          setIncidentToEdit(null);
+          setIsDialogOpen(true);
+        }}
       >
         <div className="flex flex-col h-full gap-2 overflow-y-auto">
           {incidents.map((incident) => (
-            <IncidentItem key={incident.id} incident={incident} />
+            <IncidentItem
+              key={incident.id}
+              incident={incident}
+              onComplete={handleCompleteIncident}
+              onDelete={handleDeleteIncident}
+              onEdit={(incident) => {
+                setIncidentToEdit(incident);
+                setIsDialogOpen(true);
+              }}
+            />
           ))}
         </div>
       </ClientPage>
       <DialogContainer
-        open={isAddIncidentDialogOpen}
-        onOpenChange={setIsAddIncidentDialogOpen}
+        open={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
         title={t("Add Incident")}
         description={t("Add a new incident")}
       >
-        <IncidentForm onSubmit={handleAddIncident} />
+        {incidentToEdit ? (
+          <IncidentForm
+            onSubmit={handleEditIncident}
+            defaultValues={incidentToEdit}
+          />
+        ) : (
+          <IncidentForm onSubmit={handleAddIncident} />
+        )}
       </DialogContainer>
     </>
   );

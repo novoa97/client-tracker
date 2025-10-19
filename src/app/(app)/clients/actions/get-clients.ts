@@ -11,6 +11,7 @@ interface GetClientsParams {
     type?: string;
     city?: string;
     order?: string;
+    activeIncidents?: boolean;
 }
 
 interface GetClientsResponse {
@@ -43,6 +44,7 @@ export async function getClients({
     type,
     city,
     order = "name",
+    activeIncidents,
 }: GetClientsParams): Promise<GetClientsResponse> {
     try {
         const orderBy = getOrder(order);
@@ -68,6 +70,14 @@ export async function getClients({
             where.city = { equals: cityFilter };
         }
 
+        if (activeIncidents) {
+            where.incidents = {
+                some: {
+                    status: "OPEN",
+                },
+            };
+        }
+
         const [clients, total] = await Promise.all([
             prisma.client.findMany({
                 where,
@@ -80,6 +90,7 @@ export async function getClients({
                         select: {
                             licenses: true,
                             devices: true,
+                            incidents: true,
                         },
                     },
                 },
