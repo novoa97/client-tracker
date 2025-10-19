@@ -1,5 +1,16 @@
 # client-tracker
 
+## 2.0.0
+
+### Major Changes
+
+- d749288: New UI
+
+### Minor Changes
+
+- 6483a18: add client incidents
+- d1fc8b3: add search input in the map page
+
 ## 1.2.0
 
 ### Minor Changes
