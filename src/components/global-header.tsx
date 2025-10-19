@@ -24,7 +24,15 @@ export function GlobalHeader() {
           variant="ghost"
           size="icon"
           className="size-7"
-          onClick={() => router.back()}
+          onClick={() => {
+            const backOrigin = sessionStorage.getItem("backOrigin");
+            if (backOrigin) {
+              sessionStorage.removeItem("backOrigin");
+              router.push(backOrigin);
+            } else {
+              router.back();
+            }
+          }}
         >
           <ChevronLeftIcon />
           <span className="sr-only">Toggle Sidebar</span>

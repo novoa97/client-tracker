@@ -18,6 +18,8 @@ import { generateMarkerIcon } from "@/lib/marker";
 import { getTextColor } from "@/lib/colors";
 import { useEffect } from "react";
 import { useSidebar } from "./ui/sidebar";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+
 interface Props {
   clients: ClientWithType[];
   center?: [number, number];
@@ -26,6 +28,10 @@ interface Props {
 export default function GeneralMap({ clients, center }: Props) {
   // Agrupar clientes por tipo dinámicamente
   const { open: sidebarOpen } = useSidebar();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const clientsByType = clients.reduce<Record<string, ClientWithType[]>>(
     (acc, client) => {
       if (!acc[client.type.name]) {
@@ -82,6 +88,14 @@ export default function GeneralMap({ clients, center }: Props) {
     return null;
   };
 
+  const onSelectClient = (client: ClientWithType) => {
+    sessionStorage.setItem(
+      "backOrigin",
+      pathname + "?" + searchParams.toString()
+    );
+    router.push(`/clients/${client.id}`);
+  };
+
   return (
     <MapContainer
       center={center ?? [42.7551, -7.8662]}
@@ -121,11 +135,12 @@ export default function GeneralMap({ clients, center }: Props) {
                     icon={customIcon}
                   >
                     <Popup>
-                      <Link href={"clients/" + client.id}>
-                        <div className="flex flex-row items-center gap-2 text-md font-bold text-black">
-                          {client.name}
-                        </div>
-                      </Link>
+                      <div
+                        onClick={() => onSelectClient(client)}
+                        className="flex flex-row items-center gap-2 text-md font-bold text-black"
+                      >
+                        {client.name}
+                      </div>
                     </Popup>
                   </Marker>
                 );
