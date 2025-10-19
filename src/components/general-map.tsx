@@ -137,7 +137,7 @@ export default function GeneralMap({ clients, center }: Props) {
                     <Popup>
                       <div
                         onClick={() => onSelectClient(client)}
-                        className="flex flex-row items-center gap-2 text-md font-bold text-black"
+                        className="flex flex-row items-center gap-2 text-md font-bold text-black cursor-pointer"
                       >
                         {client.name}
                       </div>
