@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { darkenColor, getTextColor } from "@/lib/colors";
 import { Computer, Key, MapPin } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import DynamicIcon from "@/components/icon";
 import { useTranslations } from "next-intl";
 
@@ -16,8 +16,14 @@ interface Props {
 export function ClientListItem({ client }: Props) {
   const router = useRouter();
   const t = useTranslations();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const handleRowClick = (id: string, path?: "licenses" | "devices") => {
+    sessionStorage.setItem(
+      "backOrigin",
+      pathname + "?" + searchParams.toString()
+    );
     if (path) {
       router.push(`/clients/${id}/${path}`);
     } else {
