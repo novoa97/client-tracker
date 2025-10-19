@@ -20,7 +20,6 @@ interface CalendarInputProps {
 export function CalendarInput({
   value,
   onChange,
-  placeholder = "Pick a date",
   disabled = false,
   className,
   buttonClassName,
@@ -61,7 +60,7 @@ export function CalendarInput({
               id || "date-input"
             ) as HTMLInputElement;
             if (input && "showPicker" in input) {
-              (input as any).showPicker();
+              (input as HTMLInputElement).showPicker();
             }
           }}
           disabled={disabled}

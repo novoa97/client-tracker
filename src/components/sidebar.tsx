@@ -14,6 +14,7 @@ import {
   SidebarMenuButton,
   SidebarMenu,
 } from "@/components/ui/sidebar";
+import { useTranslations } from "next-intl";
 
 interface Props {
   section?: {
@@ -25,7 +26,7 @@ interface Props {
 
 export function AppSidebar({ section }: Props) {
   const pathname = usePathname();
-
+  const t = useTranslations();
   const path = "/" + pathname.split("/")[1];
 
   return (
@@ -71,7 +72,7 @@ export function AppSidebar({ section }: Props) {
                   >
                     <a href={href}>
                       <DynamicIcon name={icon} className="w-4 h-4" />
-                      <span>{label}</span>
+                      <span>{t(label)}</span>
                     </a>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

@@ -4,7 +4,6 @@
 import AddClientForm from "@/app/(app)/clients/new/components/add-client-form";
 import { addClient } from "../actions/add-client";
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
 import { getClientType } from "../actions/get-client-type";
 import { ClientType } from "@/generated/prisma";
 import AddClientMapWrapper from "./components/add-client-map-wrapper";
@@ -14,7 +13,6 @@ export default function NewClientPage() {
   const [coordinates, setCoordinates] = useState<[number, number] | null>(null);
   const [clientTypes, setClientTypes] = useState<ClientType[]>([]);
   const [selectedType, setSelectedType] = useState<ClientType | null>(null);
-  const t = useTranslations();
 
   useEffect(() => {
     const fetchClientTypes = async () => {

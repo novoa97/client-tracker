@@ -71,7 +71,7 @@ export function IncidentActions({
           {/** Edit */}
           <DropdownMenuItem
             disabled={incident.status === IncidentStatus.RESOLVED}
-            onSelect={(e) => {
+            onSelect={() => {
               setTimeout(() => {
                 onEdit(incident);
               }, 0);

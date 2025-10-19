@@ -1,5 +1,4 @@
 import { SettingsTabs } from "./components/settings-tabs";
-import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 
 type Props = {

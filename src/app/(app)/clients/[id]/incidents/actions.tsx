@@ -21,8 +21,7 @@ export async function addIncident(
   data: AddIncidentInput
 ): Promise<ActionResponse> {
   try {
-    console.log(data);
-    const incident = await prisma.incident.create({
+    await prisma.incident.create({
       data: {
         clientId: clientId,
         title: data.title,

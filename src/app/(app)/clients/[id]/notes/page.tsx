@@ -71,7 +71,7 @@ export default function ClientNotesPage() {
         toast.error("Failed to auto-save notes");
       }
     },
-    [clientId, lastSavedNotes]
+    [clientId, lastSavedNotes, autoSaveStatus, t]
   );
 
   // Debounced auto-save effect

@@ -1,17 +1,11 @@
 import { Button } from "@/components/ui/button";
-import {
-  DialogContent,
-  DialogFooter,
-  DialogDescription,
-} from "@/components/ui/dialog";
 import { useTranslations } from "next-intl";
 
 interface Props {
   onSubmit: () => void;
-  isLoading: boolean;
 }
 
-export function ClientDelete({ onSubmit, isLoading }: Props) {
+export function ClientDelete({ onSubmit }: Props) {
   const t = useTranslations();
   return (
     <>

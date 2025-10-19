@@ -10,7 +10,6 @@ import {
   useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import Link from "next/link";
 import { ClientWithType } from "@/app/types";
 import { renderToStaticMarkup } from "react-dom/server";
 import DynamicIcon from "./icon";
@@ -19,10 +18,11 @@ import { getTextColor } from "@/lib/colors";
 import { useEffect } from "react";
 import { useSidebar } from "./ui/sidebar";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { LatLngExpression } from "leaflet";
 
 interface Props {
   clients: ClientWithType[];
-  center?: [number, number];
+  center?: LatLngExpression;
 }
 
 export default function GeneralMap({ clients, center }: Props) {
@@ -43,7 +43,13 @@ export default function GeneralMap({ clients, center }: Props) {
     {}
   );
 
-  const MapUpdater = ({ sidebarOpen }: { sidebarOpen: boolean }) => {
+  const MapUpdater = ({
+    sidebarOpen,
+    center,
+  }: {
+    sidebarOpen: boolean;
+    center?: LatLngExpression;
+  }) => {
     const map = useMap();
 
     useEffect(() => {
@@ -149,7 +155,7 @@ export default function GeneralMap({ clients, center }: Props) {
           </LayersControl.Overlay>
         ))}
       </LayersControl>
-      <MapUpdater sidebarOpen={sidebarOpen} />
+      <MapUpdater sidebarOpen={sidebarOpen} center={center} />
     </MapContainer>
   );
 }

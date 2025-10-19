@@ -17,7 +17,7 @@ export function PageHeader({ title, icon, children, buttonBack }: Props) {
 
   useEffect(() => {
     setHeader(t(title), icon, buttonBack, children);
-  }, [title, icon, children, buttonBack, setHeader]);
+  }, [t, title, icon, children, buttonBack, setHeader]);
 
   return <></>;
 }
