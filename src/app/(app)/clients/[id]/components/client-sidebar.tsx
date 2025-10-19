@@ -265,7 +265,7 @@ export function ClientSidebar({ client, types, className }: Props) {
         onOpenChange={setIsDeleting}
         title={t("Delete Client")}
       >
-        <ClientDelete onSubmit={handleDelete} isLoading={isDeleting} />
+        <ClientDelete onSubmit={handleDelete} />
       </DialogContainer>
     </>
   );
