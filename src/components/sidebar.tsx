@@ -50,9 +50,6 @@ export function AppSidebar({ section }: Props) {
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-medium">ClientTracker</span>
-                  <span className="font-sm text-muted-foreground">
-                    v{process.env.NEXT_PUBLIC_APP_VERSION}
-                  </span>
                 </div>
               </a>
             </SidebarMenuButton>
