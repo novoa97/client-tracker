@@ -89,10 +89,10 @@ export default function GeneralMap({ clients, center }: Props) {
   };
 
   const onSelectClient = (client: ClientWithType) => {
-    sessionStorage.setItem(
-      "backOrigin",
-      pathname + "?" + searchParams.toString()
-    );
+    const params = new URLSearchParams(searchParams?.toString());
+    params.set("lat", String(client.latitude));
+    params.set("lng", String(client.longitude));
+    sessionStorage.setItem("backOrigin", pathname + "?" + params.toString());
     router.push(`/clients/${client.id}`);
   };
 
