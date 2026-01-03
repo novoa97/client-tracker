@@ -9,6 +9,7 @@
   "Delete": "Eliminar",
   "Creating": "Creando...",
   "Updating": "Actualizando...",
+  "Uploading": "Subindo...",
   "Save": "Gardar",
   "Saving": "Gardando",
   "Saved": "Gardado",
@@ -22,12 +23,10 @@
   "Information": "Información",
   "You can browse icon names at": "Podes buscar nomes de iconas en",
   "This action cannot be undone": "Esta acción non se pode deshacer",
-
   "Color": "Cor",
   "Icon": "Icona",
   "Enter an icon name": "Introduce un nome de icona",
   "Type name": "Nome do Tipo",
-
   "Map": "Mapa",
   "View details": "Ver detalles",
 
@@ -124,7 +123,6 @@
   "Add a new device": "Engadir un novo dispositivo",
   "Device added successfully": "Dispositivo engadido correctamente",
   "Device added successfully description": "O dispositivo foi engadido correctamente",
-
   "General Settings": "Configuración Xeral",
   "Configure general application settings": "Configura as opcións xerais da aplicación",
   "Language": "Idioma",
@@ -229,5 +227,13 @@
   "Delete incident?": "¿Eliminar incidencia?",
   "Are you sure you want to permanently delete the incident?": "¿Estás seguro de que quieres eliminar la incidencia?",
   "Incident deleted successfully": "Incidencia eliminada correctamente",
-  "Not exists incidents": "Non hai incidencias"
+  "Not exists incidents": "Non hai incidencias",
+
+  "**FILES**": "FICHEIROS",
+  "Files": "Ficheiros",
+  "Upload File": "Subir Ficheiro",
+  "File uploaded successfully": "Ficheiro subido correctamente",
+  "No files uploaded yet": "Aínda non se subiron ficheiros",
+  "Drag and drop files here or click on the button": "Arrastra ficheiros aquí ou fai clic no botón",
+  "Drop files here": "Arrastra ficheiros aquí"
 }

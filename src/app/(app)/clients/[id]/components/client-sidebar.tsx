@@ -48,6 +48,7 @@ const navItems = [
   { href: "/devices", label: "Devices", icon: Computer, mobile: true },
   { href: "/licenses", label: "Licenses", icon: Key, mobile: true },
   { href: "/incidents", label: "Incidents", icon: AlertCircle, mobile: true },
+  { href: "/files", label: "Files", icon: FileText, mobile: true },
 ];
 
 export function ClientSidebar({ client, types, className }: Props) {

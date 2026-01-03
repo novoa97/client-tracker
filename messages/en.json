@@ -9,6 +9,7 @@
   "Delete": "Delete",
   "Creating": "Creating...",
   "Updating": "Updating...",
+  "Uploading": "Uploading...",
   "Save": "Save",
   "Saving": "Saving",
   "Saved": "Saved",
@@ -22,12 +23,10 @@
   "Information": "Information",
   "You can browse icon names at": "You can browse icon names at",
   "This action cannot be undone": "This action cannot be undone",
-
   "Color": "Color",
   "Icon": "Icon",
   "Enter an icon name": "Enter an icon name",
   "Type name": "Type name",
-
   "Map": "Map",
   "View details": "View details",
 
@@ -124,7 +123,6 @@
   "Add a new device": "Add a new device",
   "Device added successfully": "Device added successfully",
   "Device added successfully description": "The device has been added successfully",
-
   "General Settings": "General Settings",
   "Configure general application settings": "Configure general application settings",
   "Language": "Language",
@@ -229,5 +227,13 @@
   "Delete incident?": "Delete incident?",
   "Are you sure you want to permanently delete the incident?": "Are you sure you want to permanently delete the incident?",
   "Incident deleted successfully": "Incident deleted successfully",
-  "Not exists incidents": "Not exists incidents"
+  "Not exists incidents": "Not exists incidents",
+
+  "**FILES**": "FILES",
+  "Files": "Files",
+  "Upload File": "Upload File",
+  "File uploaded successfully": "File uploaded successfully",
+  "No files uploaded yet": "No files uploaded yet",
+  "Drag and drop files here or click on the button": "Drag and drop files here or click on the button",
+  "Drop files here": "Drop files here"
 }

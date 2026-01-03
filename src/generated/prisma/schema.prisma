@@ -42,6 +42,7 @@ model Client {
   licenses      License[]
   devices       Device[]
   incidents     Incident[]
+  files         File[]
   createdAt     DateTime   @default(now())
 
   @@map("client")
@@ -103,6 +104,7 @@ model User {
   secret    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  files     File[]
 
   @@map("user")
 }
@@ -123,6 +125,21 @@ model Incident {
   resolvedAt  DateTime?
 
   @@map("incident")
+}
+
+model File {
+  id           String   @id @default(uuid())
+  name         String
+  path         String
+  size         Int?
+  type         String
+  createdAt    DateTime @default(now())
+  client       Client   @relation(fields: [clientId], references: [id])
+  clientId     String
+  uploadedBy   User     @relation(fields: [uploadedById], references: [id])
+  uploadedById String
+
+  @@map("file")
 }
 
 enum IncidentStatus {
