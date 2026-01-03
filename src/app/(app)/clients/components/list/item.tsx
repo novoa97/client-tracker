@@ -3,7 +3,7 @@
 import { ClientWithTypeAndCount } from "@/app/types";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { darkenColor, getTextColor } from "@/lib/colors";
+import { getTextColor } from "@/lib/colors";
 import { Computer, Key, MapPin } from "lucide-react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import DynamicIcon from "@/components/icon";
@@ -44,7 +44,7 @@ export function ClientListItem({ client }: Props) {
               style={{
                 backgroundColor: client.type?.color,
                 borderWidth: 3,
-                borderColor: darkenColor(client.type?.color, 30),
+                borderColor: client.type?.color,
               }}
             >
               <DynamicIcon

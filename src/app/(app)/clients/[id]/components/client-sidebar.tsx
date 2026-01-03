@@ -2,7 +2,7 @@
 
 import { ClientWithTypeAndOpenIncidents } from "@/app/types";
 import DynamicIcon from "@/components/icon";
-import { darkenColor, getTextColor } from "@/lib/colors";
+import { getTextColor } from "@/lib/colors";
 import {
   Building,
   Map,
@@ -128,7 +128,7 @@ export function ClientSidebar({ client, types, className }: Props) {
             style={{
               backgroundColor: client.type?.color,
               borderWidth: 3,
-              borderColor: darkenColor(client.type?.color, 30),
+              borderColor: client.type?.color,
             }}
           >
             <DynamicIcon

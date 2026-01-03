@@ -1,12 +1,25 @@
 "use client";
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import { useEffect, useRef } from "react";
+import { Map, useMap } from "@/components/ui/map";
+import { useEffect } from "react";
 import { ClientType } from "@/generated/prisma";
-import { generateMarkerIcon } from "@/lib/marker";
-import { renderToStaticMarkup } from "react-dom/server";
-import DynamicIcon from "@/components/icon";
+import ClientMarker from "@/components/map/ClientMarker";
+
+function MapController({
+  center,
+}: {
+  center: [number, number] | null;
+  search?: boolean;
+}) {
+  const { map } = useMap();
+
+  useEffect(() => {
+    if (map && center) {
+      map.flyTo({ center, zoom: 15 });
+    }
+  }, [map, center]);
+
+  return null;
+}
 
 type Props = {
   coordinates: [number, number] | null;
@@ -14,68 +27,23 @@ type Props = {
 };
 
 export default function AddClientMap({ coordinates, type }: Props) {
-  const fallbackCoords: [number, number] = [42.7551, -7.8662];
+  const fallbackCoords: [number, number] = [-7.8662, 42.7551];
   const position = coordinates ?? fallbackCoords;
-
-  const markerRef = useRef<L.Marker>(null);
-
-  useEffect(() => {
-    if (markerRef.current && type) {
-      const newIcon = generateMarkerIcon(
-        type?.color ?? "#ababab",
-        renderToStaticMarkup(
-          type?.icon ? (
-            <DynamicIcon name={type.icon} className="text-white w-4 h-4" />
-          ) : (
-            <DynamicIcon name={"circle-dashed"} className=" w-4 h-4" />
-          )
-        )
-      );
-      markerRef.current.setIcon(newIcon);
-    }
-  }, [type]);
-
-  const MapUpdater = ({ center }: { center: [number, number] }) => {
-    const map = useMap();
-
-    useEffect(() => {
-      map.setView(center, coordinates ? 15 : 8);
-    }, [center, map]);
-
-    return null;
-  };
+  const zoom = coordinates ? 15 : 7.5;
 
   return (
     <div className="h-full w-full p-0">
       <div className="h-full w-full overflow-hidden">
-        <MapContainer
-          center={position}
-          zoom={8.4}
-          scrollWheelZoom={true}
-          className="w-full h-full leaflet-rounded"
-        >
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          {coordinates ? (
-            <Marker
-              ref={markerRef}
-              position={position}
-              icon={generateMarkerIcon(
-                type?.color ?? "#ababab",
-                renderToStaticMarkup(
-                  type?.icon ? (
-                    <DynamicIcon
-                      name={type.icon}
-                      className="text-white w-4 h-4"
-                    />
-                  ) : (
-                    <DynamicIcon name={"user"} className=" w-4 h-4" />
-                  )
-                )
-              )}
+        <Map center={position} zoom={zoom}>
+          <MapController center={coordinates} />
+          {coordinates && (
+            <ClientMarker
+              longitude={coordinates[0]}
+              latitude={coordinates[1]}
+              type={type}
             />
-          ) : null}
-          <MapUpdater center={position} />
-        </MapContainer>
+          )}
+        </Map>
       </div>
     </div>
   );
