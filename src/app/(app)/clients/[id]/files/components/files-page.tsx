@@ -5,7 +5,7 @@ import { File } from "@/generated/prisma";
 import { ClientPage } from "../../components/client-page";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Plus, LoaderCircle } from "lucide-react";
+import { Upload, LoaderCircle, FileIcon } from "lucide-react";
 import { useRef } from "react";
 import { toast } from "sonner";
 import FileItem from "./file-item";
@@ -26,10 +26,7 @@ export default function FilesPage({ clientId, files }: Props) {
     fileInputRef.current?.click();
   }
 
-  async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    if (!e.target.files || e.target.files.length === 0) return;
-    const file = e.target.files[0];
-
+  async function uploadFile(file: globalThis.File) {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("clientId", clientId);
@@ -51,10 +48,20 @@ export default function FilesPage({ clientId, files }: Props) {
     } catch {
       toast.error("Upload failed");
     } finally {
-      // Allow uploading the same file again by resetting the input value
       if (fileInputRef.current) fileInputRef.current.value = "";
       setIsLoading(false);
     }
+  }
+
+  async function uploadFiles(files: globalThis.File[]) {
+    for (const file of files) {
+      await uploadFile(file);
+    }
+  }
+
+  async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files || e.target.files.length === 0) return;
+    await uploadFiles(Array.from(e.target.files));
   }
 
   return (
@@ -62,14 +69,20 @@ export default function FilesPage({ clientId, files }: Props) {
       <ClientPage
         icon="file"
         title="Files"
+        empty={files.length === 0}
+        emptyMessage={t("No files uploaded yet")}
+        emptyDescription={t("Drag and drop files here or click on the button")}
+        emptyIcon={<FileIcon />}
         subtitle="Files for this client"
         onBackClick={() => router.push("/clients/" + clientId)}
+        onDrop={uploadFiles}
         actions={
           <>
             <input
               ref={fileInputRef}
               type="file"
               name="file"
+              multiple
               className="hidden"
               onChange={handleFileChange}
             />
@@ -81,9 +94,9 @@ export default function FilesPage({ clientId, files }: Props) {
               {isLoading ? (
                 <LoaderCircle className="h-3.5 w-3.5 animate-spin" />
               ) : (
-                <Plus className="h-3.5 w-3.5" />
+                <Upload className="h-3.5 w-3.5" />
               )}
-              {isLoading ? t("Uploading") : t("Add File")}
+              {isLoading ? t("Uploading") : t("Upload File")}
             </Button>
           </>
         }

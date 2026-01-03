@@ -23,12 +23,10 @@
   "Date": "Fecha",
   "You can browse icon names at": "Puedes buscar nombres de iconos en",
   "This action cannot be undone": "Esta acción no se puede deshacer",
-
   "Color": "Color",
   "Icon": "Icono",
   "Enter an icon name": "Introduce un nombre de icono",
   "Type name": "Nombre del Tipo",
-
   "Map": "Mapa",
   "View details": "Ver detalles",
 
@@ -125,7 +123,6 @@
   "Add a new device": "Añadir un nuevo dispositivo",
   "Device added successfully": "Dispositivo añadido correctamente",
   "Device added successfully description": "El dispositivo ha sido añadido correctamente",
-
   "General Settings": "Configuración General",
   "Configure general application settings": "Configura las opciones generales de la aplicación",
   "Language": "Idioma",
@@ -234,6 +231,9 @@
 
   "**FILES**": "ARCHIVOS",
   "Files": "Archivos",
-  "Add File": "Añadir Archivo",
-  "File uploaded successfully": "Archivo subido correctamente"
+  "Upload File": "Subir Archivo",
+  "File uploaded successfully": "Archivo subido correctamente",
+  "No files uploaded yet": "Aún no se han subido archivos",
+  "Drag and drop files here or click on the button below": "Arrastra archivos aquí o haz clic en el botón",
+  "Drop files here": "Arrastra archivos aquí"
 }
