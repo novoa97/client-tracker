@@ -1,4 +1,5 @@
 import { User } from "@/generated/prisma";
+import { prisma } from '@/lib/prisma';
 import { SignJWT, jwtVerify, decodeJwt } from 'jose'
 
 type Payload = {
@@ -60,5 +61,35 @@ export async function verifyJWT(user: User, token: string): Promise<{ success: b
         return { success: true, payload: payload as Payload }
     } catch (error) {
         return { success: false, payload: null, error: error instanceof Error ? error.message : 'Unknown error' }
+    }
+}
+
+export async function verifyToken(token: string): Promise<User | null> {
+    try {
+        const { success, payload } = await decodeJWT(token);
+
+        if (!success) {
+            return null;
+        }
+
+        const user = await prisma.user.findUnique({
+            where: {
+                id: payload?.id,
+            },
+        });
+
+        if (!user) {
+            return null;
+        }
+
+        const { success: verified } = await verifyJWT(user, token);
+
+        if (!verified) {
+            return null;
+        }
+        return user;
+
+    } catch (error) {
+        return null;
     }
 }

@@ -9,6 +9,7 @@ interface Props {
   title: string;
   subtitle: string;
   children: React.ReactNode;
+  actions?: React.ReactNode;
   addAction?: () => void;
   empty?: boolean;
   emptyIcon?: React.ReactNode;
@@ -24,6 +25,7 @@ export function ClientPage({
   empty,
   emptyIcon,
   emptyMessage,
+  actions,
   addAction,
   onBackClick,
 }: Props) {
@@ -69,6 +71,7 @@ export function ClientPage({
                 {t("Add")}
               </Button>
             )}
+            {actions ? actions : null}
           </div>
         </div>
       </div>
@@ -94,6 +97,9 @@ export function ClientPage({
             </Button>
           </div>
         )}
+        <div className="flex md:hidden w-full my-2 justify-center">
+          {actions ? actions : null}
+        </div>
       </div>
     </div>
   );
