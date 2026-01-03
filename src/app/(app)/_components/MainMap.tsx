@@ -3,18 +3,13 @@
 import { ClientWithType } from "@/app/types";
 import {
   Map,
-  MapMarker,
-  MarkerContent,
-  MarkerPopup,
   MapControls,
   useMap,
 } from "@/components/ui/map";
-import { getTextColor } from "@/lib/colors";
 import { useEffect } from "react";
-import DynamicIcon from "@/components/icon";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ExternalLink } from "lucide-react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import ClientMarker from "@/components/map/ClientMarker";
+
 interface Props {
   clients: ClientWithType[];
   center: [number, number] | undefined;
@@ -36,7 +31,7 @@ function MapController({
     } else if (map && center) {
       map.jumpTo({ center, zoom: 15 });
     }
-  }, [map, center]);
+  }, [map, center, search]);
 
   return null;
 }

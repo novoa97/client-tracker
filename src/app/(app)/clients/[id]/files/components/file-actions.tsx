@@ -7,7 +7,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { DropdownMenu } from "@/components/ui/dropdown-menu";
 import { Download, Eye, MoreVertical, Trash } from "lucide-react";
-import { File } from "@/generated/prisma";
 
 interface Props {
   handleOpen: () => void;

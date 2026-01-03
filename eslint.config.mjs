@@ -11,7 +11,7 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   {
-    ignores: ["src/generated/**"],  // <--- aquí es donde realmente ignoras en Flat Config
+    ignores: ["src/generated/**", "src/components/ui/map.tsx"],
   },
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];

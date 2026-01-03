@@ -1,5 +1,4 @@
 "use server";
-import GeneralMapWrapper from "@/components/general-map-wrapper";
 import { PageHeader } from "@/components/page-header";
 import { prisma } from "@/lib/prisma";
 import { MainSearch } from "./_components/MainSearch";

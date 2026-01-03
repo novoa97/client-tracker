@@ -90,6 +90,7 @@ export async function verifyToken(token: string): Promise<User | null> {
         return user;
 
     } catch (error) {
+        console.log(error);
         return null;
     }
 }

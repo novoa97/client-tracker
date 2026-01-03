@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from '@/lib/prisma';
 import path from "path";
 import fs from "fs";
-import { decodeJWT, verifyJWT, verifyToken } from "@/lib/jwt";
+import { verifyToken } from "@/lib/jwt";
 
 const UPLOAD_DIR = path.resolve(process.env.ROOT_PATH ?? "", "uploads");
 
