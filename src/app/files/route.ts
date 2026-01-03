@@ -5,7 +5,8 @@ import path from "path";
 import fs from "fs";
 import { verifyToken } from "@/lib/jwt";
 
-const UPLOAD_DIR = path.resolve(process.env.ROOT_PATH ?? "", "uploads");
+const ROOT_DIR = process.env.DATA_PATH ?? (process.env.NODE_ENV === "production" ? "/data" : "./data");
+
 
 export const POST = async (req: NextRequest) => {
 
@@ -37,7 +38,7 @@ export const POST = async (req: NextRequest) => {
     const newFile = await prisma.file.create({
         data: {
             name: (body.file as File).name,
-            path: path.resolve(UPLOAD_DIR),
+            path: path.resolve(ROOT_DIR, "uploads"),
             size: (body.file as File).size || 0,
             type: mimeType ?? "",
             uploadedById: user.id,
@@ -49,12 +50,13 @@ export const POST = async (req: NextRequest) => {
 
     if (file) {
         const buffer = Buffer.from(await file.arrayBuffer());
-        if (!fs.existsSync(UPLOAD_DIR)) {
-            fs.mkdirSync(UPLOAD_DIR);
+        if (!fs.existsSync(ROOT_DIR)) {
+            fs.mkdirSync(ROOT_DIR);
+            fs.mkdirSync(path.resolve(ROOT_DIR, "uploads"));
         }
 
         fs.writeFileSync(
-            path.resolve(UPLOAD_DIR, newFile.id + '.' + extension),
+            path.resolve(ROOT_DIR, "uploads", newFile.id + '.' + extension),
             buffer
         );
     } else {
@@ -66,7 +68,7 @@ export const POST = async (req: NextRequest) => {
     await prisma.file.update({
         where: { id: newFile.id },
         data: {
-            path: path.resolve(UPLOAD_DIR, newFile.id + '.' + extension),
+            path: path.resolve(ROOT_DIR, "uploads", newFile.id + '.' + extension),
         }
     });
 
