@@ -29,7 +29,6 @@
   "Type name": "Nome do Tipo",
   "Map": "Mapa",
   "View details": "Ver detalles",
-
   "**CLIENTS**": "CLIENTES",
   "Clients": "Clientes",
   "Client": "Cliente",
@@ -74,7 +73,6 @@
   "Delete Client": "Eliminar Cliente",
   "Are you sure you want to delete this client?": "¿Estás seguro de que quieres eliminar este cliente?",
   "Client deleted successfully": "Cliente eliminado correctamente",
-
   "**LICENSES**": "LICENZAS",
   "license": "licenza",
   "licenses": "licenzas",
@@ -109,7 +107,6 @@
   "One or more sub licenses already exist": "Unha ou máis sublicenzas xa existen",
   "All sublicenses associated with this license": "Todas as sublicenzas asociadas a esta licenza",
   "Sublicenses already exist": "Algunas sublicenzas a engadir xa existen",
-
   "**DEVICES**": "DISPOSITIVOS",
   "devices": "dispositivos",
   "device": "dispositivo",
@@ -139,7 +136,6 @@
   "Invalid current password": "Contraseña actual inválida",
   "Password changed successfully": "Contraseña cambiada correctamente",
   "Logout": "Saír",
-
   "**CLIENT TYPES**": "TIPOS DE CLIENTE",
   "Client Types": "Tipos de Cliente",
   "Manage client types for your application": "Xestiona os tipos de cliente para a aplicación.",
@@ -159,7 +155,6 @@
   "Client type update failed description": "Non se puido actualizar o tipo de cliente",
   "Client type deleted": "Tipo de cliente eliminado correctamente",
   "Client type deleted description": "O tipo de cliente eliminouse correctamente",
-
   "**DEVICE TYPES**": "TIPOS DE DISPOSITIVO",
   "Device Types": "Tipos de Dispositivo",
   "Manage device types for your application": "Xestiona os tipos de dispositivo para a aplicación.",
@@ -178,7 +173,6 @@
   "Device type update failed description": "Non se puido actualizar o tipo de dispositivo",
   "Device type deleted": "Tipo de dispositivo eliminado correctamente",
   "Device type deleted description": "O tipo de dispositivo eliminouse correctamente",
-
   "**LICENSE TYPES**": "TIPOS DE LICENZA",
   "License Types": "Tipos de Licenza",
   "Manage license types for your application": "Xestiona os tipos de licenza para a aplicación",
@@ -199,7 +193,6 @@
   "License type deleted description": "O tipo de licenza eliminouse correctamente",
   "License type deletion failed": "Erro ao eliminar o tipo de licenza",
   "License type deletion failed description": "Non se puido eliminar o tipo de licenza",
-
   "**AUTH**": "AUTH",
   "Username": "Nome de usuario",
   "Password": "Contraseña",
@@ -209,7 +202,6 @@
   "Logging in": "Iniciando sesión...",
   "Hide password": "Esconder contraseña",
   "Show password": "Mostrar contraseña",
-
   "**INCIDENTS**": "INCIDENCIAS",
   "Incidents": "Incidencias",
   "Incident": "Incidencia",
@@ -228,12 +220,12 @@
   "Are you sure you want to permanently delete the incident?": "¿Estás seguro de que quieres eliminar la incidencia?",
   "Incident deleted successfully": "Incidencia eliminada correctamente",
   "Not exists incidents": "Non hai incidencias",
-
   "**FILES**": "FICHEIROS",
   "Files": "Ficheiros",
   "Upload File": "Subir Ficheiro",
   "File uploaded successfully": "Ficheiro subido correctamente",
   "No files uploaded yet": "Aínda non se subiron ficheiros",
   "Drag and drop files here or click on the button": "Arrastra ficheiros aquí ou fai clic no botón",
+  "Navigation": "Navegación",
   "Drop files here": "Arrastra ficheiros aquí"
 }
