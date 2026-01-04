@@ -26,10 +26,8 @@ function MapController({
   const { map } = useMap();
 
   useEffect(() => {
-    if (map && center && search) {
-      map.flyTo({ center, zoom: 15 });
-    } else if (map && center) {
-      map.jumpTo({ center, zoom: 15 });
+    if (map && center) {
+      map.flyTo({ center, zoom: 15, maxDuration: 7000 });
     }
   }, [map, center, search]);
 
@@ -41,18 +39,21 @@ export default function MainMap({ clients, center, search }: Props) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  const postion = center || [-8, 42.7551];
+  const zoom = center ? 15 : 7.5;
+
+
   const onSelectClient = (client: ClientWithType) => {
     const params = new URLSearchParams(searchParams?.toString());
     params.set("lat", String(client.latitude));
     params.set("lng", String(client.longitude));
-    params.delete("search");
     sessionStorage.setItem("backOrigin", pathname + "?" + params.toString());
     router.push(`/clients/${client.id}`);
   };
 
   return (
     <div className="w-full h-full">
-      <Map center={[-8, 42.7551]} zoom={7.5}>
+      <Map center={postion} zoom={zoom}>
         <MapControls position="bottom-right" showZoom showCompass />
         <MapController center={center} search={search} />
         {clients.map((client) => (

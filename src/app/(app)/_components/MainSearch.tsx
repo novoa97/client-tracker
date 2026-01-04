@@ -49,7 +49,6 @@ export function MainSearch({ clients, className }: Props) {
     const params = new URLSearchParams(searchParams?.toString());
     params.set("lat", String(client.latitude));
     params.set("lng", String(client.longitude));
-    params.set("search", "true");
     router.push(`${pathname}?${params.toString()}`);
     router.refresh();
   };
