@@ -6,8 +6,12 @@ import DynamicIcon from "@/components/icon";
 import { prettySize } from "@/lib/utils";
 import { FileActions } from "./file-actions";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 export default function FileItem({ file }: { file: File }) {
+
+  const router = useRouter();
+
   const getIconConfig = (type: string) => {
     if (type.includes("image")) {
       return { icon: "file-image", color: "text-violet-500", bg: "bg-violet-500/10" };
@@ -28,6 +32,7 @@ export default function FileItem({ file }: { file: File }) {
   async function handleDelete() {
     try {
       await deleteFile(file.id);
+      router.refresh()
       toast.success("File deleted");
     } catch {
       toast.error("Failed to delete file");

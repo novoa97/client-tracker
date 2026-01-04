@@ -57,6 +57,7 @@ export default function FilesPage({ clientId, files }: Props) {
     for (const file of files) {
       await uploadFile(file);
     }
+    router.refresh();
   }
 
   async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
