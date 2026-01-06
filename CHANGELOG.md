@@ -1,5 +1,14 @@
 # client-tracker
 
+## 2.1.0
+
+### Minor Changes
+
+- 723ef2b: Add mapcn and remove leaflet
+- 9c68657: Improve sidebar app
+- 6a0ba00: Improve ui of incidents list
+- fca5835: Add client file management
+
 ## 2.0.0
 
 ### Major Changes
