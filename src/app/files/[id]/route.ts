@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { verifyToken } from "@/lib/jwt";
 import fs from "fs";
 
-export const GET = async (req: NextRequest, { params }: { params: { id: string } }) => {
+export const GET = async (req: NextRequest, { params }: { params: Promise<{ id: string }> }) => {
     const token = req.cookies.get("session");
     if (!token) {
         return NextResponse.json({
@@ -56,7 +56,7 @@ export const GET = async (req: NextRequest, { params }: { params: { id: string }
 }
 
 
-export const DELETE = async (req: NextRequest, { params }: { params: { id: string } }) => {
+export const DELETE = async (req: NextRequest, { params }: { params: Promise<{ id: string }> }) => {
     const token = req.cookies.get("session");
 
     if (!token) {

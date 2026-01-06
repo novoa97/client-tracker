@@ -52,7 +52,11 @@ export const POST = async (req: NextRequest) => {
         const buffer = Buffer.from(await file.arrayBuffer());
         if (!fs.existsSync(ROOT_DIR)) {
             fs.mkdirSync(ROOT_DIR);
-            fs.mkdirSync(path.resolve(ROOT_DIR, "uploads"));
+        }
+
+        const uploadsDir = path.resolve(ROOT_DIR, "uploads");
+        if (!fs.existsSync(uploadsDir)) {
+            fs.mkdirSync(uploadsDir);
         }
 
         fs.writeFileSync(
