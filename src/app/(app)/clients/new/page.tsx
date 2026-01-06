@@ -6,8 +6,8 @@ import { addClient } from "../actions/add-client";
 import { useState, useEffect } from "react";
 import { getClientType } from "../actions/get-client-type";
 import { ClientType } from "@/generated/prisma";
-import AddClientMapWrapper from "./components/add-client-map-wrapper";
 import { PageHeader } from "@/components/page-header";
+import AddClientMap from "./components/add-client-map";
 
 export default function NewClientPage() {
   const [coordinates, setCoordinates] = useState<[number, number] | null>(null);
@@ -28,7 +28,7 @@ export default function NewClientPage() {
     type?: ClientType;
   }) => {
     if (newData.latitude && newData.longitude) {
-      setCoordinates([newData.latitude, newData.longitude]);
+      setCoordinates([newData.longitude, newData.latitude]);
     }
     if (newData.type) {
       setSelectedType(newData.type);
@@ -44,11 +44,9 @@ export default function NewClientPage() {
           onSubmit={addClient}
           onChange={handleFormChange}
         />
-        <AddClientMapWrapper
-          className="hidden md:block w-2/3 h-full"
-          coordinates={coordinates}
-          type={selectedType}
-        ></AddClientMapWrapper>
+        <div className="hidden md:block w-2/3 h-full">
+          <AddClientMap coordinates={coordinates} type={selectedType} />
+        </div>
       </div>
     </div>
   );

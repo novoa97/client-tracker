@@ -195,6 +195,17 @@ exports.Prisma.IncidentScalarFieldEnum = {
   resolvedAt: 'resolvedAt'
 };
 
+exports.Prisma.FileScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  path: 'path',
+  size: 'size',
+  type: 'type',
+  createdAt: 'createdAt',
+  clientId: 'clientId',
+  uploadedById: 'uploadedById'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -266,6 +277,15 @@ exports.Prisma.IncidentOrderByRelevanceFieldEnum = {
   description: 'description',
   clientId: 'clientId'
 };
+
+exports.Prisma.FileOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  path: 'path',
+  type: 'type',
+  clientId: 'clientId',
+  uploadedById: 'uploadedById'
+};
 exports.IncidentStatus = exports.$Enums.IncidentStatus = {
   OPEN: 'OPEN',
   RESOLVED: 'RESOLVED'
@@ -286,7 +306,8 @@ exports.Prisma.ModelName = {
   DeviceType: 'DeviceType',
   Device: 'Device',
   User: 'User',
-  Incident: 'Incident'
+  Incident: 'Incident',
+  File: 'File'
 };
 
 /**

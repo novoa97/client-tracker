@@ -15,7 +15,8 @@ import { useState } from "react";
 import { DialogContainer } from "@/components/dialog-container";
 import { IncidentForm } from "./incident-form";
 import { toast } from "sonner";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   clientId: string;
@@ -78,13 +79,24 @@ export function IncidentsPage({ clientId, incidents }: Props) {
         title={t("Incidents")}
         subtitle={t("Incidents registered for this client")}
         onBackClick={() => router.push("/clients/" + clientId)}
-        addAction={() => {
-          setIncidentToEdit(null);
-          setIsDialogOpen(true);
-        }}
         empty={incidents.length === 0}
         emptyMessage={t("Not exists incidents")}
         emptyIcon={<AlertCircle />}
+        actions={
+          <>
+            <Button
+              variant="default"
+              className="w-full"
+              onClick={() => {
+                setIncidentToEdit(null);
+                setIsDialogOpen(true);
+              }}
+            >
+              <Plus className="h-3.5 w-3.5" />
+              {t("Add Incident")}
+            </Button>
+          </>
+        }
       >
         <div className="flex flex-col h-full gap-2 overflow-y-auto">
           {incidents.map((incident) => (

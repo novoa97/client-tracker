@@ -1,8 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { IncidentStatus } from "@/generated/prisma";
-import ClientMapWrapper from "./components/client-map-wrapper";
 import { ClientSidebar } from "./components/client-sidebar";
+import ClientMap from "./components/client-map";
 
 type Props = {
   params: Promise<{
@@ -36,10 +36,9 @@ export default async function ClientPage({ params }: Props) {
   return (
     <>
       {/* Desktop */}
-      <ClientMapWrapper
-        client={client}
-        className="w-full h-full hidden md:block"
-      ></ClientMapWrapper>
+      <div className="w-full h-full hidden md:block">
+        <ClientMap client={client} />
+      </div>
       {/* Mobile */}
       <ClientSidebar
         types={clientTypes}

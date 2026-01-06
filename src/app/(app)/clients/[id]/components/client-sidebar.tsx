@@ -2,7 +2,7 @@
 
 import { ClientWithTypeAndOpenIncidents } from "@/app/types";
 import DynamicIcon from "@/components/icon";
-import { darkenColor, getTextColor } from "@/lib/colors";
+import { getTextColor } from "@/lib/colors";
 import {
   Building,
   Map,
@@ -48,6 +48,7 @@ const navItems = [
   { href: "/devices", label: "Devices", icon: Computer, mobile: true },
   { href: "/licenses", label: "Licenses", icon: Key, mobile: true },
   { href: "/incidents", label: "Incidents", icon: AlertCircle, mobile: true },
+  { href: "/files", label: "Files", icon: FileText, mobile: true },
 ];
 
 export function ClientSidebar({ client, types, className }: Props) {
@@ -128,7 +129,7 @@ export function ClientSidebar({ client, types, className }: Props) {
             style={{
               backgroundColor: client.type?.color,
               borderWidth: 3,
-              borderColor: darkenColor(client.type?.color, 30),
+              borderColor: client.type?.color,
             }}
           >
             <DynamicIcon

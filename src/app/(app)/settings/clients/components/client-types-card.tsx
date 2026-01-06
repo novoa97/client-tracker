@@ -23,7 +23,7 @@ import {
   editClientType,
   deleteClientType,
 } from "../actions";
-import { darkenColor, getTextColor } from "@/lib/colors";
+import { getTextColor } from "@/lib/colors";
 
 interface Props {
   types: ClientTypeWithInUse[];
@@ -118,7 +118,7 @@ export function ClientTypesCard({ types }: Props) {
                 style={{
                   backgroundColor: type.color,
                   borderWidth: 3,
-                  borderColor: darkenColor(type?.color, 30),
+                  borderColor: type.color,
                 }}
               >
                 <DynamicIcon

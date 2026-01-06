@@ -9,6 +9,7 @@
   "Delete": "Delete",
   "Creating": "Creating...",
   "Updating": "Updating...",
+  "Uploading": "Uploading...",
   "Save": "Save",
   "Saving": "Saving",
   "Saved": "Saved",
@@ -22,15 +23,12 @@
   "Information": "Information",
   "You can browse icon names at": "You can browse icon names at",
   "This action cannot be undone": "This action cannot be undone",
-
   "Color": "Color",
   "Icon": "Icon",
   "Enter an icon name": "Enter an icon name",
   "Type name": "Type name",
-
   "Map": "Map",
   "View details": "View details",
-
   "**CLIENTS**": "CLIENTS",
   "Clients": "Clients",
   "Client": "Client",
@@ -74,7 +72,6 @@
   "Delete Client": "Delete Client",
   "Are you sure you want to delete this client?": "Are you sure you want to delete this client?",
   "Client deleted successfully": "Client deleted successfully",
-
   "**LICENSES**": "LICENSES",
   "license": "license",
   "licenses": "licenses",
@@ -109,7 +106,6 @@
   "One or more sub licenses already exist": "One or more sub licenses already exist",
   "All sublicenses associated with this license": "All sublicenses associated with this license",
   "Sublicenses already exist": "Some sublicenses to add already exist",
-
   "**DEVICES**": "DEVICES",
   "device": "device",
   "devices": "devices",
@@ -124,7 +120,6 @@
   "Add a new device": "Add a new device",
   "Device added successfully": "Device added successfully",
   "Device added successfully description": "The device has been added successfully",
-
   "General Settings": "General Settings",
   "Configure general application settings": "Configure general application settings",
   "Language": "Language",
@@ -141,7 +136,6 @@
   "Invalid current password": "Invalid current password",
   "Password changed successfully": "Password changed successfully",
   "Logout": "Logout",
-
   "**CLIENT TYPES**": "CLIENT TYPES",
   "Client Types": "Client Types",
   "Manage client types for your application": "Manage client types for the application.",
@@ -161,7 +155,6 @@
   "Client type update failed description": "The client type has not been updated",
   "Client type deleted": "Client type deleted",
   "Client type deleted description": "The client type has been deleted successfully",
-
   "**DEVICE TYPES**": "DEVICE TYPES",
   "Device Types": "Device Types",
   "Manage device types for your application": "Manage device types for the application",
@@ -180,7 +173,6 @@
   "Device type update failed description": "The device type has not been updated",
   "Device type deleted": "Device type deleted",
   "Device type deleted description": "The device type has been deleted successfully",
-
   "**LICENSE TYPES**": "LICENSE TYPES",
   "License Types": "License Types",
   "Manage license types for your application": "Manage license types for the application",
@@ -201,7 +193,6 @@
   "License type deleted description": "The license type has been deleted successfully",
   "License type deletion failed": "License type deletion failed",
   "License type deletion failed description": "The license type has not been deleted",
-
   "**AUTH**": "AUTH",
   "Username": "Username",
   "Password": "Password",
@@ -211,7 +202,6 @@
   "Logging in": "Logging in...",
   "Hide password": "Hide password",
   "Show password": "Show password",
-
   "**INCIDENTS**": "INCIDENTS",
   "Incidents": "Incidents",
   "Incident": "Incident",
@@ -229,5 +219,13 @@
   "Delete incident?": "Delete incident?",
   "Are you sure you want to permanently delete the incident?": "Are you sure you want to permanently delete the incident?",
   "Incident deleted successfully": "Incident deleted successfully",
-  "Not exists incidents": "Not exists incidents"
+  "Not exists incidents": "Not exists incidents",
+  "**FILES**": "FILES",
+  "Files": "Files",
+  "Upload File": "Upload File",
+  "File uploaded successfully": "File uploaded successfully",
+  "No files uploaded yet": "No files uploaded yet",
+  "Drag and drop files here or click on the button": "Drag and drop files here or click on the button",
+  "Navigation": "Navigation",
+  "Drop files here": "Drop files here"
 }

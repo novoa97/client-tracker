@@ -13,7 +13,7 @@ interface Props {
   className?: string;
 }
 
-export function GeneralMapSearch({ clients, className }: Props) {
+export function MainSearch({ clients, className }: Props) {
   const t = useTranslations();
   const router = useRouter();
   const pathname = usePathname();
