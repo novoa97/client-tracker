@@ -3,7 +3,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
 import { Calendar, CircleAlert, CircleCheck } from "lucide-react";
 import { IncidentActions } from "./incident-actions";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 interface Props {
   incident: Incident;
