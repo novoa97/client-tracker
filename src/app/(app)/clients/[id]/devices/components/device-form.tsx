@@ -102,7 +102,6 @@ export function DeviceForm({
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                   disabled={types.length === 0}
-                  modal={false}
                 >
                   <FormControl>
                     <SelectTrigger
