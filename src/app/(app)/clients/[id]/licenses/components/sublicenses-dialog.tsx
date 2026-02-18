@@ -10,12 +10,16 @@ export function SublicensesList({ license }: Props) {
       {license?.subLicenses.map((subLicense) => (
         <div
           key={subLicense.id}
-          className="flex items-center justify-between border-b pb-3 last:border-0 last:pb-0"
+          className="flex items-center justify-between border-b border-border pb-3 last:border-0 last:pb-0"
         >
           <div className="flex items-center gap-2 ">
             <div className="flex flex-col">
-              <h3 className="text-lg font-bold">{subLicense.type.name}</h3>
-              <p className="text-sm text-gray-500">ID: {subLicense.id}</p>
+              <h3 className="text-lg font-bold text-foreground">
+                {subLicense.type.name}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                ID: {subLicense.id}
+              </p>
             </div>
           </div>
         </div>

@@ -41,7 +41,7 @@ export default async function ClientLayout({ params, children }: Props) {
       ></ClientSidebar>
       {/* <Header icon={User} title={client.name}></Header>
       <ClientTabs client={client}></ClientTabs> */}
-      <div className="flex-1 flex flex-col min-h-0">{children}</div>
+      <div className="flex-1 flex flex-col min-h-0 w-full">{children}</div>
     </div>
   );
 }

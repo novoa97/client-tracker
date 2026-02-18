@@ -100,9 +100,9 @@ export default function SignupForm() {
             aria-label={showPassword ? "Hide password" : "Show password"}
           >
             {showPassword ? (
-              <EyeOffIcon className="h-4 w-4 text-gray-500" />
+              <EyeOffIcon className="h-4 w-4 text-muted-foreground" />
             ) : (
-              <EyeIcon className="h-4 w-4 text-gray-500" />
+              <EyeIcon className="h-4 w-4 text-muted-foreground" />
             )}
           </Button>
         </div>
