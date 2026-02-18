@@ -53,7 +53,7 @@ export const POST = async (req: NextRequest) => {
     );
   }
 
-  const validation = validateUpload(file, rawName, mimeType);
+  const validation = validateUpload(file, rawName);
   if (!validation.ok) {
     const err = validation as UploadValidationError;
     return NextResponse.json(

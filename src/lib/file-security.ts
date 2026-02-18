@@ -68,8 +68,7 @@ export type UploadValidation = UploadValidationResult | UploadValidationError;
  */
 export function validateUpload(
   file: Blob | null,
-  reportedName: string,
-  _reportedMime: string | null
+  reportedName: string
 ): UploadValidation {
   if (!file || file.size === 0) {
     return { ok: false, message: "No file or empty file", status: 400 };
