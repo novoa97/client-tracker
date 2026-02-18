@@ -90,7 +90,7 @@ export default function AddClientForm({
   };
 
   return (
-    <div className="p-8 w-full md:w-1/3 h-full border-r">
+    <div className="p-8 w-full md:w-1/3 h-full border-r border-border bg-background">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleFormSubmit)}

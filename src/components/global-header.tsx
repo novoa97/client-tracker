@@ -14,16 +14,13 @@ export function GlobalHeader() {
   const router = useRouter();
 
   return (
-    <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-      <SidebarTrigger className="-ml-1" />
-      {/** Button to back to the previous page*/}
+    <header className="flex h-16 shrink-0 items-center gap-2 border-b border-border bg-background px-4">
+      <SidebarTrigger className="-ml-1 text-foreground hover:bg-accent hover:text-accent-foreground" />
       {buttonBack && (
         <Button
-          data-sidebar="trigger"
-          data-slot="sidebar-trigger"
           variant="ghost"
           size="icon"
-          className="size-7"
+          className="size-7 text-foreground hover:bg-accent hover:text-accent-foreground"
           onClick={() => {
             const backOrigin = sessionStorage.getItem("backOrigin");
             if (backOrigin) {
@@ -34,27 +31,32 @@ export function GlobalHeader() {
             }
           }}
         >
-          <ChevronLeftIcon />
-          <span className="sr-only">Toggle Sidebar</span>
+          <ChevronLeftIcon className="size-4" />
+          <span className="sr-only">Go back</span>
         </Button>
       )}
       <Separator
         orientation="vertical"
-        className="mr-2 data-[orientation=vertical]:h-4"
+        className="mr-2 data-[orientation=vertical]:h-4 bg-border"
       />
-      <div className="flex items-center gap-2 w-full">
-        <div className="flex items-center gap-2 flex-1">
+      <div className="flex items-center gap-2 w-full min-w-0">
+        <div className="flex items-center gap-2 flex-1 min-w-0">
           {title && icon ? (
             <>
-              <div className="w-8 h-8 rounded-md flex items-center justify-center bg-gray-100">
-                <DynamicIcon name={icon} className="w-4 h-4" />
+              <div className="flex size-8 shrink-0 items-center justify-center rounded-md bg-muted">
+                <DynamicIcon
+                  name={icon}
+                  className="size-4 text-muted-foreground"
+                />
               </div>
-              <h1 className="text-md font-bold">{title}</h1>
+              <h1 className="truncate text-sm font-semibold text-foreground">
+                {title}
+              </h1>
             </>
           ) : (
             <>
-              <Skeleton className="w-8 h-8 rounded-md" />
-              <Skeleton className="w-24 h-4 rounded-md" />
+              <Skeleton className="size-8 shrink-0 rounded-md" />
+              <Skeleton className="h-5 w-24 shrink-0 rounded-md" />
             </>
           )}
         </div>
