@@ -43,7 +43,7 @@ export default function FilesPage({ clientId, files }: Props) {
         toast.success(t("File uploaded successfully"));
         router.refresh();
       } else {
-        toast.error("Upload failed");
+        toast.error(result.message ?? "Upload failed");
       }
     } catch {
       toast.error("Upload failed");
