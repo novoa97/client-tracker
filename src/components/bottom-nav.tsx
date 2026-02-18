@@ -20,13 +20,15 @@ export default function BottomNav({ section }: Props) {
   const path = "/" + pathname.split("/")[1];
 
   return (
-    <nav className="bg-white border-t shadow-md flex justify-around items-center h-14">
+    <nav className="bg-background border-t border-border shadow-sm flex justify-around items-center h-14">
       {section?.map(({ href, icon }) => (
         <Link
           key={href}
           href={href}
           className={`flex flex-col items-center text-xs ${
-            path === href ? "text-blue-600 font-semibold " : "text-gray-500"
+            path === href
+              ? "text-primary font-semibold"
+              : "text-muted-foreground"
           }`}
         >
           <DynamicIcon name={icon} className="w-6 h-6" />

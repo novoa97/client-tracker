@@ -28,11 +28,16 @@ import { useUser } from "@/hooks/useUser";
 import { changePassword } from "@/lib/auth";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
+import { useMapStyle } from "@/hooks/useMapStyle";
+import { MAP_STYLE_PRESETS } from "@/lib/map-styles";
 
 export function GeneralCard() {
   const router = useRouter();
   const t = useTranslations();
   const locale = useLocale();
+  const { theme, setTheme } = useTheme();
+  const { styleId: mapStyleId, setStyleId: setMapStyleId } = useMapStyle();
   const { user, changeLanguage } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -42,6 +47,16 @@ export function GeneralCard() {
   async function handleChange(language: string) {
     await changeLanguage(language);
     toast.success(t("Language changed successfully"), { duration: 2000 });
+  }
+
+  function handleThemeChange(value: string) {
+    setTheme(value);
+    toast.success(t("Theme changed successfully"), { duration: 2000 });
+  }
+
+  function handleMapStyleChange(value: string) {
+    setMapStyleId(value as "carto" | "openstreetmap" | "openstreetmap3d");
+    toast.success(t("Map style changed successfully"), { duration: 2000 });
   }
 
   async function handleChangePassword(data: {
@@ -74,16 +89,62 @@ export function GeneralCard() {
             {t("Configure general application settings")}
           </CardDescription>
         </CardHeader>
-        <CardContent className="w-full flex-1 overflow-y-auto">
-          <div>
-            <label className="text-sm font-medium">{t("Language")}</label>
+        <CardContent className="w-full flex-1 overflow-y-auto space-y-6">
+          <div className="space-y-4">
+            <div className="grid gap-1">
+              <h3 className="text-sm font-semibold text-foreground">
+                {t("Appearance")}
+              </h3>
+              <p className="text-muted-foreground text-sm">
+                {t("Theme and map style for the application")}
+              </p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 mt-2">
+              <div className="space-y-2">
+                <Label className="text-sm font-medium">{t("Theme")}</Label>
+                <Select
+                  value={theme ?? "system"}
+                  onValueChange={handleThemeChange}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder={t("Select a theme")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="light">{t("Light")}</SelectItem>
+                    <SelectItem value="dark">{t("Dark")}</SelectItem>
+                    <SelectItem value="system">{t("System")}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label className="text-sm font-medium">{t("Map style")}</Label>
+                <Select value={mapStyleId} onValueChange={handleMapStyleChange}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder={t("Select a map style")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {MAP_STYLE_PRESETS.map((preset) => (
+                      <SelectItem key={preset.id} value={preset.id}>
+                        {t(preset.labelKey)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </div>
+
+          <Separator />
+
+          <div className="space-y-2">
+            <Label className="text-sm font-medium">{t("Language")}</Label>
             <p className="text-muted-foreground text-sm">
               {t(
-                "This is the language that will be used throughout the application"
+                "This is the language that will be used throughout the application",
               )}
             </p>
             <Select onValueChange={handleChange} defaultValue={locale}>
-              <SelectTrigger className="text-sm mt-4 w-full md:w-auto">
+              <SelectTrigger className="w-full sm:w-[180px]">
                 <SelectValue placeholder={t("Select a language")} />
               </SelectTrigger>
               <SelectContent>
@@ -93,8 +154,10 @@ export function GeneralCard() {
               </SelectContent>
             </Select>
           </div>
-          <Separator className="my-4 h-px w-full bg-border" />
-          <div>
+
+          <Separator />
+
+          <div className="space-y-2">
             <Label className="text-sm font-medium">
               {t("Change Password")}
             </Label>
@@ -103,7 +166,7 @@ export function GeneralCard() {
             </p>
             <Button
               variant="outline"
-              className="text-sm mt-4 w-full md:w-auto"
+              className="w-full sm:w-auto"
               onClick={() => setIsChangePasswordDialogOpen(true)}
             >
               {t("Change Password")}
@@ -113,7 +176,7 @@ export function GeneralCard() {
               onOpenChange={setIsChangePasswordDialogOpen}
               title={t("Change Password")}
               description={t(
-                "Change your password to keep your account secure"
+                "Change your password to keep your account secure",
               )}
             >
               <ChangePasswordForm

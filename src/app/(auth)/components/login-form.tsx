@@ -93,9 +93,9 @@ export default function LoginForm() {
             aria-label={showPassword ? t("Hide password") : t("Show password")}
           >
             {showPassword ? (
-              <EyeOffIcon className="h-4 w-4 text-gray-500" />
+              <EyeOffIcon className="h-4 w-4 text-muted-foreground" />
             ) : (
-              <EyeIcon className="h-4 w-4 text-gray-500" />
+              <EyeIcon className="h-4 w-4 text-muted-foreground" />
             )}
           </Button>
         </div>

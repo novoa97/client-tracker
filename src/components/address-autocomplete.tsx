@@ -83,11 +83,11 @@ export default function AddressAutocomplete({
         placeholder="Escribe una dirección"
       />
       {status === "OK" && data.length > 0 && (
-        <ul className="absolute z-10 w-full bg-white border mt-1 rounded shadow max-h-60 overflow-y-auto">
+        <ul className="absolute z-10 w-full border border-border bg-popover mt-1 rounded-md shadow-md max-h-60 overflow-y-auto">
           {data.map(({ place_id, description }) => (
             <li
               key={place_id}
-              className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+              className="px-4 py-2 hover:bg-accent hover:text-accent-foreground cursor-pointer text-sm text-foreground"
               onClick={() => handleSelect(description)}
             >
               {description}

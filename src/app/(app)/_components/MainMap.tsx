@@ -9,6 +9,7 @@ import {
 import { useEffect } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import ClientMarker from "@/components/map/ClientMarker";
+import { useMapStyle } from "@/hooks/useMapStyle";
 
 interface Props {
   clients: ClientWithType[];
@@ -38,6 +39,7 @@ export default function MainMap({ clients, center, search }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { styles: mapStyles } = useMapStyle();
 
   const postion = center || [-8, 42.7551];
   const zoom = center ? 15 : 7.5;
@@ -53,7 +55,7 @@ export default function MainMap({ clients, center, search }: Props) {
 
   return (
     <div className="w-full h-full">
-      <Map center={postion} zoom={zoom}>
+      <Map center={postion} zoom={zoom} styles={mapStyles}>
         <MapControls position="bottom-right" showZoom showCompass />
         <MapController center={center} search={search} />
         {clients.map((client) => (

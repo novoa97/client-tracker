@@ -114,16 +114,13 @@ export function ClientSidebar({ client, types, className }: Props) {
         </Button>
       </PageHeader>
       <div
-        style={{
-          boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.1)",
-        }}
         className={cn(
-          "flex flex-col h-full w-3/10 bg-white  border-r p-8 space-y-2 shadow-lg overflow-y-auto",
-          className
+          "flex flex-col h-full w-3/10 border-r border-border bg-background p-8 space-y-2 overflow-y-auto shadow-sm",
+          className,
         )}
       >
         {/* Header */}
-        <div className="flex flex-row gap-3 items-center border-b pb-6">
+        <div className="flex flex-row gap-3 items-center border-b border-border pb-6">
           <div
             className="flex h-10 w-10 items-center justify-center rounded-full"
             style={{
@@ -140,22 +137,29 @@ export function ClientSidebar({ client, types, className }: Props) {
               }}
             />
           </div>
-          <div className="flex-1 flex flex-col gap-1">
-            <p className="text-lg font-medium">{client.name}</p>
+          <div className="flex-1 flex flex-col gap-1 min-w-0">
+            <p className="text-lg font-medium text-foreground truncate">
+              {client.name}
+            </p>
             <div className="flex items-center gap-1 text-muted-foreground">
               <MapPin className="h-4 w-4" />
               <p className="text-sm">{client.city}</p>
             </div>
           </div>
           {/** Close button */}
-          <div className="flex md:hidden">
-            <Button variant="ghost" size="icon" onClick={() => handleClose()}>
+          <div className="flex md:hidden shrink-0">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-foreground hover:bg-accent hover:text-accent-foreground"
+              onClick={() => handleClose()}
+            >
               <X className="h-4 w-4" />
             </Button>
           </div>
         </div>
         {/* Client info */}
-        <div className="flex flex-col gap-4 pt-2 border-b pb-4">
+        <div className="flex flex-col gap-4 pt-2 border-b border-border pb-4">
           <p className="text-xs font-medium text-muted-foreground uppercase">
             {t("Information")}
           </p>
@@ -207,8 +211,8 @@ export function ClientSidebar({ client, types, className }: Props) {
                     variant="ghost"
                     className={cn(
                       !item.mobile && "hidden md:flex",
-                      "w-full justify-start",
-                      isActive && "bg-muted font-medium"
+                      "w-full justify-start text-foreground hover:bg-accent hover:text-accent-foreground",
+                      isActive && "bg-muted font-medium text-foreground",
                     )}
                   >
                     <div className="flex flex-row gap-2 items-center justify-between w-full">
@@ -288,9 +292,9 @@ function InfoItem({
           <Icon className="h-4 w-4 text-muted-foreground flex-shrink-0" />
         </div>
       </div>
-      <div>
+      <div className="min-w-0">
         <p className="text-xs text-muted-foreground">{label}</p>
-        <p className="font-medium">{value}</p>
+        <p className="font-medium text-foreground truncate">{value}</p>
       </div>
     </div>
   );

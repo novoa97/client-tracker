@@ -84,22 +84,24 @@ export function MainSearch({ clients, className }: Props) {
         className="pl-8"
       />
       {showSuggestions && normalizedQuery && filtered.length > 0 && (
-        <ul className="absolute z-10 mt-1 w-full max-h-72 overflow-auto rounded-md border bg-white shadow">
+        <ul className="absolute z-10 mt-1 w-full max-h-72 overflow-auto rounded-md border border-border bg-popover shadow-md">
           {filtered.map((c, idx) => (
             <li
               key={c.id}
-              className={
-                "px-3 py-2 cursor-pointer text-sm hover:bg-gray-100 " +
-                (idx === activeIndex ? "bg-gray-100" : "")
-              }
+              className={cn(
+                "px-3 py-2 cursor-pointer text-sm hover:bg-accent hover:text-accent-foreground",
+                idx === activeIndex && "bg-accent text-accent-foreground"
+              )}
               onMouseDown={(e) => e.preventDefault()}
               onClick={() => handleSelect(c)}
             >
               <div className="flex items-center justify-between gap-2">
-                <span className="font-medium">{c.name}</span>
-                <span className="text-xs text-gray-500">{c.city}</span>
+                <span className="font-medium text-foreground">{c.name}</span>
+                <span className="text-xs text-muted-foreground">{c.city}</span>
               </div>
-              <div className="text-xs text-gray-500 truncate">{c.address}</div>
+              <div className="text-xs text-muted-foreground truncate">
+                {c.address}
+              </div>
             </li>
           ))}
         </ul>

@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
 import Script from "next/script";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "ClientTracker",
@@ -41,20 +42,22 @@ export default async function RootLayout({
   const locale = await getLocale();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <Script
-        defer
-        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&libraries=places`}
-      />
-      <NextIntlClientProvider>
-        <body className="text-gray-900">
-          {children}
-          <Toaster />
-        </body>
-      </NextIntlClientProvider>
+      <body className="bg-background text-foreground">
+        <NextIntlClientProvider>
+          <ThemeProvider>
+            <Script
+              strategy="afterInteractive"
+              src={`https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&libraries=places`}
+            />
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </NextIntlClientProvider>
+      </body>
     </html>
   );
 }

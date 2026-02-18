@@ -130,7 +130,7 @@ export function ClientSearchForm({
 
           <DropdownMenuContent
             align="end"
-            className="z-50 w-[220px] rounded-md border bg-white bg-popover p-2 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[side=bottom]:slide-in-from-top-2"
+            className="z-50 w-[220px] rounded-md border border-border bg-popover p-2 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[side=bottom]:slide-in-from-top-2"
           >
             <div className="flex flex-col gap-2">
               <div className="flex flex-col gap-1">
@@ -201,7 +201,7 @@ export function ClientSearchForm({
 
           <DropdownMenuContent
             align="end"
-            className="z-50 w-[220px] rounded-md border bg-white bg-popover p-2 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[side=bottom]:slide-in-from-top-2"
+            className="z-50 w-[220px] rounded-md border border-border bg-popover p-2 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 data-[side=bottom]:slide-in-from-top-2"
           >
             <div className="space-y-2">
               <DropdownMenuLabel>Sort by</DropdownMenuLabel>
