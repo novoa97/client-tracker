@@ -1,5 +1,13 @@
 # client-tracker
 
+## 2.2.0
+
+### Minor Changes
+
+- 22ae17d: Add dark mode support and Appearance settings
+- fef4a0c: Add center map button
+- 422726a: Harden file upload and file management security: size limit, sanitized names and extensions, path traversal protection, and safe Content-Disposition headers. No extension or MIME whitelist (any file type allowed).
+
 ## 2.1.0
 
 ### Minor Changes
